@@ -1,0 +1,12 @@
+.btn-buscaAvan{
+    color: white;
+    font-size: 20px;
+    background-color: #8D733F;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    
+}
+.btn-buscaAvan:hover{
+    background-color: #4B4A42;
+    color: white;
+}
