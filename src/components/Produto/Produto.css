@@ -21,16 +21,3 @@
     font-size: large;
     font-weight: bolder;
 }
-.comprar{
-    margin-top: 5px;
-    margin-bottom: 10px;
-    background-color: #070c90ef;
-}
-.btn-comprar{
-    background-color: #070c90;
-    color: white;
-}
-.btn-comprar:hover{
-    background-color: #1c23e7;
-    color: white;
-}

@@ -1,11 +1,11 @@
 import './App.css';
 import Home from './pages/Home/Home';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Busca from './pages/Busca/Busca';
 
 function App(props) {
   return (
     <>
-    <Home/>
+    <Busca/>
     </>
   );
 }
