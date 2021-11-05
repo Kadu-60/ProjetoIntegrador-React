@@ -56,7 +56,7 @@ function BuscaAvan(props) {
                         </div>
                     </div>
                     
-                    <BotaoBuscaAvan/>
+                    <BotaoBuscaAvan type='submit' texto='Buscar'/>
                     
                 </div>
             </form>

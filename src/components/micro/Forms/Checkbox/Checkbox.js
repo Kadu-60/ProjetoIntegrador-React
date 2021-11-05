@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Input(props) {
+function Checkbox(props) {
 
     return(
         <>
@@ -13,4 +13,4 @@ function Input(props) {
     )
 }
 
-export default Input
+export default Checkbox

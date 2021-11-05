@@ -6,7 +6,7 @@ function BotaoBuscaAvan(props) {
 
   return (
     <>
-        <button type="submit" class="btn btn-buscaAvan col-12 col-md-4">Buscar</button>
+        <button type={props.type} class="btn btn-buscaAvan col-12 col-md-4">{props.texto}</button>
     </>
   );
 }
