@@ -1,0 +1,10 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.input-container input {
+    padding: 0 5px;
+    height: 35px;
+}
