@@ -1,7 +1,7 @@
 import React from 'react'
 import './BuscaAvan.css'
-import Select from '../../micro/Select/Select';
-import SelectOp from '../../micro/Select/SelectOp';
+import Select from '../../micro/Forms/Select/Select';
+import SelectOp from '../../micro/Forms/Select/SelectOp';
 import BotaoBuscaAvan from '../../micro/BotaoBuscaAvan/BotaoBuscaAvan';
 
 function BuscaAvan(props) {

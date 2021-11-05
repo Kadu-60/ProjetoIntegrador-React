@@ -1,6 +1,6 @@
 import React from 'react'
 import './Produto.css'
-import BotaoComprar from '../micro/BotaoComprar/BotaoComprar';
+import BotaoComprar from '../micro/BotaoConfirmar/BotaoConfirmar';
 
 
 function Produto(props) {
@@ -21,7 +21,7 @@ function Produto(props) {
                             
                             <p class="preco">R${props.preco}</p>
                             <div class="col-12 d-flex justify-content-center">
-                                <BotaoComprar/>
+                                <BotaoComprar texto='Comprar'/>
                        
                             </div>
                         </div>
