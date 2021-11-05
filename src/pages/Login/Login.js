@@ -2,12 +2,13 @@ import React from "react";
 import './Login.css'
 import Input from "../../components/micro/Forms/Input/Input";
 import BotaoComprar from "../../components/micro/BotaoConfirmar/BotaoConfirmar";
+import FormDefault from "../../components/micro/Forms/FormDefault/FormDefault";
 
 function Login(props) {
   return (
     <>
-        <div class="container ">
-            
+        
+        <FormDefault>
                 <div class="row d-flex justify-content-center pt-5">
                     <div class="col d-flex justify-content-center">
                         <h2 className="titulo">Faça seu login</h2>
@@ -53,10 +54,7 @@ function Login(props) {
                     </p>
                 </div>
                </div>
-
-            
-           
-        </div>
+            </FormDefault>
     </>
   );
 }

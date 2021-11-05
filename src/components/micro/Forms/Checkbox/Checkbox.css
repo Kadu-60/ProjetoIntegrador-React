@@ -1,6 +1,6 @@
 .input-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
     
 }
@@ -13,4 +13,7 @@
 .preto{
     color: black;
     font-size: var(--bs-body-font-size);
+}
+.aceite-termos{
+    margin-top: 500px;
 }
