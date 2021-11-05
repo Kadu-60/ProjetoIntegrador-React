@@ -4,24 +4,34 @@ import TitulosHome from '../../components/micro/TitulosHome/TitulosHome';
 import Produto from '../../components/Produto/Produto';
 import Img1 from './imgs/ipa-bottle.png'
 import BuscaAvan from '../../components/macro/BuscaAvan/BuscaAvan';
+import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
+import Carrosel from '../../components/macro/Carrosel/Carrosel';
+import Banner1 from '../Home/imgs'
+import Banner2 from './imgs/imgs/banner3.png'
 
 function Home(props) {
 
   return (
     <>
         <main class="container">
+            <Carrosel banner1={Banner1} banner2={Banner2}/>
             <TitulosHome titulo="Destaques"/>
-            <div class="row d-flex justify-content-center pt-4">
-                    <div class="row d-flex listaProdutos">
+            <ListarProdutos>
+                <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
                         <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
                         <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
                         <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
                         <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
-                        <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
-                    </div>
-            </div>
+            </ListarProdutos>
             <BuscaAvan/>
-
+            <TitulosHome titulo="Novidades"/>
+            <ListarProdutos>
+                <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
+                        <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
+                        <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
+                        <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
+                        <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29"/>
+            </ListarProdutos>
         </main>
     </>
   );
