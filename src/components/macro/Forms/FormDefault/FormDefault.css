@@ -1,0 +1,19 @@
+.container-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 3px 0 #333;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.container-form .form {
+    width: 100%;
+    padding: 0 10% 5%;
+}
+
+.titulo {
+    font-family: 'MedievalSharp', cursive;
+    
+}
