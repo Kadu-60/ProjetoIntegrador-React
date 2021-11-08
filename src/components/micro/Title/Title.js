@@ -5,7 +5,11 @@ function Title(props) {
 
     return(
         <>
+<<<<<<< Updated upstream
         <h2>DEV BREW</h2>
+=======
+        {Title}
+>>>>>>> Stashed changes
         </>
     )
 }
