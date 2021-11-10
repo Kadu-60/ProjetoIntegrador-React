@@ -6,7 +6,7 @@ function FormDefault(props) {
         <>
         <div className="container">
             
-            <form className="form">
+            <form onSubmit={props.onSubmit} className="form">
                 {props.children}
             </form>
         </div>

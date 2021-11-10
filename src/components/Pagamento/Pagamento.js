@@ -1,7 +1,7 @@
 import React from 'react'
 import './Pagamento.css'
 import ImgCartao from "./images/cartao-de-credito.png"
-function Endereco(props) {
+function Pagamento(props) {
 
     return (
         <>
@@ -9,10 +9,10 @@ function Endereco(props) {
                 <img class="pagamentoCartao" src={ImgCartao} alt="" />
                 (Crédito) **** {props.finalCartao}
                 <br />
-                Em {props.parcelas}x de R$ {props.valoParcela}
+                Em {props.parcelas}x de R$ {props.valorParcela}
             </p>
         </>
     )
 }
 
-export default Endereco
+export default Pagamento
