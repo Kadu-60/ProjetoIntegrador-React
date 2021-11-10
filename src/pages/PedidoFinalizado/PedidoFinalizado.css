@@ -1,0 +1,13 @@
+.barril {
+    width: 100%;
+    max-width: 110px;
+    height: auto;
+}
+.pedido {
+    font-family: 'MedievalSharp';
+    font-weight: bold;
+    padding-top: 15px;
+}
+.resumo{
+    padding-top: 10px;;
+}

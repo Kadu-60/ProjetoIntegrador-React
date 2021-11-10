@@ -3,15 +3,16 @@ import { Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
-// import Category from './pages/Category/Category'
-// import Checkout from './pages/Checkout/Checkout'
-// import Dashboard from './pages/Dashboard/Dashboard'
+//import Category from './pages/Category/Category'
+//import Checkout from './pages/Checkout/Checkout'
+//import Dashboard from './pages/Dashboard/Dashboard'
 import Login from './pages/Login/Login'
-// import Product from './pages/Product/Product'
-// import Register from './pages/Register/Register'
-// import Success from './pages/Success/Success'
-// import NotFound from "./pages/NotFound/NotFound"
+import Produto from './pages/Produto/Produto'
+//import Register from './pages/Register/Register'
+//import Success from './pages/Success/Success'
+//import NotFound from "./pages/NotFound/NotFound"
 import Endereco from "./pages/Endereco/Endereco"
+import CadastroCliente from "./pages/CadastroCliente/CadastroCliente"
 
 export const Routes = () => {
     return (
@@ -21,13 +22,13 @@ export const Routes = () => {
             <Route path="/cart" component={Cart}/>
             {/* <Route path="/category" component={Category}/>
             <Route path="/checkout" component={Checkout}/>
-            <Route path="/dashboard" component={Dashboard}/>*/}
+            <Route path="/dashboard" component={Dashboard}/> */}
             <Route path="/login" component={Login}/>
-            {/* <Route path="/product/:id" component={Product}/>
-            <Route path="/register" component={Register}/>  */}
+            <Route path="/produto/:id" component={Produto}/>
+            <Route path="/cadastro" component={CadastroCliente}/> 
             <Route path="/endereco" component={Endereco}/>
-            {/* <Route path="/success" component={Success}/> */}
-            {/* <Route component={NotFound}/> */}
+            {/* <Route path="/success" component={Success}/>
+            <Route component={NotFound}/> */}
         </Switch>
     )
 }

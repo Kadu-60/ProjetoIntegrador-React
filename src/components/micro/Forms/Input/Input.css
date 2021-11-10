@@ -2,9 +2,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    
 }
 
 .input-container input {
-    padding: 0 5px;
-    height: 35px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+
+.preto{
+    color: black;
+    font-size: var(--bs-body-font-size);
 }

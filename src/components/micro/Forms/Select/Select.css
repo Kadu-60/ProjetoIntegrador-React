@@ -1,0 +1,13 @@
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    font-size: 15px;
+    padding-right: 20px;
+    width:70%;
+}
+label{
+    color: white;
+    font-size: 15px;
+}

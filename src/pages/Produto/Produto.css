@@ -1,0 +1,10 @@
+.card-qtd{
+    display: block;
+    height: 60px;
+    width: 80%;
+    border: 1px solid rgba(128, 128, 128, 0.400);
+    border-radius: 5px;
+}
+.img-produto img{
+    width : 450px;
+}
