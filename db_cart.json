@@ -1,19 +1,9 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "produtos": [
+      { "id": 1, "nome": "Baden Baden Cristal", "preco": 12.90 },
+      { "id": 2, "nome": "Baden Baden Chocolate", "preco": 7.50 },
+      { "id": 3, "nome": "Baden Baden Witbier", "preco": 9.90 },
+      { "id": 4, "nome": "Baden Baden American IPA", "preco": 8.60 },
+      { "id": 5, "nome": "Baden Baden Weiss", "preco": 12.50 }
+  ]
 }

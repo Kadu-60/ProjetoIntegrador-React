@@ -1,0 +1,23 @@
+.resultadoPesquisa:hover{
+    box-shadow: 1px 1px 3px 0px gray;
+    
+}
+.resultadoPesquisa{
+    box-shadow: 0px 0px 1px 0px rgb(172, 171, 171);
+    
+}
+.imgPesquisa{
+    width: 100%;
+    max-width: 110px;
+    
+}
+.descricao{
+    padding-left: 20px;
+    padding-top: 25px;
+}
+.preco{
+    margin-top: -10px;
+    margin-bottom: -1px;
+    font-size: large;
+    font-weight: bolder;
+}
