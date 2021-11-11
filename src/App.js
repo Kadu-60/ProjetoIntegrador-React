@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { RoutesSite } from './routes'
+import { Routes } from './routes'
 import Home from './pages/Home/Home';
 import Busca from './pages/Busca/Busca';
 import Login from './pages/Login/Login';
@@ -14,7 +14,7 @@ function App(props) {
   return (
     <>
       <Router>
-        <RoutesSite/>
+        <Routes/>
       </Router>
     </>
   );
