@@ -4,18 +4,20 @@ import axios from "axios";
 import ListarCardMarcas from "../../components/macro/ListarCardMarcas/ListarCardMarcas"
 import {Container, Row, Col } from 'react-bootstrap'
 import "./Categoria.css"
+import ListaMarcas from '../../ListaMarcas'
 
 function Categoria() {
     const [marcas, setMarcas] = useState([])
     
     useEffect(() => {
-        axios.get('http://localhost:3001/marcas')
-        .then((response) => {
-            setMarcas(response.data)
-        })
-        .catch((error) => {
-            console.error("Ops! ocorreu um erro"+error)
-        })
+        setMarcas(ListaMarcas)
+        // axios.get('http://localhost:3001/marcas')
+        // .then((response) => {
+        //     setMarcas(response.data)
+        // })
+        // .catch((error) => {
+        //     console.error("Ops! ocorreu um erro"+error)
+        // })
     })
 
 
