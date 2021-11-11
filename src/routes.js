@@ -4,6 +4,7 @@ import StoreProvider from './components/Context/Provider'
 import RoutesPrivate from './components/Routes/Private/Private'
 import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
+import Categoria from './pages/Categoria/Categoria'
 
 
 export const RoutesSite = () => {
@@ -12,6 +13,7 @@ export const RoutesSite = () => {
             <Switch>
                 <RoutesPrivate path='/' component={Home} exact/>
                 <Route path="/login" component={Login} />
+                <Route path="/categorias" component={Categoria}/>
             </Switch>
         </StoreProvider>
     )
