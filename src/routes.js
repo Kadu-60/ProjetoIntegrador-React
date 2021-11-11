@@ -2,7 +2,7 @@ import React from "react"
 import { Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home/Home'
-import Cart from './pages/Cart/Cart'
+import Carrinho from "./pages/Carrinho/Carrinho"
 //import Category from './pages/Category/Category'
 import Checkout from './pages/Checkout/Checkout'
 //import Dashboard from './pages/Dashboard/Dashboard'
@@ -14,13 +14,15 @@ import Produto from './pages/Produto/Produto'
 import Endereco from "./pages/Endereco/Endereco"
 import CadastroCliente from "./pages/CadastroCliente/CadastroCliente"
 import FormularioContato from "./pages/FormularioContato/FormularioContato"
+import ListarProdutos from "./pages/Carrinho/ListarProdutos"
 
 export const Routes = () => {
     return (
         <Switch>
             <Route path="/" component={Home} exact/>
             <Route path="/home" component={Home}/>
-            <Route path="/cart" component={Cart}/>
+            <Route path="/carrinho" component={Carrinho}/>
+            <Route path="/listaproduto" component={ListarProdutos} />
             <Route path="/checkout" component={Checkout}/>
             {/* <Route path="/category" component={Category}/>
             
