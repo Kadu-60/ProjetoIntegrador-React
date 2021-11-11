@@ -1,5 +1,5 @@
 {
-  "name": "pi-react",
+  "name": "projeto-integrador-nayara",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,9 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,280 @@
+.menu{
+    display: inline-block;
+    color: black;
+    padding-left: 10px;
+    width: 18%;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 30px;
+    position: relative;
+  
+ 
+
+}
+.title-dash{
+    font-family: Open Sans;
+    font-weight: 900;
+    line-height: 1;
+    display: table;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 25px;
+    margin: 0 auto 40px
+;
+}
+.hidden{
+    display: none;
+}
+
+.btn-botao{
+    background-color: #8D733F;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.show{
+    display: block !important;
+
+}
+.hide{ 
+    display: none !important;
+
+}
+
+
+.btn-botao:hover{
+    background-color: #8D733F;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.container-b{
+    padding-top: 30px;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 2px 0px #333;
+    margin-right: 10px;
+    width: 70%;
+    margin-left: 10px;
+    padding-left: 10px;
+    height: 100%;
+    margin-bottom: 60px;
+
+
+}
+#mais{
+    display: none;
+}
+
+
+
+
+.grid{
+    background-color: #fff;
+    margin: 3px;
+    -webkit-box-shadow: 1px 1px 1px 1px #b0b0b0;
+    box-shadow: 1px 1px 1px 1px #b0b0b0;
+
+}
+
+.table-pedido{
+    margin-top: 0!important;
+    display: table!important;
+    width: 100%;
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.thead-pedido{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+th.th-global{
+    text-align: center;
+    padding: 10px;
+    width: 140px;
+    
+}
+
+th {
+    text-align: center;
+}
+
+
+td.product{
+    text-align: left;
+    width: auto;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+
+body{
+
+    font-family: Roboto;
+    font-size: 14px;
+    color: #444;
+
+}
+
+.wd-checkout-basket-summary td {
+    text-align: center;
+    padding: 10px;
+}
+.quantity{
+    padding-left: 10px;
+}
+ td[colspan] {
+    text-align: right;
+    font-weight: 700;
+}
+td{
+    box-shadow: inset 1px -1px 0 #fff;
+}
+
+.col-end{
+    
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.wd-content-global{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+ 
+}
+
+.wd-checkout-orderpayment .content {
+    padding: 10px;
+    float: left;
+    min-width: 250px;
+}
+
+.wd-pagamento{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: inline-flex;
+
+}
+
+.status-cartao{
+    padding-left: 330px;
+
+}
+.line{
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.linha-do-pedido{
+    align-items: center;
+   
+}
+.line-linha::after{
+    content: "";
+    position: absolute;
+    border: 2px
+    solid rgba(171,203,55,.5);
+    height: 34px;
+    left: 3px;
+    bottom: -33px;
+    box-sizing: inherit;
+
+}
+.line::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 0 3px rgb(171 203 55 / 50%);
+    box-shadow: 0 0 0 3px rgb(171 203 55 / 50%);
+    background-color: #fff;
+    box-sizing: inherit;
+
+    
+}
+.status-global-pedido{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+
+.icon{
+  
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    color: black;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    padding: 15px 0;
+    
+}
+
+.current{
+color: black;
+}
+.current:hover{
+    color: black;
+    }
+
+.menuItem:hover{
+    font-weight: bold;
+    border-bottom: 2px solid #8D733F;
+}
+ul{
+    list-style: none;
+}

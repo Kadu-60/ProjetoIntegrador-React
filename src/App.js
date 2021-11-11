@@ -1,3 +1,5 @@
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router} from 'react-router-dom'
 import { RoutesSite } from './routes'
@@ -9,7 +11,8 @@ import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado';
 import Produto from './pages/Produto/Produto';
 import Teste from './pages/Teste';
 
-function App(props) {
+
+function App() {
   return (
     <>
       <Router>

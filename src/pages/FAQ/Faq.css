@@ -1,0 +1,27 @@
+.chamado{
+    text-decoration: none;
+    color: white;
+   
+}
+.chamado:hover{
+    text-decoration: none;
+    color: white;
+   
+}
+.btn-botao-faq{
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top:10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    border:none;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #8D733F;
+
+}
+.btn-botao-faq:hover{
+
+    opacity: 0.8;
+    color: #fff
+}
