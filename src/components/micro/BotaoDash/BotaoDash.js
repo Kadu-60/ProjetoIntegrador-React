@@ -16,6 +16,8 @@ function BotaoDash(props){
                 <button onClick={() => props.onclick} className={"btn-custom-default " + props.class}>
                     {props.label}
                 </button>
+
+                
             )
         }
         
