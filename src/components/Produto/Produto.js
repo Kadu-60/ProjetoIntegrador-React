@@ -17,10 +17,10 @@ function Produto(props) {
                         
                         <div class="descricao">
                             <div class="col-12 d-flex justify-content-center">
-                                <p>{props.descricao}</p>
+                                <p >{props.descricao}</p>
                             </div>
                             
-                            <p class="preco">R${props.preco}</p>
+                            <p class="preco mt-1">R${props.preco}</p>
                             <div class="col-12 d-flex justify-content-center">
                                 <BotaoConfirmar texto='Comprar'/>
                        

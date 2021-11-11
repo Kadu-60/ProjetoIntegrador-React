@@ -59,7 +59,7 @@ function PedidoFinalizado(props) {
                 </div>
             </div>
             <div class="row d-flex justify-content-around">
-              <div class="col-12   d-flex justify-content-around">
+              <div class="col-12  mt-4 d-flex justify-content-around">
                   <BotaoVoltar type='submit' texto="Voltar para a home"/>
                   <BotaoVoltar type='submit' texto="Ver pagina do pedido"/>
                 
