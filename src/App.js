@@ -12,7 +12,8 @@ import Produto from './pages/Produto/Produto';
 import Teste from './pages/Teste';
 
 
-function App() {
+
+function App(props) {
   return (
     <>
       <Router>

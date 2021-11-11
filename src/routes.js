@@ -11,24 +11,37 @@ import Busca from './pages/Busca/Busca'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
 import Produto from './components/Produto/Produto'
-
+import Cart from './pages/Cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
+import Endereco from "./pages/Endereco/Endereco"
+import FormularioContato from "./pages/FormularioContato/FormularioContato"
 
 export const RoutesSite = () => {
     return (
         <StoreProvider>
             <Switch>
-                <Route path='/' component={Home} exact/>
-                <Route path='/home' component={Home}/>
+                <Route path='/' component={Home} exact />
+                <Route path='/home' component={Home} />
                 <Route path="/login" component={Login} />
-                <Route path="/dashboard" component={Dashboard}/>
-                <Route path="/faq" component={Faq}/>
-                <Route path="/categorias" component={Categoria}/>
-                <Route path="/busca" component={Busca}/>
-                <Route path="/cadastro" component={CadastroCliente}/>
-                <Route path="/pedidoFinalizado" component={PedidoFinalizado}/>
-                <Route path="/produto" component={Produto}/>
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/faq" component={Faq} />
+                <Route path="/categorias" component={Categoria} />
+                <Route path="/busca" component={Busca} />
+                <Route path="/cadastro" component={CadastroCliente} />
+                <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
+                <Route path="/produto" component={Produto} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/checkout" component={Checkout} />
+                <Route path="/endereco" component={Endereco} />
+                <Route path="/formularioContato" component={FormularioContato} />
             </Switch>
         </StoreProvider>
+
+
+
+
+
+
 
 
 
