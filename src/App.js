@@ -10,9 +10,12 @@ import CadastroCliente from './pages/CadastroCliente/CadastroCliente';
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado';
 import Produto from './pages/Produto/Produto';
 import Teste from './pages/Teste';
+<<<<<<< HEAD
 import Header from './components/templates/Header/Header'
 import Footer from './components/templates/Footer/Footer'
 
+=======
+>>>>>>> 19522399fa4f7d3e16ae16375660b09e0e0f8ef0
 
 function App() {
   return (

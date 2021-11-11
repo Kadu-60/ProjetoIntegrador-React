@@ -6,6 +6,8 @@ import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Faq from './pages/FAQ/Faq'
+import Categoria from './pages/Categoria/Categoria'
+
 
 export const RoutesSite = () => {
     return (

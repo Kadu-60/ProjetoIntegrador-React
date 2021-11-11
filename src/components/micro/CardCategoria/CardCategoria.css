@@ -1,0 +1,11 @@
+.CardCategoria{
+    height: 530px;
+}
+.CardCategorialink{
+    color: black;
+    text-decoration: none;
+}
+
+.CardCategoria :hover{
+    color: black !important;
+}
