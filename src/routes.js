@@ -1,18 +1,18 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import StoreProvider from './components/Context/Provider'
-
+import RoutesPrivate from './components/Routes/Private/Private'
 import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
+
 
 export const RoutesSite = () => {
     return (
         <StoreProvider>
-            <Routes>
-                <Route path='/' element={<Home/>} />
-                <Route path="/login" element={<Login/>} />
-
-            </Routes>
+            <Switch>
+                <RoutesPrivate path='/' component={Home} exact/>
+                <Route path="/login" component={Login} />
+            </Switch>
         </StoreProvider>
     )
 }

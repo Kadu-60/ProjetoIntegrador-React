@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router} from 'react-router-dom'
 import { RoutesSite } from './routes'
 import Home from './pages/Home/Home';
 import Busca from './pages/Busca/Busca';
@@ -8,7 +8,6 @@ import CadastroCliente from './pages/CadastroCliente/CadastroCliente';
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado';
 import Produto from './pages/Produto/Produto';
 import Teste from './pages/Teste';
-import StoreProvider from './components/Context/Provider';
 
 function App(props) {
   return (

@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import './Login.css'
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Input from "../../components/micro/Forms/Input/Input";
 import BotaoComprar from "../../components/micro/BotaoConfirmar/BotaoConfirmar";
 import FormDefault from "../../components/micro/Forms/FormDefault/FormDefault";
@@ -12,17 +12,17 @@ function estadoInicial(){
 }
 
 function fazerLogin({email, password}){
-    axios.put(`localhost:8080/login`)
-        .then(response => {
-            return response
-        })
+    if(email === 'admin' && password === 'admin'){
+        return {token: '1234'}
+    }
+    return {error: 'invalido'}
 }
 
 function Login(props) {
 
     const [values, setValues] = useState(estadoInicial)
     const {setToken} = useContext(StoreContext)
-    const navigate = useNavigate()
+    const history = useHistory()
 
     function onChange(event){
         const {value, name} = event.target
@@ -41,7 +41,7 @@ function Login(props) {
 
         if(token){
             setToken(token)
-            navigate.push("/")
+            return history.push("/")
         }
 
         setValues(estadoInicial )
