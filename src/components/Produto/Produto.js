@@ -15,7 +15,7 @@ function Produto(props) {
                           </a>
                         </div>
                         
-                        <div class="descricao">
+                        <div class="descricao ">
                             <div class="col-12 d-flex justify-content-center">
                                 <p >{props.descricao}</p>
                             </div>
