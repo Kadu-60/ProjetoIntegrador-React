@@ -10,11 +10,10 @@ import Categoria from './pages/Categoria/Categoria'
 import Busca from './pages/Busca/Busca'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
-import Produto from './components/Produto/Produto'
+import Produto from './pages/Produto/Produto'
 import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
-import FormularioContato from "./pages/FormularioContato/FormularioContato"
 
 export const RoutesSite = () => {
     return (
@@ -33,7 +32,6 @@ export const RoutesSite = () => {
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
-                <Route path="/formularioContato" component={FormularioContato} />
             </Switch>
         </StoreProvider>
 

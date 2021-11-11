@@ -1,11 +1,7 @@
 import React from 'react'
 import './Produto.css'
-<<<<<<< HEAD
 import BotaoComprar from '../micro/BotaoConfirmar/BotaoConfirmar';
 import BotaoConfirmar from '../micro/BotaoConfirmar/BotaoConfirmar';
-=======
-import BotaoConfirmar from '../micro/BotaoConfirmar/BotaoConfirmar'
->>>>>>> 4cf7ec38610d3c6438c7286fa41b3ff7a0583af7
 
 
 function Produto(props) {
