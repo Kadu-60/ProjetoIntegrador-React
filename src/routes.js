@@ -13,6 +13,7 @@ import Produto from './pages/Produto/Produto'
 //import NotFound from "./pages/NotFound/NotFound"
 import Endereco from "./pages/Endereco/Endereco"
 import CadastroCliente from "./pages/CadastroCliente/CadastroCliente"
+import FormularioContato from "./pages/FormularioContato/FormularioContato"
 
 export const Routes = () => {
     return (
@@ -27,6 +28,7 @@ export const Routes = () => {
             <Route path="/produto/:id" component={Produto}/>
             <Route path="/cadastro" component={CadastroCliente}/> 
             <Route path="/endereco" component={Endereco}/>
+            <Route path="/formularioContato" component={FormularioContato}/>
             {/* <Route path="/success" component={Success}/>
             <Route component={NotFound}/> */}
         </Switch>
