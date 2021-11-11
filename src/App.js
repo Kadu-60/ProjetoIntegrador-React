@@ -1,12 +1,24 @@
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
+import { Routes } from './routes'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Home from './pages/Home/Home';
-import Busca from './pages/Busca/Busca';
-import Login from './pages/Login/Login';
+import Header from "./components/templates/Header/Header";
+import Footer from "./components/templates/Footer/Footer";
+import Home from "./pages/Home/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
-function App(props) {
+
+function App() {
   return (
     <>
-    <Login/>
+    <Header/>
+      <Router>
+      <Routes/>
+      </Router>
+    <Footer/>
+
     </>
   );
 }
