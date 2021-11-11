@@ -37,7 +37,7 @@ function NavPrincipal(props){
                             <div className="row d-flex justify-content-center align-items-center">
 
                                 <div className="col-3 header-FC">
-                                    <a className ="link-icone" href="#">
+                                    <a className ="link-icone" href="/faq">
                                         <img className ="imagem" src={Fale}/>
                                         <p className ="icone"> Fale Conosco</p>
                                     </a>
