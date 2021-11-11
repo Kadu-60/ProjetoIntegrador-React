@@ -10,7 +10,7 @@ export const RoutesSite = () => {
     return (
         <StoreProvider>
             <Switch>
-                <RoutesPrivate path='/' component={Home} exact/>
+                <Route path='/' component={Home} exact/>
                 <Route path="/login" component={Login} />
             </Switch>
         </StoreProvider>
