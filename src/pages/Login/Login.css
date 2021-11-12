@@ -2,29 +2,3 @@
     font-family: 'MedievalSharp', serif;
     font-weight: bolder;
 }
-
-.btn-custom-default {
-    font-weight: bold;
-    padding: 10px 20px;
-    margin-top:10px;
-    margin-right: 10px;
-    text-transform: uppercase;
-    border:none;
-    text-decoration: none;
-    display: inline-block
-}
-
-.btn-custom-default:hover {
-    opacity: 0.8;
-    color: #fff
-}
-
-.conversao {
-    background-color: #070c90;
-    color: #fff;
-}
-
-.apoio {
-    background-color: #8D733F;
-    color: #fff;
-}

@@ -1,57 +1,104 @@
-import React from "react"
-import '../Login/Login.css'
-import Input from "../../components/micro/Forms/Input/Input"
-import FormDefault from "../../components/macro/Forms/FormDefault/FormDefault"
-import Button from "../../components/micro/Button/Button"
-import Title from "../../components/micro/Title/Title"
+import React, {useState, useContext} from "react";
+import './Login.css'
+import { useHistory } from "react-router-dom";
+import Input from "../../components/micro/Forms/Input/Input";
+import BotaoComprar from "../../components/micro/BotaoConfirmar/BotaoConfirmar";
+import FormDefault from "../../components/micro/Forms/FormDefault/FormDefault";
+import StoreContext from "../../components/Context/Context";
+import axios from 'axios'
 
-export default class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {forgot: false};
+function estadoInicial(){
+        return{email: '', password: ''}
+}
+
+function fazerLogin({email, password}){
+    if(email === 'admin' && password === 'admin'){
+        return {token: '1234'}
+    }
+    return {error: 'invalido'}
+}
+
+function Login(props) {
+
+    const [values, setValues] = useState(estadoInicial)
+    const {setToken} = useContext(StoreContext)
+    const history = useHistory()
+
+    function onChange(event){
+        const {value, name} = event.target
+
+        setValues({
+            ...values,
+            [name]: value, 
+        })
+
     }
 
-    login() {
-        alert('Usuário logado com sucesso!');
-    }
-    forgot() {
-        this.setState({forgot: true})
+    function onSubmit(event){
+        event.preventDefault()
+
+        const {token} = fazerLogin(values)
+
+        if(token){
+            setToken(token)
+            return history.push("/")
+        }
+
+        setValues(estadoInicial )
     }
 
-    render() {
-        return (
-            <FormDefault>
-                
-            <div>
-            <div class="row d-flex justify-content-center pt-5 titulo">
-                    <h1 class="titulo">Faça seu login</h1>
+  return (
+    <>
+        
+        <FormDefault onSubmit={onSubmit}>
+                <div class="row d-flex justify-content-center pt-5">
+                    <div class="col d-flex justify-content-center">
+                        <h2 className="titulo">Faça seu login</h2>
+                    </div>
                 </div>
-                {this.state.forgot === false && <div>
-                    <Input corLabel='preto' label="E-mail" type="email" placeholder="usuario@email.com"/> <br/>
-                    <Input corLabel='preto' label="Senha" type="password" placeholder="Digite sua senha" required="true"/><br/>
+                <div class="row d-flex justify-content-center">
                     
-                    <button onClick={this.login.bind(this)} class="conversao btn-custom-default">Login</button>
-                    <button onClick={this.forgot.bind(this)} class="apoio btn-custom-default">Esqueci a Senha</button>
-                </div>}
-                {this.state.forgot === true && <ForgotPassword/>}
-            </div>
+                    <div class="form-group col-md-4">
+                    <Input value={values.email} name='email' onChange={onChange} corLabel='preto' label="E-mail" type="text" placeholder="user@email.com"/>
+                        
+                    </div>
+                   
+                </div>
+                <div class="row d-flex justify-content-center">
+                    
+                    <div class="form-group col-md-4">
+                        <Input value={values.password} name='password' onChange={onChange} corLabel='preto' label="Senha" type="password" placeholder="Digite sua senha" required="true"/>
+                    </div>
+                </div>
+                <br></br>
+                <div class="row d-flex justify-content-center">
+                       <div class="col-12 col-md-4  d-flex justify-content-around">
+                           <BotaoComprar texto="Fazer Login"/>
+                           
+                       </div>
+                    
+                    
+               </div>
+               <br/>
+               <div class="row d-flex justify-content-center">
+                
+                <div class="col-md-4 d-flex justify-content-center">
+                    <p>
+                        Esqueceu sua senha? <a href="recuperarSenha.html"> Recuperar senha</a>
+                    </p>
+                </div>
+               </div>
+               <div class="row d-flex justify-content-center">
+                
+                <div class="col-md-4 d-flex justify-content-center">
+                    <p>
+                        Ainda não possui conta? <a href="../cadastroCliente/cadastroCliente.html"> Crie sua conta</a>
+                    </p>
+                </div>
+               </div>
             </FormDefault>
-        );
-    }
+    </>
+  );
 }
 
-class ForgotPassword extends React.Component {
-
-    reset() {
-        alert('Sua senha foi enviada por e-mail');
-    }
-
-    render() {
-        return (
-        <div>
-            <Input corLabel='preto' label="Digite seu e-mail para recuperar senha" type="email" placeholder="usuario@email.com"/>
-            <button onClick={this.reset.bind(this)} class="apoio btn-custom-default">Resetar Senha</button>
-
-        </div>)
-    }
-}
+export default Login;
