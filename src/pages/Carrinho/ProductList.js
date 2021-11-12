@@ -1,7 +1,7 @@
 import React from 'react'
 
 function ProductList(props) {
-
+    
     const addToCart = (item) => {
         let cartList = localStorage.getItem("cart") 
             ? JSON.parse(localStorage.getItem("cart")) 
@@ -14,7 +14,8 @@ function ProductList(props) {
     }
 
     const listProducts = () => {
-        return props.products.map((item) => {
+        const products = props.products || []
+        return products.map((item) => {
             return (
                 <li key={item.id}>
                     <div>{item.nome}</div>

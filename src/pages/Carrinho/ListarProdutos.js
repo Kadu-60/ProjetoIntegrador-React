@@ -2,8 +2,9 @@ import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ProductList from './ProductList'
+import ListaDeProdutos from '../../db_cart'
 
-function ListarProdutos(props) {
+function ListarProdutos() {
 
 
     const [products, setProducts] = useState([])
@@ -15,9 +16,10 @@ function ListarProdutos(props) {
     }, [])
 
     const getProducts = () => {
-        axios.get('http://localhost:3001/produtos').then((response) => {
-            setProducts(response.data)
-        })
+        // axios.get('http://localhost:3001/produtos').then((response) => {
+        //     setProducts(response.data)
+        // })
+        setProducts(ListaDeProdutos)
     }
 
     return(

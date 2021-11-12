@@ -11,8 +11,8 @@ function Carrinho(props) {
     const [qtyCart, setQtyCart] = useState(0)
 
     useEffect(() => {
-        setProducts(JSON.parse(localStorage.getItem("cart")))
-        setQtyCart(JSON.parse(localStorage.getItem("qtyCart")))
+        setProducts(JSON.parse(localStorage.getItem("cart"))||[])
+        setQtyCart(JSON.parse(localStorage.getItem("qtyCart"))||[])
     }, [])
 
     return (
