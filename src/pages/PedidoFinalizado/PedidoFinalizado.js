@@ -67,6 +67,9 @@ function PedidoFinalizado(props) {
             </div>
 
         </div>
+        <br/><br/>
+        <br/><br/>
+
         
     </>
   );

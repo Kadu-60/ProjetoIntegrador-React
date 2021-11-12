@@ -9,7 +9,7 @@ export default
         {
             "id": 2,
             "nome": "Michelob",
-            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/ad7a1e5a-38c9-4ecb-aa15-d41f8c15107a___3552782389433122de0dce12f1544287.png",
+            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/986a60da-6c03-4458-932a-27247be38836___ae6f7ff02a3825e0e4bbfaf32337af5c.png",
             "desc": "Michelob Ultra chega ao Brasil como uma cerveja Low Carb (2,4g) e Low Calories (79kcal). 80% menos carboidratos que uma cerveja normal*!"
         },
         {
@@ -33,7 +33,7 @@ export default
         {
             "id": 6,
             "nome": "Michelob",
-            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/ad7a1e5a-38c9-4ecb-aa15-d41f8c15107a___3552782389433122de0dce12f1544287.png",
+            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/986a60da-6c03-4458-932a-27247be38836___ae6f7ff02a3825e0e4bbfaf32337af5c.png",
             "desc": "Michelob Ultra chega ao Brasil como uma cerveja Low Carb (2,4g) e Low Calories (79kcal). 80% menos carboidratos que uma cerveja normal*!"
         },
         {
@@ -57,7 +57,7 @@ export default
         {
             "id": 10,
             "nome": "Michelob",
-            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/ad7a1e5a-38c9-4ecb-aa15-d41f8c15107a___3552782389433122de0dce12f1544287.png",
+            "img": "https://emporiodacerveja.vtexassets.com/assets/vtex.file-manager-graphql/images/986a60da-6c03-4458-932a-27247be38836___ae6f7ff02a3825e0e4bbfaf32337af5c.png",
             "desc": "Michelob Ultra chega ao Brasil como uma cerveja Low Carb (2,4g) e Low Calories (79kcal). 80% menos carboidratos que uma cerveja normal*!"
         },
         {

@@ -28,7 +28,7 @@ export default class AccordionExampleStandard extends Component {
           index={0}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Por que meu pedido esta parado no posto fiscal?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
@@ -46,7 +46,7 @@ export default class AccordionExampleStandard extends Component {
           index={1}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Onde estamos?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 1}>
@@ -60,7 +60,7 @@ export default class AccordionExampleStandard extends Component {
           index={2}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Política de privacidade e segurança
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 2}>
@@ -82,7 +82,7 @@ export default class AccordionExampleStandard extends Component {
           index={3}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Possuem loja física?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 3}>
@@ -95,7 +95,7 @@ export default class AccordionExampleStandard extends Component {
           index={4}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Política de compras
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 4}>
@@ -218,7 +218,7 @@ export default class AccordionExampleStandard extends Component {
           index={5}
           onClick={this.handleClick}
         >
-          <Icon name='dropdown' />
+          <Icon name='beer' />
           Como faço para trocar / devolver os produtos?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 5}>

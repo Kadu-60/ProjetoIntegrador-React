@@ -9,15 +9,7 @@
     width: 150px;    
     
 }
-.form-control{
-    
-    font-family: 'MedievalSharp', cursive;
-    background: #fff!important;
-    font-size: 13px;
-    width: 400px;
-    height: 45px;
-    
-}
+
 
 
 .nav-item{
@@ -141,10 +133,7 @@
 
 
 @media screen and (max-width: 700px) {
-    .form-control {   
-      width: 230px;
-      height: 30px;
-    }
+  
     .custom-img {
         position: relative;
         top: 3px;
@@ -250,10 +239,7 @@
         left:20px;
       
     }
-    .form-control{
-        width: 250px;
-        height: 35px;
-    }
+  
     .header-conta{
         margin-right: 30px;
         display: flex;
@@ -286,10 +272,7 @@
         left:20px;
       
     }
-    .form-control{
-        width: 250px;
-        height: 35px;
-    }
+   
     .header-conta{
         margin-right: 8%;
         display: flex;
@@ -324,10 +307,7 @@
     .header-busca{
         width: 1px;
     }
-    .form-control{
-        width: 100px;
-        height: 30px;
-    }
+  
     .header-conta{
         margin-right: 8%;
         display: flex;

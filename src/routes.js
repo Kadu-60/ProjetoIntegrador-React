@@ -14,12 +14,14 @@ import Produto from './pages/Produto/Produto'
 import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
+import HomePop from './pages/Home/Home-pop'
+
 
 export const RoutesSite = () => {
     return (
         <StoreProvider>
             <Switch>
-                <Route path='/' component={Home} exact />
+                <Route path='/' component={HomePop} exact />
                 <Route path='/home' component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/dashboard" component={Dashboard} />

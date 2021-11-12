@@ -1,7 +1,7 @@
 import React from 'react'
 import './BuscaAvan.css'
 import Select from '../../micro/Forms/Select/Select';
-import SelectOp from '../../micro/Forms/Select/SelectOp';
+import SelectBusca from '../../micro/Forms/Select/SelectBusca';
 import BotaoBuscaAvan from '../../micro/BotaoBuscaAvan/BotaoBuscaAvan';
 
 function BuscaAvan(props) {
@@ -10,28 +10,26 @@ function BuscaAvan(props) {
     <>
         
         <div class="busca-ava container">
+        <br/>
             <form>
                 <div class="row d-flex justify-content-center">
+                   
                     <div class="titulo-pesq col-12 d-flex justify-content-center">
-                        Busca Avançada
+                    <p className="title-dash bsc-avan">Busca Avançada</p>
                     </div>
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                             <div class="col-12 d-flex flex-column align-items-center">
-                                <Select titulo="Marca">
-                                    <SelectOp valor="" titulo="--Marca--"/>
-                                </Select>
+                            <p> Marca:</p>
+                                <SelectBusca/>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                             <div class="col-12 d-flex flex-column align-items-center">
-                               <Select titulo="Familia">
-                                    <SelectOp selected="true" valor="" titulo="--Familia--"/>
-                                    <SelectOp valor="Pilsen" titulo="Pilsen"/>
-                                    <SelectOp valor="Lager" titulo="Lager"/>
-                               </Select>
+                            <p> Familia:</p>
+                            <SelectBusca/>
 
                                
                             </div>
@@ -40,18 +38,16 @@ function BuscaAvan(props) {
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
-                                <Select titulo="Prato">
-                                    <SelectOp valor="" titulo="--Prato--"/>
-                                </Select>
+                        <p> Prato:</p>
+                        <SelectBusca/>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
-                                <Select titulo="Categoria">
-                                    <SelectOp valor="" titulo="--Categoria--"/>
-                                </Select>
+                            <p> Categoria:</p>
+                            <SelectBusca/>
                             </div>
                         </div>
                     </div>

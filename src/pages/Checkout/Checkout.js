@@ -8,8 +8,11 @@ import { Form, Row, Col } from 'react-bootstrap'
 function Checkout(props) {
 
     return (
-        <>
-            <FormDefault className="title-endereco" title="Check-out">
+        <> <br/>   <br/>   
+            <FormDefault className="title-endereco" title="">
+                <br/>
+               
+            <p className="title-dash">Finalizar Pedido</p>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Nome</Form.Label>
@@ -100,6 +103,7 @@ function Checkout(props) {
                     <Button label="Confirmar Compra" type="submit" onclick="null" class="conversao"/>
                     <Button label="Cancelar" type="submit" onclick="null" class="apoio"/>
             </FormDefault>
+            <br/>   <br/>  
 
         </>
     )

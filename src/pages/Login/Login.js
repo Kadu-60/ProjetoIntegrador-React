@@ -53,7 +53,8 @@ function Login(props) {
         <FormDefault onSubmit={onSubmit}>
                 <div class="row d-flex justify-content-center pt-5">
                     <div class="col d-flex justify-content-center">
-                        <h2 className="titulo">Faça seu login</h2>
+                    <p className="title-dash">Faça seu login</p>
+                    <br/>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
@@ -82,21 +83,48 @@ function Login(props) {
                <br/>
                <div class="row d-flex justify-content-center">
                 
-                <div class="col-md-4 d-flex justify-content-center">
-                    <p>
-                        Esqueceu sua senha? <a href="recuperarSenha.html"> Recuperar senha</a>
-                    </p>
-                </div>
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <p>
+                            Esqueceu sua senha? <a href=""data-bs-toggle="modal" data-bs-target="#exampleModal"> Recuperar senha</a>
+                        </p>
+                    </div>
                </div>
+               <br/>
                <div class="row d-flex justify-content-center">
-                
+               
                 <div class="col-md-4 d-flex justify-content-center">
+               
                     <p>
-                        Ainda não possui conta? <a href="../cadastroCliente/cadastroCliente.html"> Crie sua conta</a>
+                        Ainda não possui conta? <a href="/cadastro"> Crie sua conta</a>
                     </p>
                 </div>
                </div>
+
             </FormDefault>
+            <br/><br/>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Por favor, informe seu e-mail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex:jose@email.com" required/>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+          <button type="button" class="btn apoio">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+          
     </>
   );
 }

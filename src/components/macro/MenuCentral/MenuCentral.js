@@ -17,43 +17,45 @@ const panes = [
                     <div  class="" >
                         <div class="row">
                             <div class="col">
-                                <label for="nome">Nome:</label>
-                                <input type="text" class="form-control" id="nome" />
+                                <label className="label-minha-conta" for="nome">Nome:</label>
+                                <input type="text" class="form-control-dash" id="nome" />
                             </div>
                             <div class="col">
-                                <label for="email">E-mail:</label>
-                                <input type="text" class="form-control" id="email" />
+                                <label className="label-minha-conta"  for="email">E-mail:</label>
+                                <input type="text" class="form-control-dash" id="email" />
                             </div>
                             
                         </div>
                         <div class="row">
                         <div class="col">
-                                <label for="tel">Telefone:</label>
-                                <input type="text" class="form-control" id="tel" />
+                                <label  className="label-minha-conta"  for="tel">Telefone:</label>
+                                <input type="text" class="form-control-dash" id="tel" />
                             </div>
                             <div class="col">
-                                <label for="email">Endereço:</label>
-                                <input type="text" class="form-control" id="email" />
+                                <label className="label-minha-conta"  for="email">Endereço:</label>
+                                <input type="text" class="form-control-dash" id="email" />
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col">
+                                <label className="label-minha-conta"  for="numero">Número:</label>
+                                <input type="text" class="form-control-dash" id="numero" />
                             </div>
                             <div class="col">
-                                <label for="numero">Número:</label>
-                                <input type="text" class="form-control" id="numero" />
-                            </div>
-                            <div class="col">
-                                <label for="cep">CEP:</label>
-                                <input type="text" class="form-control" id="cep" />
+                                <label  className="label-minha-conta"  for="cep">CEP:</label>
+                                <input type="text" class="form-control-dash" id="cep" />
                             </div>
                             
                         </div>
                         <div class="row">
                                                     
                             <div class="col">
-                                <label for="cidade">Cidade:</label>
-                                <input type="text" class="form-control" id="cidade" />
+                                <label className="label-minha-conta" for="cidade">Cidade:</label>
+                                <input type="text" class="form-control-dash" id="cidade" />
                             </div>
                             <div class="col">
-                                <label for="cidade">Estado:</label>
-                                <input type="text" class="form-control" id="estado" />
+                                <label className="label-minha-conta" for="cidade">Estado:</label>
+                                <input type="text" class="form-control-dash" id="estado" />
                             </div>
                         </div>
                                         
@@ -82,22 +84,23 @@ const panes = [
                 <form>
                     <div className="form-row">
                     <div className="form-group col-md-6 offset-md-3">
-                        <label htmlFor="inputEmail" >
+                        <label className="label-minha-conta" htmlFor="inputEmail" >
                         Digite sua nova Senha:
                         </label>
-                        <input type="password" className="form-group form-control" />
+                        <input type="password" className="form-group form-control-dash" />
                     </div>
                     <div className="form-group col-md-6 offset-md-3">
-                        <label htmlFor="inputSenha" >
+                        <label className="label-minha-conta" htmlFor="inputSenha" >
                         Confirme sua Senha:
                         </label>
-                        <input type="password" className="form-group form-control" />
+                        <input type="password" className="form-group form-control-dash" />
                     </div>
                     </div>
                 </form>
                 <div className="btn-form ">
+                  <br/>
                 
-                <BotaoDash label="Salvar" onclick="null" class="apoio"/>
+                <BotaoDash label="Salvar" onclick="null" class="apoio butn-senha"/>
             
                 </div>
                 <br/>
