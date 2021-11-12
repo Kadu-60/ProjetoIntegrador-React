@@ -4,10 +4,16 @@
     background-color: #070c90ef;
 }
 .btn-comprar{
-    background-color: #070c90;
-    color: white;
+    background-color: #EACF2B;
+    border-bottom: 3px solid #d0a14c;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+    color: black;
+    font-weight: bold;
 }
 .btn-comprar:hover{
-    background-color: #1c23e7;
-    color: white;
+    background-color: #d0a14c;
+    border-bottom: 3px solid #d0a14c;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+    color: black;
+    font-weight: bold;
 }

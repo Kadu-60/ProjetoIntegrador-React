@@ -1,3 +1,8 @@
 .title-endereco {
     font-family: 'MedievalSharp', cursive;
 }
+
+label {
+    color: black;
+    font-size: 15px;
+}

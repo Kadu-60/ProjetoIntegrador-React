@@ -1,0 +1,46 @@
+.chamado{
+    text-decoration: none;
+    color: white;
+   
+}
+.chamado:hover{
+    text-decoration: none;
+    color: white;
+   
+}
+.btn-botao-faq{
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top:10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    border:none;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #8D733F;
+
+}
+
+i.icon {
+    display: inline-block;
+    opacity: 1;
+    margin: 0 0.25rem 0 0;
+    width: 1.18em;
+    height: 2.6em;
+    font-family: Icons;
+    font-style: normal;
+    font-weight: 400;
+    /* text-decoration: inherit; */
+    text-align: center;
+    speak: none;
+    font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.btn-botao-faq:hover{
+
+    opacity: 0.8;
+    color: #fff
+}

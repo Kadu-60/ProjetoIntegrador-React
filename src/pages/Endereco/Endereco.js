@@ -9,8 +9,11 @@ function Endereco (props) {
 
     return (
         <>
-            <FormDefault className="title-endereco" title="Endereço">
-            <Input label="Rua" type="text"/>
+        <br/>   <br/>
+            <FormDefault className="title-endereco" title="">
+            <br/>
+            <p className="title-dash">Cadastro de endereço</p>
+            <Input label="Rua " type="text"/>
             <Input label="Número" type="text"/>
             <Input label="Bairro" type="text"/>
             <Input label="Cidade" type="text"/>
@@ -18,6 +21,7 @@ function Endereco (props) {
             <Button label="Voltar" navigation route="login" class="apoio"/>
             <Button label="Confirmar" onclick="null" class="btn-comprar"/>
         </FormDefault>
+        <br/>   <br/>
         </>
     )
 }

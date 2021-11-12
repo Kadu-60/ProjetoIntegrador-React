@@ -6,7 +6,7 @@ function Input(props) {
     return(
         <>
         <div className="input-container">
-            <label className={props.corLabel}>{props.label}:</label>
+            <label className= {props.corLabel}>{props.label}:</label>
             <input className="form-control" name={props.name} value={props.value} onChange={props.onChange} type={props.type} placeholder={props.placeholder} required={props.required}/>
             <small >{props.small}</small>
         </div>

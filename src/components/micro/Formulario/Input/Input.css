@@ -1,0 +1,16 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: .97em;
+    margin-bottom: 5px;
+        margin-top: 9px;
+}
+
+.input-container input {
+    padding: 0 5px;
+    height: 35px;
+}

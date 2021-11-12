@@ -10,11 +10,11 @@ function CadastroCliente(props) {
     return(
         <>
         <FormDefault>
-                
+                <br/>    <br/>
                 <div class="row d-flex justify-content-center">
                 
                     <div class="col d-flex justify-content-center">
-                        <h2 class="titulo" >Criar conta</h2>
+                    <p className="title-dash">Criar conta</p>
                     </div>
                </div>
                 <br/>

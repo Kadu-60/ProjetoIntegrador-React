@@ -5,6 +5,7 @@ import ListarCardMarcas from "../../components/macro/ListarCardMarcas/ListarCard
 import {Container, Row, Col } from 'react-bootstrap'
 import "./Categoria.css"
 import ListaMarcas from '../../ListaMarcas'
+import { Icon } from 'semantic-ui-react';
 
 function Categoria() {
     const [marcas, setMarcas] = useState([])
@@ -25,11 +26,15 @@ function Categoria() {
         <>
         
         <Container>
-            <h2 className="Categoria-title ">As Marcas presentes em nossa loja:</h2>
+
+       <br/><br/>
+        <p className="title-dash">  <Icon className="tag-marca" name="tag" size='small'/>marcas presentes em nossa loja</p>
+            <hr/>
             <br/>
             <Row>
                 <ListarCardMarcas marcas={marcas}/>
             </Row>
+            <br/><br/>
         </Container>
         </>
     );
