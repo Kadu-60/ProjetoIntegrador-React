@@ -11,9 +11,12 @@ import Busca from './pages/Busca/Busca'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
 import Produto from './pages/Produto/Produto'
-import Cart from './pages/Cart/Cart'
+import Carrinho from "./pages/Carrinho/Carrinho"
+//import Category from './pages/Category/Category'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
+
+import ListarProdutos from "./pages/Carrinho/ListarProdutos"
 
 export const RoutesSite = () => {
     return (
@@ -29,7 +32,8 @@ export const RoutesSite = () => {
                 <Route path="/cadastro" component={CadastroCliente} />
                 <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
                 <Route path="/produto" component={Produto} />
-                <Route path="/cart" component={Cart} />
+                <Route path="/carrinho" component={Carrinho} />
+                <Route path="/listaproduto" component={ListarProdutos} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
             </Switch>

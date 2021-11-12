@@ -3,13 +3,15 @@ import './Checkout.css'
 //import 'bootstrap/dist/css'
 import FormDefault from '../../components/macro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
-import { Form, Row, Col } from 'react-bootstrap'
+import { Container, Form, Row, Col } from 'react-bootstrap'
 
 function Checkout(props) {
 
     return (
         <>
-            <FormDefault className="title-endereco" title="Check-out">
+        <Container>
+            <FormDefault className="title-endereco" title="Dados de Pagamento">
+                <br/>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Nome</Form.Label>
@@ -17,7 +19,7 @@ function Checkout(props) {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPassword">
-                            <Form.Label></Form.Label>
+                            <Form.Label>Sobrenome</Form.Label>
                             <Form.Control type="surname" placeholder="Sobrenome" />
                         </Form.Group>
                     </Row>
@@ -100,7 +102,7 @@ function Checkout(props) {
                     <Button label="Confirmar Compra" type="submit" onclick="null" class="conversao"/>
                     <Button label="Cancelar" type="submit" onclick="null" class="apoio"/>
             </FormDefault>
-
+            </Container>
         </>
     )
 }
