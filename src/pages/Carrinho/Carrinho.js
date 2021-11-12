@@ -11,12 +11,13 @@ function Carrinho(props) {
     const [qtyCart, setQtyCart] = useState(0)
 
     useEffect(() => {
-        setProducts(JSON.parse(localStorage.getItem("cart")))
-        setQtyCart(JSON.parse(localStorage.getItem("qtyCart")))
+        setProducts(JSON.parse(localStorage.getItem("cart"))||[])
+        setQtyCart(JSON.parse(localStorage.getItem("qtyCart"))||[])
     }, [])
 
     return (
         <>
+            <br/>
             <Container>
                 <FormDefault className="title-endereco" title="Carrinho">
                     <h5>Quantidade de produtos: {qtyCart}</h5>
@@ -28,6 +29,7 @@ function Carrinho(props) {
                     <Button label="Voltar" navigation route="listaproduto" class="apoio" />
                 </FormDefault>
             </Container>
+            <br/>
         </>
     )
 }
