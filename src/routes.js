@@ -15,6 +15,8 @@ import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
 import HomePop from './pages/Home/Home-pop'
+import Carrinho from './pages/Carrinho/Carrinho'
+import ListarProdutos from './pages/Carrinho/ListarProdutos'
 
 
 export const RoutesSite = () => {
@@ -34,6 +36,8 @@ export const RoutesSite = () => {
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
+                <Route path="/carrinho" component={Carrinho} />
+                <Route path="/listarprodutos" component={ListarProdutos} />
             </Switch>
         </StoreProvider>
 
