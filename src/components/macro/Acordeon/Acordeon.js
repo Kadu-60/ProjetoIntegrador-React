@@ -17,15 +17,15 @@ function Acordeon(props) {
                     <Accordion.Header>Descrição Técnica</Accordion.Header>
                     <Accordion.Body>
                         <ul>
-                            <label> <strong>Familia da Cerveja:</strong></label>
+                            <label className='labelproduto'> <strong>Familia da Cerveja:</strong></label>
                             <li>{props.familia}</li>
-                            <label> <strong>Estilo ou Família:</strong></label>
+                            <label className='labelproduto'> <strong>Estilo ou Família:</strong></label>
                             <li>{props.estilo}</li>
-                            <label> <strong>IBU:</strong></label>
+                            <label className='labelproduto'> <strong>IBU:</strong></label>
                             <li>{props.ibu}</li>
-                            <label> <strong>Cor da Cerveja:</strong></label>
+                            <label className='labelproduto'> <strong>Cor da Cerveja:</strong></label>
                             <li>{props.cor}</li>
-                            <label> <strong>Teor Alcoólico:</strong></label>
+                            <label className='labelproduto'> <strong>Teor Alcoólico:</strong></label>
                             <li>{props.teor}00%</li>
                         </ul>
                     </Accordion.Body>

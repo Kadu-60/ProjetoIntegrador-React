@@ -20,7 +20,7 @@ function Produto(props) {
                                 <p >{props.descricao}</p>
                             </div>
                             
-                            <p class="preco mt-1">R${props.preco}</p>
+                            <p class="preco">R${props.preco}</p>
                             <div class="col-12 d-flex justify-content-center">
                                 <BotaoConfirmar texto='Comprar'/>
                        
