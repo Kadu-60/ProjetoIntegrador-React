@@ -3,7 +3,7 @@ import './Checkout.css'
 //import 'bootstrap/dist/css'
 import FormDefault from '../../components/macro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
-import { Container, Form, Row, Col } from 'react-bootstrap'
+import { Container, Form, Row, Col, Accordion } from 'react-bootstrap'
 
 function Checkout(props) {
 
@@ -12,7 +12,7 @@ function Checkout(props) {
         <Container>
             <FormDefault className="title-endereco" title="Dados de Pagamento">
                 <br/>
-                    <Row className="mb-3">
+                    {/* <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="name" placeholder="Nome" />
@@ -22,10 +22,10 @@ function Checkout(props) {
                             <Form.Label>Sobrenome</Form.Label>
                             <Form.Control type="surname" placeholder="Sobrenome" />
                         </Form.Group>
-                    </Row>
+                    </Row> */}
 
                     <Form.Group className="mb-3" controlId="formGridAddress1">
-                        <Form.Label>Endereço</Form.Label>
+                        <Form.Label>Endereço de entrega</Form.Label>
                         <Form.Control placeholder="Av. Corifeu de Azevedo Marques" />
                     </Form.Group>
 
@@ -37,7 +37,7 @@ function Checkout(props) {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridCity">
                             <Form.Label>Cidade</Form.Label>
-                            <Form.Control />
+                            <Form.Control placeholder="São Paulo"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
@@ -63,6 +63,10 @@ function Checkout(props) {
                     </Row>
 
                     <hr />
+                    <Accordion>
+  <Accordion.Item eventKey="0">
+    <Accordion.Header>Realizar pagamento</Accordion.Header>
+    <Accordion.Body>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>Cartão</Form.Label>
@@ -75,16 +79,17 @@ function Checkout(props) {
                         </Form.Group>
                     </Row>
 
+
                     <Row className="mb-3">
                         <Form.Group className="mb-3" controlId="formGridAddress1">
                             <Form.Label>Nome como está no cartão</Form.Label>
                             <Form.Control placeholder="Nome Sobrenome" />
                         </Form.Group>
-                    </Row>
+                    {/* </Row>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
-                            <Form.Label>Número do Cartão</Form.Label>
+                    <Row className="mb-3"> */}
+                        <Form.Group className="mb-3" controlId="formGridAddress1">
+                            <Form.Label>Número do cartão</Form.Label>
                             <Form.Control placeholder="#### #### #### ####" />
                         </Form.Group>
 
@@ -99,8 +104,11 @@ function Checkout(props) {
                         </Form.Group>
                     </Row>
 
-                    <Button label="Confirmar Compra" type="submit" onclick="null" class="conversao"/>
-                    <Button label="Cancelar" type="submit" onclick="null" class="apoio"/>
+                    <Button label="Finalizar Compra" navigation route="pedidoFinalizado" class="btn-checkout"/>
+                    <Button label="Cancelar" navigation route="home" class="apoio"/>
+                </Accordion.Body>
+  </Accordion.Item>
+  </Accordion>
             </FormDefault>
             </Container>
         </>

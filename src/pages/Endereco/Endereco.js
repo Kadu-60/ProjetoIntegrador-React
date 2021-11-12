@@ -16,7 +16,7 @@ function Endereco (props) {
             <Input label="Cidade" type="text"/>
             <Input label="Estado" type="tel"/>
             <Button label="Voltar" navigation route="login" class="apoio"/>
-            <Button label="Confirmar" onclick="null" class="conversao"/>
+            <Button label="Confirmar" onclick="null" class="btn-comprar"/>
         </FormDefault>
         </>
     )
