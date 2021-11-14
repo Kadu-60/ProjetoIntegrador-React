@@ -8,9 +8,7 @@ import { Container, Form, Row, Col, Accordion } from 'react-bootstrap'
 function Checkout(props) {
 
     return (
-        <>
-        <Container>
-            <FormDefault className="title-endereco" title="Dados de Pagamento">
+        <><Container>
                 <br/>
                     {/* <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
@@ -63,10 +61,6 @@ function Checkout(props) {
                     </Row>
 
                     <hr />
-                    <Accordion>
-  <Accordion.Item eventKey="0">
-    <Accordion.Header>Realizar pagamento</Accordion.Header>
-    <Accordion.Body>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>Cartão</Form.Label>
@@ -106,10 +100,7 @@ function Checkout(props) {
 
                     <Button label="Finalizar Compra" navigation route="pedidoFinalizado" class="btn-checkout"/>
                     <Button label="Cancelar" navigation route="home" class="apoio"/>
-                </Accordion.Body>
-  </Accordion.Item>
-  </Accordion>
-            </FormDefault>
+
             </Container>
         </>
     )
