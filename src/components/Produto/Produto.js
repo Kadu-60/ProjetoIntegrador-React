@@ -1,7 +1,7 @@
 import React from 'react'
 import './Produto.css'
 import BotaoComprar from '../micro/BotaoConfirmar/BotaoConfirmar';
-import BotaoConfirmar from '../micro/BotaoConfirmar/BotaoConfirmar';
+import BotaoAdicionar from '../micro/BotaoConfirmar/BotaoAdicionar';
 
 
 function Produto(props) {
@@ -22,7 +22,7 @@ function Produto(props) {
                             
                             <p class="preco">R${props.preco}</p>
                             <div class="col-12 d-flex justify-content-center">
-                                <BotaoConfirmar texto='Comprar'/>
+                            <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar texto='Adicionar '/></a>
                        
                             </div>
                         </div>

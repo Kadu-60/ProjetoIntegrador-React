@@ -19,15 +19,18 @@ function Carrinho(props) {
         <>
             <br/>
             <Container>
-                <FormDefault className="title-endereco" title="Carrinho">
+                <FormDefault className="title-endereco" title="">
+                <p className="title-dash">Carrinho</p>
                     <h5>Quantidade de produtos: {qtyCart}</h5>
                     <br/>
                     <ProductList label="Produtos" products={products} cart />
                     <hr/>
                     <h6>Valor total: R$ </h6>
-                    <Button label="Ir para pagamento" navigation route="checkout" class="conversao" />
+                    <Button label="Ir para pagamento" navigation route="checkout" class="conversao" ><a href="/checkout"></a> </Button>
                     <Button label="Voltar" navigation route="listaproduto" class="apoio" />
                 </FormDefault>
+
+                
             </Container>
             <br/>
         </>

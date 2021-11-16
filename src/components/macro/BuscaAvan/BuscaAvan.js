@@ -20,7 +20,7 @@ function BuscaAvan(props) {
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                             <div class="col-12 d-flex flex-column align-items-center">
-                            <p> Marca:</p>
+                            <p className="busc-avanc"> Marca:</p>
                                 <SelectBusca/>
                             </div>
                         </div>
@@ -28,7 +28,7 @@ function BuscaAvan(props) {
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                             <div class="col-12 d-flex flex-column align-items-center">
-                            <p> Familia:</p>
+                            <p className="busc-avanc"> Familia:</p>
                             <SelectBusca/>
 
                                
@@ -38,7 +38,7 @@ function BuscaAvan(props) {
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
-                        <p> Prato:</p>
+                        <p className="busc-avanc"> Prato:</p>
                         <SelectBusca/>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ function BuscaAvan(props) {
                     <div class="col-6 d-flex justify-content-center">
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
-                            <p> Categoria:</p>
+                            <p className="busc-avanc"> Categoria:</p>
                             <SelectBusca/>
                             </div>
                         </div>

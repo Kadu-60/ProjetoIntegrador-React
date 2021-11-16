@@ -13,7 +13,7 @@ function Busca(props) {
         <div class="container">
             <div class="row pt-5">
                 <div class="col-10 d-flex justify-content-start">
-                    <h5 className="titulo">1-16 de 390 resultados para</h5><h5 class="pesquisa titulo">"Cerveja"</h5>
+                    <h5 className="titulo-header">1-16 de 390 resultados para</h5><h5 class="pesquisa titulo-header">"Cerveja"</h5>
                 </div>
             </div>
             <ListarProdutos>
@@ -37,9 +37,10 @@ function Busca(props) {
                     <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" />
                     <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" />
                     <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" />
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" />
+                    
             </ListarProdutos>
             <BotaoPags/>
+            <br/> <br/>
         </div>
           
     </>

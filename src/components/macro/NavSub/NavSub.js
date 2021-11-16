@@ -23,27 +23,27 @@ function NavSub(props){
 
                                 <li class="nav-item sub-menu">
 
-                                    <button class="dropbtn"><a class="nav-link " aria-current="page" href="#"> Home</a></button>
+                                    <button class="dropbtn"><a class="nav-link " aria-current="page" href="/home"> Home</a></button>
 
                                 </li>
 
 
                                 <li class="nav-item sub-menu ">
                                   
-                                    <button class="dropbtn">  <a class="nav-link " href="#"> CATEGORIA</a></button>
+                                    <button class="dropbtn">  <a class="nav-link " href="/categorias"> CATEGORIA</a></button>
                                   
                                 </li>
                                 
                                 <li class="nav-item sub-menu">
                                     
-                                    <button class="dropbtn"> <a class="nav-link " href="#"> FAMÍLIA</a></button>
+                                    <button class="dropbtn"> <a class="nav-link " href="/produtos"> Produtos</a></button>
 
                                 </li>
 
                            
 
                                 <li class="nav-item sub-menu">
-                                    <button class="dropbtn">  <a class="nav-link " href="#"> DESTAQUES</a></button>
+                                    <button class="dropbtn">  <a class="nav-link " href="/busca"> DESTAQUES</a></button>
                                 </li>
 
                             </ul>

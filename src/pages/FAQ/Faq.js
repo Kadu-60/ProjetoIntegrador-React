@@ -242,7 +242,7 @@ export default class AccordionExampleStandard extends Component {
       <p className="title-dash">Não encontrou o que precisava?</p>
       <p> Visite nossa central de atendimento</p>
       <button  className="btn-botao-faq" id="">
-          <a className="chamado" href="/formulariocontato">
+          <a className="chamado" href="/contato">
                         Criar um chamado</a>
         </button>
   

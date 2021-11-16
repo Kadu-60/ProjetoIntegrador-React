@@ -22,7 +22,7 @@ function NavPrincipal(props){
 
                 <div className="row header-nav d-flex justify-content-between align-items-center">
                     <div class="col-2">
-                        <a className ="navbar-brand col-2" href="#"> <img className ="header-logo" src={Logo} alt="DevBrew"/> </a>
+                        <a className ="navbar-brand col-2" href="/home"> <img className ="header-logo" src={Logo} alt="DevBrew"/> </a>
                     </div>
                         <div class="col-7 col-lg-5">
                             <div class="header-pesquisa">
@@ -44,21 +44,21 @@ function NavPrincipal(props){
                                 </div>
 
                                 <div className="col-3 header-conta">
-                                    <a className ="link-icone" href="/dashboard">
+                                    <a className ="link-icone" href="/login">
                                         <img className ="imagem" src={Conta}/>
                                         <p className ="icone"> Minha Conta</p>
                                     </a>
                                 </div>
 
                                 <div className="col-3 header-Pedidos ">
-                                    <a className ="link-icone" href="#">
+                                    <a className ="link-icone" href="/dashboard">
                                         <img className ="imagem" src={Pedido}/>
                                         <p className ="icone">  Meus Pedidos</p>
                                     </a>
                                 </div>
 
                                 <div className="col-3 header-carrinho">
-                                    <a className ="link-icone" href="#">
+                                    <a className ="link-icone" href="/carrinho">
                                         <img id="carrinho" className ="imagem" src={Carrinho}/><Badge pill bg="danger">0</Badge>
                                         <p className ="icone">Carrinho</p>
                                     </a>

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CadastroCliente.css'
 import FormDefault from '../../components/micro/Forms/FormDefault/FormDefault'
 import Input from '../../components/micro/Forms/Input/Input'
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
+import { Button, Modal } from 'react-bootstrap'
 
 function CadastroCliente(props) {
+    
+    const [show, setShow] = useState(false);
 
     return(
         <>
@@ -58,7 +61,8 @@ function CadastroCliente(props) {
                <div class="row justify-content-center">
                 <div class="col-md-6 d-flex justify-content-around">
                     <div class="form-check col-md-6 termos">
-                        <Checkbox texto="Aceito e concordo com os Termos"/>
+                        <Checkbox texto="Aceito e concordo com os " /> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
+
                     </div>
                 </div>
                 </div>
@@ -76,14 +80,46 @@ function CadastroCliente(props) {
                 
                     <div class="col-md-4 d-flex justify-content-center">
                         <p>
-                            Já possui conta? <a href="../login/login.html"> Fazer login</a>
+                            Já possui conta? <a className="fazer-login" href="/login"> Fazer login</a>
                         </p>
                     </div>
                </div>
+
+         
+        <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+           Termos e Condições do site
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
+            commodi aspernatur enim, consectetur. Cumque deleniti temporibus
+            ipsam atque a dolores quisquam quisquam adipisci possimus
+            laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
+            accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
+            reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
+            deleniti rem!
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+           
+        <Button  className="btn-modal-termo" onClick={() => setShow(false)}>Concordo</Button>
+      </Modal.Footer>
+      </Modal>
+
                <br/>
             </FormDefault>
         </>
     )
 }
+
+
 
 export default CadastroCliente
