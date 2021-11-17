@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import './CadastroCliente.css'
 import FormDefault from '../../components/micro/Forms/FormDefault/FormDefault'
+import Button from '../../components/micro/Button/Button'
 
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 
 import axios from 'axios'
-import BotaoVoltar from '../../components/micro/BotaoVoltar/BotaoVoltar'
 import BotaoCadastrarCliente from '../../components/micro/BotaoCadastrarCliente/BotaoCadastrarCliente'
 
 function CadastroCliente(props) {
@@ -31,9 +31,38 @@ function CadastroCliente(props) {
                 window.location.href = "http://localhost:3000/"
             })
             .catch((error) => console.log(error))
-
-
     }
+
+    const mascaraLetras = (value) => {
+        return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
+      };
+
+      const mascaraCPF = (value) => {
+        return value
+          .replace(/\D/g, "")
+          .replace(/(\d{3})(\d)/, "$1.$2")
+          .replace(/(\d{3})(\d)/, "$1.$2")
+          .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+          .replace(/(-\d{2})\d+?$/, "$1");
+      };
+
+      const mascaraData = (value) => {
+        return value
+          .replace(/\D/g, "")
+          .replace(/(\d{2})(\d)/, "$1/$2")
+          .replace(/(\d{2})(\d)/, "$1/$2")
+          .replace(/(\d{4})(\d)/, "$1");
+      };
+
+      const mascaraTelefone = (value) => {
+        return value
+          .replace(/\D/g, "")
+          .replace(/(\d{2})(\d)/, "($1) $2")
+          .replace(/(\d{5})(\d)/, "$1-$2")
+          .replace(/(-\d{4})(\d+?)$/, "$1");
+      };
+
+
 
     return (
         <>
@@ -51,7 +80,7 @@ function CadastroCliente(props) {
                     <div class="form-group col-md-6">
                         <Form.Label>Nome Completo</Form.Label>
                         <Form.Control type="nome" placeholder="Ex.: Fulano de Tal" onChange={(event) => {
-                            setNome(event.target.value)
+                            setNome(mascaraLetras(event.target.value))
                         }}
                             value={nome} required="true" />
                     </div>
@@ -62,14 +91,14 @@ function CadastroCliente(props) {
                     <div class="form-group col-md-3">
                         <Form.Label>CPF</Form.Label>
                         <Form.Control type="cpf" placeholder="Ex.: 900.000.000-22" onChange={(event) => {
-                            setCpf(event.target.value)
+                            setCpf(mascaraCPF(event.target.value))
                         }}
                             value={cpf} required="true" />
                     </div>
                     <div class="form-group col-md-3">
                         <Form.Label>Nascimento:</Form.Label>
                         <Form.Control type="dataNascimento" placeholder="Ex.: 29/02/1980" onChange={(event) => {
-                            setDataNascimento(event.target.value)
+                            setDataNascimento(mascaraData(event.target.value))
                         }}
                             value={dataNascimento} required="true" />
                     </div>
@@ -87,7 +116,7 @@ function CadastroCliente(props) {
                     <div class="form-forup col-md-3">
                         <Form.Label>Telefone</Form.Label>
                         <Form.Control type="telefone" placeholder="Ex.: (11) 98889-7667" onChange={(event) => {
-                            setTelefone(event.target.value)
+                            setTelefone(mascaraTelefone(event.target.value))
                         }}
                             value={telefone} required="true" />
                     </div>
@@ -121,9 +150,9 @@ function CadastroCliente(props) {
                 <br />
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 col-md-4  d-flex justify-content-around">
-                        <BotaoCadastrarCliente class="conversao" label="Cadastrar" type="submit" onClick={(event) => {
-                            Cadastrar(event)
-                        }} />
+                        <Button label="Cadastrar" type="submit" 
+                        onClick={(event) => { Cadastrar(event) }} />
+                        <Button label="Voltar" navigation route="login" class="apoio"/>
                     </div>
 
                 </div>
