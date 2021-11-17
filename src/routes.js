@@ -29,7 +29,7 @@ export const RoutesSite = () => {
                 <Route path='/' component={HomePop} exact />
                 <Route path='/home' component={Home} />
                 <Route path="/login" component={Login} />
-                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/dashboard/:id" component={Dashboard} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contato" component={Fale} />
                 <Route path="/categorias" component={Categoria} />
