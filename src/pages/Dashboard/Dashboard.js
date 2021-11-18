@@ -10,9 +10,13 @@ function Dashboard(props){
 
     return(
      <> 
-     <TituloDash/>
-              
-              <MenuCentral/>
+
+            <div className="container">
+                <TituloDash nome={props.nome} />
+                <MenuCentral />
+                <br/>
+                <br/>
+            </div>
 
            
             

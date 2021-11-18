@@ -2,6 +2,9 @@ import React from 'react'
 import './BuscaAvan.css'
 import Select from '../../micro/Forms/Select/Select';
 import SelectBusca from '../../micro/Forms/Select/SelectBusca';
+import SelectPrato from '../../micro/Forms/Select/SelectPrato';
+import SelectCategoria from '../../micro/Forms/Select/SelectCategoria';
+import SelectFamilia from '../../micro/Forms/Select/SelectFamilia';
 import BotaoBuscaAvan from '../../micro/BotaoBuscaAvan/BotaoBuscaAvan';
 
 function BuscaAvan(props) {
@@ -29,7 +32,7 @@ function BuscaAvan(props) {
                         <div class="row seletores">
                             <div class="col-12 d-flex flex-column align-items-center">
                             <p className="busc-avanc"> Familia:</p>
-                            <SelectBusca/>
+                            <SelectFamilia/>
 
                                
                             </div>
@@ -39,7 +42,7 @@ function BuscaAvan(props) {
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
                         <p className="busc-avanc"> Prato:</p>
-                        <SelectBusca/>
+                        <SelectPrato/>
                             </div>
                         </div>
                     </div>
@@ -47,7 +50,7 @@ function BuscaAvan(props) {
                         <div class="row seletores">
                         <div class="col-12 d-flex flex-column align-items-center">
                             <p className="busc-avanc"> Categoria:</p>
-                            <SelectBusca/>
+                            <SelectCategoria/>
                             </div>
                         </div>
                     </div>

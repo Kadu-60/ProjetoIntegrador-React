@@ -15,7 +15,7 @@ function FormularioContato(props) {
           </p>
         </div>
         <div className="container col-6 titulo">
-        <p className="p-nome">  Nome:*</p>
+        <p className="p-nome"> *Nome:</p>
           <input
             type="text"
             className="form-control"
@@ -23,20 +23,10 @@ function FormularioContato(props) {
             aria-required="true"
           />
         </div>
+      
         <div className="container col-6 titulo">
           <label htmlFor="exampleFormControlInput1" className="form-label">
-          <p className="p-nome"> Telefone:</p>
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="ex (00) 00000-0000"
-          />
-        </div>
-        <div className="container col-6 titulo">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-          <p className="p-nome">   E-mail:*</p>
+          <p className="p-nome">   *E-mail:</p>
           </label>
           <input
             type="email"
@@ -46,7 +36,7 @@ function FormularioContato(props) {
           />
         </div>
         <div className="container col-6 titulo">
-        <p className="p-nome"> Tipo De Contato:*</p>
+        <p className="p-nome"> *Tipo De Contato:</p>
           <select className="form-select" aria-label="Tipo De Contato">
             <option selected>Selecione</option>
             <option value={1}>Informação</option>
@@ -55,36 +45,10 @@ function FormularioContato(props) {
             <option value={4}>Elogio</option>
           </select>
         </div>
-        <div className="container col-6 titulo">
-          <div className="container col-6 d-flex titulo">
-            <div className="container col-5">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-              <p className="p-nome">  Sou Cliente </p>
-              </label>
-            </div>
-            <div className="container col-7">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                defaultChecked
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault2">
-              <p className="p-nome">  Não sou Cliente</p>
-              </label>
-            </div>
-          </div>
-        </div>
+     
         <div className="container col-6 titulo">
           <label htmlFor="exampleFormControlInput1" className="form-label">
-          <p className="p-nome">   Assunto:*{" "}</p>
+          <p className="p-nome">   *Assunto:{" "}</p>
           </label>
           <input
             type="text"
@@ -95,7 +59,7 @@ function FormularioContato(props) {
         </div>
         <div className="container col-6 mensagem-form titulo">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
-          <p className="p-nome">  Mensagem:*</p>
+          <p className="p-nome">  *Mensagem:</p>
           </label>
           <textarea
             className="form-control"
