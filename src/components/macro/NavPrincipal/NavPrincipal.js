@@ -59,7 +59,8 @@ function NavPrincipal(props){
 
                                 <div className="col-3 header-carrinho">
                                     <a className ="link-icone" href="/carrinho">
-                                        <img id="carrinho" className ="imagem" src={Carrinho}/><Badge pill bg="danger">0</Badge>
+                                        <img id="carrinho" className ="imagem" src={Carrinho}/>
+                                        {/* <Badge pill bg="danger">0</Badge> */}
                                         <p className ="icone">Carrinho</p>
                                     </a>
                                 </div>

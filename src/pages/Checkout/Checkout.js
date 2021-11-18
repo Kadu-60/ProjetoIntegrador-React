@@ -96,15 +96,35 @@ function Checkout(props) {
 
                                         <ul className="lista-carrinho-total">
 
-                                            <p> <Icon className="icone-resumo" name="user" /><b> Dados Pessoais</b></p>
+                                        <p> <Icon className="icone-resumo" name="home" /><b>Entrega</b></p>
                                             <p>Solicitamos apenas as informações essenciais para a realização da compra.</p>
                                             <li className="sub-global">
 
-                                                <span>E-mail: teste@email.com{props.email}</span>
-                                                <label>Primeiro nome</label>
-                                                <input type="text" class="form-control" placeholder="" />
-                                                <label>Último nome</label>
-                                                <input type="text" class="form-control" placeholder="" />
+                                                
+                                            
+                                                <ul className="lista-carrinho-total">
+
+                                                  
+                                                    <label>* CEP </label>
+                                                    <Field type="text" id="cep" name="cep" onBlur={(ev) => buscaCep(ev, setFieldValue)} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
+                                                    <label>* Rua </label>
+                                                    <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" required/>
+                                                    <label>* Número </label>
+                                                    <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" required/>
+                                                    <label>* Complemento </label>
+                                                    <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" required />
+                                                    <label>* Bairro </label>
+                                                    <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" required />
+                                                    <label>* Cidade </label>
+                                                    <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" required />
+                                                    <label>* Estado </label>
+                                                    <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" required />
+                                                    <label>Nome do destinatário </label>
+                                                    <input type="text" class="form-control" placeholder="" />
+                                                   
+                                                    <br />
+                                                    <br />
+                                                 </ul>   
 
 
                                             </li>
@@ -120,29 +140,7 @@ function Checkout(props) {
                                     <div className="div-entrega" >
                                         <ul className="lista-carrinho-total">
 
-                                            <p> <Icon className="icone-resumo" name="home" /><b>Entrega</b></p>
-                                            <label>CEP *</label>
-                                            <Field type="text" id="cep" name="cep" onBlur={(ev) => buscaCep(ev, setFieldValue)} className="form-control input-cep" data-js="cep" placeholder="00000-000" />
-                                            <label>Rua *</label>
-                                            <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" />
-                                            <label>Número *</label>
-                                            <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" />
-                                            <label>Complemento *</label>
-                                            <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" />
-                                            <label>Bairro *</label>
-                                            <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" />
-                                            <label>Cidade *</label>
-                                            <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" />
-                                            <label>Estado *</label>
-                                            <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" />
-
-                                            <button className=" btn-default form-control ok-cep btn-ir-pag" onClick={verMais} id="btnPagamento" type="button">Ir para o pagamento</button>
-                                            <br />
-                                            <br />
-
-
-                                            <span id="pontos">
-                                            </span>
+                                                                   
 
 
                                             <div className="div-fundo" id="div-fundo">
@@ -250,13 +248,15 @@ function Checkout(props) {
                                             </tbody>
 
 
-
+                                            <br/>  <br/>  <br/>
                                             <div className="resumo-pedido-sub">
 
-                                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ 20,00 {props.subtotal}</span>   </li>
-                                                <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 10,00{props.frete}</span>   </li>
+                                                <li className="sub-global sub-total-frete"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ 20,00 {props.subtotal}</span>   </li>
+                                                <li className="sub-global sub-total-frete"><b>Frete </b>  <span className="texto-total-frete">  R$ 10,00{props.frete}</span>   </li>
+                                                <br/>
+                                                <li className="sub-global  sub-total-frete borda-total"><b>Total </b> <span className="texto-total-frete-total-pedido">  R$ 30,00{props.total}</span>   </li>
 
-                                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total-pedido">  R$ 30,00{props.total}</span>   </li>
+                                                <br/>  <br/>  
                                                 <button class="btn-finalizar-compra botao-pedido-finalizar" type="button"><a className="finalizar-compra-cor" href="/pedidofinalizado">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
                                                 <br />
                                                 <br />
@@ -274,7 +274,10 @@ function Checkout(props) {
 
                             </Container>
                             <br />
-
+                            <br />
+                                                <br />
+                                                <br />
+                                                <br />
 
                         </body>
 

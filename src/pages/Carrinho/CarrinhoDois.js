@@ -3,12 +3,14 @@ import './CarrinhoDois.css'
 import ListaCarrinho from '../../components/macro/ListaCarrinho/ListaCarrinho'
 
 
+
 function CarrinhoDois(props){
 
     return(
      <>
      
      <ListaCarrinho/>
+    
 
 
     
