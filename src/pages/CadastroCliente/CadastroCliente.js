@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-import { Form } from 'react-bootstrap'
+import React, { useState } from 'react' 
 import './CadastroCliente.css'
 import FormDefault from '../../components/micro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
-
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
-
+import { Form } from 'react-bootstrap'
 import axios from 'axios'
-import BotaoCadastrarCliente from '../../components/micro/BotaoCadastrarCliente/BotaoCadastrarCliente'
 
 function CadastroCliente(props) {
     const [nome, setNome] = useState('')
@@ -69,7 +66,6 @@ function CadastroCliente(props) {
             <FormDefault>
                 <br />    <br />
                 <div class="row d-flex justify-content-center">
-
                     <div class="col d-flex justify-content-center">
                         <p className="title-dash">Criar conta</p>
                     </div>
@@ -130,13 +126,6 @@ function CadastroCliente(props) {
                         }}
                             value={password} required="true" />
                     </div>
-                    <div class="form-group col-md-3">
-                        <Form.Label>Confirmar Senha:</Form.Label>
-                        <Form.Control type="password" placeholder="Ex.: Abc123" onChange={(event) => {
-                            setPassword(event.target.value)
-                        }}
-                            value={password} />
-                    </div>
                 </div>
 
                 <br /><br />
@@ -150,8 +139,7 @@ function CadastroCliente(props) {
                 <br />
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 col-md-4  d-flex justify-content-around">
-                        <Button label="Cadastrar" type="submit" 
-                        onClick={(event) => { Cadastrar(event) }} />
+                        <Button label="Cadastrar" type="submit" onClick={(event) => { Cadastrar(event) }}/>
                         <Button label="Voltar" navigation route="login" class="apoio"/>
                     </div>
 
