@@ -25,10 +25,11 @@ function DestaquesHome(props) {
 
     
         return destaques.map(prod => {
+            const link = '/produto/' + prod.id_produto
             return (
 
                 
-                    <Produto linkProduto="" imagem={prod.foto} descricao={prod.nome_produto} preco="5,29" >
+                    <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco="5,29" >
                         <a className="/produto:id}"></a></Produto>
                 
 
