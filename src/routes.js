@@ -33,7 +33,7 @@ export const RoutesSite = () => {
                 <Route path="/faq" component={Faq} />
                 <Route path="/contato" component={Fale} />
                 <Route path="/categorias" component={Categoria} />
-                <Route path="/busca" component={Busca} />
+                <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
                 <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
                 <Route path="/produto" component={Produto} />

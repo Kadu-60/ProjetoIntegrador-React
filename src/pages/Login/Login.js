@@ -11,16 +11,14 @@ function estadoInicial(){
         return{email: '', password: ''}
 }
 
-function fazerLogin({email, password}){
-    if(email === 'admin' && password === 'admin'){
-        return {token: '1234'}
-    }
-    return {error: 'invalido'}
-}
+
+
+
 
 function Login(props) {
 
     const [values, setValues] = useState(estadoInicial)
+    const [senha, setSenha] = useState([])
     const {setToken} = useContext(StoreContext)
     const history = useHistory()
 
@@ -34,17 +32,48 @@ function Login(props) {
 
     }
 
-    function onSubmit(event){
+    async function onSubmit(event){
         event.preventDefault()
-
+        
+        
+        
+        
         const {token} = fazerLogin(values)
+
+        
+        console.log('token')
+        console.log({token})
 
         if(token){
             setToken(token)
-            return history.push("/")
+            return history.push("/home")
         }
 
         setValues(estadoInicial )
+    }
+
+    function fazerLogin(props){
+        const dados = {
+            email: props.email,
+            password: props.password
+        }
+        const {token} = ''
+        
+        
+        axios.post('http://localhost:8080/login', dados)
+            .then(res => {
+                console.log('resposta')
+                console.log(res)
+                const {token} = res.data
+
+                
+            })
+            .catch(err => {
+                console.log('erro')
+                console.log(err)
+            })
+        return {token}
+        
     }
 
   return (
