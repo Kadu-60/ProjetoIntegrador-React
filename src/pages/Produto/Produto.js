@@ -70,7 +70,7 @@ function Produto(props) {
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
-                                        <BotaoQtd />
+                                        <BotaoQtd inicial={1} passo={1}  />
                                     </div>
                                     <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                         <div class="col-12 d-flex justify-content-center">

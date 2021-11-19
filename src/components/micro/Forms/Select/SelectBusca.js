@@ -2,9 +2,9 @@ import React from 'react'
 import { Select } from 'semantic-ui-react'
 
 const countryOptions = [
-  { key: 'DEf', value: '-1', text: 'Selecione' },
-  { key: 'Bd', value: 'Bd', text: 'Baden' },
-  { key: 'Cl', value: '13', text: 'Colorado' },
+  { key: '', value: '', text: 'Selecione' },
+  { key: 'af', value: 'af', text: 'Baden' },
+  { key: 'ax', value: 'ax', text: 'Colorado' },
   { key: 'al', value: 'al', text: 'Fritz' },
   { key: 'dz', value: 'dz', text: 'Hoegaarden' },
   { key: 'as', value: 'as', text: 'Patagonia' },

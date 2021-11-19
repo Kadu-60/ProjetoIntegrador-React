@@ -23,7 +23,7 @@
     box-sizing: border-box;
     padding-top: 10px;
     padding-left: 20px;
-    max-height: 475px;
+    max-height: 650px;
     position: relative;
     width: 350px;
     margin-top: 10px;
@@ -36,18 +36,23 @@
     box-sizing: border-box;
     padding-top: 10px;
     padding-right: 60px;
-    max-height: 500px;
+    max-height: 650px;
     position: relative;
-    width: 350px;
+    width: 400px;
+    max-width: 400px;
 
     margin-top: 10px;
     display: flex;
     justify-content: right;
-    padding-bottom:90%;
+    
     margin-left: 10px;
 }
-#div-fundo{
-    display: none;
+.sub-global{
+    margin-left: 30px;
+}
+
+.sub-total-frete{
+    margin-left: 40px;
 }
 
 .finalizar-titulo{
@@ -58,7 +63,7 @@
     box-sizing: border-box;
     padding-top: 10px;
     padding-right: 60px;
-    max-height: 475px;
+    max-height: 650px;
     position: relative;
     width: 350px;
 
@@ -97,6 +102,15 @@
     margin-top: 30px;
     border: #8D733F;
 }
+.btn-ir-pag:focus{
+    margin-top: 30px;
+    border: #8D733F;
+}
+.btn-ir-pag:hover{
+    margin-top: 30px;
+    border: #8D733F;
+}
+
 
 
 .input-validade{
@@ -115,3 +129,11 @@
 .div-checkout{
     display: inline-flex;
 }
+
+@media only screen and (max-width: 1200px){
+    .div-checkout{
+        display: block;
+    }
+}
+
+

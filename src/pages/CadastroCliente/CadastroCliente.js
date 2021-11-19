@@ -1,17 +1,33 @@
-import React, { useState } from 'react'
+import React, { useRef,useEffect, useState  } from 'react'
 import './CadastroCliente.css'
+import * as Yup from 'yup';
 import FormDefault from '../../components/micro/Forms/FormDefault/FormDefault'
 import Input from '../../components/micro/Forms/Input/Input'
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
 import { Button, Modal } from 'react-bootstrap'
+import InputMask from "react-input-mask";
+import InputUnform from '../../components/micro/Forms/FormDefault/FormUnform/Input'
 
-function CadastroCliente(props) {
-    
+
+// import { mask, unMask } from 'remask'
+
+function CadastroCliente() {
+
+
+
     const [show, setShow] = useState(false);
+    const [value, setValue] = useState ('');
+    const onChange = ev =>{
+        setValue(ev.target.value)
+    };
+    
+
 
     return(
         <>
+
+  
         <FormDefault>
                 <br/>    <br/>
                 <div class="row d-flex justify-content-center">
@@ -24,36 +40,45 @@ function CadastroCliente(props) {
                 <div class="row d-flex justify-content-center">
                     
                     <div class="form-group col-md-6">
-                        <Input corLabel="preto" label="Nome Completo" type="text" required="true"/>
+                    <label>Nome Completo:</label><br/>
+                     
+                        <InputMask corLabel="preto" id="input-container-nome" label="Nome Completo" type="text" required="true"/>
                     </div>
                     
                 </div>
                <div class="row d-flex justify-content-center">
                
                     <div class="form-group col-md-3">
-                        <Input corLabel="preto" label="CPF" type="text" placeholder="XXX.XXX.XXX-XX" small="Apenas número" required="true"/>
+                        <label>CPF:</label>
+                        <InputMask mask="999.999.999-99" corLabel="preto" id="input-container" label="CPF" type="text" placeholder="Digite seu CPF" value={value} small="Apenas número" required="true"/>
+                        <span id="resposta"></span>
                     </div>
                     <div class="form-group col-md-3">
-                        <Input corLabel="preto" label="Data de nascimento" type="text" placeholder="DD/MM/AAAA" required="true"/>
+                    <label>Data de Nascimento:</label>
+                        <InputMask mask="99/99/9999" corLabel="preto" id="input-container" label="Data de nascimento" type="text" placeholder="DD/MM/AAAA" required="true"/>
                     </div>
                     
                </div>
                <div class="row d-flex justify-content-center">
              
                    <div class="form-group col-md-3">
-                       <Input corLabel="preto" label="E-mail" type='text' placeholder="user@email.com" small='Este será seu Login' required="true"/>
+                   <label>E-mail:</label>
+                       <InputMask corLabel="preto" id="input-container" label="E-mail" type='email' placeholder="user@email.com" small='Este será seu Login' required="true"/>
                    </div>
                    <div class="form-forup col-md-3">
-                       <Input corLabel="preto" label='Telefone' type='text' placeholder="(XX) XXXXX-XXXX" small='Apenas números' required="true"/>
+                       <label>Telefone:</label>
+                   <InputMask mask="(99)99999-9999" id="input-container"  label="Telefone" type='text' placeholder="(00) 00000-0000"  required="true"/>
                    </div>
                </div>
                <div class="row">
                 <div class="col-md-3"></div>
                    <div class="form-group col-md-3">
-                       <Input corLabel='preto' label='Senha' type='password' placeholder="Insira sua senha" small='Deve conter pelo menos 8 caracteres' required="true"/>
+                   <label>Digite sua senha:</label>
+                       <InputMask corLabel='preto' id="input-container" label='Senha' type='password' placeholder="Insira sua senha" small='Deve conter pelo menos 8 caracteres' required="true"/>
                    </div>
                     <div class="form-group col-md-3">
-                        <Input corLabel='preto' label='Repita sua senha' type='password' placeholder="Insira sua senha" required="true"/>
+                    <label>Repita sua senha:</label>
+                        <InputMask corLabel='preto' id="input-container" label='Repita sua senha' type='password' placeholder="Insira sua senha" required="true"/>
                     </div>
                </div>
                
