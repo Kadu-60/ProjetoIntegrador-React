@@ -15,8 +15,11 @@ import Produto from './pages/Produto/Produto'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
 import HomePop from './pages/Home/Home-pop'
-import Carrinho from './pages/Carrinho/Carrinho'
+import Produtos from './pages/Produtos/Produtos'
+import CarrinhoDois from './pages/Carrinho/CarrinhoDois'
 import ListarProdutos from './pages/Carrinho/ListarProdutos'
+import Fale from './pages/FormularioContato/FormularioContato'
+
 
 
 export const RoutesSite = () => {
@@ -28,6 +31,7 @@ export const RoutesSite = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/faq" component={Faq} />
+                <Route path="/contato" component={Fale} />
                 <Route path="/categorias" component={Categoria} />
                 <Route path="/busca" component={Busca} />
                 <Route path="/cadastro" component={CadastroCliente} />
@@ -36,7 +40,8 @@ export const RoutesSite = () => {
                 {/* <Route path="/cart" component={Cart} /> */}
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
-                <Route path="/carrinho" component={Carrinho} />
+                <Route path="/produtos" component={Produtos} />
+                <Route path="/carrinho" component={CarrinhoDois} />
                 <Route path="/listarprodutos" component={ListarProdutos} />
             </Switch>
         </StoreProvider>

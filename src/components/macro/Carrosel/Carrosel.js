@@ -20,6 +20,14 @@ function Carrosel(props) {
                         alt="Second slide"
                     />
                 </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={props.banner3}
+                        alt="Second slide"
+                    />
+                </Carousel.Item>
+            
                 
             </Carousel>
         </>

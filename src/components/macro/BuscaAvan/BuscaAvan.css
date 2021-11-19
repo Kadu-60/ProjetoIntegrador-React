@@ -1,8 +1,13 @@
 .busca-ava{
-    background-color: #232319;
+    background-color: #4B4A42;
     margin-top: 5px;
     width: 50%;
     
+}
+
+.busc-avanc{
+    color: white;
+    padding-top: 10px;
 }
 
 

@@ -1,3 +1,9 @@
+.body-cart{
+    background-color: #f7f7f7;
+    height: 100%;
+}
+
+
 .btn-checkout {
     background-color: #EACF2B;
     color: black;
@@ -7,4 +13,105 @@
 
 .btn-checkout:hover {
     background-color: #D0A14C;
+}
+
+.continuar-comprando-pedido{
+   margin-left: 70px;
+}
+.div-pessoais{
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 20px;
+    max-height: 475px;
+    position: relative;
+    width: 350px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.div-entrega{
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-right: 60px;
+    max-height: 500px;
+    position: relative;
+    width: 350px;
+
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+    padding-bottom:90%;
+    margin-left: 10px;
+}
+#div-fundo{
+    display: none;
+}
+
+.finalizar-titulo{
+    padding-top: 30px;
+}
+.div-resumo-pedido{
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-right: 60px;
+    max-height: 475px;
+    position: relative;
+    width: 350px;
+
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+ ;
+    margin-left: 10px;
+}
+
+
+
+#conteudo-cart-pedido{
+    background-color: #ffffff;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    max-height: 20px;
+    position: relative;
+    font-size: 11px;
+    align-items: center;
+}
+.div-resumo-pedido{
+    padding-left: 30px;
+}
+
+.texto-total-frete-total-pedido{
+    padding-left: 50px;
+}
+
+.botao-pedido-finalizar{
+    margin-top: 30px;
+   margin-left: 50px;
+}
+
+.btn-ir-pag{
+    margin-top: 30px;
+    border: #8D733F;
+}
+
+
+.input-validade{
+    width: 100px;
+}
+
+
+.input-cep{
+    width: 110px;
+}
+
+.input-numero{
+    width: 80px;
+}
+
+.div-checkout{
+    display: inline-flex;
 }

@@ -8,27 +8,35 @@ import TotalPedido from "../../components/TotalPedido/TotalPedido";
 import BotaoVoltar from "../../components/micro/BotaoVoltar/BotaoVoltar";
 import Barril from "./images/barril.png"
 import NumeroPedido from "../../components/NumeroPedido/NumeroPedido";
+import { Icon } from 'semantic-ui-react'
 
 function PedidoFinalizado(props) {
   return (
     <>
-        <div class="container">
+    <body className="body-finalizado">
+
+    <div class="container">
             <div class="row pt-5">
                 <div class="col d-flex justify-content-center">
-                    <h2 class="titulo">Pedido finalizado</h2>
+                <p className="title-dash"> Pedido confirmado</p>
                 </div>
             </div>
+          
+
+
+            <br/>
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
                     <p>
                         Seu pedido foi recebido por nós e em breve estará com você!
                     </p>
                 </div>
+                <br/>
                 <div class="col-12 d-flex justify-content-center">
                     <img class="barril" src={Barril} alt=""/>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
-                    <h5 class="titulo pedido">Pedido Nº</h5><NumeroPedido numeroPedido='XXXXX'/>
+                    <h5 class="titulo-pedido">Pedido Nº<NumeroPedido className="num-pedido" numeroPedido='XXXXXXXX'/></h5>
                 </div>
             </div>
             <div class="row  d-flex justify-content-center">
@@ -40,9 +48,10 @@ function PedidoFinalizado(props) {
             <div class="row d-flex justify-content-center">
                 <div class="col-md-2"></div>
                 <div class="col-12 col-md-10 d-flex justify-content-start">
-                    <h5 class="titulo resumo">Resumo do pedido:</h5>
+                    <h5 class="resumo"><b>Resumo do pedido:</b></h5>
                 </div>
-                <div class=" col-12 col-md-9 pt-2 d-flex justify-content-center">
+                
+                <div class=" col-12 col-md-9 pt-2 d-flex justify-content-center resumo-pedido-end">
                     <div class="col-12 col-md-10 d-flex justify-content-between">
                         <CaixaInfo titulo='Endereço de envio'>
                             <Endereco rua='Rua Brasileirinho, 2002' bairro='Jardim Tropical' cidade='São Paulo' estado='SP' cep='12345678'/>
@@ -60,8 +69,9 @@ function PedidoFinalizado(props) {
             </div>
             <div class="row d-flex justify-content-around">
               <div class="col-12  mt-4 d-flex justify-content-around">
-                  <BotaoVoltar type='submit' texto="Voltar para a home"/>
-                  <BotaoVoltar type='submit' texto="Ver pagina do pedido"/>
+
+             <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido"href="/home"> Voltar para home</a></button>
+             <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido"href="/dashboard"> Ver página do pedido</a></button>
                 
             </div>
             </div>
@@ -70,6 +80,9 @@ function PedidoFinalizado(props) {
         <br/><br/>
         <br/><br/>
 
+
+    </body>
+       
         
     </>
   );
