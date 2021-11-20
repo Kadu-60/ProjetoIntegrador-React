@@ -18,12 +18,13 @@ function Dashboard() {
     };
     useEffect(() => {
         getUser()
-    },[1])
+    },[])
     const getUser = () =>{
         axios.get("http://localhost:8080/cadastro-cliente/" + id, config)
             .then(response => {
                 setUser(response.data)
             })
+        
     }
 
     return (
