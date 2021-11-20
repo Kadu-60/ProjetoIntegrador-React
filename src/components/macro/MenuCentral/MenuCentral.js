@@ -115,7 +115,7 @@ const panes = [
 
     
       
-            <p className="title-dash">meus pedido</p>
+            <p className="title-dash">meus pedidos</p>
                         <Container>
                             
                 <div className=" wd-widget">
@@ -206,7 +206,7 @@ const panes = [
 
 
                 <br/>
-                <span id="pontos">...
+                <span id="pontos">
                     </span>
 
             

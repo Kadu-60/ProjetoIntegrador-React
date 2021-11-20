@@ -2,3 +2,23 @@
     font-family: 'MedievalSharp', serif;
     font-weight: bolder;
 }
+
+.btn-modal-termo{
+    background-color: #8D733F;
+    font-weight: bold;
+    border:#8D733F ;
+}
+
+.btn-modal-termo:hover{
+    background-color: #8D733F;
+    border:#8D733F ;
+}
+.link-termo{
+    cursor: pointer;
+   
+}
+
+.fazer-login{
+    color: blue;
+    font-weight: bold;
+}
