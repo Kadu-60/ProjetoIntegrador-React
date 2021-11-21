@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './NavPrincipal.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../../../assets/imgs/header/logo.png'
@@ -22,7 +22,10 @@ function NavPrincipal(props) {
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
-
+    const [qtyCart, setQty] = useState(0)
+    useEffect(() => {
+        setQty(localStorage.getItem('qtyCart'))
+    })
 
 
     function onChange(event) {
@@ -99,7 +102,7 @@ function NavPrincipal(props) {
 
                                     <div className="col-3 header-carrinho">
                                         <a className="link-icone" href="/carrinho">
-                                            <img id="carrinho" className="imagem" src={Carrinho} /><Badge pill bg="danger">0</Badge>
+                                            <img id="carrinho" className="imagem" src={Carrinho} /><Badge pill bg="danger">{qtyCart}</Badge>
                                             <p className="icone">Carrinho</p>
                                         </a>
                                     </div>
