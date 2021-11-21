@@ -13,7 +13,7 @@ function DestaquesHome(props) {
     }, [])
 
     const getDestaques = () => {
-        axios.get(`http://localhost:8080/home/destaques`)
+        axios.get(`http://localhost:8080/Card/destaques`)
             .then((response) => {
                 setDestaques(response.data)
                 
@@ -29,7 +29,8 @@ function DestaquesHome(props) {
             return (
 
                 
-                    <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco="5,29" >
+                    <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco={(+prod.valor_preco).toFixed(2)}
+                    >
                         <a className="/produto:id}"></a></Produto>
                 
 
