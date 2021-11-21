@@ -97,6 +97,7 @@ function CadastroCliente(props) {
                             }}
                                 value={cpf} required="true" />
                         </div>
+                        --- Função de validação de 
                         <div class="form-group col-md-3">
                             <Form.Label>Nascimento:</Form.Label>
                             <Form.Control type="dataNascimento" placeholder="Ex.: 29/02/1980" onChange={(event) => {
@@ -133,13 +134,14 @@ function CadastroCliente(props) {
                                     value={password} required="true" />
                             </div>
                             
-                            <div class="form-group col-md-3">
+                            {/* --- Confirmar senha posteriormente --- */}
+                            {/* <div class="form-group col-md-3">
                                 <Form.Label>Confirmar Senha:</Form.Label>
                                 <Form.Control name="senha2" type="password" placeholder="Ex.: Abc123" onChange={(event) => {
                                     setConfPassword(event.target.value)
                                 }}
                                     value={confPassword} required="true" />
-                            </div>
+                            </div> */}
                         </div>
 
                         <br />
