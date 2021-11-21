@@ -231,13 +231,13 @@ td{
 
 .linha-do-pedido{
     align-items: center;
+  
    
 }
 .line-linha::after{
     content: "";
     position: absolute;
-    border: 2px
-    solid rgba(171,203,55,.5);
+    border: 2px solid rgba(171,203,55,.5);
     height: 34px;
     left: 3px;
     bottom: -33px;
@@ -249,10 +249,11 @@ td{
     width: 10px;
     height: 10px;
     display: inline-block;
+    background-color:rgba(171,203,55,.5) ;
     border-radius: 50%;
     -webkit-box-shadow: 0 0 0 3px rgb(171 203 55 / 50%);
     box-shadow: 0 0 0 3px rgb(171 203 55 / 50%);
-    background-color: #fff;
+    
     box-sizing: inherit;
 }
 

@@ -19,6 +19,7 @@ import Produtos from './pages/Produtos/Produtos'
 import CarrinhoDois from './pages/Carrinho/CarrinhoDois'
 import ListarProdutos from './pages/Carrinho/ListarProdutos'
 import Fale from './pages/FormularioContato/FormularioContato'
+import Teste from './pages/Teste'
 
 
 
@@ -36,13 +37,14 @@ export const RoutesSite = () => {
                 <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
                 <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
-                <Route path="/produto" component={Produto} />
+                <Route path="/produto/:pesq" component={Produto} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
                 <Route path="/produtos" component={Produtos} />
                 <Route path="/carrinho" component={CarrinhoDois} />
                 <Route path="/listarprodutos" component={ListarProdutos} />
+                <Route path="/teste/:pesq" component={Teste} />
             </Switch>
         </StoreProvider>
 
