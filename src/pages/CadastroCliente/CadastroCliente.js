@@ -65,23 +65,7 @@ function CadastroCliente(props) {
                 .replace(/(-\d{4})(\d+?)$/, "$1");
         };
 
-        function validarSenha(name1, name2)
-        {
-            var senha1 = document.getElementById(name1).value;
-            var senha2 = document.getElementById(name2).value;
-                
-            if (senha1 !== "" && senha2 !== "" && senha1 === senha2)
-            {
-                alert('senha iguais');
-            }
-            else
-            {
-                  alert('senhas diferentes');
-            }
-        }
         
-
-
 
         return (
             <>
@@ -151,7 +135,7 @@ function CadastroCliente(props) {
                             
                             <div class="form-group col-md-3">
                                 <Form.Label>Confirmar Senha:</Form.Label>
-                                <Form.Control name="senha2" type="password" onblur="validarSenha('senha','senha1')" placeholder="Ex.: Abc123" onChange={(event) => {
+                                <Form.Control name="senha2" type="password" placeholder="Ex.: Abc123" onChange={(event) => {
                                     setConfPassword(event.target.value)
                                 }}
                                     value={confPassword} required="true" />
