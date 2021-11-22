@@ -13,7 +13,7 @@ function Button(props) {
                 )
         } else {
             return (
-                <button onClick={() => props.onclick} className={"btn-custom-default " + props.class}>
+                <button onClick={(event) => props.onClick(event)} className={"btn-custom-default " + props.class}>
                     {props.label}
                 </button>
             )
