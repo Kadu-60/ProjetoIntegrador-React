@@ -112,17 +112,17 @@ function Produto(props) {
                                 {/* <p>{produto.marca}</p> */}
                             </div>
                             <div class="col-12 nome-produto">
-                                <h4>{produto.nome_produto}</h4>
+                                <span className="titulo-produto-nome">{produto.nome_produto}</span>
                             </div>
                             <div class="col-12 mt-3 align-self-center">
                                 <div class="preco-produto">
                                     <div class="preco-por">
                                         
-                                        <h5><b> Por R${preco1}</b></h5>
+                                        <span className="titulo-produto-preco"><b> Por R${preco1}</b></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 d-flex justify-content-center">
+                            <div class="col-12 d-flex justify-content-center btn-qtd">
                                 <BotaoQtd inicial={1} passo={1} />
                             </div>
                             <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">

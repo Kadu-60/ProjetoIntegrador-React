@@ -44,7 +44,7 @@ textarea {
 }
 
 
-.apoio {
+.apoio-form {
   background-color: #8D733F;
   color: #fff;
   font-weight: bold;
@@ -74,7 +74,7 @@ textarea {
   }
   
   
-  .apoio:hover {
+  .apoio-form:hover {
     background-color: #8D733F;
     color: #fff;
     font-weight: bold;

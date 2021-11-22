@@ -66,11 +66,11 @@
     max-height: 650px;
     position: relative;
     width: 350px;
-
+    overflow-y: scroll;
     margin-top: 10px;
     display: flex;
     justify-content: right;
- ;
+ 
     margin-left: 10px;
 }
 
@@ -80,7 +80,7 @@
     background-color: #ffffff;
     box-sizing: border-box;
     overflow-y: scroll;
-    max-height: 20px;
+    max-height: 100px;
     position: relative;
     font-size: 11px;
     align-items: center;

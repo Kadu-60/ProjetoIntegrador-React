@@ -26,3 +26,16 @@
 a{
     color: black;
 }
+
+.btn-qtd{
+    margin-top: 20px;
+    margin-left: 120px;
+    font-size: 22px;
+    margin-bottom: -40px;
+    cursor: pointer;
+}
+
+.titulo-produto-nome{
+    font-size: 20px;
+}
+

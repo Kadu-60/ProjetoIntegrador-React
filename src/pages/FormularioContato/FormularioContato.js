@@ -38,7 +38,7 @@ function FormularioContato(props) {
         
         alert("Mensagem enviada com sucesso!")
 
-        history.push('/');
+        history.push('/home');
       });
     
     
@@ -123,7 +123,7 @@ function FormularioContato(props) {
           <div className="container buttonform col-12 d-flex titulo">
             <div className="container col-1">
 
-              <button onClick="null" className="apoio" type="reset">
+              <button onClick="null" className="apoio-form" type="reset">
                 Excluir
               </button>
               <button  className="enviar" type="submit" >
