@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Faq from './pages/FAQ/Faq'
 import Categoria from './pages/Categoria/Categoria'
 import Busca from './pages/Busca/Busca'
+import BuscaAvancada from './pages/Busca/BuscaAvancada'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
 import Produto from './pages/Produto/Produto'
@@ -35,6 +36,7 @@ export const RoutesSite = () => {
                 <Route path="/contato" component={Fale} />
                 <Route path="/categorias" component={Categoria} />
                 <Route path="/busca/:pesq" component={Busca} exact/>
+                <Route path="/buscaAvancada/:pesq1/:pesq2/:pesq3/:pesq4" component={BuscaAvancada} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
                 <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
                 <Route path="/produto/:pesq" component={Produto} />

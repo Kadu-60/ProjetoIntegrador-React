@@ -13,9 +13,6 @@ function Busca(props) {
   const params = useParams(":pesq")
 
   const pesq = params.pesq
-  const URL = 'http://localhost:8080/produtos/buscar/'
-  const final = URL+ params.pesq
-  
 
 
   

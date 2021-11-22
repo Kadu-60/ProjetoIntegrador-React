@@ -54,7 +54,7 @@ function Produto(props) {
     const getPreco = () => {
         axios.get(precoFinal)
             .then((response) => {
-                setPreco1((+response.data.valor_preco).toFixed(2))
+                setPreco1((+response.data.valor_preco).toFixed(2).toString().replace('.', ','))
                 
 
             })

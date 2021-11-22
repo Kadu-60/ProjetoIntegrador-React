@@ -16,7 +16,7 @@ const countryOptions = [
 ]
 
 const SelectExample = () => (
-  <Select className="selectBusca" placeholder='Selecione' options={countryOptions} />
+  <Select onBlur='teste' name='opcSel' className="selectBusca" placeholder='Selecione' options={countryOptions} />
 )
 
 export default SelectExample
