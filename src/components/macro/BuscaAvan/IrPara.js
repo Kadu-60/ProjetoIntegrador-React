@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { useHistory } from "react-router-dom"
+import './BuscaAvan.css'
 
 function IrPara(props) {
     const history = useHistory();
@@ -12,7 +13,7 @@ function IrPara(props) {
 
 
     return (
-        <button className="mt-5" onClick={irParaPag}>
+        <button className="mt-5 btn-busca" onClick={irParaPag}>
               Enviar
               </button>
     )

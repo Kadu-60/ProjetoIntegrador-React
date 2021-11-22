@@ -11,7 +11,7 @@ const ProdutosBusca = ({ produtos, loading }) => {
         return (
 
 
-            <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco={(+prod.valor_preco).toFixed(2).toString().replace('.', ',')} >
+            <Produto id={prod.id_produto} linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco={(+prod.valor_preco).toFixed(2).toString().replace('.', ',')} >
                 <a href={link}></a></Produto>
 
 
