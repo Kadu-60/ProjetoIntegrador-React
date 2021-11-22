@@ -52,7 +52,7 @@ function CadastroCliente() {
                
                     <div class="form-group col-md-3">
                         <label>CPF:</label>
-                        <InputMask mask="999.999.999-99" corLabel="preto" id="input-container" label="CPF" type="text" placeholder="Digite seu CPF" value={value} small="Apenas número" required="true"/>
+                        <InputMask mask="999.999.999-99" corLabel="preto" id="input-container" label="CPF" type="text" placeholder="Digite seu CPF"  small="Apenas número" required="true"/>
                         <span id="resposta"></span>
                     </div>
                     <div class="form-group col-md-3">
