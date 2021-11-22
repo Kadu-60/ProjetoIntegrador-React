@@ -12,7 +12,7 @@ import BuscaAvancada from './pages/Busca/BuscaAvancada'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
 import Produto from './pages/Produto/Produto'
-import Cart from './pages/Cart/Cart'
+// import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
 import HomePop from './pages/Home/Home-pop'
@@ -49,14 +49,5 @@ export const RoutesSite = () => {
                 <Route path="/teste/:pesq" component={Teste} />
             </Switch>
         </StoreProvider>
-
-
-
-
-
-
-
-
-
     )
 }

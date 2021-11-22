@@ -1,8 +1,8 @@
 import React from 'react'
-import './Button.css'
+import './BotaoCadastrarCliente.css'
 import { Link } from 'react-router-dom'
 
-function Button(props) {
+function BotaoCadastrarCliente(props) {
 
     const typeButton = () => {
         if (props.navigation) {
@@ -13,7 +13,7 @@ function Button(props) {
                 )
         } else {
             return (
-                <button onClick={(event) => props.onclick(event)} className={"btn-custom-default " + props.class}>
+                <button onClick={(event) => props.onClick(event)} className={"btn-custom-default " + props.class}>
                     {props.label}
                 </button>
             )
@@ -28,4 +28,4 @@ function Button(props) {
     )
 }
 
-export default Button
+export default BotaoCadastrarCliente
