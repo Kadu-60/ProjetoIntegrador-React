@@ -147,7 +147,7 @@ const Checkout = (props) => {
             })
 
 
-        // window.location.href = "http://localhost:3000/pedidofinalizado"
+         window.location.href = "http://localhost:3000/pedidofinalizado"
     }
 
     function buscaCep(ev, setFieldValue) {
