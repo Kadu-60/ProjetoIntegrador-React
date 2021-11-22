@@ -11,7 +11,7 @@ import axios from 'axios'
 const deslogar = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
-  window.location.href = 'http://localhost:3000/'
+  window.location.href = 'http://localhost:3000/home'
 }
 
 
@@ -75,6 +75,7 @@ const Panes = (user) => {
     };
     axios.get("http://localhost:8080/Pedido/cliente/" + id, config)
       .then((response) => {
+        console.log(response.data)
         setPedidos(response.data);
       })
   }, [])

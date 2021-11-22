@@ -6,17 +6,31 @@ import BotaoQtd from '../../micro/BotaoQtd/BotaoQtd';
 
 import InputMask from "react-input-mask";
 function ProdutoCarrinho(props) {
+    
+    
     const [numero, setNumero] = useState(1)
 
     const incremento = () => {
         setNumero(numero + 1)
-
+        let cartList = localStorage.getItem("cart") 
+            ? JSON.parse(localStorage.getItem("cart")) 
+            : []
+        cartList.push(props.prod.id_produto)
+        let cartString = JSON.stringify(cartList)
+        localStorage.setItem("cart", cartString)  
+        localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
 
     }
     const decremento = () => {
         if (numero > 1) {
             setNumero(numero - 1)
         }
+        let cartList = localStorage.getItem("cart") 
+            ? JSON.parse(localStorage.getItem("cart")) 
+            : []
+        cartList.splice(cartList.indexOf(props.prod.id_produto), 1)
+        localStorage.setItem("cart", JSON.stringify(cartList))  
+        localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
     }
     const remove = () => {
         let id = props.prod.id_produto
@@ -29,6 +43,22 @@ function ProdutoCarrinho(props) {
         localStorage.setItem("qtyCart", JSON.stringify(cart.length))
         window.location.reload()
     }
+
+    useEffect(() => {
+        let cart = ((localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []))
+        let count=0
+        let count2=0
+        cart.map((item)=>{
+            if(item==props.prod.id_produto){
+                count++;
+            }
+            
+        })
+        
+        setNumero(count)
+    },[])
 
     return (
         <>
@@ -58,9 +88,9 @@ function ProdutoCarrinho(props) {
                             <div class="btn-group inline">
 
                                 <div class="contador contador-pag-produto">
-                                    <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
+                                    <div onClick={decremento} class="contador-btn btn-danger" data-sinal="-1" >-</div>
                                     <div class="mostrador">{numero}</div>
-                                    <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
+                                    <div onClick={incremento} class="contador-btn btn-success" data-sinal="1">+</div>
                                 </div>
 
                             </div>

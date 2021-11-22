@@ -84,6 +84,14 @@ function ListaCarrinho(props) {
                     }
                 })
         }
+        let array=[]
+        cart.map((item)=>{
+            if(array.indexOf(item)==-1){
+                array.push(item)
+            }
+        })
+
+        
 
 
     }, [])

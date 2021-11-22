@@ -38,7 +38,7 @@ function FormularioContato(props) {
         
         alert("Mensagem enviada com sucesso!")
 
-        history.push('/');
+        history.push('/home');
       });
     
     
