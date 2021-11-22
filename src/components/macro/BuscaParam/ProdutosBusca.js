@@ -11,7 +11,7 @@ const ProdutosBusca = ({ produtos, loading }) => {
         return (
 
 
-            <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco="5,29" >
+            <Produto linkProduto={link} imagem={prod.foto} descricao={prod.nome_produto} preco={prod.valor_preco} >
                 <a href={link}></a></Produto>
 
 

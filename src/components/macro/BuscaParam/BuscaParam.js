@@ -13,7 +13,7 @@ function BuscaParam(props) {
     const [loading, setLoading] = useState(false)
     const [paginaAtual, setPaginaAtual] = useState(1)
     const [prodsPorPagina, setProdsPorPagina] = useState(15)
-    const URL = 'http://localhost:8080/produtos/buscar/'
+    const URL = 'http://localhost:8080/Card/busca/'
     const final = URL + props.pesq
 
 
