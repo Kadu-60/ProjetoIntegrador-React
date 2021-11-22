@@ -22,6 +22,7 @@
 .cart-template-holder {
     float: left;
     width: 71.666%;
+    min-height: 450px;
     margin-top: 27px;
 }
 
@@ -316,7 +317,10 @@ padding-bottom: 20px;
     padding: 10px ;
     border-radius: 5px;
     display: inline-block;
+    display: flex;
     text-align: center;
+    justify-content: space-between;
+    align-items: center;
    
   }
   
@@ -329,11 +333,14 @@ padding-bottom: 20px;
     text-align: left;
 
   }
+
+  
   
 
   
   .mostrador {
-    width: 20px;
+    width: 40px;
+    font-weight: bold;
   }
   
   .contador .button {

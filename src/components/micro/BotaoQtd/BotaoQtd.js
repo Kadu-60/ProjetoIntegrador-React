@@ -9,11 +9,11 @@ function BotaoQtd(props) {
     const incremento = () =>{
         setNumero(numero + props.passo)
        
-        console.log(numero)
+        
     }
     const decremento = () =>{
         setNumero(numero - props.passo)
-        console.log(numero)
+        
     }
     return(
         <>
@@ -21,9 +21,9 @@ function BotaoQtd(props) {
             <div class="btn-group inline">
 
                             <div class="contador contador-pag-produto">
-                                <div onClick={decremento} class="buttonMenos" data-sinal="-1" >-</div>
+                                <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
                                 <div class="mostrador">{numero}</div>
-                                <div onClick={incremento} class="buttonMais" data-sinal="1">+</div>
+                                <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
                             </div>
               
             </div>

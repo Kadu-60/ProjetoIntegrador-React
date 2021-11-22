@@ -81,11 +81,10 @@
 
 
 .btn-botao:hover{
-    background-color: #8D733F;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    background-color: #745e33;
+    color:#ced4da;
+    transition:0.2s;
+    
 }
 
 .container-b{
@@ -167,13 +166,7 @@ table {
     border-spacing: 2px;
 }
 
-body{
 
-    font-family: Roboto;
-    font-size: 14px;
-    color: #444;
-
-}
 
 .wd-checkout-basket-summary td {
     text-align: center;
@@ -262,8 +255,10 @@ td{
     box-shadow: 0 0 0 3px rgb(171 203 55 / 50%);
     
     box-sizing: inherit;
+}
 
-    
+.filled::before{
+    background-color: green;
 }
 .status-global-pedido{
     margin-top: 10px;

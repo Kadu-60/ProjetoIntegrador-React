@@ -5,7 +5,7 @@ import BotaoAdicionar from '../micro/BotaoConfirmar/BotaoAdicionar';
 
 
 function Produto(props) {
-
+  
   return (
     <>
       <div class="col-12 col-lg-2 my-2 mx-3 d-flex flex-column justify-content-between resultadoPesquisa">
@@ -30,7 +30,7 @@ function Produto(props) {
           </div>
 
           <div class="col-12 d-flex align-self-end justify-content-center">
-          <a className='d-flex align-self-end me-auto' href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar texto='Adicionar ' /></a>
+          <div className='d-flex align-self-end me-auto'  id="botao-comprar-pag-produto"><BotaoAdicionar texto='Adicionar ' id={props.id} /></div>
 
         </div>
         </div>

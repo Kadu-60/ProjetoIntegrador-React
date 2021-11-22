@@ -4,7 +4,14 @@
   
     
 }
-
-
-
-
+.contador-btn{
+    width: 80%;
+    height: 55%;
+    border-radius:20px;
+    color: black ;
+    font-weight: bold;
+}
+.contador-btn:hover{
+    color: black;
+    cursor: pointer;
+}

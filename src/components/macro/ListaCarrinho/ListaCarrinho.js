@@ -1,16 +1,214 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ListaCarrinho.css'
-
+import { Container, Table } from 'react-bootstrap'
+import { Icon } from 'semantic-ui-react'
+import InputMask from "react-input-mask";
 import ProdutoCarrinho from './ProdutoCarrinho'
+import axios from 'axios'
 
 function ListaCarrinho(props) {
+    const [subtotal, setSubtotal ] = useState(0)
+    const [cards, setCards] = useState([])
+    let conteudoTable = () => {
+        if ((localStorage.getItem("cart")
+        ? false
+        : true)||localStorage.getItem("cart")=='[]') {
+
+            
+            return (
+                <>
+                    <div className="container d-flex justify-content-center align-content-center">
+                        <p>Carrinho vazio</p>
+                    </div>
+                </>
+            )
+
+        } else {
+            return (
+                <>
+                    <Table class="table-cart oi cart-items scroll" id="oi">
+                        <thead class="thead-cart">
+                            <tr class="tr-cart">
+                                <th colSpan="2" class="product-cart">Produto</th>
+
+                                <th class="shipping-date">Entrega</th>
+                                <th class="product-price">Preço</th>
+                                <th class="quantity">Quantidade</th>
+                                <th class="quantity-price">Total</th>
+                                <th class="item-remove">Remover</th>
+                            </tr>
+                        </thead>
+                        <tbody className="conteudo-cart">
+                            {
+                                cards.map((prod) => (
+                                    <ProdutoCarrinho prod={prod} />
+                                ))
+                            }
+                        </tbody>
+                    </Table>
+                </>
+            )
+        }
+    }
+
+    useEffect(() => {
+        let cart = ((localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []))
+
+        if (cart) {
+
+            axios.post('http://localhost:8080/Card/multi', cart)
+                .then(response => {
+                    setCards(response.data)
+                    let acumulador=0
+                    response.data.map((data) =>{
+                        acumulador += data.valor_preco
+                    })
+                    setSubtotal(acumulador)
+                })
+                
+                .catch(error => {
+                    if (error.response) {
+
+                        console.log(error.response)
+
+                    } else if (error.request) {
+
+                        console.log(error.request)
+
+                    } else if (error.message) {
+
+                        console.log(error.message)
+
+                    }
+                })
+        }
+        let array=[]
+        cart.map((item)=>{
+            if(array.indexOf(item)==-1){
+                array.push(item)
+            }
+        })
+
+        
+
+
+    }, [])
 
     return (
         <>
-        <ProdutoCarrinho />
-       
+
+
+            <body className="body-cart " >
+
+                <div className="body-cart cart-template-holder">
+                    <br />
+                    <p className="title-dash carrinho-titulo" > <Icon className="icon-carrinho-cart" name="shopping cart" /> Meu Carrinho</p>
+
+
+                    <br />
+                    <Container>
+                        <div className="lado-esquerdo" id="lado-esquerdo">
+
+
+                            {
+                                conteudoTable()
+                            }
+                        </div>
+
+
+
+
+                    </Container>
+
+                    <br />    <br />    <br />
+                </div>
+
+                <div className="global-lado-direito">
+                    <div className="botao-continuar-cmp">
+                        <a class="keep-shopping" href="/produtos">
+                            <Icon className="icone-comprando" name="angle left" /> Continuar comprando
+                        </a>
+                    </div>
+                    <br />
+
+
+                    <div className="lado-direito" id="lado-direito">
+                        <div className="div-subtotal " >
+
+                            <ul className="lista-carrinho-total">
+
+                                <p className="titulo-entrega"> <Icon className="icone-resumo" name="truck" /><b> Entrega</b></p>
+                                <li className="sub-global">
+                                    <p>Seu CEP  <span className="texto-total-frete-sub" id="mais-cep"> <b>Frete R$10,00</b> </span> </p>
+
+
+
+
+                                    <InputMask mask="99999-999" type="text" class="form-control" placeholder="00000-000" />
+                                    <span class="input-group-btn">
+                                        <button class=" btn-default form-control ok-cep" onClick={verMais} id="btnCalcular" type="button">Calcular</button>
+                                    </span>
+                                </li>
+
+                                <span id="pontos">
+                                </span>
+
+                                <br />
+
+                            </ul>
+
+                        </div>
+
+
+                        <div className="div-total " >
+                            <ul className="lista-carrinho-total">
+
+                                <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
+                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {subtotal.toFixed(2)}</span>   </li>
+                                <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
+
+                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {(subtotal+15).toFixed(2)}</span>   </li>
+                                <button class="btn-finalizar-compra" type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
+                                <br />
+                                <br />
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <br />
+                <br />
+
+
+
+            </body>
+
+
+
         </>
     )
+}
+
+function verMais() {
+    var pontos = document.getElementById("pontos");
+    var meusPedidos = document.getElementById("mais-cep");
+    var btnCalcular = document.getElementById("btnCalcular");
+
+    if (pontos.style.display === "none") {
+        pontos.style.display = "inline";
+        meusPedidos.style.display = "none";
+        btnCalcular.innerHTML = "Calcular";
+    } else {
+        pontos.style.display = "none";
+        meusPedidos.style.display = "inline";
+
+
+    }
 }
 
 
