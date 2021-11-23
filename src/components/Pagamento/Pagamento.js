@@ -5,11 +5,11 @@ function Pagamento(props) {
 
     return (
         <>
-            <p class="pagamentoCaixa">
+            <p class="pagamentoCaixa d-flex justify-content-center">
                 <img class="pagamentoCartao" src={ImgCartao} alt="" />
                 (Crédito) **** {props.finalCartao}
                 <br />
-                Em {props.parcelas}x de R$ {props.valorParcela}
+                {props.parcelas}
             </p>
         </>
     )

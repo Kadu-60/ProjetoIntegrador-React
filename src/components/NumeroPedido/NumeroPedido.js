@@ -6,7 +6,7 @@ function NumeroPedido(props) {
   return (
     <>
         
-        <p class="numeroPedido titulo">{props.numeroPedido}</p>
+        <p class="numeroPedido titulo d-flex justify-content-center">{props.numeroPedido}</p>
     </>
   );
 }

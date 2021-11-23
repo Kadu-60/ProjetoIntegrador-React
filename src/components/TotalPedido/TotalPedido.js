@@ -4,7 +4,7 @@ function TotalPedido(props) {
 
     return (
         <>
-            <p class="totalCaixa">
+            <p class="totalCaixa d-flex justify-content-center">
                 Subtotal do(s) item(ns):R$ {props.subtotal}
                 <br />
                 Frete e manuseio:R$ {props.frete}

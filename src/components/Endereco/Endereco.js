@@ -4,8 +4,8 @@ function Endereco(props) {
 
     return (
         <>
-            <p class="enderecoCaixa">
-                {props.rua}
+            <p class="enderecoCaixa d-flex justify-content-center">
+                {props.rua},{props.numero}
                 <br />
                 {props.bairro}
                 <br />

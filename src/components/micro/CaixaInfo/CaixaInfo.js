@@ -6,8 +6,8 @@ function CaixaInfo(props) {
     return (
         <>
 
-            <div class="col col-md-3">
-                <h6 className='titulo-finalizado'>{props.titulo}</h6>
+            <div class="col-12 col-md-4 mb-4">
+                <h6 className='titulo-finalizado d-flex justify-content-center'>{props.titulo}</h6>
 
 
                 {props.children}

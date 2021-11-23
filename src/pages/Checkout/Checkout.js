@@ -10,7 +10,7 @@ import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import InputMask from "react-input-mask";
 import axios from 'axios'
-
+import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
 
 
@@ -35,9 +35,12 @@ const Checkout = (props) => {
     const [parcelas, setParcelas] = useState([])
     const [cliente, setCliente] = useState({})
     const [parcelamento, setParcelamento] = useState('')
+    const [numeroPedido, setNumeroPedido] = useState('')
+    const [ULRPedidoFinalizado, setURLPedidoFinalizado] = useState('')
+    
 
 
-
+    const history = useHistory();
 
     // const [values, setValues] = useState(initialValues);
 
@@ -71,9 +74,11 @@ const Checkout = (props) => {
 
     }, [])
 
+    
 
 
     const Finalizar = (event) => {
+        
         event.preventDefault();
         let pedido = {
             "subtotal": 0,
@@ -119,8 +124,11 @@ const Checkout = (props) => {
                 var count = {};
                 cart.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
                 let contador = 1
+                const URL = '/pedidoFinalizado/' + response.data.id
                 Object.keys(count).forEach((item) => {
+                    
                     let itemPedido = {
+                        
                         "item_pedido_key":
                         {
                             "item": contador,
@@ -144,10 +152,13 @@ const Checkout = (props) => {
                         console.log(response.data)
                     })
                 });
+                history.push(URL)
             })
 
-
-         window.location.href = "http://localhost:3000/pedidofinalizado"
+            
+            console.log(ULRPedidoFinalizado)
+            
+        //  window.location.href = ULRPedidoFinalizado
     }
 
     function buscaCep(ev, setFieldValue) {

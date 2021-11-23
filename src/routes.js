@@ -38,7 +38,7 @@ export const RoutesSite = () => {
                 <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/buscaAvancada/:pesq1/:pesq2/:pesq3/:pesq4" component={BuscaAvancada} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
-                <Route path="/pedidoFinalizado" component={PedidoFinalizado} />
+                <Route path="/pedidoFinalizado/:pesq" component={PedidoFinalizado} />
                 <Route path="/produto/:pesq" component={Produto} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
