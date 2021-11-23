@@ -6,6 +6,7 @@ import Button from '../../components/micro/Button/Button'
 import { Container, Form, Row, Col, Accordion } from 'react-bootstrap'
 import { Icon } from 'semantic-ui-react'
 import Produto1 from '../../assets/imgs/teste/cerveja.png'
+import ProdutoCheckout from '../../components/micro/ProdutoCheckout/ProdutoCheckout'
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import InputMask from "react-input-mask";
@@ -35,6 +36,8 @@ const Checkout = (props) => {
     const [parcelas, setParcelas] = useState([])
     const [cliente, setCliente] = useState({})
     const [parcelamento, setParcelamento] = useState('')
+    const [cards, setCards] = useState([])
+    const [subtotal, setSubtotal] = useState('')
 
 
 
@@ -66,7 +69,33 @@ const Checkout = (props) => {
             window.location.href = "http://3000/login"
         }
 
-
+        let cart = ((localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []))
+        if (cart) {
+            axios.post('http://localhost:8080/Card/multi', cart)
+                .then(response => {
+                    setCards(response.data)
+                    let acumulador = 0
+                    response.data.map((data) => {
+                        cart.map((item) => {
+                            if (item == data.id_produto) {
+                                acumulador += data.valor_preco;
+                            }
+                        })
+                    })
+                    setSubtotal(acumulador)
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response)
+                    } else if (error.request) {
+                        console.log(error.request)
+                    } else if (error.message) {
+                        console.log(error.message)
+                    }
+                })
+        }
 
 
     }, [])
@@ -103,51 +132,50 @@ const Checkout = (props) => {
             {
                 "nome": name,
                 "numero": number,
-                "validade": new Date(expiry)
+                "validade": new Date(expiry.replace('/', "/01/"))
             }
         }
+        let arrayItens = [];
+        let cart = ((localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []))
+        var count = {};
+        cart.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
+        let contador = 1
+        Object.keys(count).forEach((item) => {
+            let itemPedido = {
+                "item_pedido_key":
+                {
+                    "item": contador,
+                    "pedido":
+                    {
+                        "id": null
+                    }
+                },
+                "produto":
+                {
+                    "id_produto": item
+                },
+                "quantidade_produto": count[item],
+                "desconto_unitario": 10,
+                "valor_unitario": 10,
+                "valor_total": 10
+            }
+            contador++;
+            arrayItens.push(itemPedido)
+        });
         const token = localStorage.getItem('token')
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        axios.post('http://localhost:8080/Pedido', pedido, config)
-            .then(response => {
-                console.log(response.data)
-                let cart = ((localStorage.getItem("cart")
-                    ? JSON.parse(localStorage.getItem("cart"))
-                    : []))
-                var count = {};
-                cart.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
-                let contador = 1
-                Object.keys(count).forEach((item) => {
-                    let itemPedido = {
-                        "item_pedido_key":
-                        {
-                            "item": contador,
-                            "pedido":
-                            {
-                                "id": response.data.id
-                            }
-                        },
-                        "produto":
-                        {
-                            "id_produto": item
-                        },
-                        "quantidade_produto": count[item],
-                        "desconto_unitario": 10,
-                        "valor_unitario": 10,
-                        "valor_total": 10
-                    }
-                    contador++;
-                    axios.post('http://localhost:8080/item_pedido', itemPedido, config)
-                    .then((response)=>{
-                        console.log(response.data)
-                    })
-                });
-            })
+        console.log({"pedido": pedido, "arrayItens": arrayItens});
+        axios.post('http://localhost:8080/finalizarPedido', {"pedido": pedido, "arrayItens": arrayItens}, config)
+        .then((response)=>{
+            console.log(response.data)
+        })
 
 
-         window.location.href = "http://localhost:3000/pedidofinalizado"
+        // window.location.href = "http://localhost:3000/pedidofinalizado"
     }
 
     function buscaCep(ev, setFieldValue) {
@@ -205,7 +233,7 @@ const Checkout = (props) => {
                                 <div className="div-checkout" id="">
                                     <div className="div-pessoais " >
 
-                                        <ul className="lista-carrinho-total">
+                                        <ul className="lista-checkout-total">
 
                                             <p> <Icon className="icone-resumo" name="home" /><b>Entrega</b></p>
                                             <p>Solicitamos apenas as informações essenciais para a realização da compra.</p>
@@ -223,7 +251,7 @@ const Checkout = (props) => {
                                                     <label>* Número </label>
                                                     <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
                                                     <label>* Complemento </label>
-                                                    <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} required />
+                                                    <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
                                                     <label>* Bairro </label>
                                                     <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
                                                     <label>* Cidade </label>
@@ -302,91 +330,38 @@ const Checkout = (props) => {
 
                                     </div>
 
-                                    <div className="div-resumo-pedido" >
+                                    <div className="div-resumo-pedido-checkout" >
                                         <ul className="lista-carrinho-total">
 
                                             <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
 
-
-                                            <tbody className="conteudo-cart-pedido" id="conteudo-cart-pedido">
-
-
-
-
-                                                <tr className="product-item">
-                                                    <td className="product-image"> <a href="/produto">
-                                                        <img src={Produto1} class="ui tiny middle aligned image" /> </a>
-                                                    </td>
-
-                                                    <td className="product-name product-cart">
-                                                        <a href="/produto"><span className="titulo-cerveja-cart">Cerveja Madalena Double IPA 600ml  </span></a>
-                                                    </td>
-
-                                                    <td className="shipping-date">
-                                                        <span className="titulo-entrega-cart">Em até 6 dias úteis</span>
-                                                    </td>
+                                            <div className="overflow-resumo-pedido">
+                                                <thead>
+                                                    <tr className="product-item">
+                                                        <th className="product-image">Produto</th>
+                                                        <th className="product-name">Nome</th>
+                                                        <th className="product-produto-checkout">Quantidade</th>
+                                                        <th className="product-checkout-price">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="conteudo-cart-pedido" id="conteudo-cart-pedido">
+                                                    {
+                                                        cards.map(card => (
+                                                            <ProdutoCheckout product={card} />
+                                                        ))
+                                                    }
 
 
-                                                    <td className="product-price">
-                                                        <span>R$ 4,99</span>
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr className="product-item">
-                                                    <td className="product-image"> <a href="/produto">
-                                                        <img src={Produto1} class="ui tiny middle aligned image" /> </a>
-                                                    </td>
-
-                                                    <td className="product-name product-cart">
-                                                        <a href="/produto"><span className="titulo-cerveja-cart">Cerveja Madalena Double IPA 600ml  </span></a>
-                                                    </td>
-
-                                                    <td className="shipping-date">
-                                                        <span className="titulo-entrega-cart">Em até 6 dias úteis</span>
-                                                    </td>
-
-
-                                                    <td className="product-price">
-                                                        <span>R$ 4,99</span>
-                                                    </td>
-
-
-                                                </tr>
-                                                <tr className="product-item">
-                                                    <td className="product-image"> <a href="/produto">
-                                                        <img src={Produto1} class="ui tiny middle aligned image" /> </a>
-                                                    </td>
-
-                                                    <td className="product-name product-cart">
-                                                        <a href="/produto"><span className="titulo-cerveja-cart">Cerveja Madalena Double IPA 600ml  </span></a>
-                                                    </td>
-
-                                                    <td className="shipping-date">
-                                                        <span className="titulo-entrega-cart">Em até 6 dias úteis</span>
-                                                    </td>
-
-
-                                                    <td className="product-price">
-                                                        <span>R$ 4,99</span>
-                                                    </td>
-
-
-                                                </tr>
-                                               
-
-
-
-                                            </tbody>
-
+                                                </tbody>
+                                            </div>
 
                                             <br />  <br />  <br />
                                             <div className="resumo-pedido-sub">
 
-                                                <li className="sub-global sub-total-frete"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ 20,00 {props.subtotal}</span>   </li>
-                                                <li className="sub-global sub-total-frete"><b>Frete </b>  <span className="texto-total-frete">  R$ 10,00{props.frete}</span>   </li>
+                                                <li className="sub-global sub-total-frete"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ {((subtotal || 0).toFixed(2)).replace('.', ',')}</span>   </li>
+                                                <li className="sub-global sub-total-frete"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
                                                 <br />
-                                                <li className="sub-global  sub-total-frete borda-total"><b>Total </b> <span className="texto-total-frete-total-pedido">  R$ 30,00{props.total}</span>   </li>
+                                                <li className="sub-global  sub-total-frete borda-total"><b>Total </b> <span className="texto-total-frete-total-pedido">R${(((subtotal || 0) + 15).toFixed(2)).replace('.', ',')}</span>   </li>
 
                                                 <br />  <br />
                                                 <button class="btn-finalizar-compra botao-pedido-finalizar" type="submit" onClick={Finalizar}><div className="finalizar-compra-cor" >Finalizar Compra</div> <Icon className="icone-finalizar-compra" name="angle right" /></button>

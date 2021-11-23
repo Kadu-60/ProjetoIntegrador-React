@@ -22,9 +22,13 @@ function NavPrincipal(props) {
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
-    const [qtyCart, setQty] = useState(0)
+    const [qtyCart, setQty] = useState(localStorage.getItem('qtyCart'))
     useEffect(() => {
-        setQty(localStorage.getItem('qtyCart'))
+        
+        setTimeout(function run() {
+            setQty(localStorage.getItem('qtyCart'))
+            setTimeout(run, 200);
+          }, 200);
     })
 
 

@@ -7,14 +7,14 @@ import ProdutoCarrinho from './ProdutoCarrinho'
 import axios from 'axios'
 
 function ListaCarrinho(props) {
-    const [subtotal, setSubtotal ] = useState(0)
+    const [subtotal, setSubtotal] = useState(0)
     const [cards, setCards] = useState([])
     let conteudoTable = () => {
         if ((localStorage.getItem("cart")
-        ? false
-        : true)||localStorage.getItem("cart")=='[]') {
+            ? false
+            : true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
 
-            
+
             return (
                 <>
                     <div className="container d-flex justify-content-center align-content-center">
@@ -53,47 +53,32 @@ function ListaCarrinho(props) {
 
     useEffect(() => {
         let cart = ((localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : []))
-
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []))
         if (cart) {
-
             axios.post('http://localhost:8080/Card/multi', cart)
                 .then(response => {
                     setCards(response.data)
-                    let acumulador=0
-                    response.data.map((data) =>{
-                        acumulador += data.valor_preco
+                    let acumulador = 0
+                    response.data.map((data) => {
+                        cart.map((item) => {
+                            if (item == data.id_produto) {
+                                acumulador += data.valor_preco;
+                            }
+                        })
                     })
                     setSubtotal(acumulador)
                 })
-                
                 .catch(error => {
                     if (error.response) {
-
                         console.log(error.response)
-
                     } else if (error.request) {
-
                         console.log(error.request)
-
                     } else if (error.message) {
-
                         console.log(error.message)
-
                     }
                 })
         }
-        let array=[]
-        cart.map((item)=>{
-            if(array.indexOf(item)==-1){
-                array.push(item)
-            }
-        })
-
-        
-
-
     }, [])
 
     return (
@@ -166,10 +151,10 @@ function ListaCarrinho(props) {
                             <ul className="lista-carrinho-total">
 
                                 <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
-                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {subtotal.toFixed(2)}</span>   </li>
+                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {subtotal.toFixed(2).replace('.', ',')}</span>   </li>
                                 <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
-                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {(subtotal+15).toFixed(2)}</span>   </li>
+                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {(subtotal + 15).toFixed(2).replace('.', ',')}</span>   </li>
                                 <button class="btn-finalizar-compra" type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
                                 <br />
                                 <br />

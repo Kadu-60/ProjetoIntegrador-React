@@ -204,7 +204,7 @@ function MeuPedido(props) {
                             <tr className="subtotal">
                                 {" "}
                                 <td /> <td colSpan={2}>Subtotal</td>{" "}
-                                <td className="td-subtotal">R$ {pedido.total.toFixed(2)}</td>{" "}
+                                <td className="td-subtotal">R$ {(pedido.total-15).toFixed(2)}</td>{" "}
                             </tr>{" "}
                             <tr className="delivery-amount">
                                 {" "}
@@ -215,7 +215,7 @@ function MeuPedido(props) {
                             <tr className="total">
                                 {" "}
                                 <td /> <td colSpan={2}>Total</td>{" "}
-                                <td className="td-delivery-amount"> R$ {(pedido.total+15).toFixed(2)} </td>{" "}
+                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2)} </td>{" "}
 
                             </tr>{" "}
                         </tfoot>{" "}

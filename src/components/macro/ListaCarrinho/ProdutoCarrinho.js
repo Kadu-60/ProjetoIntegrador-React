@@ -6,39 +6,43 @@ import BotaoQtd from '../../micro/BotaoQtd/BotaoQtd';
 
 import InputMask from "react-input-mask";
 function ProdutoCarrinho(props) {
-    
-    
+
+
     const [numero, setNumero] = useState(1)
 
     const incremento = () => {
         setNumero(numero + 1)
-        let cartList = localStorage.getItem("cart") 
-            ? JSON.parse(localStorage.getItem("cart")) 
+        let cartList = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
             : []
         cartList.push(props.prod.id_produto)
         let cartString = JSON.stringify(cartList)
-        localStorage.setItem("cart", cartString)  
+        localStorage.setItem("cart", cartString)
         localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
-
+        window.location.reload()
     }
     const decremento = () => {
         if (numero > 1) {
             setNumero(numero - 1)
         }
-        let cartList = localStorage.getItem("cart") 
-            ? JSON.parse(localStorage.getItem("cart")) 
+        let cartList = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
             : []
         cartList.splice(cartList.indexOf(props.prod.id_produto), 1)
-        localStorage.setItem("cart", JSON.stringify(cartList))  
+        localStorage.setItem("cart", JSON.stringify(cartList))
         localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+        window.location.reload()
     }
     const remove = () => {
         let id = props.prod.id_produto
         let cart = ((localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : []))
-        console.log(cart)
-        cart.splice(cart.indexOf(id), 1)
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []))
+        let indice = cart.indexOf(id);
+        while (indice >= 0) {
+            cart.splice(indice, 1);
+            indice = cart.indexOf(id);
+        }
         localStorage.setItem("cart", JSON.stringify(cart))
         localStorage.setItem("qtyCart", JSON.stringify(cart.length))
         window.location.reload()
@@ -46,19 +50,18 @@ function ProdutoCarrinho(props) {
 
     useEffect(() => {
         let cart = ((localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : []))
-        let count=0
-        let count2=0
-        cart.map((item)=>{
-            if(item==props.prod.id_produto){
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []))
+        let count = 0
+        cart.map((item) => {
+            if (item == props.prod.id_produto) {
                 count++;
             }
-            
+
         })
-        
+
         setNumero(count)
-    },[])
+    }, [])
 
     return (
         <>
@@ -78,7 +81,7 @@ function ProdutoCarrinho(props) {
 
 
                 <td className="product-price">
-                    <span className="titulo-carrinho-lista">R$ {(props.prod.valor_preco || 0).toFixed(2)}</span>
+                    <span className="titulo-carrinho-lista">R$ {(props.prod.valor_preco || 0).toFixed(2).replace('.', ',')}</span>
                 </td>
 
 
@@ -100,7 +103,7 @@ function ProdutoCarrinho(props) {
 
 
                 <td className="quantity-price">
-                    <span className="titulo-carrinho-lista" id={"Total"+props.prod.id_produto}>R$ {((props.prod.valor_preco || 0) * numero).toFixed(2)}</span>
+                    <span className="titulo-carrinho-lista" id={"Total" + props.prod.id_produto}>R$ {((props.prod.valor_preco || 0) * numero).toFixed(2).replace('.', ',')}</span>
                 </td>
 
 
