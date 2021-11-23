@@ -88,7 +88,7 @@ function CadastroCliente() {
                <div class="row justify-content-center">
                 <div class="col-md-6 d-flex justify-content-around">
                     <div class="form-check col-md-6 termos">
-                        <Checkbox texto="Aceito e concordo com os " /> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
+                        <Checkbox texto="Aceito e concordo com os " required/> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
 
                     </div>
                 </div>
