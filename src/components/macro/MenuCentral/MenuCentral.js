@@ -67,7 +67,7 @@ const Panes = (user) => {
   }
 
   useEffect(() => {
-
+    localStorage.removeItem('defaultIndex')
     setDataNas((user.dataNascimento || '').replace(/\//g, "-").slice(0, 10))
     const token = localStorage.getItem('token')
     const config = {
@@ -75,7 +75,6 @@ const Panes = (user) => {
     };
     axios.get("http://localhost:8080/Pedido/cliente/" + id, config)
       .then((response) => {
-        console.log(response.data)
         setPedidos(response.data);
       })
   }, [])
@@ -256,9 +255,10 @@ function verMais() {
 
 
 const TabExampleVerticalTabular = (props) => {
-
+  let index = localStorage.getItem('defaultIndex')?2:0
+  console.log(index)
   return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props.user)} />
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props.user)} defaultActiveIndex={index}/>
   )
 }
 

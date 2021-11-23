@@ -173,7 +173,6 @@ const Checkout = (props) => {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        console.log({ "pedido": pedido, "arrayItens": arrayItens });
         axios.post('http://localhost:8080/finalizarPedido', { "pedido": pedido, "arrayItens": arrayItens }, config)
             .then((response) => {
                 setNumeroPedido(response.data.pedido)
