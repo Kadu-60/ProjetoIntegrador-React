@@ -44,7 +44,7 @@ const Panes = (user) => {
 
   }
 
-  
+
 
   const alterarSenha = (event) => {
     event.preventDefault()
@@ -206,9 +206,13 @@ const Panes = (user) => {
 
         <p className="title-dash">meus pedidos</p>
         {
-          pedidos.map((pedido) => (
-            <MeuPedido data={pedido} />
-          ))
+          pedidos ?
+            pedidos.map((pedido) => (
+              <MeuPedido data={pedido} />
+            )) :
+            <div className="container d-flex justify-content-center align-content-center">
+              <p>Você ainda não fez nenhum pedido!</p>
+            </div>
         }
 
 
