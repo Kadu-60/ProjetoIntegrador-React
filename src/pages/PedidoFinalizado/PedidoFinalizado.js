@@ -105,7 +105,7 @@ function PedidoFinalizado(props) {
                                 </CaixaInfo>
 
                                 <CaixaInfo titulo="Total Pedido">
-                                    <TotalPedido subtotal={(+pedido.subtotal).toFixed(2).toString().replace('.', ',')} frete='15,00' total={(+pedido.total).toFixed(2).toString().replace('.', ',')} />
+                                    <TotalPedido subtotal={((+pedido.subtotal)-15).toFixed(2).toString().replace('.', ',')} frete='15,00' total={(+pedido.total).toFixed(2).toString().replace('.', ',')} />
                                 </CaixaInfo>
                                 
                                 </div>
