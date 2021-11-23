@@ -9,27 +9,55 @@ import Pedido from '../../../assets/imgs/header/pedido.png'
 import Carrinho from '../../../assets/imgs/header/carrinho.png'
 import Badge from 'react-bootstrap/Badge'
 import InputHeader from '../../micro/Forms/Input/InputHeader';
+import axios from 'axios'
 
 function estadoInicial() {
-        return {busca: '' }
-    }
+    return { busca: '' }
+}
 
 
 function NavPrincipal(props) {
 
-    
+
 
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
     const [qtyCart, setQty] = useState(localStorage.getItem('qtyCart'))
+    const [token, setToken] = useState('')
+    const [logado, setLogado] = useState(0)
+    const [id, setId] = useState(0)
     useEffect(() => {
-        
+
         setTimeout(function run() {
             setQty(localStorage.getItem('qtyCart'))
             setTimeout(run, 200);
-          }, 200);
+            let email = localStorage.getItem('user')
+            if (token && logado == 0 && email) {
+                
+                axios.get("http://localhost:8080/cadastro-cliente/getByEmail/"+email)
+                .then((response) => {
+                    setId( response.data.id_Cliente)
+                    setLogado(1)
+                })
+                .catch((error) => { console.log(error) })
+            }
+            if (logado == 1) {
+                setTimeout(() => {
+                    localStorage.removeItem('token')
+                    setToken(null)
+                    localStorage.removeItem('user')
+                    setLogado(0)
+                }, 5999000)
+            }
+
+        }, 1000);
+
     })
+
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+    }, [])
 
 
     function onChange(event) {
@@ -70,8 +98,8 @@ function NavPrincipal(props) {
                                 <form action={final}>
                                     <div class="header-pesquisa">
 
-                                        
-                                            <InputHeader value={values.busca} name='busca' onChange={onChange} className='header-input' type="text" placeholder="O que você está procurando?" arialabel="Search"/>
+
+                                        <InputHeader value={values.busca} name='busca' onChange={onChange} className='header-input' type="text" placeholder="O que você está procurando?" arialabel="Search" />
                                         <a href={final} class="header-busca">
 
                                             <img src={Busca} alt="buscar" />
@@ -91,7 +119,7 @@ function NavPrincipal(props) {
                                     </div>
 
                                     <div className="col-3 header-conta">
-                                        <a className="link-icone" href="/login">
+                                        <a className="link-icone" href={logado==0?"/login":"/dashboard/"+id}>
                                             <img className="imagem" src={Conta} />
                                             <p className="icone"> Minha Conta</p>
                                         </a>

@@ -120,41 +120,15 @@ function ListaCarrinho(props) {
 
 
                     <div className="lado-direito" id="lado-direito">
-                        <div className="div-subtotal " >
-
-                            <ul className="lista-carrinho-total">
-
-                                <p className="titulo-entrega"> <Icon className="icone-resumo" name="truck" /><b> Entrega</b></p>
-                                <li className="sub-global">
-                                    <p>Seu CEP  <span className="texto-total-frete-sub" id="mais-cep"> <b>Frete R$10,00</b> </span> </p>
-
-
-
-
-                                    <InputMask mask="99999-999" type="text" class="form-control" placeholder="00000-000" />
-                                    <span class="input-group-btn">
-                                        <button class=" btn-default form-control ok-cep" onClick={verMais} id="btnCalcular" type="button">Calcular</button>
-                                    </span>
-                                </li>
-
-                                <span id="pontos">
-                                </span>
-
-                                <br />
-
-                            </ul>
-
-                        </div>
-
 
                         <div className="div-total " >
                             <ul className="lista-carrinho-total">
 
                                 <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
-                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {subtotal.toFixed(2).replace('.', ',')}</span>   </li>
+                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {(subtotal||0).toFixed(2).replace('.', ',')}</span>   </li>
                                 <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
-                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {(subtotal + 15).toFixed(2).replace('.', ',')}</span>   </li>
+                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal||0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
                                 <button class="btn-finalizar-compra" type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
                                 <br />
                                 <br />

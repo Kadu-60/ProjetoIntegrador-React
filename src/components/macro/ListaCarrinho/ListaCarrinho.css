@@ -41,12 +41,10 @@ a:hover{
     padding-top: 10px;
     max-height: 475px;
     position: relative;
-     width: 300px;
-   margin-top: 10px;
-     display: flex;
-     justify-content: right;
- 
-     
+    width: 300px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
 
 }
 
@@ -78,7 +76,7 @@ tr {
 .lista-carrinho-total{
   
 text-align: left;
-margin-right: 10px;
+margin-left: 15px;
  
 }
 .texto-total-frete{
