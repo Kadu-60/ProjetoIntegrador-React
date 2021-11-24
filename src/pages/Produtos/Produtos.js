@@ -21,7 +21,7 @@ function Produtos(){
    
     useEffect(() => {
         
-        axios.get(`http://localhost:3000/produtos/${id}`)
+        axios.get(`http://localhost:8080/Marca/${id}`)
         .then((response) => {
            
             setProdutos(response.data)

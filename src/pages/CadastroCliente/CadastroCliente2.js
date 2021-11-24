@@ -5,6 +5,8 @@ import Button from '../../components/micro/Button/Button'
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 import { Form, Modal } from 'react-bootstrap'
 import axios from 'axios'
+import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
+
 
 function CadastroCliente(props) {
     const [nome, setNome] = useState('')
@@ -15,9 +17,6 @@ function CadastroCliente(props) {
     const [password, setPassword] = useState('')
     const [show, setShow] = useState(false)
     const [confPassword, setConfPassword] = useState('')
-
-
-        
 
         const Cadastrar = (event) => {
             event.preventDefault();
@@ -57,6 +56,19 @@ function CadastroCliente(props) {
                 .replace(/(\d{4})(\d)/, "$1");
         };
 
+
+            function validaSenha() {
+
+                if(password === confPassword) {
+                    console.log("Senha confirmada");
+                } else {
+                    console.log("Insire uma senha correta");
+                }
+                
+            }
+
+
+
         const mascaraTelefone = (value) => {
             return value
                 .replace(/\D/g, "")
@@ -64,7 +76,6 @@ function CadastroCliente(props) {
                 .replace(/(\d{5})(\d)/, "$1-$2")
                 .replace(/(-\d{4})(\d+?)$/, "$1");
         };
-
         
 
         return (
@@ -80,8 +91,8 @@ function CadastroCliente(props) {
                     <div class="row d-flex justify-content-center">
 
                         <div class="form-group col-md-6">
-                            <Form.Label>Nome Completo</Form.Label>
-                            <Form.Control type="nome" placeholder="Ex.: Fulano de Tal" onChange={(event) => {
+                            <Form.Label>Nome Completo*:</Form.Label>
+                            <Form.Control type="nome" placeholder="seu nome" onChange={(event) => {
                                 setNome(mascaraLetras(event.target.value))
                             }}
                                 value={nome} required="true" />
@@ -91,34 +102,34 @@ function CadastroCliente(props) {
                     <div class="row d-flex justify-content-center">
 
                         <div class="form-group col-md-3">
-                            <Form.Label>CPF</Form.Label>
-                            <Form.Control type="cpf" placeholder="Ex.: 900.000.000-22" onChange={(event) => {
+                            <Form.Label>CPF*:</Form.Label>
+                            <Form.Control type="cpf" placeholder="999.999.999-00" onChange={(event) => {
                                 setCpf(mascaraCPF(event.target.value))
                             }}
                                 value={cpf} required="true" />
                         </div>
                         {/* --- Função de validação de data --- */}
                         <div class="form-group col-md-3">
-                            <Form.Label>Nascimento:</Form.Label>
-                            <Form.Control type="dataNascimento" placeholder="Ex.: 29/02/1980" onChange={(event) => {
+                            <Form.Label>Nascimento*:</Form.Label>
+                            <Form.Control type="dataNascimento" id="maiorIdade" placeholder="99/99/9999" onChange={(event) => {
                                 setDataNascimento(mascaraData(event.target.value))
                             }}
-                                value={dataNascimento} required="true" />
+                                value={dataNascimento} required="true"/>
                         </div>
 
                     </div>
                     <div class="row d-flex justify-content-center">
 
                         <div class="form-group col-md-3">
-                            <Form.Label>E-mail:</Form.Label>
-                            <Form.Control type="email" placeholder="Ex.: fu.lano@net.com" onChange={(event) => {
+                            <Form.Label>E-mail*:</Form.Label>
+                            <Form.Control type="email" placeholder="usuario@email.com" onChange={(event) => {
                                 setEmail(event.target.value)
                             }}
                                 value={email} required="true" />
                         </div>
                         <div class="form-forup col-md-3">
-                            <Form.Label>Telefone</Form.Label>
-                            <Form.Control type="telefone" placeholder="Ex.: (11) 98889-7667" onChange={(event) => {
+                            <Form.Label>Contato*:</Form.Label>
+                            <Form.Control type="telefone" placeholder="(99) 99999-9999" onChange={(event) => {
                                 setTelefone(mascaraTelefone(event.target.value))
                             }}
                                 value={telefone} required="true" />
@@ -127,20 +138,22 @@ function CadastroCliente(props) {
                         <div class="row d-flex justify-content-center">
 
                             <div class="form-group col-md-3">
-                                <Form.Label>Inserir Senha:</Form.Label>
-                                <Form.Control name="senha1" type="password" placeholder="Ex.: Abc123" onChange={(event) => {
+                                 <Form.Label for="senha">Criar Senha*:</Form.Label>
+                               <Form.Control name="senha" id="senha" type="password" placeholder="Abc@123" maxLength="8" onChange={(event) => {
                                     setPassword(event.target.value)
                                 }}
                                     value={password} required="true" />
+
                             </div>
                             
                             {/* --- Confirmar senha posteriormente --- */}
                             <div class="form-group col-md-3">
-                                <Form.Label>Confirmar Senha:</Form.Label>
-                                <Form.Control name="senha2" type="password" maxLength="8" onblur="validarSenha('senha','senha1')" placeholder="Ex.: Abc123" onChange={(event) => {
+                                <Form.Label for="senha">Confirmar Senha*:</Form.Label>
+                                <Form.Control name="senha1" id="senha1" type="password" placeholder="Abc@123" maxLength="8" 
+                                onChange={(event) => {
                                     setConfPassword(event.target.value)
                                 }}
-                                    value={confPassword} required="true" />
+                                value={confPassword} required="true" />
                             </div>
                         </div>
 
@@ -148,7 +161,7 @@ function CadastroCliente(props) {
                         <div class="row justify-content-center">
                         <div class="col-md-6 d-flex justify-content-around">
                             <div class="form-check col-md-6 termos">
-                                <Checkbox texto="Aceito e concordo com os " /> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
+                                <Checkbox texto="Aceito e concordo com os " required/> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
 
                             </div>
                         </div>
@@ -156,8 +169,8 @@ function CadastroCliente(props) {
                         <br />
                         <div class="row d-flex justify-content-center">
                             <div class="col-12 col-md-4  d-flex justify-content-around">
-                                <Button label="Cadastrar" type="button" onClick={(event) => { Cadastrar(event) }} />
-                                <Button label="Voltar" navigation route="login" class="apoio" />
+                                <BotaoConfirmar texto="Cadastrar" type="button"  onClick={(event) => { Cadastrar(event) } } navigation route="login" />
+                                {/* <Button label="Voltar" navigation route="login" class="apoio" /> */}
                             </div>
 
                         </div>
@@ -205,6 +218,8 @@ function CadastroCliente(props) {
                 </FormDefault>
             </>
         )
+
+        
     }
 
 
