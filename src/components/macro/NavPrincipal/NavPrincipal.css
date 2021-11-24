@@ -123,6 +123,7 @@
 
  .link-icone{
     text-decoration: none;
+    cursor: pointer;
  }
 
  .promo{
