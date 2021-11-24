@@ -54,7 +54,12 @@ function ListaCarrinho(props) {
         if ((localStorage.getItem("cart")? false: true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
             alert("carrinho vazio")
         }else{
-            window.location.href = "http://localhost:3000/checkout"
+            if(localStorage.getItem("user")){
+                window.location.href = "http://localhost:3000/checkout"
+            }else{
+                window.location.href = "http://localhost:3000/login"
+            }
+            
         }
         
     }
