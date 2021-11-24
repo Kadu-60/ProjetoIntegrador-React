@@ -34,7 +34,6 @@ function NavPrincipal(props) {
     useEffect(() => {
         setQty(localStorage.getItem('qtyCart'))
         setToken(localStorage.getItem('token'))
-        console.log('mudou qty')
         let email = localStorage.getItem('user')
         if (token && logado == 0 && email) {
             console.log('logado')
