@@ -6,13 +6,13 @@ import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Faq from './pages/FAQ/Faq'
-import Categoria from './pages/Categoria/Categoria'
+// import Categoria from './pages/Marca/Marca'
 import Busca from './pages/Busca/Busca'
 import BuscaAvancada from './pages/Busca/BuscaAvancada'
 import CadastroCliente from './pages/CadastroCliente/CadastroCliente2'
 import PedidoFinalizado from './pages/PedidoFinalizado/PedidoFinalizado'
 import Produto from './pages/Produto/Produto'
-import Cart from './pages/Cart/Cart'
+// import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Endereco from "./pages/Endereco/Endereco"
 import HomePop from './pages/Home/Home-pop'
@@ -21,7 +21,7 @@ import CarrinhoDois from './pages/Carrinho/CarrinhoDois'
 import ListarProdutos from './pages/Carrinho/ListarProdutos'
 import Fale from './pages/FormularioContato/FormularioContato'
 import Teste from './pages/Teste'
-
+import Marca from './pages/Marca/Marca'
 
 
 export const RoutesSite = () => {
@@ -34,13 +34,13 @@ export const RoutesSite = () => {
                 <Route path="/dashboard/:id" component={Dashboard} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contato" component={Fale} />
-                <Route path="/categorias" component={Categoria} />
+                <Route path="/marcas" component={Marca} />
                 <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/buscaAvancada/:pesq1/:pesq2/:pesq3/:pesq4" component={BuscaAvancada} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
                 <Route path="/pedidoFinalizado/:pesq" component={PedidoFinalizado} />
                 <Route path="/produto/:pesq" component={Produto} />
-                <Route path="/cart" component={Cart} />
+                <Route path="/cart" component={CarrinhoDois} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
                 <Route path="/produtos" component={Produtos} />
@@ -49,14 +49,5 @@ export const RoutesSite = () => {
                 <Route path="/teste/:pesq" component={Teste} />
             </Switch>
         </StoreProvider>
-
-
-
-
-
-
-
-
-
     )
 }
