@@ -12,14 +12,15 @@ function Categoria() {
     
     useEffect(() => {
         setMarcas(ListaMarcas)
-        // axios.get('http://localhost:3001/marcas')
-        // .then((response) => {
-        //     setMarcas(response.data)
-        // })
-        // .catch((error) => {
-        //     console.error("Ops! ocorreu um erro"+error)
-        // })
-    })
+        axios.get('http://localhost:8080/Marca')
+        .then((response) => {
+           
+            setMarcas(response.data)
+        })
+        .catch((error) => {
+            console.error("Ops! ocorreu um erro"+error)
+        })
+    }, [])
 
 
     return ( 

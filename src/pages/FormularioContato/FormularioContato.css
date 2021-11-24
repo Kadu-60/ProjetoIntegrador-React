@@ -1,18 +1,32 @@
+.formulario-contato{
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+  
+
+
+}
+
+.form-control{
+font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+
+}
+
 .titulo {
   color     : black;
   margin-top: 20px;
 }
 
 .p-nome{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+ 
 }
 #subtitulo {
   color     : black;
   margin-top: 5px;
+  margin-left: 30px;
 }
 
 .mensagem-form{
-  height: 100px;
+  height: 120px;
 }
 
 
@@ -30,30 +44,73 @@ textarea {
 }
 
 
-.apoio {
-background-color: #8D733F;
-color: #fff;
-font-weight: bold;
-  padding: 10px 20px;
-  margin-top:10px;
-  margin-right: 10px;
-  text-transform: uppercase;
-  border:none;
-  text-decoration: none;
-  display: inline-block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.apoio-form {
+  background-color: #8D733F;
+  color: #fff;
+  font-weight: bold;
+    padding: 10px 30px;
+    margin-top:10px;
+    margin-left: -75px;
+    text-transform: uppercase;
+    border:none;
+    text-decoration: none;
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .enviar{
+  background-color: #4B4A42;
+  color: #fff;
+  font-weight: bold;
+    padding: 10px 30px;
+    position: relative;
+    margin-top: -43px;
+    margin-left: 75px;
+    text-transform: uppercase;
+    border:none;
+    text-decoration: none;
+    display: flex;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  
+  .apoio-form:hover {
+    background-color: #8D733F;
+    color: #fff;
+    font-weight: bold;
+      padding: 10px 30px;
+      margin-top:10px;
+      margin-left: -75px;
+      text-transform: uppercase;
+      border:none;
+      text-decoration: none;
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .enviar:hover{
+    background-color: #4B4A42;
+    color: #fff;
+    font-weight: bold;
+      padding: 10px 30px;
+      margin-top: -43px;
+      text-transform: uppercase;
+      border:none;
+      text-decoration: none;
+      display: flex;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }  
+
+
+.buttonform{
+
+padding-right: 50px;
+display: flex;
+
 }
 
-.enviar{
-background-color: #4B4A42;
-color: #fff;
-font-weight: bold;
-  padding: 10px 20px;
-  margin-top:10px;
-  margin-right: 10px;
-  text-transform: uppercase;
-  border:none;
-  text-decoration: none;
-  display: inline-block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+  .dados-form{
+  align-items: center;
+  }
+
+  

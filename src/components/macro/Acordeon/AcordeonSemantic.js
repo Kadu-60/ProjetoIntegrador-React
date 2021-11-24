@@ -59,7 +59,7 @@ export default class AccordionExampleStandard extends Component {
                             <label className='labelproduto'> <strong>Cor da Cerveja:</strong></label>
                             <li>{this.props.cor}</li>
                             <label className='labelproduto'> <strong>Teor Alcoólico:</strong></label>
-                            <li>{this.props.teor}00%</li>
+                            <li>{this.props.teor}%</li>
                         </ul>
          
           </p>

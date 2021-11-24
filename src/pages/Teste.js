@@ -1,82 +1,138 @@
-
-import React from "react";
-
+import React, { useState, useEffect } from 'react'
+import './Produto/Produto.css'
+import BotaoAdicionar from '../components/micro/BotaoConfirmar/BotaoAdicionar';
+import BotaoQtd from '../components/micro/BotaoQtd/BotaoQtd';
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import axios from 'axios'
+import AcordeonSemantic from '../components/macro/Acordeon/AcordeonSemantic';
+import { useParams } from "react-router-dom"
 
 
 function Teste(props) {
 
+    const [produto, setProduto] = useState([])
+    const [familia, setFamilia] = useState([])
+    const [estilo, setEstilo] = useState([])
+    const [harmonizacao, setHarmonizacao] = useState([])
+    const [preco1, setPreco1] = useState([])
+    const [teste, setTeste] = useState({})
+    
+
+
+    const params = useParams(":pesq")
+    const pesq = params.pesq
+    const URL = 'http://localhost:8080/produtos/'
+    const final = URL + params.pesq
+
+    const URLPreco = 'http://localhost:8080/preco/'
+    const precoFinal = URLPreco + params.pesq
+
+    // useEffect(() => {
+    //     getProduto()
+    // }, [])
+
+    // const getProduto = () => {
+    //     axios.get(final)
+    //         .then((response) => {
+    //             setProduto(response.data)
+    //             setFamilia(response.data.familia)
+    //             setEstilo(response.data.categoria)
+    //             setHarmonizacao(response.data.prato)
+    //             console.log(response.data.familia.descricao)
+
+
+
+    //         })
+    // }
+
+    useEffect(() => {
+        getPreco()
+    }, [])
+
+    const getPreco = () => {
+        axios.get(precoFinal)
+            .then((response) => {
+                setPreco1((+response.data.valor_preco).toFixed(2))
+                console.log(response.data)
+                setTeste(response.data)
+                console.log(teste)
+                
+
+            })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
         <>
-           
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link active"
-                        id="home-tab"
-                        data-mdb-toggle="tab"
-                        href="#home"
-                        role="tab"
-                        aria-controls="home"
-                        aria-selected="true"
-                    >Home</a
-                    >
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="profile-tab"
-                        data-mdb-toggle="tab"
-                        href="#profile"
-                        role="tab"
-                        aria-controls="profile"
-                        aria-selected="false"
-                    >Profile</a
-                    >
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="messages-tab"
-                        data-mdb-toggle="tab"
-                        href="#messages"
-                        role="tab"
-                        aria-controls="messages"
-                        aria-selected="false"
-                    >Messages</a
-                    >
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="settings-tab"
-                        data-mdb-toggle="tab"
-                        href="#settings"
-                        role="tab"
-                        aria-controls="settings"
-                        aria-selected="false"
-                    >Settings</a
-                    >
-                </li>
-            </ul>
+            <br />
+            <Breadcrumb className="cor-migalha">
+                <Breadcrumb.Item className="migalha-pao" href="/home"> Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/produtos">
+                    Produtos
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active> Produto</Breadcrumb.Item>
+            </Breadcrumb>
+            <div key={produto.id} class="container container-produto">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="img-produto">
+                            <img src={produto.foto} alt="" srcset="" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex align-items-center">
+                        <div class="row d-flex justify-content-start info-prod ">
+                            <div class="col-12 nome-produto">
+                                {/* <p>{produto.marca}</p> */}
+                            </div>
+                            <div class="col-12 nome-produto">
+                                <h4>{produto.nome_produto}</h4>
+                            </div>
+                            <div class="col-12 mt-3 align-self-center">
+                                <div class="preco-produto">
+                                    <div class="preco-por">
+                                        
+                                        <h5><b> Por R${preco1}</b></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <BotaoQtd inicial={1} passo={1} />
+                            </div>
+                            <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar className="botao-comprar-pag-produto" id="botao-comprar-pag-produto" texto='Adicionar ' /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="mb-5">
 
-            
-            <div class="tab-content">
-                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    ...
-                </div>
-                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    ...
-                </div>
-                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-                    ...
-                </div>
-                <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                    ...
+                    <AcordeonSemantic harmonizacao={harmonizacao.descricao} estilo={estilo.nome} familia={familia.descricao} descricaoProd={produto.descricao} ibu={produto.ibu} cor={produto.cor} teor={produto.teor} />
+
+
                 </div>
             </div>
         </>
-    );
+
+    )
+
+
+
+
 }
 
 export default Teste;

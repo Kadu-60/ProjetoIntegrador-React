@@ -1,91 +1,94 @@
-import React, { useState } from 'react'
+import React, { useRef,useEffect, useState  } from 'react'
 import './CadastroCliente.css'
+import * as Yup from 'yup';
 import FormDefault from '../../components/micro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
 import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
-import { Form, Modal } from 'react-bootstrap'
-import axios from 'axios'
-
-function CadastroCliente(props) {
-    const [nome, setNome] = useState('')
-    const [cpf, setCpf] = useState('')
-    const [dataNascimento, setDataNascimento] = useState('')
-    const [email, setEmail] = useState('')
-    const [telefone, setTelefone] = useState('')
-    const [password, setPassword] = useState('')
-    const [show, setShow] = useState(false)
-    const [confPassword, setConfPassword] = useState('')
+import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
+import { Button, Modal } from 'react-bootstrap'
+import InputMask from "react-input-mask";
+import InputUnform from '../../components/micro/Forms/FormDefault/FormUnform/Input'
 
 
-        
+// import { mask, unMask } from 'remask'
 
-        const Cadastrar = (event) => {
-            event.preventDefault();
-            axios.post("http://localhost:8080/cadastroCliente/salvar", {
-                nome: nome,
-                cpf: cpf,
-                dataNascimento: dataNascimento,
-                email: email,
-                telefone: telefone,
-                password: password,
-                confPassword: confPassword
-            })
-                .then((response) => {
-                    window.location.href = "http://localhost:3000/"
-                })
-                .catch((error) => console.log(error))
-        }
+function CadastroCliente() {
 
-        const mascaraLetras = (value) => {
-            return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
-        };
 
-        const mascaraCPF = (value) => {
-            return value
-                .replace(/\D/g, "")
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-                .replace(/(-\d{2})\d+?$/, "$1");
-        };
 
-        const mascaraData = (value) => {
-            return value
-                .replace(/\D/g, "")
-                .replace(/(\d{2})(\d)/, "$1/$2")
-                .replace(/(\d{2})(\d)/, "$1/$2")
-                .replace(/(\d{4})(\d)/, "$1");
-        };
+    const [show, setShow] = useState(false);
+    const [value, setValue] = useState ('');
+    const onChange = ev =>{
+        setValue(ev.target.value)
+    };
 
-        const mascaraTelefone = (value) => {
-            return value
-                .replace(/\D/g, "")
-                .replace(/(\d{2})(\d)/, "($1) $2")
-                .replace(/(\d{5})(\d)/, "$1-$2")
-                .replace(/(-\d{4})(\d+?)$/, "$1");
-        };
+    
+    
 
-        
 
-        return (
-            <>
-                <FormDefault>
-                    <br />    <br />
-                    <div class="row d-flex justify-content-center">
-                        <div class="col d-flex justify-content-center">
-                            <p className="title-dash">Criar conta</p>
-                        </div>
+    return(
+        <>
+
+  
+        <FormDefault>
+                <br/>    <br/>
+                <div class="row d-flex justify-content-center">
+                
+                    <div class="col d-flex justify-content-center">
+                    <p className="title-dash">Criar conta</p>
                     </div>
-                    <br />
-                    <div class="row d-flex justify-content-center">
-
-                        <div class="form-group col-md-6">
-                            <Form.Label>Nome Completo</Form.Label>
-                            <Form.Control type="nome" placeholder="Ex.: Fulano de Tal" onChange={(event) => {
-                                setNome(mascaraLetras(event.target.value))
-                            }}
-                                value={nome} required="true" />
-                        </div>
+               </div>
+                <br/>
+                <div class="row d-flex justify-content-center">
+                    
+                    <div class="form-group col-md-6">
+                    <label>Nome Completo:</label><br/>
+                     
+                        <InputMask corLabel="preto" id="input-container-nome" label="Nome Completo" type="text" required="true"/>
+                    </div>
+                    
+                </div>
+               <div class="row d-flex justify-content-center">
+               
+                    <div class="form-group col-md-3">
+                        <label>CPF:</label>
+                        <InputMask mask="999.999.999-99" corLabel="preto" id="input-container" label="CPF" type="text" placeholder="Digite seu CPF" value={value} small="Apenas número" required="true"/>
+                        <span id="resposta"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label>Data de Nascimento:</label>
+                        <InputMask mask="99/99/9999" corLabel="preto" id="input-container" label="Data de nascimento" type="text" placeholder="DD/MM/AAAA" required="true"/>
+                    </div>
+                    
+               </div>
+               <div class="row d-flex justify-content-center">
+             
+                   <div class="form-group col-md-3">
+                   <label>E-mail:</label>
+                       <InputMask corLabel="preto" id="input-container" label="E-mail" type='email' placeholder="user@email.com" small='Este será seu Login' required="true"/>
+                   </div>
+                   <div class="form-forup col-md-3">
+                       <label>Telefone:</label>
+                   <InputMask mask="(99)99999-9999" id="input-container"  label="Telefone" type='text' placeholder="(00) 00000-0000"  required="true"/>
+                   </div>
+               </div>
+               <div class="row">
+                <div class="col-md-3"></div>
+                   <div class="form-group col-md-3">
+                   <label>Digite sua senha:</label>
+                       <InputMask corLabel='preto' id="input-container" label='Senha' type='password' placeholder="Insira sua senha" small='Deve conter pelo menos 8 caracteres' required="true"/>
+                   </div>
+                    <div class="form-group col-md-3">
+                    <label>Repita sua senha:</label>
+                        <InputMask corLabel='preto' id="input-container" label='Repita sua senha' type='password' placeholder="Insira sua senha" required="true"/>
+                    </div>
+               </div>
+               
+               <br/><br/>
+               <div class="row justify-content-center">
+                <div class="col-md-6 d-flex justify-content-around">
+                    <div class="form-check col-md-6 termos">
+                        <Checkbox texto="Aceito e concordo com os " required/> <a className="link-termo" onClick={() => setShow(true)}> <u>Termos e condições</u></a>
 
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -208,4 +211,5 @@ function CadastroCliente(props) {
     }
 
 
+}
 export default CadastroCliente
