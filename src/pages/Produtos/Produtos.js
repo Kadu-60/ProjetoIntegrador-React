@@ -15,122 +15,50 @@ function Produtos(props){
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"> <Icon className="icone-cerveja-produtos" name="beer"/>Colorado</p>
  
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                    
                    
                 </ListarProdutos>
                  
                 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Baden</p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                   
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Hoegaarden</p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                   
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Patagonia </p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                    
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Fritz </p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                   
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Mantibier </p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                    
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Madalena</p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                    
                    
                 </ListarProdutos>
 
                 <ListarProdutos>
                 <p className="title-dash cervejas-produtos"><Icon className="icone-cerveja-produtos" name="beer"/>Weltenburger</p>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
-                    <Produto linkProduto="" imagem={Img1} descricao="EISENBAHN American Ipa Puro Malte Long Neck 355ml" preco="5,29" >
-                    <a className="/produto"></a></Produto>
+                    
                    
                 </ListarProdutos>
                 

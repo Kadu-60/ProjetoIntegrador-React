@@ -18,32 +18,32 @@ function NavSub(props){
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler"><img src={Menu} width="30px" /></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav menu-sub">
+                        <div className="collapse navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav menu-sub">
 
-                                <li class="nav-item sub-menu">
+                                <li className="nav-item sub-menu">
 
-                                    <button class="dropbtn"><a class="nav-link " aria-current="page" href="/home"> Home</a></button>
+                                    <button className="dropbtn"><a className="nav-link " aria-current="page" href="/home"> Home</a></button>
 
                                 </li>
 
 
-                                <li class="nav-item sub-menu ">
+                                <li className="nav-item sub-menu ">
                                   
-                                    <button class="dropbtn">  <a class="nav-link " href="/categorias"> CATEGORIA</a></button>
+                                    <button className="dropbtn">  <a className="nav-link " href="/categorias"> MARCAS</a></button>
                                   
                                 </li>
                                 
-                                <li class="nav-item sub-menu">
+                                <li className="nav-item sub-menu">
                                     
-                                    <button class="dropbtn"> <a class="nav-link " href="/produtos"> Produtos</a></button>
+                                    <button className="dropbtn"> <a className="nav-link " href="/produtos"> Produtos</a></button>
 
                                 </li>
 
                            
 
-                                <li class="nav-item sub-menu">
-                                    <button class="dropbtn">  <a class="nav-link " href="/busca"> DESTAQUES</a></button>
+                                <li className="nav-item sub-menu">
+                                    <button className="dropbtn">  <a className="nav-link " href="/busca"> DESTAQUES</a></button>
                                 </li>
 
                             </ul>

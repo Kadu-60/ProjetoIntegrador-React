@@ -1,249 +1,215 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ListaCarrinho.css'
 import { Container, Table } from 'react-bootstrap'
-import {  Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
+import InputMask from "react-input-mask";
+import ProdutoCarrinho from './ProdutoCarrinho'
+import axios from 'axios'
 
-
-import Produto1 from '../../../assets/imgs/teste/cerveja.png'
-import BotaoConfirmar from '../../micro/BotaoConfirmar/BotaoConfirmar'
-import Button from '@restart/ui/esm/Button'
-
-function ListaCarrinho(props){
-
-    return(
-     <>
-
-   <body className="body-cart " >
-       
-   <div className="body-cart cart-template-holder">
-      <br/>    
-      <p className="title-dash carrinho-titulo" > <Icon className="icon-carrinho-cart" name="shopping cart"/> Meu Carrinho</p>
-     
-
-                <br/>
-                <Container>
-          <div className="lado-esquerdo" id="lado-esquerdo">
-          
-                <Table class="table-cart oi cart-items scroll" id="oi">
-
-                <thead class="thead-cart">
-                    <tr class="tr-cart">
-                        <th colSpan="2" class="product-cart">Produto</th>
-                        
-                        <th class="shipping-date">Entrega</th>
-                        <th class="product-price">Preço</th>
-                        <th class="quantity">Quantidade</th>
-                        <th class="quantity-price">Total</th>
-                        <th class="item-remove">Remover</th>
-                    </tr>
-                </thead>
-                
-                        
-                    <tbody className="conteudo-cart">
-
-
-
-
-                        
-                        <tr className="product-item">
-                        <td className="product-image"> <a href="/produto">
-                            <img src={Produto1} class="ui tiny middle aligned image"/> </a> 
-                            </td>
-                            
-                            <td className="product-name product-cart"> 
-                            <a href="/produto"><span className="titulo-cerveja-cart">Cerveja Madalena Double IPA 600ml  </span></a>
-                            </td>
-                        
-                            <td className="shipping-date">  
-                            <span className="titulo-entrega-cart">Em até 6 dias úteis</span>
-                            </td>
-                            
-                        
-                            <td className="product-price"> 
-                            <span>R$ 4,99</span>
-                            </td>
-                            
-                        
-                            <td className="quantity">
-                            <div class="contador">
-                                <div class="button" data-sinal="-1" >-</div>
-                                <div class="mostrador">0</div>
-                                <div class="button" data-sinal="1">+</div>
-                            </div>
-                            </td>
-                        
-                        
-                            <td className="quantity-price">  
-                            <span>R$ 4,99</span>
-                            </td>
-                        
-                        
-                            <td className="item-remove ">  
-                            <Icon className="lixeira " name="trash alternate outline" />
-                            </td>
-                        </tr>
-
-
-
-
-                
-                        <tr className="product-item">
-                        <td className="product-image"> <a href="/produto">
-                            <img src={props.img} class="ui tiny middle aligned image"/> </a> 
-                            </td>
-                            
-                            <td className="product-name product-cart"> 
-                            <a href="/produto"><span className="titulo-cerveja-cart">{props.nome}  </span></a>
-                            </td>
-                        
-                            <td className="shipping-date">  
-                            <span className="titulo-entrega-cart">{props.frete}</span>
-                            </td>
-                            
-                        
-                            <td className="product-price"> 
-                            <span>{props.preco}</span>
-                            </td>
-                            
-                        
-                            <td className="quantity">
-                            <div class="contador">
-                                <div class="button" data-sinal="-1" >-</div>
-                                <div class="mostrador">0</div>
-                                <div class="button" data-sinal="1">+</div>
-                            </div>
-                            </td>
-                        
-                        
-                            <td className="quantity-price">  
-                            <span>{props.total}</span>
-                            </td>
-                        
-                        
-                            <td className="item-remove ">  
-                            <Icon className="lixeira " name="trash alternate outline" />
-                            </td>
-                        </tr>
-
-                
-
-
-
-
-                    
-                    </tbody>
-                
+function ListaCarrinho(props) {
+    const [subtotal, setSubtotal ] = useState(0)
+    const [cards, setCards] = useState([])
+    let conteudoTable = () => {
+        if ((localStorage.getItem("cart")
+        ? false
+        : true)||localStorage.getItem("cart")=='[]') {
 
             
+            return (
+                <>
+                    <div className="container d-flex justify-content-center align-content-center">
+                        <p>Carrinho vazio</p>
+                    </div>
+                </>
+            )
 
-                    
-                    
+        } else {
+            return (
+                <>
+                    <Table class="table-cart oi cart-items scroll" id="oi">
+                        <thead class="thead-cart">
+                            <tr class="tr-cart">
+                                <th colSpan="2" class="product-cart">Produto</th>
+
+                                <th class="shipping-date">Entrega</th>
+                                <th class="product-price">Preço</th>
+                                <th class="quantity">Quantidade</th>
+                                <th class="quantity-price">Total</th>
+                                <th class="item-remove">Remover</th>
+                            </tr>
+                        </thead>
+                        <tbody className="conteudo-cart">
+                            {
+                                cards.map((prod) => (
+                                    <ProdutoCarrinho prod={prod} />
+                                ))
+                            }
+                        </tbody>
+                    </Table>
+                </>
+            )
+        }
+    }
+
+    useEffect(() => {
+        let cart = ((localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []))
+
+        if (cart) {
+
+            axios.post('http://localhost:8080/Card/multi', cart)
+                .then(response => {
+                    setCards(response.data)
+                    let acumulador=0
+                    response.data.map((data) =>{
+                        acumulador += data.valor_preco
+                    })
+                    setSubtotal(acumulador)
+                })
                 
+                .catch(error => {
+                    if (error.response) {
+
+                        console.log(error.response)
+
+                    } else if (error.request) {
+
+                        console.log(error.request)
+
+                    } else if (error.message) {
+
+                        console.log(error.message)
+
+                    }
+                })
+        }
+        let array=[]
+        cart.map((item)=>{
+            if(array.indexOf(item)==-1){
+                array.push(item)
+            }
+        })
+
         
-                </Table>
-
-        </div>   
 
 
+    }, [])
 
-    
-    </Container>
+    return (
+        <>
 
-    <br/>    <br/>    <br/>
-    </div>
-    
-    <div className="global-lado-direito">
-    <div className="botao-continuar-cmp">    
-            <a class="keep-shopping" href="/produtos">
-                    <Icon className="icone-comprando" name="angle left"/> Continuar comprando 
-                </a>
+
+            <body className="body-cart " >
+
+                <div className="body-cart cart-template-holder">
+                    <br />
+                    <p className="title-dash carrinho-titulo" > <Icon className="icon-carrinho-cart" name="shopping cart" /> Meu Carrinho</p>
+
+
+                    <br />
+                    <Container>
+                        <div className="lado-esquerdo" id="lado-esquerdo">
+
+
+                            {
+                                conteudoTable()
+                            }
+                        </div>
+
+
+
+
+                    </Container>
+
+                    <br />    <br />    <br />
                 </div>
-                <br/>
+
+                <div className="global-lado-direito">
+                    <div className="botao-continuar-cmp">
+                        <a class="keep-shopping" href="/produtos">
+                            <Icon className="icone-comprando" name="angle left" /> Continuar comprando
+                        </a>
+                    </div>
+                    <br />
 
 
-            <div className="lado-direito" id="lado-direito">
-                <div className="div-subtotal " >
-                    
-                        <ul className="lista-carrinho-total">
-                            
-                            <p> <Icon className="icone-resumo" name="truck"/><b> Entrega</b></p>
-                            <li className="sub-global">
-                                <p>Seu CEP  <span className="texto-total-frete-sub" id="mais-cep"> <b>Frete Fixo R$10,00</b> </span> </p>  
-                            
-                                 
-                           
-                                
-                                <input type="text" class="form-control" placeholder="00000-000"/>
-                                <span class="input-group-btn">
-                                    <button class=" btn-default form-control ok-cep" onClick={verMais} id="btnCalcular" type="button">Calcular</button>
-                                </span>  
-                            </li>
-                            <span id="pontos">
-                            </span>
-                           
-                            
-                    
-                            <br/>
-                        </ul>
-                    
+                    <div className="lado-direito" id="lado-direito">
+                        <div className="div-subtotal " >
+
+                            <ul className="lista-carrinho-total">
+
+                                <p className="titulo-entrega"> <Icon className="icone-resumo" name="truck" /><b> Entrega</b></p>
+                                <li className="sub-global">
+                                    <p>Seu CEP  <span className="texto-total-frete-sub" id="mais-cep"> <b>Frete R$10,00</b> </span> </p>
+
+
+
+
+                                    <InputMask mask="99999-999" type="text" class="form-control" placeholder="00000-000" />
+                                    <span class="input-group-btn">
+                                        <button class=" btn-default form-control ok-cep" onClick={verMais} id="btnCalcular" type="button">Calcular</button>
+                                    </span>
+                                </li>
+
+                                <span id="pontos">
+                                </span>
+
+                                <br />
+
+                            </ul>
+
+                        </div>
+
+
+                        <div className="div-total " >
+                            <ul className="lista-carrinho-total">
+
+                                <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
+                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {subtotal.toFixed(2)}</span>   </li>
+                                <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
+
+                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {(subtotal+15).toFixed(2)}</span>   </li>
+                                <button class="btn-finalizar-compra" type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
+                                <br />
+                                <br />
+                            </ul>
+
+                        </div>
+                    </div>
                 </div>
-            
-        
-                <div className="div-total " >
-                        <ul className="lista-carrinho-total">
-                            
-                            <p> <Icon className="icone-resumo" name="file alternate outline"/><b>Resumo do Pedido</b></p>
-                            <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ 20,00 {props.subtotal}</span>   </li>
-                            <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 10,00{props.frete}</span>   </li>
-                            
-                            <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total">  R$ 30,00{props.total}</span>   </li>
-                            <button class="btn-finalizar-compra"  type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right"/></button>
-                            <br/>
-                            <br/>
-                        </ul>
-                    
-                </div>
-            </div> 
-       </div>
 
 
-       <br/>
-        <br/>
-        <br/>
-       
-       
-       
-    </body>     
- 
- 
-     </>
+                <br />
+                <br />
+                <br />
+
+
+
+            </body>
+
+
+
+        </>
     )
 }
 
-function  verMais ()  {
+function verMais() {
     var pontos = document.getElementById("pontos");
     var meusPedidos = document.getElementById("mais-cep");
     var btnCalcular = document.getElementById("btnCalcular");
-  
-    if(pontos.style.display === "none"){
+
+    if (pontos.style.display === "none") {
         pontos.style.display = "inline";
         meusPedidos.style.display = "none";
-        btnCalcular.innerHTML="Calcular";
-    }else{
-        pontos.style.display="none";
+        btnCalcular.innerHTML = "Calcular";
+    } else {
+        pontos.style.display = "none";
         meusPedidos.style.display = "inline";
-       
-  
-    }
-  }
-  
 
-//  var contador = (function(el) {
-//    const mostrador = el.querySelector('.mostrador');
-//   el.addEventListener('click', function(e) {
-//     if (!e.target.matches('.button')) return;
-//     mostrador.innerHTML = Number(mostrador.innerHTML) + Number(e.target.dataset.sinal);
-//   });
-// })(document.querySelector('.contador'));
+
+    }
+}
+
 
 export default ListaCarrinho

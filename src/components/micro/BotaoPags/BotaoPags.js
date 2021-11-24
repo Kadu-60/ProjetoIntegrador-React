@@ -1,8 +1,14 @@
 import React from 'react'
+import { PaginationItem } from 'semantic-ui-react';
 import './BotaoPags.css'
 
 
-function BotaoPags(props) {
+function BotaoPags({prodsPorPagina, totalProd, paginate}) {
+
+  const numeroPags = []
+  for(let i = 1; i <= Math.ceil(totalProd / prodsPorPagina); i++){
+    numeroPags.push(i)
+  }
 
   return (
     <>
@@ -10,15 +16,14 @@ function BotaoPags(props) {
         <div class="col pt-4">
                 <nav aria-label="Page navigation example migalhas">
                     <ul class="pagination  migalhas justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                      </li>
-                      <li class="page-item "><a class="page-link  migalhas" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link  migalhas" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link  migalhas" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link  migalhas" href="#">Proxima</a>
-                      </li>
+                      {numeroPags.map(numero =>(
+                        <li key={numero} className="page-item">
+                          <a onClick={() => paginate(numero)} className="page-link" href="#">
+                            {numero}
+                          </a>
+                        </li>
+
+                      ))}
                     </ul>
                 </nav>
             </div>
