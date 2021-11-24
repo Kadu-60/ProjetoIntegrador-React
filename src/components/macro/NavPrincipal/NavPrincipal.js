@@ -17,9 +17,6 @@ function estadoInicial() {
 
 
 function NavPrincipal(props) {
-
-
-
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
@@ -28,23 +25,30 @@ function NavPrincipal(props) {
     const [logado, setLogado] = useState(0)
     const [id, setId] = useState(0)
     useEffect(() => {
+        setInterval(() => {
+            setQty(localStorage.getItem('qtyCart'))
+            setToken(localStorage.getItem('token'))
+        },500)
+    },[URL])
 
-
+    useEffect(() => {
         setQty(localStorage.getItem('qtyCart'))
+        setToken(localStorage.getItem('token'))
+        console.log('mudou qty')
         let email = localStorage.getItem('user')
         if (token && logado == 0 && email) {
             console.log('logado')
             axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
                 .then((response) => {
                     setId(response.data.id_Cliente)
-
+                    
                 })
                 .catch((error) => { console.log(error) })
             setLogado(1)
         }
         if (logado == 1) {
             setTimeout(() => {
-                console.log('deslogando com o tempo')
+                console.log('token expirado')
                 localStorage.removeItem('token')
                 setToken(null)
                 localStorage.removeItem('user')
@@ -52,14 +56,11 @@ function NavPrincipal(props) {
             }, 5999000)
             setLogado(2)
         }
-
-
-
+        
     })
 
-    useEffect(() => {
-        setToken(localStorage.getItem('token'))
-    }, [])
+    
+
 
 
     function onChange(event) {
