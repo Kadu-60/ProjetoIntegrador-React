@@ -29,29 +29,31 @@ function NavPrincipal(props) {
     const [id, setId] = useState(0)
     useEffect(() => {
 
-        setTimeout(function run() {
-            setQty(localStorage.getItem('qtyCart'))
-            setTimeout(run, 200);
-            let email = localStorage.getItem('user')
-            if (token && logado == 0 && email) {
-                
-                axios.get("http://localhost:8080/cadastro-cliente/getByEmail/"+email)
+
+        setQty(localStorage.getItem('qtyCart'))
+        let email = localStorage.getItem('user')
+        if (token && logado == 0 && email) {
+            console.log('logado')
+            axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
                 .then((response) => {
-                    setId( response.data.id_Cliente)
-                    setLogado(1)
+                    setId(response.data.id_Cliente)
+
                 })
                 .catch((error) => { console.log(error) })
-            }
-            if (logado == 1) {
-                setTimeout(() => {
-                    localStorage.removeItem('token')
-                    setToken(null)
-                    localStorage.removeItem('user')
-                    setLogado(0)
-                }, 5999000)
-            }
+            setLogado(1)
+        }
+        if (logado == 1) {
+            setTimeout(() => {
+                console.log('deslogando com o tempo')
+                localStorage.removeItem('token')
+                setToken(null)
+                localStorage.removeItem('user')
+                setLogado(0)
+            }, 5999000)
+            setLogado(2)
+        }
 
-        }, 1000);
+
 
     })
 
@@ -79,7 +81,20 @@ function NavPrincipal(props) {
 
 
     }
+    function meusPedidos() {
 
+        localStorage.setItem('defaultIndex', "index")
+        let email = localStorage.getItem('user')
+        if (email) {
+            axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
+                .then((response) => {
+                    window.location.href = "http://localhost:3000/dashboard/" + response.data.id_Cliente
+                })
+        } else {
+            window.location.href = "http://localhost:3000/login"
+        }
+
+    }
 
 
     return (
@@ -119,17 +134,17 @@ function NavPrincipal(props) {
                                     </div>
 
                                     <div className="col-3 header-conta">
-                                        <a className="link-icone" href={logado==0?"/login":"/dashboard/"+id}>
+                                        <a className="link-icone" href={logado == 0 ? "/login" : "/dashboard/" + id}>
                                             <img className="imagem" src={Conta} />
                                             <p className="icone"> Minha Conta</p>
                                         </a>
                                     </div>
 
                                     <div className="col-3 header-Pedidos ">
-                                        <a className="link-icone" href="/dashboard">
+                                        <div className="link-icone" onClick={() => { meusPedidos() }}>
                                             <img className="imagem" src={Pedido} />
                                             <p className="icone">  Meus Pedidos</p>
-                                        </a>
+                                        </div>
                                     </div>
 
                                     <div className="col-3 header-carrinho">

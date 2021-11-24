@@ -109,7 +109,7 @@ function Login(props) {
 
                         <div class="col-md-4 d-flex justify-content-center">
                             <p>
-                                Esqueceu sua senha? <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"> Recuperar senha</a>
+                                Esqueceu sua senha? <a className="fazer-login" data-bs-toggle="modal" data-bs-target="#exampleModal"> Recuperar senha</a>
                             </p>
                         </div>
                     </div>

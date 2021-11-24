@@ -21,6 +21,7 @@
 .fazer-login{
     color: blue;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #input-container {
