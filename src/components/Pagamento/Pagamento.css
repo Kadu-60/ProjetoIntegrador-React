@@ -3,3 +3,10 @@
     font-size:14px;
     
 }
+.pagamentoCartao{
+    display: block;
+  max-width:24px;
+  max-height:24px;
+  width: auto;
+  height: auto;
+}

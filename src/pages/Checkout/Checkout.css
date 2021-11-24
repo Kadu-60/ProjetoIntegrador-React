@@ -50,27 +50,47 @@
 .sub-global{
     margin-left: 30px;
 }
-
+.product-image{
+    width: 25%!important;
+}
+.product-checkout-price {
+    width: 22%;
+    color: #2b2e33;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+  
+}
+.lista-checkout-total{
+    text-align: left;
+}
+.overflow-resumo-pedido{
+    overflow-y: scroll;
+    max-height: 250px;
+}
 .sub-total-frete{
     margin-left: 40px;
 }
-
+.titulo-quantidade-cart{ 
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.quantidade-produto-checkout{
+    width: 25%;
+}
 .finalizar-titulo{
     padding-top: 30px;
 }
-.div-resumo-pedido{
+.div-resumo-pedido-checkout{
     background-color: #ffffff;
     box-sizing: border-box;
-    padding-top: 10px;
-    padding-right: 60px;
+    padding: auto;
     max-height: 650px;
     position: relative;
     width: 350px;
-    overflow-y: scroll;
     margin-top: 10px;
     display: flex;
     justify-content: right;
- 
     margin-left: 10px;
 }
 
@@ -79,8 +99,7 @@
 #conteudo-cart-pedido{
     background-color: #ffffff;
     box-sizing: border-box;
-    overflow-y: scroll;
-    max-height: 100px;
+   
     position: relative;
     font-size: 11px;
     align-items: center;

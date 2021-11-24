@@ -127,7 +127,7 @@ function Produto(props) {
                             </div>
                             <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                 <div class="col-12 d-flex justify-content-center">
-                                    <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar className="botao-comprar-pag-produto" id="botao-comprar-pag-produto" texto='Adicionar ' /></a>
+                                    <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar className="botao-comprar-pag-produto" id={produto.id_produto} texto='Adicionar ' /></a>
                                 </div>
                             </div>
                         </div>
