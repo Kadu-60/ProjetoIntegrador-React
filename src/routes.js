@@ -20,6 +20,7 @@ import Produtos from './pages/Produtos/Produtos'
 import CarrinhoDois from './pages/Carrinho/CarrinhoDois'
 import ListarProdutos from './pages/Carrinho/ListarProdutos'
 import Fale from './pages/FormularioContato/FormularioContato'
+import Destaques from './pages/Destaques/Destaques'
 import Teste from './pages/Teste'
 
 
@@ -35,6 +36,7 @@ export const RoutesSite = () => {
                 <Route path="/faq" component={Faq} />
                 <Route path="/contato" component={Fale} />
                 <Route path="/categorias" component={Categoria} />
+                <Route path="/destaques" component={Destaques} />
                 <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/buscaAvancada/:pesq1/:pesq2/:pesq3/:pesq4" component={BuscaAvancada} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />

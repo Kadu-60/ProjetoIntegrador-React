@@ -43,7 +43,7 @@ function NavSub(props){
                            
 
                                 <li className="nav-item sub-menu">
-                                    <button className="dropbtn">  <a className="nav-link " href="/busca"> DESTAQUES</a></button>
+                                    <button className="dropbtn">  <a className="nav-link " href="/destaques"> DESTAQUES</a></button>
                                 </li>
 
                             </ul>

@@ -21,9 +21,9 @@ function BotaoQtd(props) {
             <div class="btn-group inline">
 
                             <div class="contador contador-pag-produto">
-                                <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
+                                <button onClick={decremento} class="contador-btn btn-menos" data-sinal="-1" >-</button>
                                 <div class="mostrador">{numero}</div>
-                                <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
+                                <button onClick={incremento} class="contador-btn btn-maiss" data-sinal="1">+</button>
                             </div>
               
             </div>

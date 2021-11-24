@@ -7,6 +7,13 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import axios from 'axios'
 import AcordeonSemantic from '../../components/macro/Acordeon/AcordeonSemantic';
 import { useParams } from "react-router-dom"
+import { Icon } from 'semantic-ui-react';
+import Caneca from '../../assets/imgs/teste/caneca.gif'
+import CanecaPreta from '../../assets/imgs/teste/canecapreta.gif'
+import Prato from '../../assets/imgs/teste/prato.gif'
+import Garrafas from '../../assets/imgs/teste/cervejas.png'
+import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
+import NovidadesHome from '../../components/macro/NovidadesHome/NovidadesHome';
 
 function Produto(props) {
     const [produto, setProduto] = useState([])
@@ -15,6 +22,10 @@ function Produto(props) {
     const [harmonizacao, setHarmonizacao] = useState([])
     const [preco1, setPreco1] = useState([])
     const [teste, setTeste] = useState([])
+    const [products, setProducts] = useState([])
+    const [qtyCart, setQtyCart] = useState(0)  
+    
+
     
 
 
@@ -83,14 +94,11 @@ function Produto(props) {
 
 
 
-
-
-
-
-
-
     return (
         <>
+        <body className="body-produto">
+           
+            <main className="class-main-produto">
             <br />
             <Breadcrumb className="cor-migalha">
                 <Breadcrumb.Item className="migalha-pao" href="/home"> Home</Breadcrumb.Item>
@@ -99,14 +107,18 @@ function Produto(props) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item active> Produto</Breadcrumb.Item>
             </Breadcrumb>
+            <div className="setando-voltar">
+            <a href="/produtos"><Icon name="arrow left" className="seta-voltar"/></a> <div className="voltar-seta"> Voltar</div>
+            </div>
+            
             <div key={produto.id} class="container container-produto">
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <div class="img-produto">
+                        <div class="img-produto zoom">
                             <img src={produto.foto} alt="" srcset="" />
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 d-flex align-items-center">
+                    <div class="col-12 col-md-6 d-flex align-items-center div-container-produto">
                         <div class="row d-flex justify-content-start info-prod ">
                             <div class="col-12 nome-produto">
                                 {/* <p>{produto.marca}</p> */}
@@ -118,7 +130,11 @@ function Produto(props) {
                                 <div class="preco-produto">
                                     <div class="preco-por">
                                         
-                                        <span className="titulo-produto-preco"><b> Por R${preco1}</b></span>
+                                        <span className="titulo-produto-preco"><b> por R${preco1}</b></span>
+                                       
+                                    </div>
+                                    <div>
+                                    <span className="titulo-produto-parc"> Ou 3 x de R${(parseFloat(preco1)/3).toFixed(2).replace(".", ",")} sem juros </span>
                                     </div>
                                 </div>
                             </div>
@@ -127,19 +143,107 @@ function Produto(props) {
                             </div>
                             <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                 <div class="col-12 d-flex justify-content-center">
-                                    <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar className="botao-comprar-pag-produto" id="botao-comprar-pag-produto" texto='Adicionar ' /></a>
+                                   <BotaoAdicionar texto='Adicionar' id={produto.id_produto} />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="mb-5">
-
-                    <AcordeonSemantic harmonizacao={harmonizacao.descricao} estilo={estilo.nome} familia={familia.descricao} descricaoProd={produto.descricao} ibu={produto.ibu} cor={produto.cor} teor={produto.teor} />
-
-
                 </div>
-            </div>
+                </main>
+                <br/> 
+                <div className="container-fluid  mb-5" id="acordeon-produto">
+               
+                <p className="sobre" id="sobre"><Icon name="comment alternate" className=" sobre-produto"/>Mais sobre</p>
+                        <div className="div-total-pag-produto">
+                            <div className="dec-prod col-4">
+                                <ul>
+                                    <li>   
+                                    <img src={Caneca} width="20px" className="caneca-brew"/>
+                                    <b>Descrição do Produto</b></li>
+                                   
+                                    <li>
+                                        <div className="desc-produto-text">
+
+                                        {produto.descricao}
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div className="dec-tec col-4">
+                                <ul className="centro-ul ">
+                                    <li>  <i class="fas fa-wine-bottle"></i>  <img src={CanecaPreta} width="20px" className="caneca-brew"/>
+                                   <b> Descrição Técnica</b></li>
+                                <div className="estilo-familia">
+                                <label className='labelproduto'> <strong>Familia da Cerveja:</strong></label>
+                                <li>{familia.descricao}</li>
+                                <label className='labelproduto'> <strong>Estilo ou Família:</strong></label>
+                                <li>{estilo.nome}</li>
+                                <label className='labelproduto'> <strong>IBU:</strong></label>
+                                <li>{produto.ibu}</li>
+                                <label className='labelproduto'> <strong>Cor da Cerveja:</strong></label>
+                                <li>{produto.cor}</li>
+                                <label className='labelproduto'> <strong>Teor Alcoólico:</strong></label>
+                                <li>{produto.teor}%</li>
+                                </div>
+                            
+            
+            
+
+                                </ul>
+                            </div>
+                            <div className="dec-har col-4">
+                                <ul>
+                                    <li>     <img src={Prato} width="25px" className="caneca-brew"/>
+                                       <b> Harmonização </b></li>
+
+                                        <li> <p className="estilo-familia">{harmonizacao.descricao} </p> </li>
+                    
+                                </ul>
+                            </div>
+
+
+                    </div>
+                
+
+
+                    {/* <AcordeonSemantic harmonizacao={harmonizacao.descricao} estilo={estilo.nome} familia={familia.descricao} descricaoProd={produto.descricao} ibu={produto.ibu} cor={produto.cor} teor={produto.teor} /> */}
+
+                    <br/> <br/>
+                </div>
+                <div className="container-parc-frete">
+
+                    <div className="global-parc-frete">
+                        <div className="parcelamento-produto-pd col-4">
+                            <Icon name="credit card outline icon" className="icone-card"/>
+                            <span className="texto-par-entr-ambi">Parcelamento em até 3x</span>
+                            
+                        </div>
+
+                        <div className="parcelamento-produto-pd col-4">
+                            <Icon name="truck " className="icone-card"/>
+                            <span className="texto-par-entr-ambi">Entrega Garantida</span>
+                            
+                        </div>
+
+                        <div className="parcelamento-produto-pd col-4">
+                            <Icon name="check circle outline" className="icone-card"/>
+                            <span className="texto-par-entr-ambi">Ambiente 100% seguro</span>
+                            
+                        </div>
+
+                    </div>
+                </div>
+
+                <p className="sobre" id="sobre"><img src={Garrafas} width="22px"/> Quem gostou também comprou</p>
+                <div className="list-cards-produtos">
+                    <ListarProdutos >
+                        <NovidadesHome/>
+                    </ListarProdutos>
+                </div>
+                </body>
         </>
 
     )

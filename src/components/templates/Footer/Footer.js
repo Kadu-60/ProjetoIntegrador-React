@@ -6,7 +6,7 @@ function Footer(props) {
 
     return(
         <>
-        <body>
+        
 
         <footer>
                 {/* Inicio frete grátis */}
@@ -114,7 +114,7 @@ function Footer(props) {
 
             </footer>
 
-        </body>
+       
             
 {/* Fim Footer */}
         </>

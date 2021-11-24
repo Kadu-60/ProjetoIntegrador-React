@@ -1,17 +1,66 @@
 .contador-pag-produto{
-    width: 100px;
-    margin-left: 120px;
-  
-    
+     
+    display: inline-block;
+    width: 60px;
+    padding: 11px 0;
+    font-size: 1.1em;
+    text-align: center;
+    height: 48px;
+    vertical-align: bottom;
+   
+
 }
+
+
+
 .contador-btn{
     width: 80%;
     height: 55%;
-    border-radius:20px;
+    border-radius: 6px;
+    border: none;
+    border-bottom: 3px solid #d0a14c;
     color: black ;
     font-weight: bold;
+    background-color: #EACF2B;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 35px;
 }
+
+.contador-btn:hover{
+   
+    background-color: #d0a14c;
+  
+}
+
+
+
+.btn-menos{
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+
+
 .contador-btn:hover{
     color: black;
     cursor: pointer;
 }
+
+.btn-menos{
+    margin-bottom: 10px;
+}
+.btn-maiss{
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 10px;
+    
+  
+}
+
+
+
+
+

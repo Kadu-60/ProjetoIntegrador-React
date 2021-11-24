@@ -20,9 +20,8 @@ export default class AccordionExampleStandard extends Component {
 
     return (
         <Container>
-            <br/> <br/> <br/>
-              <p className="title-dash">Informações</p>
-              <hr/>
+           
+             
              <Accordion>
         <Accordion.Title
           active={activeIndex === 0}
