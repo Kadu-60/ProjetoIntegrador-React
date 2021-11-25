@@ -145,7 +145,7 @@ const Panes = ({user, dataNascimento}) => {
             <div class="row">
               <div class="col-6 ">
                 <label className="label-minha-conta" for="date">Data de Nascimento:</label>
-                <input id='data123' type='text' max="2003-11-30" class="form-control-dash" onFocus={(e) => e.target.type = 'date'} onblur={(e) => e.target.type = 'text'} value={dataNas} placeholder={data1} onChange={(event) => { setDataNas(event.target.value) }} />
+                <input onKeyDown={(e) => e.preventDefault()} id='data123' type='text' max="2003-11-30" class="form-control-dash" onFocus={(e) => e.target.type = 'date'} onblur={(e) => e.target.type = 'text'} value={dataNas} placeholder={data1} onChange={(event) => { setDataNas(event.target.value) }} />
               </div>
 
             </div>

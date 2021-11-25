@@ -111,7 +111,7 @@ function CadastroCliente(props) {
                         {/* --- Função de validação de data --- */}
                         <div class="form-group col-md-3">
                             <Form.Label>Nascimento:</Form.Label>
-                            <Form.Control type="date" max="2003-11-30" placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value) }}
+                            <Form.Control onKeyDown={(e) => e.preventDefault()} type="date" max="2003-11-30" placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value) }}
                                 value={dataNascimento} required="true" />
                         </div>
 
