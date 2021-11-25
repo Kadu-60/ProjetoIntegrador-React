@@ -279,7 +279,7 @@ function verMais() {
 const TabExampleVerticalTabular = (props) => {
   let index = localStorage.getItem('defaultIndex')?2:0
   return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props.user)} defaultActiveIndex={index}/>
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index}/>
   )
 }
 
