@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './Produtos.css'
 import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
-import Produto from '../../components/Produto/Produto';
-import Img1 from '../Home/imgs/ipa-bottle.png'
-import Caneca from '../../assets/imgs/teste/caneca.gif'
-import Colorado from '../../assets/imgs/teste/banner-colorado.png'
+
 import NovidadesHome from '../../components/macro/NovidadesHome/NovidadesHome';
 import axios from "axios";
 import MarcaItem from '../../components/micro/MarcaItem/MarcaItem';

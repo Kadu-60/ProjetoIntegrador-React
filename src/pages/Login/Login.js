@@ -109,7 +109,7 @@ function Login(props) {
 
                         <div class="col-md-4 d-flex justify-content-center">
                             <p>
-                                Esqueceu sua senha? <a className="fazer-login" data-bs-toggle="modal" data-bs-target="#exampleModal"> Recuperar senha</a>
+                                Esqueceu sua senha? <a  href="#exampleModal" className="fazer" data-bs-toggle="modal" data-bs-target="#exampleModal"> Recuperar senha</a>
                             </p>
                         </div>
                     </div>
@@ -125,7 +125,8 @@ function Login(props) {
                     </div>
 
                 </form>
-            </div>
+                </div>
+          
             <br /><br />
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,13 +143,13 @@ function Login(props) {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                            <button type="button" class="btn apoio" data-bs-dismiss="modal">Voltar</button>
                             <button type="button" onClick={(event)=>{ recuperarSenha(event)}} class="btn apoio">Confirmar</button>
                         </div>
                     </div>
                 </div>
             </div>
-
+           
 
         </>
     );
