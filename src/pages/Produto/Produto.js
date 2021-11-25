@@ -6,7 +6,7 @@ import Acordeon from '../../components/macro/Acordeon/Acordeon';
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import axios from 'axios'
 import AcordeonSemantic from '../../components/macro/Acordeon/AcordeonSemantic';
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { Icon } from 'semantic-ui-react';
 import Caneca from '../../assets/imgs/teste/caneca.gif'
 import CanecaPreta from '../../assets/imgs/teste/canecapreta.gif'
@@ -26,7 +26,7 @@ function Produto(props) {
     const [qtyCart, setQtyCart] = useState(0)  
     
 
-    
+    const history = useHistory();
 
 
     const params = useParams(":pesq")
@@ -107,8 +107,8 @@ function Produto(props) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item active> Produto</Breadcrumb.Item>
             </Breadcrumb>
-            <div className="setando-voltar">
-            <a href="/produtos"><Icon name="arrow left" className="seta-voltar"/></a> <div className="voltar-seta"> Voltar</div>
+            <div className="setando-voltar" onClick={()=>{history.go(-1)}}>
+                <Icon name="arrow left" className="seta-voltar"/><div className="voltar-seta"> Voltar</div>
             </div>
             
             <div key={produto.id} class="container container-produto">
