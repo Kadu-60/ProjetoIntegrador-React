@@ -29,6 +29,7 @@ function NavPrincipal(props) {
             setQty(localStorage.getItem('qtyCart'))
             setToken(localStorage.getItem('token'))
         },500)
+        
     },[URL])
 
     useEffect(() => {
@@ -36,7 +37,6 @@ function NavPrincipal(props) {
         setToken(localStorage.getItem('token'))
         let email = localStorage.getItem('user')
         if (token && logado == 0 && email) {
-            console.log('logado')
             axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
                 .then((response) => {
                     setId(response.data.id_Cliente)
@@ -45,16 +45,18 @@ function NavPrincipal(props) {
                 .catch((error) => { console.log(error) })
             setLogado(1)
         }
-        if (logado == 1) {
-            setTimeout(() => {
-                console.log('token expirado')
-                localStorage.removeItem('token')
-                setToken(null)
-                localStorage.removeItem('user')
-                setLogado(0)
-            }, 5999000)
-            setLogado(2)
-        }
+        setInterval(() => {
+            if (logado == 1) {
+                setTimeout(() => {
+                    console.log('token expirado')
+                    localStorage.removeItem('token')
+                    setToken(null)
+                    localStorage.removeItem('user')
+                    setLogado(0)
+                }, 5999000)
+                setLogado(2)
+            }
+        },1000)
         
     })
 
