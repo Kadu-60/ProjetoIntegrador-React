@@ -81,14 +81,9 @@ const Panes = ({user, dataNascimento}) => {
     }
   }
 
-
-
-  
-
   useEffect(() => {
-    
-    
-    
+    localStorage.removeItem('defaultIndex')
+    setDataNas((user.dataNascimento || '').replace(/\//g, "-").slice(0, 10))
     const token = localStorage.getItem('token')
     const config = {
       headers: { Authorization: `Bearer ${token}` }
@@ -145,7 +140,7 @@ const Panes = ({user, dataNascimento}) => {
             <div class="row">
               <div class="col-6 ">
                 <label className="label-minha-conta" for="date">Data de Nascimento:</label>
-                <input id='data123' type='text' max="2003-11-30" class="form-control-dash" onFocus={(e) => e.target.type = 'date'} onblur={(e) => e.target.type = 'text'} value={dataNas} placeholder={data1} onChange={(event) => { setDataNas(event.target.value) }} />
+                <input onKeyDown={(e) => e.preventDefault()} id='data123' type='text' max="2003-11-30" class="form-control-dash" onFocus={(e) => e.target.type = 'date'} onblur={(e) => e.target.type = 'text'} value={dataNas} placeholder={data1} onChange={(event) => { setDataNas(event.target.value) }} />
               </div>
 
             </div>
@@ -279,7 +274,7 @@ function verMais() {
 const TabExampleVerticalTabular = (props) => {
   let index = localStorage.getItem('defaultIndex')?2:0
   return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props.user)} defaultActiveIndex={index}/>
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index}/>
   )
 }
 

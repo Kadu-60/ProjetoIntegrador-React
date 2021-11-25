@@ -27,10 +27,11 @@ function Dashboard() {
                 setDataNascimento(response.data.dataNascimento)
                 
             })
-            console.log(user)
-            console.log(dataNascimento)
+            
         
     }
+    console.log(user)
+            console.log(dataNascimento)
 
     return (
         <>
