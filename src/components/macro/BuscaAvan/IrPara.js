@@ -13,7 +13,7 @@ function IrPara(props) {
 
 
     return (
-        <button className="mt-5 btn-busca" onClick={irParaPag}>
+        <button className="btn mt-5 btn-busca" onClick={irParaPag}>
               Enviar
               </button>
     )

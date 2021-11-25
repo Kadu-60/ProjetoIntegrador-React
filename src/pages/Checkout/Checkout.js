@@ -103,7 +103,12 @@ const Checkout = (props) => {
 
     }, [])
 
-    
+    const direcionar = (props) =>{
+        const URL = '/pedidoFinalizado/' + props.id
+        console.log(URL)
+        history.push(URL)
+        
+    }
 
 
     const Finalizar = (event) => {
@@ -178,11 +183,9 @@ const Checkout = (props) => {
         .then((response)=>{
             console.log(response.data)
             setNumeroPedido(response.data.pedido)
-            
+            direcionar(response.data.pedido)
         })
-        const URL = '/pedidoFinalizado/' + numeroPedido.id
-        console.log(URL)
-        history.push(URL)
+        
 
 
         // window.location.href = "http://localhost:3000/pedidofinalizado"

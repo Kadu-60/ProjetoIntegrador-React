@@ -16,7 +16,7 @@ function BotaoConfirmar(props) {
   return (
     <>
 
-      <button type="submit" class="comprar btn btn-comprar col-6 col-lg-12" onClick={addToCart}>{props.texto}<Icon id="botao-carrinho-produto" name="shopping cart" /></button>
+      <button type="submit" class="comprar btn btn-comprar col-12 col-lg-12" onClick={addToCart}>{props.texto}<Icon id="botao-carrinho-produto" name="shopping cart" /></button>
 
     </>
   );

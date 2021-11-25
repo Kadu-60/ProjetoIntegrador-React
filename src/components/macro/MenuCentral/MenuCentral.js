@@ -15,8 +15,15 @@ const deslogar = () => {
 }
 
 
-const Panes = (user) => {
 
+
+
+
+const Panes = ({user, dataNascimento}) => {
+
+  
+  const [testeData, setTesteData] = useState([])
+  
 
   const [telefoneChanged, setTelefoneChanged] = useState((user.telefone))
   const [nomeChanged, setNomeChanged] = useState((user.nome))
@@ -28,6 +35,10 @@ const Panes = (user) => {
   const [pedidos, setPedidos] = useState([])
   const [dateInvalida, setDateInvalida] = useState('d-none')
   const [dateLess, setDateLess] = useState('d-none')
+
+  const teste1 = ((""+dataNascimento).slice(0, 10).replaceAll("-","/"))
+  const data1 = new Date(teste1).toLocaleDateString()
+  const [muda, setMuda] = useState('')
 
   const alterarDados = (event) => {
     event.preventDefault()
@@ -43,6 +54,10 @@ const Panes = (user) => {
 
 
   }
+
+  
+
+  
 
 
 
@@ -66,9 +81,14 @@ const Panes = (user) => {
     }
   }
 
-  useEffect(() => {
 
-    setDataNas((user.dataNascimento || '').replace(/\//g, "-").slice(0, 10))
+
+  
+
+  useEffect(() => {
+    
+    
+    
     const token = localStorage.getItem('token')
     const config = {
       headers: { Authorization: `Bearer ${token}` }
@@ -77,6 +97,7 @@ const Panes = (user) => {
       .then((response) => {
         console.log(response.data)
         setPedidos(response.data);
+        
       })
   }, [])
 
@@ -87,7 +108,7 @@ const Panes = (user) => {
 
 
 
-
+  console.log(data1)
 
   return ([
     {
@@ -125,7 +146,7 @@ const Panes = (user) => {
             <div class="row">
               <div class="col-6 ">
                 <label className="label-minha-conta" for="date">Data de Nascimento:</label>
-                <input type="date" class="form-control-dash" id="date" value={((dataNas))} onChange={(event) => { setDataNas(event.target.value); }} />
+                <input id='data123' type='text' max="2003-11-30" class="form-control-dash" onFocus={(e) => e.target.type = 'date'} onblur={(e) => e.target.type = 'text'} value={dataNas} placeholder={data1} onChange={(event) => { setDataNas(event.target.value) }} />
               </div>
 
             </div>
@@ -225,7 +246,7 @@ const Panes = (user) => {
         <h2>Deseja Realmente Sair?</h2>
         <br /><br /><br />
         <div className="d-grid gap-2">
-          <button class="btn btn-danger" onClick={() => { deslogar() }} type="button">Sair</button>
+          <button class="btn btn-danger btn-sair" onClick={() => { deslogar() }} type="button">Sair</button>
 
         </div>
       </Tab.Pane>
@@ -257,8 +278,12 @@ function verMais() {
 
 const TabExampleVerticalTabular = (props) => {
 
+  
+  
+  
+
   return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props.user)} />
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} />
   )
 }
 

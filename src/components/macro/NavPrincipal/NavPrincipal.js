@@ -74,7 +74,7 @@ function NavPrincipal(props) {
                                             <InputHeader value={values.busca} name='busca' onChange={onChange} className='header-input' type="text" placeholder="O que você está procurando?" arialabel="Search"/>
                                         <a href={final} class="header-busca">
 
-                                            <img src={Busca} alt="buscar" />
+                                            <img className='imgBusca' src='http://www.devmedia.com.br/imagens/2013/buscar_grey.png' alt="buscar" />
                                         </a>
 
                                     </div>
