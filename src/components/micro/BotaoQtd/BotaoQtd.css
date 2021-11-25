@@ -7,11 +7,12 @@
 .contador-btn{
     width: 80%;
     height: 55%;
-    border-radius:20px;
+    background-color: #EACF2B;
     color: black ;
     font-weight: bold;
 }
 .contador-btn:hover{
+    background-color: #d0a14c;
     color: black;
     cursor: pointer;
 }
