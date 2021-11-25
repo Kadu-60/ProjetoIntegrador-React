@@ -18,7 +18,7 @@ function NovidadesHome(props) {
         axios.get(`http://localhost:8080/Card/novidades`)
             .then((response) => {
                 setNovidades(response.data)
-                console.log(novidades)
+                
 
 
 

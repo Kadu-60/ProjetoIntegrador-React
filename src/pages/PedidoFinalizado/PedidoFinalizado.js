@@ -34,9 +34,6 @@ function PedidoFinalizado(props) {
             setEndereco(res.data.endereco)
             setPagamento(res.data.pagamento)
             setCartao((res.data.cartao))
-            
-            
-            console.log(ULRPedidoFinalizado)
         }
         
 
@@ -45,7 +42,14 @@ function PedidoFinalizado(props) {
         
 
     }, [])
-
+    function MeusPedidos(){
+        localStorage.setItem('defaultIndex', "index")
+        let email = localStorage.getItem('user')
+        axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
+                .then((response) => {
+                    window.location.href="http://localhost:3000/dashboard/"+response.data.id_Cliente
+                })
+    }
     useEffect(()=>{
         setNumero((cartao.numero))
     })
@@ -118,7 +122,7 @@ function PedidoFinalizado(props) {
                         <div class="col-12  mt-4 d-flex justify-content-around">
 
                             <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" href="/home"> Voltar para home</a></button>
-                            <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" href="/dashboard"> Ver página do pedido</a></button>
+                            <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" onClick={() =>{MeusPedidos()}}> Ver página do pedido</a></button>
 
                         </div>
                     </div>

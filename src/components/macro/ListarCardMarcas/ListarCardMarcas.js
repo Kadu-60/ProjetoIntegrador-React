@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import CardCategoria from "../../micro/CardCategoria/CardCategoria"
+import CardMarca from "../../micro/CardMarca/CardMarca"
 import {Col } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -15,7 +15,7 @@ function ListarCardMarcas(props) {
                 marcas.map((marca)=>{
                     return(
                         <Col key={marca.id} xl={3} md={4} sm={6} xs={12} >
-                            <CardCategoria  id={marca.id} img={marca.img} title={marca.nome} desc={marca.desc} />
+                            <CardMarca  id={marca.id} img={marca.img} title={marca.nome} desc={marca.desc} />
                         </Col>
                     )
                 })

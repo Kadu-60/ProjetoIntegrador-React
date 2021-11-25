@@ -65,8 +65,9 @@
     text-align: left;
 }
 .overflow-resumo-pedido{
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 250px;
+    min-height: 115px;
 }
 .sub-total-frete{
     margin-left: 40px;

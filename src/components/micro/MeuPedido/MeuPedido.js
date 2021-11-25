@@ -180,7 +180,7 @@ function MeuPedido(props) {
                         {
                         itens==[]?()=>(
                             <div>
-                                <p>você ainda não tem pedidos :(</p>
+                                <p>Este Pedido não tem itens</p>
                             </div>
                         )
                         :

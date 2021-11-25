@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import CardCategoria from "../../components/micro/CardCategoria/CardCategoria"
+// import CardCategoria from "../../components/micro/CardCategoria/CardCategoria"
 import axios from "axios";
 import ListarCardMarcas from "../../components/macro/ListarCardMarcas/ListarCardMarcas"
-import {Container, Row, Col } from 'react-bootstrap'
-import "./Categoria.css"
+import {Container, Row, Col, NavLink } from 'react-bootstrap'
+import "./Marca.css"
 import ListaMarcas from '../../ListaMarcas'
 import { Icon } from 'semantic-ui-react';
 
-function Categoria() {
+function Marca() {
     const [marcas, setMarcas] = useState([])
     
     useEffect(() => {
@@ -18,7 +18,7 @@ function Categoria() {
             setMarcas(response.data)
         })
         .catch((error) => {
-            console.error("Ops! ocorreu um erro"+error)
+            console.error("Ops! Marca não encontrada" + error)
         })
     }, [])
 
@@ -29,7 +29,10 @@ function Categoria() {
         <Container>
 
        <br/><br/>
-        <p className="title-dash">  <Icon className="tag-marca" name="tag" size='small'/>marcas presentes em nossa loja</p>
+        <p className="title-dash">  
+        <Icon className="tag-marca" name="tag" size='small'/>
+        Marcas presentes em nossa loja
+        </p>
             <hr/>
             <br/>
             <Row>
@@ -41,4 +44,4 @@ function Categoria() {
     );
 }
 
-export default Categoria;
+export default Marca;

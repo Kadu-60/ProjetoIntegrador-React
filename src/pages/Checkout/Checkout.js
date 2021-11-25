@@ -38,7 +38,7 @@ const Checkout = (props) => {
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
-    
+
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
 
@@ -69,7 +69,7 @@ const Checkout = (props) => {
                     setCliente(response.data)
                 })
         } else {
-            window.location.href = "http://3000/login"
+            window.location.href = "http://localhost:3000/login"
         }
 
         let cart = ((localStorage.getItem("cart")
@@ -112,7 +112,7 @@ const Checkout = (props) => {
 
 
     const Finalizar = (event) => {
-        
+
         event.preventDefault();
         let pedido = {
             "subtotal": 0,
@@ -178,13 +178,16 @@ const Checkout = (props) => {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
-        console.log({"pedido": pedido, "arrayItens": arrayItens});
-        axios.post('http://localhost:8080/finalizarPedido', {"pedido": pedido, "arrayItens": arrayItens}, config)
-        .then((response)=>{
-            console.log(response.data)
-            setNumeroPedido(response.data.pedido)
-            direcionar(response.data.pedido)
-        })
+        axios.post('http://localhost:8080/finalizarPedido', { "pedido": pedido, "arrayItens": arrayItens }, config)
+            .then((response) => {
+                setNumeroPedido(response.data.pedido)
+                localStorage.setItem('cart', JSON.stringify([]))
+                localStorage.setItem('qtyCart', JSON.stringify(0))
+                const URL = '/pedidoFinalizado/' + response.data.pedido.id
+                history.push(URL)
+            })
+        
+        
         
 
 
@@ -325,7 +328,7 @@ const Checkout = (props) => {
                                                     <option value='' selected>Parcelamento</option>
                                                     {
                                                         parcelas.map((parcela) => (
-                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento}</option>
+                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal||0)+15)/parcela.id_parcelamento).toFixed(2).replace('.', ','))}  </option>
                                                         )
                                                         )
                                                     }
@@ -368,19 +371,22 @@ const Checkout = (props) => {
                                                 </tbody>
                                             </div>
 
-                                            <br />  <br />  <br />
-                                            <div className="resumo-pedido-sub">
+                                            <br />
+                                            <div className="div-total" >
+                                                <ul className="lista-carrinho-total">
 
-                                                <li className="sub-global sub-total-frete"><b>Subtotal</b> <span className="texto-total-frete-sub"> R$ {((subtotal || 0).toFixed(2)).replace('.', ',')}</span>   </li>
-                                                <li className="sub-global sub-total-frete"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
-                                                <br />
-                                                <li className="sub-global  sub-total-frete borda-total"><b>Total </b> <span className="texto-total-frete-total-pedido">R${(((subtotal || 0) + 15).toFixed(2)).replace('.', ',')}</span>   </li>
+                                                    <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
+                                                    <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {(subtotal || 0).toFixed(2).replace('.', ',')}</span>   </li>
+                                                    <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
-                                                <br />  <br />
-                                                <button class="btn-finalizar-compra botao-pedido-finalizar" type="submit" onClick={Finalizar}><div className="finalizar-compra-cor" >Finalizar Compra</div> <Icon className="icone-finalizar-compra" name="angle right" /></button>
-                                                <br />
-                                                <br />
+                                                    <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal || 0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
+                                                    <button class="btn-finalizar-compra botao-pedido-finalizar" type="submit" onClick={Finalizar}><div className="finalizar-compra-cor" >Finalizar Compra</div> <Icon className="icone-finalizar-compra" name="angle right" /></button>
+                                                    <br />
+                                                    <br />
+                                                </ul>
+
                                             </div>
+
                                         </ul>
 
 
