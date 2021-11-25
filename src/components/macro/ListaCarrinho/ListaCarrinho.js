@@ -50,12 +50,25 @@ function ListaCarrinho(props) {
             )
         }
     }
+    const checkout = (event)=>{
+        if ((localStorage.getItem("cart")? false: true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
+            alert("carrinho vazio")
+        }else{
+            if(localStorage.getItem("user")){
+                window.location.href = "http://localhost:3000/checkout"
+            }else{
+                window.location.href = "http://localhost:3000/login"
+            }
+            
+        }
+        
+    }
 
     useEffect(() => {
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []))
-        if (cart) {
+        if (cart != []) {
             axios.post('http://localhost:8080/Card/multi', cart)
                 .then(response => {
                     setCards(response.data)
@@ -79,6 +92,7 @@ function ListaCarrinho(props) {
                     }
                 })
         }
+
     }, [])
 
     return (
@@ -129,7 +143,7 @@ function ListaCarrinho(props) {
                                 <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
                                 <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal||0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
-                                <button class="btn-finalizar-compra" type="button"><a href="checkout">Finalizar Compra</a> <Icon className="icone-finalizar-compra" name="angle right" /></button>
+                                <button class="btn-finalizar-compra" type="button"  onClick={(event)=>{checkout(event)}}>Finalizar Compra<Icon className="icone-finalizar-compra" name="angle right" /></button>
                                 <br />
                                 <br />
                             </ul>
