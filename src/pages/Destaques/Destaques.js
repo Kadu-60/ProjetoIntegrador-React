@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import ListarProdutos from '../ListarProdutos/ListarProdutos'
-import BotaoPags from '../../micro/BotaoPags/BotaoPags'
+import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos'
+import BotaoPags from '../../components/micro/BotaoPags/BotaoPags'
+import './Destaques.css'
 
 import axios from 'axios'
-import ProdutosBusca from './ProdutosBusca'
+import ProdutosBusca from '../../components/macro/BuscaParam/ProdutosBusca'
 
 
-function BuscaParam(props) {
+function BuscaAvancadaResult(props) {
 
 
     const [produtos, setProdutos] = useState([])
     const [loading, setLoading] = useState(false)
     const [paginaAtual, setPaginaAtual] = useState(1)
     const [prodsPorPagina, setProdsPorPagina] = useState(15)
-    const URL = 'http://localhost:8080/Card/busca/'
-    const final = URL + props.pesq
+    const final = 'http://localhost:8080/Card/todosDestaques'
 
 
 
@@ -47,11 +47,15 @@ function BuscaParam(props) {
 
         <>
             <div class="container">
-                <div class="row pt-5">
-                    <div class="col-10 d-flex justify-content-start">
-                        <h4 className="titulo-header">Resultados para</h4><h4 class="pesquisa titulo-header">"{props.pesq}"</h4>
+                <div class="row pt-5 caixaTitulo">
+                    <div class="col-10  d-flex flex-column justify-content-start">
+                        <h4 class="tituloPagDestaques">Produtos em Destaque</h4>
+
                     </div>
+
                 </div>
+
+
 
                 <ListarProdutos>
                     <ProdutosBusca produtos={prodAtuais} loading={loading} />
@@ -71,4 +75,4 @@ function BuscaParam(props) {
 
 }
 
-export default BuscaParam
+export default BuscaAvancadaResult
