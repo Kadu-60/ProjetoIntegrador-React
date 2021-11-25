@@ -12,7 +12,7 @@ function Marca() {
     
     useEffect(() => {
         setMarcas(ListaMarcas)
-        axios.get('http://localhost:8080/Marca')
+        axios.get('http://localhost:8080/Marca/')
         .then((response) => {
            
             setMarcas(response.data)
