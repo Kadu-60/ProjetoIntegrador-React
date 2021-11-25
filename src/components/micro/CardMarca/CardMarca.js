@@ -10,10 +10,9 @@ function CardMarca(props) {
     return (
         <>
             <br />
-            <Card className="CardCategoria cardlink-marca" class="col-4" style={{ width: '100%' }}>
+            <Card className="CardCategoria cardlink-marca shadow p-3 mb-5 bg-white rounded" class="col-4" style={{ width: '100%' }}>
                 <a href={link} className="CardCategorialink">
-                    <Card.Header className="text-center">{props.title}</Card.Header>
-{/* <Button variant="warning">Saiba Mais</Button> */}
+                    <Card.Header className="text-center titulo-marca">{props.title}</Card.Header>
                     <Card.Img className="Card.Img img-marca" variant="top" src={props.img} />
                                          
                     <Card.Body>

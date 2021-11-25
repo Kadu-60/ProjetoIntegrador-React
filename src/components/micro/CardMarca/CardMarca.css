@@ -1,5 +1,7 @@
 .CardCategoria{
     height: 530px;
+    border-color: #F4D527;
+    border-style: 5px;
 }
 .CardCategorialink{
     color: black;
@@ -19,7 +21,12 @@
     height: 50vh;
 }
 
+.titulo-marca {
+    background-color: #F4D527;
+}
+
 .cardlink-marca:hover{
     color: 20px gray;
     box-shadow: 5px solid blue;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
