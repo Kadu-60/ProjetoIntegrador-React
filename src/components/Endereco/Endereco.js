@@ -1,6 +1,11 @@
 import React from 'react'
 import './Endereco.css'
 function Endereco(props) {
+    const mascaraCEP = value => {
+        return value.replace(/\D/g, "").replace(/^(\d{5})(\d{3})+?$/, "$1-$2");
+      };
+      const cep = "" + props.cep
+      
 
     return (
         <>
@@ -11,7 +16,7 @@ function Endereco(props) {
                 <br />
                 {props.cidade}, {props.estado}
                 <br />
-                CEP {props.cep}
+                CEP {mascaraCEP(cep)}
             </p>
         </>
     )

@@ -8,7 +8,7 @@ function Produto(props) {
   
   return (
     <>
-      <div class="col-12 col-lg-2 my-2 mx-3 d-flex flex-column justify-content-between resultadoPesquisa">
+      <div class="col-5 col-lg-2 my-2 mx-3 d-flex flex-column justify-content-between resultadoPesquisa">
         <div class="imgCard d-flex justify-content-center">
           <a class="imgPesquisa" href={props.linkProduto}>
             <img class="imgPesquisa" src={props.imagem} alt="" />

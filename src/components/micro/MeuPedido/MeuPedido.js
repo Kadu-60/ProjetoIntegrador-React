@@ -68,7 +68,7 @@ function MeuPedido(props) {
                                 </div>
                                 <div className="col-lg-2 col-12">
                                     <div className="div-botao">
-                                        <button onClick={()=>{verMais()}} className="btn-botao" id={"btnVerMais"+pedido.id}>
+                                        <button onClick={()=>{verMais()}} className="btn-botao btn" id={"btnVerMais"+pedido.id}>
                                             Ver Detalhes
                                         </button>
 

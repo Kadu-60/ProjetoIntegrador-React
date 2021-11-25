@@ -12,6 +12,11 @@
 
 }
 
+
+
+
+
+
 .label-minha-conta{
     color: black;
 }
@@ -85,6 +90,14 @@
     color:#ced4da;
     transition:0.2s;
     
+}
+
+.btn-sair{
+    text-transform: uppercase;
+    font-size: larger;
+    font-weight: bolder;
+    margin-right: 200px;
+    margin-left: 200px;
 }
 
 .container-b{

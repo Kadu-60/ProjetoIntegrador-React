@@ -110,11 +110,9 @@ function CadastroCliente(props) {
                         </div>
                         {/* --- Função de validação de data --- */}
                         <div class="form-group col-md-3">
-                            <Form.Label>Nascimento*:</Form.Label>
-                            <Form.Control type="dataNascimento" id="maiorIdade" placeholder="99/99/9999" onChange={(event) => {
-                                setDataNascimento(mascaraData(event.target.value))
-                            }}
-                                value={dataNascimento} required="true"/>
+                            <Form.Label>Nascimento:</Form.Label>
+                            <Form.Control onKeyDown={(e) => e.preventDefault()} type="date" max="2003-11-30" placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value) }}
+                                value={dataNascimento} required="true" />
                         </div>
 
                     </div>
@@ -170,7 +168,7 @@ function CadastroCliente(props) {
                         <div class="row d-flex justify-content-center">
                             <div class="col-12 col-md-4  d-flex justify-content-around">
                                 <BotaoConfirmar texto="Cadastrar" type="button"  onClick={(event) => { Cadastrar(event) } } navigation route="login" />
-                                {/* <Button label="Voltar" navigation route="login" class="apoio" /> */}
+                                {/* <Button label="Voltar" onClick={(event) => { Cadastrar(event) } } class="apoio" /> */}
                             </div>
 
                         </div>

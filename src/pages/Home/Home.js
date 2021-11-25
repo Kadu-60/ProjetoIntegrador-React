@@ -29,13 +29,13 @@ function Home(props) {
                 <p className="title-dash">Novidades</p>
                 <hr />
 
-                
+
                 <ListarProdutos>
-                    <NovidadesHome/>
+                    <NovidadesHome />
                 </ListarProdutos>
-                
-                
-                
+
+
+
 
                 <br />
                 <hr />
@@ -48,7 +48,7 @@ function Home(props) {
                 <ListarProdutos>
                     <DestaquesHome />
                 </ListarProdutos>
-                
+
                 <br /> <br /><br />
             </main>
         </>

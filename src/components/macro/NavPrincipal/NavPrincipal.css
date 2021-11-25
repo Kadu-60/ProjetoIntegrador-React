@@ -77,9 +77,20 @@
     align-items: center;
     position: relative;
 }
+
+.imgBusca {
+    background-size: 20px 50px;
+    top: -10px;
+    margin-right: -100px;
+    /* background-color: transparent; */
+    /* transition: .25s all ease; */
+    /* pointer-events: none; */
+    /* height: 45px; */
+  }
 .header-busca{
-    position: absolute;
-    right: 60px;
+    position: relative;
+    right: 40px;
+    bottom: -5px;
 }
 
 .header-busca img{

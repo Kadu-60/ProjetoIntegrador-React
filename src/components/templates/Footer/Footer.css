@@ -11,7 +11,7 @@ footer{
     padding: 0;
     border: 0;
     font-size: 100%;
-    vertical-align: baseline;
+    /* vertical-align: baseline; */
     text-decoration: none;
     appearance: none;
 
@@ -34,7 +34,15 @@ footer .topBar{
     
 }
 
-li i{
+.pagamento{
+    color: white;
+    font-size: 30px;
+    /* padding-left: 20px; */
+    margin-left: 40px;
+    margin-right: -20px;
+}
+
+.redesSocias{
     color: white;
     font-size: 30px;
 }
@@ -52,7 +60,7 @@ section.cadastroNew{
     padding: 0;
     border: 0;
     font-size: 100%;
-    vertical-align: baseline;
+    /* vertical-align: baseline; */
     text-decoration: none;
     appearance: none;
     text-align: center;
@@ -160,7 +168,7 @@ footer .middleArea .tpl-center div.coluna {
 }
 
 footer .middleArea .tpl-center div.coluna.atendimento{
-    margin-left: 0;
+    margin-left: -20px;
   
 }
 
