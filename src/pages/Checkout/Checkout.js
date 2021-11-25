@@ -103,11 +103,11 @@ const Checkout = (props) => {
 
     }, [])
 
-    const direcionar = (props) =>{
+    const direcionar = (props) => {
         const URL = '/pedidoFinalizado/' + props.id
         console.log(URL)
         history.push(URL)
-        
+
     }
 
 
@@ -186,9 +186,9 @@ const Checkout = (props) => {
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
             })
-        
-        
-        
+
+
+
 
 
         // window.location.href = "http://localhost:3000/pedidofinalizado"
@@ -240,9 +240,9 @@ const Checkout = (props) => {
                             <p className="title-dash finalizar-titulo" > Finalizar Compra</p>
 
                             <hr />
-                            <a className="keep-shopping continuar-comprando-pedido" href="/produtos">
-                                <Icon className="icone-comprando " name="angle left" /> Continuar comprando
-                            </a>
+                            <div class="keep-shopping" onClick={() => { history.go(-1) }}>
+                                <Icon className="icone-comprando" name="angle left" /> Voltar
+                            </div>
 
                             <br />
                             <Container>
@@ -328,7 +328,7 @@ const Checkout = (props) => {
                                                     <option value='' selected>Parcelamento</option>
                                                     {
                                                         parcelas.map((parcela) => (
-                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal||0)+15)/parcela.id_parcelamento).toFixed(2).replace('.', ','))}  </option>
+                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.id_parcelamento).toFixed(2).replace('.', ','))}  </option>
                                                         )
                                                         )
                                                     }

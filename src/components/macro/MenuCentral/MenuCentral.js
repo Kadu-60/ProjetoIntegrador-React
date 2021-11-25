@@ -82,8 +82,9 @@ const Panes = ({user, dataNascimento}) => {
   }
 
   useEffect(() => {
+    
+    
     localStorage.removeItem('defaultIndex')
-    setDataNas((user.dataNascimento || '').replace(/\//g, "-").slice(0, 10))
     const token = localStorage.getItem('token')
     const config = {
       headers: { Authorization: `Bearer ${token}` }

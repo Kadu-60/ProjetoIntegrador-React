@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ListaCarrinho.css'
 import { Container, Table } from 'react-bootstrap'
 import { Icon } from 'semantic-ui-react'
+import { useHistory } from "react-router-dom"
 import InputMask from "react-input-mask";
 import ProdutoCarrinho from './ProdutoCarrinho'
 import axios from 'axios'
@@ -9,6 +10,7 @@ import axios from 'axios'
 function ListaCarrinho(props) {
     const [subtotal, setSubtotal] = useState(0)
     const [cards, setCards] = useState([])
+    const history = useHistory();
     let conteudoTable = () => {
         if ((localStorage.getItem("cart")
             ? false
@@ -126,9 +128,9 @@ function ListaCarrinho(props) {
 
                 <div className="global-lado-direito">
                     <div className="botao-continuar-cmp">
-                        <a class="keep-shopping" href="/produtos">
-                            <Icon className="icone-comprando" name="angle left" /> Continuar comprando
-                        </a>
+                        <div class="keep-shopping" onClick={()=>{history.go(-1)}}>
+                            <Icon className="icone-comprando" name="angle left" /> Voltar
+                        </div>
                     </div>
                     <br />
 

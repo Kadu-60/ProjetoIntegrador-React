@@ -6,7 +6,7 @@ function TituloDash(props){
     return(
      <>
      <br/>
-     <p className="titulo-dash"> Olá, {props.nome} aqui é a sua conta :) </p>
+     <p className="titulo-dash"> Olá, {props.nome} seja bem vindo!  </p>
      <hr></hr>
      <br/>
 

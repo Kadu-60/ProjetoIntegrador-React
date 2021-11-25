@@ -1,14 +1,38 @@
+.products-body{
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+
 .icone-cerveja-produtos{
     border: none;
     color: #F4D529 ;
 }
 
 .cervejas-produtos{
- margin-left: 30px;
+ margin-left: 0px;
 }
 
 .produtos-encontrados{
     font-size: 15px;
     margin-bottom: 10px;
     font-weight: normal;
+}
+.paragrafo-texto{
+    margin: 0;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+#mais{
+    display: none;
+}
+
+#LeiaMais{
+    align-items: center;
+    font-weight: unset;
+    color: blue;
+    text-decoration: underline;
+    text-align: center;
+    margin-left: 400px;
+    cursor: pointer;
 }
