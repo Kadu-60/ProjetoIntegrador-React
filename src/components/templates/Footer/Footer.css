@@ -250,6 +250,10 @@ ul.itens{
     padding-inline-start: 40px;
 }
 
+.freteFixo{
+    margin-left: -70px;
+}
+
 footer .middleArea .tpl-center div.coluna ul li.item {
     text-align: left;
     color: white;
