@@ -44,7 +44,7 @@ export const RoutesSite = () => {
                 <Route path="/cart" component={CarrinhoDois} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/endereco" component={Endereco} />
-                <Route path="/produtos" component={Produtos} />
+                <Route path="/produtos/:id" component={Produtos} />
                 <Route path="/carrinho" component={CarrinhoDois} />
                 <Route path="/listarprodutos" component={ListarProdutos} />
                 <Route path="/destaques" component={Desstaques} />
