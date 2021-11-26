@@ -67,7 +67,10 @@ function Login(props) {
         })
         .catch((error) => { 
             console.log(error) 
+            alert("Verifique o  seu E-mail")
+            window.location.href = "http://localhost:3000/login"
         })
+        
     }
 
     return (

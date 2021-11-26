@@ -16,6 +16,7 @@ function Marca() {
         .then((response) => {
            
             setMarcas(response.data)
+            console.log(response.data)
         })
         .catch((error) => {
             console.error("Ops! Marca não encontrada" + error)

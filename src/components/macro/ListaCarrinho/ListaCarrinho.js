@@ -19,9 +19,13 @@ function ListaCarrinho(props) {
 
             return (
                 <>
-                    <div className="container d-flex justify-content-center align-content-center">
-                        <p>Carrinho vazio</p>
+                    <div className="container bg-light " >
+                        <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
+                            <strong className="me-1">Carrinho vazio!</strong> 
+                            Adicione um produto ao carrinho primeiro.
+                        </div>
                     </div>
+
                 </>
             )
 
@@ -52,18 +56,18 @@ function ListaCarrinho(props) {
             )
         }
     }
-    const checkout = (event)=>{
-        if ((localStorage.getItem("cart")? false: true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
+    const checkout = (event) => {
+        if ((localStorage.getItem("cart") ? false : true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
             alert("carrinho vazio")
-        }else{
-            if(localStorage.getItem("user")){
+        } else {
+            if (localStorage.getItem("user")) {
                 window.location.href = "http://localhost:3000/checkout"
-            }else{
+            } else {
                 window.location.href = "http://localhost:3000/login"
             }
-            
+
         }
-        
+
     }
 
     useEffect(() => {
@@ -128,7 +132,7 @@ function ListaCarrinho(props) {
 
                 <div className="global-lado-direito">
                     <div className="botao-continuar-cmp">
-                        <div class="keep-shopping" onClick={()=>{history.go(-1)}}>
+                        <div class="keep-shopping" onClick={() => { history.go(-1) }}>
                             <Icon className="icone-comprando" name="angle left" /> Voltar
                         </div>
                     </div>
@@ -141,11 +145,11 @@ function ListaCarrinho(props) {
                             <ul className="lista-carrinho-total">
 
                                 <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
-                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {(subtotal||0).toFixed(2).replace('.', ',')}</span>   </li>
+                                <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {(subtotal || 0).toFixed(2).replace('.', ',')}</span>   </li>
                                 <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
-                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal||0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
-                                <button class="btn-finalizar-compra" type="button"  onClick={(event)=>{checkout(event)}}>Finalizar Compra<Icon className="icone-finalizar-compra" name="angle right" /></button>
+                                <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal || 0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
+                                <button class="btn-finalizar-compra" type="button" onClick={(event) => { checkout(event) }}>Finalizar Compra<Icon className="icone-finalizar-compra" name="angle right" /></button>
                                 <br />
                                 <br />
                             </ul>

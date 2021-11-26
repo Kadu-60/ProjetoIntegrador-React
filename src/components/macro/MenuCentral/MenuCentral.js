@@ -19,11 +19,11 @@ const deslogar = () => {
 
 
 
-const Panes = ({user, dataNascimento}) => {
+const Panes = ({ user, dataNascimento }) => {
 
-  
+
   const [testeData, setTesteData] = useState([])
-  
+
 
   const [telefoneChanged, setTelefoneChanged] = useState((user.telefone))
   const [nomeChanged, setNomeChanged] = useState((user.nome))
@@ -36,7 +36,7 @@ const Panes = ({user, dataNascimento}) => {
   const [dateInvalida, setDateInvalida] = useState('d-none')
   const [dateLess, setDateLess] = useState('d-none')
 
-  const teste1 = ((""+dataNascimento).slice(0, 10).replaceAll("-","/"))
+  const teste1 = (("" + dataNascimento).slice(0, 10).replaceAll("-", "/"))
   const data1 = new Date(teste1).toLocaleDateString()
   const [muda, setMuda] = useState('')
 
@@ -55,9 +55,9 @@ const Panes = ({user, dataNascimento}) => {
 
   }
 
-  
 
-  
+
+
 
 
 
@@ -83,11 +83,11 @@ const Panes = ({user, dataNascimento}) => {
 
 
 
-  
+
 
   useEffect(() => {
-    
-    
+
+
     localStorage.removeItem('defaultIndex')
     const token = localStorage.getItem('token')
     const config = {
@@ -96,7 +96,7 @@ const Panes = ({user, dataNascimento}) => {
     axios.get("http://localhost:8080/Pedido/cliente/" + id, config)
       .then((response) => {
         setPedidos(response.data);
-        
+
       })
   }, [])
 
@@ -226,14 +226,18 @@ const Panes = ({user, dataNascimento}) => {
 
         <p className="title-dash">meus pedidos</p>
         {
-          pedidos==false ?
-          <div className="container d-flex justify-content-center align-content-center">
-          <p>Você ainda não fez nenhum pedido!</p>
-        </div>:
+          pedidos == false ?
+            <div className="container bg-light " >
+              <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
+                <strong className="me-1">Você ainda não tem pedidos!</strong>
+                
+              </div>
+            </div>
+            :
             pedidos.map((pedido) => (
               <MeuPedido data={pedido} />
-            )) 
-            
+            ))
+
         }
 
 
@@ -277,9 +281,9 @@ function verMais() {
 
 
 const TabExampleVerticalTabular = (props) => {
-  let index = localStorage.getItem('defaultIndex')?2:0
+  let index = localStorage.getItem('defaultIndex') ? 2 : 0
   return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index}/>
+    <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index} />
   )
 }
 

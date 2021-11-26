@@ -3,23 +3,29 @@ import './ListaCarrinho.css'
 import { Container, Table } from 'react-bootstrap'
 import { Icon } from 'semantic-ui-react'
 import BotaoQtd from '../../micro/BotaoQtd/BotaoQtd';
-
+import axios from 'axios'
 import InputMask from "react-input-mask";
 function ProdutoCarrinho(props) {
 
-
+    const [estoque, setEstoque] = useState(50)
     const [numero, setNumero] = useState(1)
 
     const incremento = () => {
-        setNumero(numero + 1)
-        let cartList = localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart"))
-            : []
-        cartList.push(props.prod.id_produto)
-        let cartString = JSON.stringify(cartList)
-        localStorage.setItem("cart", cartString)
-        localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
-        window.location.reload()
+        if ((numero + 1 <= estoque)) {
+            setNumero(numero + 1)
+            let cartList = localStorage.getItem("cart")
+                ? JSON.parse(localStorage.getItem("cart"))
+                : []
+            cartList.push(props.prod.id_produto)
+            let cartString = JSON.stringify(cartList)
+            localStorage.setItem("cart", cartString)
+            localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+
+            window.location.reload()
+        } else {
+            alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+        }
+
     }
     const decremento = () => {
         if (numero > 1) {
@@ -48,6 +54,7 @@ function ProdutoCarrinho(props) {
         window.location.reload()
     }
 
+
     useEffect(() => {
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
@@ -61,13 +68,17 @@ function ProdutoCarrinho(props) {
         })
 
         setNumero(count)
+        axios.get('http://localhost:8080/Estoque/' + props.prod.id_produto)
+            .then((response) => {
+                setEstoque(response.data.quantidade)
+            })
     }, [])
 
     return (
         <>
 
             <tr className="product-item">
-                <td className="product-image"> <a href="/produto">
+                <td className="product-image"> <a href={"/produto/"+props.prod.id_produto}>
                     <img src={props.prod.foto} class="ui tiny middle aligned image" /> </a>
                 </td>
 
