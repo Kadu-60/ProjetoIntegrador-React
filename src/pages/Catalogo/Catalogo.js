@@ -49,7 +49,7 @@ function Catalogo(props) {
             <div class="container">
                 <div class="row pt-5 caixaTitulo">
                     <div class="col-10  d-flex flex-column justify-content-start">
-                        <h4 class="tituloPagDestaques">Catálogo</h4>
+                    <p className="title-dash dest-produt">Catálogo </p>
 
                     </div>
 

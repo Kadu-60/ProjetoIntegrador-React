@@ -5,6 +5,7 @@ import './Destaques.css'
 
 import axios from 'axios'
 import ProdutosBusca from '../../components/macro/BuscaParam/ProdutosBusca'
+import Estrela from '../../assets/imgs/teste/estrela.gif'
 
 
 function BuscaAvancadaResult(props) {
@@ -49,7 +50,8 @@ function BuscaAvancadaResult(props) {
             <div class="container">
                 <div class="row pt-5 caixaTitulo">
                     <div class="col-10  d-flex flex-column justify-content-start">
-                        <h4 class="tituloPagDestaques">Produtos em Destaque</h4>
+                        
+                        <p className="title-dash dest-produt">Produtos em Destaques </p>
 
                     </div>
 
