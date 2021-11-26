@@ -65,7 +65,9 @@ section.cadastroNew{
     appearance: none;
     text-align: center;
 }
-
+.fab{
+    color: white;
+}
 
 #texto{
     color: #fff;

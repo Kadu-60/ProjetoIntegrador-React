@@ -52,19 +52,19 @@ function Footer(props) {
                                 <h3 className="titulo-footer"><b> Ajuda e Suporte</b></h3>
                                 <ul className="itens">
                                     <li className="item">
-                                        <a className="link-footer" href="">Perguntas Frequentes</a>
+                                        <a className="link-footer" href="/faq">Perguntas Frequentes</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="">Forma de Pagamento</a>
+                                        <a className="link-footer" href="/faq">Forma de Pagamento</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="">Taxas de Entrega</a>
+                                        <a className="link-footer" href="/faq">Taxas de Entrega</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="">Prazo de Entrega</a>
+                                        <a className="link-footer" href="/faq">Prazo de Entrega</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="">Troca e Devolução</a>
+                                        <a className="link-footer" href="/faq">Troca e Devolução</a>
                                     </li>
                                 </ul>
                             </div>
@@ -94,8 +94,8 @@ function Footer(props) {
                             <div className="coluna redes">
                                 <h3 className="titulo-footer"><b> Redes Sociais</b></h3>
                                 <div className='redesSocias d-flex justify-content-around'>
-                                    <div className="fab fa-facebook"></div>
-                                    <div className="fab fa-instagram"></div>
+                                <a  href="https://www.facebook.com"> <div className="fab fa-facebook"></div> </a>
+                                <a  href="https://www.instagram.com/devbrewcervejaria/"> <div className="fab fa-instagram"></div> </a>
                                 </div>
                                 
                             </div>
