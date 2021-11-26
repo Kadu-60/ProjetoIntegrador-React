@@ -23,7 +23,7 @@ import Fale from './pages/FormularioContato/FormularioContato'
 import Teste from './pages/Teste'
 import Marca from './pages/Marca/Marca'
 import Destaques from './pages/Destaques/Destaques'
-
+import Catalogo from './pages/Catalogo/Catalogo'
 
 export const RoutesSite = () => {
     return (
@@ -48,6 +48,7 @@ export const RoutesSite = () => {
                 <Route path="/carrinho" component={CarrinhoDois} />
                 <Route path="/listarprodutos" component={ListarProdutos} />
                 <Route path="/destaques" component={Destaques} />
+                <Route path="/catalogo" component={Catalogo} />
                 <Route path="/teste/:pesq" component={Teste} />
             </Switch>
         </StoreProvider>
