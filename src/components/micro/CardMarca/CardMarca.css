@@ -15,10 +15,11 @@
 .img-marca {
     padding-bottom: 5px;
     padding: 20px;
+    max-height: 32vh;
 }
 
 .cardlink-marca {
-    height: 35vh;
+    height: 40vh;
 }
 
 .titulo-marca {
