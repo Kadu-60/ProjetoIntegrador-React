@@ -16,7 +16,7 @@ function BotaoConfirmar(props) {
     })
     axios.get('http://localhost:8080/Estoque/' + props.id)
       .then((response) => {
-        if (response.data.quantidade >= count+1) {
+        if (response.data.quantidade >= count + 1) {
           let cartList = localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []
@@ -24,7 +24,7 @@ function BotaoConfirmar(props) {
           let cartString = JSON.stringify(cartList)
           localStorage.setItem("cart", cartString)
           localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
-        }else{
+        } else {
           alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
         }
 
