@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom'
 import './Produtos.css'
 import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
 
-import NovidadesHome from '../../components/macro/NovidadesHome/NovidadesHome';
 import axios from "axios";
 import MarcaItem from '../../components/micro/MarcaItem/MarcaItem';
+import ProdutoMarca from '../../components/macro/ProdutoMarca/ProdutoMarca';
 
 
 
@@ -14,7 +14,7 @@ import MarcaItem from '../../components/micro/MarcaItem/MarcaItem';
 function Produtos(){
 
     const {id} = useParams()
-    const [ produtos, setProdutos] = useState({})
+    const [ produtos, setProdutos] = useState([])
    
     useEffect(() => {
         
@@ -42,7 +42,7 @@ function Produtos(){
 
                   
                         <div className="div-global-pag-produtos" >
-                            <MarcaItem produtos = {produtos}/>
+                            <MarcaItem marcas={produtos}/>
 
                         </div>
                       
@@ -53,7 +53,7 @@ function Produtos(){
                            
                             <div className="list-cards-produtos">
                                 <ListarProdutos >
-                                    <NovidadesHome/>
+                                   <ProdutoMarca/>
                                 </ListarProdutos>
                             </div>
              
