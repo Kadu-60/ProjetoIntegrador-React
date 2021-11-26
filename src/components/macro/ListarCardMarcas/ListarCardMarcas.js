@@ -14,8 +14,8 @@ function ListarCardMarcas(props) {
             {
                 marcas.map((marca)=>{
                     return(
-                        <Col key={marca.id} xl={3} md={4} sm={6} xs={12} >
-                            <CardMarca  id={marca.id} img={marca.img} title={marca.nome} desc={marca.desc} />
+                        <Col key={marca.id_marca} xl={3} md={4} sm={6} xs={12} >
+                            <CardMarca  id={marca.id_marca} img={marca.img} title={marca.nome} desc={marca.desc} />
                         </Col>
                     )
                 })
