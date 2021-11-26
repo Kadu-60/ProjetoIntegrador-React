@@ -7,7 +7,7 @@ function NavSub(props){
 
     return(
      <>
-            <body>
+            <body className="body-principal-nav-sub">
 
             <div className="row align-items-start menu-sub">
 
@@ -30,7 +30,11 @@ function NavSub(props){
 
                                 <li className="nav-item sub-menu ">
                                   
-                                    <button className="dropbtn">  <a className="nav-link " href="/marcas"> MARCAS</a></button>
+                                    <button className="dropbtn "> 
+                                        <a className="nav-link " id="navbarDarkDropdownMenuLink"  href="/marcas"> MARCAS</a>
+                                       
+                                      
+                                    </button>
                                   
                                 </li>
                                 
