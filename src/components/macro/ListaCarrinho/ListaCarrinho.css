@@ -173,6 +173,8 @@ align-items: start;
     height: 60px;
     justify-content: center;
     margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
     text-decoration: none;
     width: 250px;
   

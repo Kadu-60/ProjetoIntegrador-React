@@ -119,7 +119,7 @@ function Login(props) {
                         <div class="col-md-4 d-flex justify-content-center">
 
                             <p>
-                                Ainda não possui conta? <a className="fazer-login" href="/cadastro"> Crie sua conta</a>
+                                Ainda não possui conta? <a className="fazer" href="/cadastro"> Crie sua conta</a>
                             </p>
                         </div>
                     </div>
