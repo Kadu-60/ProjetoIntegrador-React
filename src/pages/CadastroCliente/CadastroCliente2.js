@@ -74,7 +74,7 @@ function CadastroCliente(props) {
         }
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 2500)
 
     }
     function validarEntradas() {
