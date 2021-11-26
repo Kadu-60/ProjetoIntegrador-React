@@ -15,8 +15,8 @@ function Footer(props) {
                         <div id="tpl-center" className="tpl-center">
                             <section className="cadastroNew" id="cadastroNew">
                                 <div className="texto" id="texto">
-                                    <span className="frete"> Frete </span>
-                                    <strong className="fixo">Fixo para qualquer região de São Paulo <br /></strong> <br />
+                                    
+                                    <strong className="freteFixo">Frete Fixo para qualquer região de São Paulo <br /></strong> <br />
 
                                 </div>
 
@@ -50,7 +50,7 @@ function Footer(props) {
 
                             <div className="coluna ajuda col-md-2 col-12 contact-box">
                                 <h3 className="titulo-footer"><b> Ajuda e Suporte</b></h3>
-                                <ul className="itens">
+                                <ul className="itensPerguntas">
                                     <li className="item">
                                         <a className="link-footer" href="/faq">Perguntas Frequentes</a>
                                     </li>
