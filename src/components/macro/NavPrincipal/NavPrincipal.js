@@ -53,10 +53,11 @@ function NavPrincipal(props) {
                     setToken(null)
                     localStorage.removeItem('user')
                     setLogado(0)
-                }, 5999000)
+                    window.location.reload()
+                }, 599900)
                 setLogado(2)
             }
-        },1000)
+        },10000)
         
     })
 
@@ -85,12 +86,13 @@ function NavPrincipal(props) {
     }
     function meusPedidos() {
 
-        localStorage.setItem('defaultIndex', "index")
+        
         let email = localStorage.getItem('user')
         if (email) {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
                 .then((response) => {
                     window.location.href = "http://localhost:3000/dashboard/" + response.data.id_Cliente
+                    localStorage.setItem('defaultIndex', "index")
                 })
         } else {
             window.location.href = "http://localhost:3000/login"

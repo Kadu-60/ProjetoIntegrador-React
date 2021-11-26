@@ -47,7 +47,12 @@ function BuscaAvancadaResult(props) {
 
         <>
             <div class="container">
-                
+                <div class="row pt-5">
+                    <div class="col-10 d-flex justify-content-start">
+                        <h4 className="pesquisa titulo-header">Resultados para sua busca</h4>
+                    </div>
+                </div>
+
 
                 <ListarProdutos>
                     <ProdutosBusca produtos={prodAtuais} loading={loading} />
