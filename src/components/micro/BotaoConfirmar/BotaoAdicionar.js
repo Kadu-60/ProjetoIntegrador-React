@@ -1,16 +1,35 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react';
 import './BotaoConfirmar.css'
+import axios from 'axios'
 
 function BotaoConfirmar(props) {
   const addToCart = () => {
-    let cartList = localStorage.getItem("cart")
+    let cart = ((localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
-      : []
-    cartList.push(props.id)
-    let cartString = JSON.stringify(cartList)
-    localStorage.setItem("cart", cartString)
-    localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+      : []))
+    let count = 0
+    cart.map((item) => {
+      if (item == props.id) {
+        count++;
+      }
+    })
+    axios.get('http://localhost:8080/Estoque/' + props.id)
+      .then((response) => {
+        if (response.data.quantidade >= count+1) {
+          let cartList = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : []
+          cartList.push(props.id)
+          let cartString = JSON.stringify(cartList)
+          localStorage.setItem("cart", cartString)
+          localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+        }else{
+          alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+        }
+
+      })
+
 
   }
   return (
