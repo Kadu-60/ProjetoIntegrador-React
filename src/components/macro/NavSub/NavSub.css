@@ -1,28 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-.dropdown {
+.body-principal-nav-sub{
+  overflow: hidden;
+}
+.menu-sub{
+  overflow: hidden;
+  z-index: 1;
+}
+ .dropdown {
     position: relative;
     display: inline-block;
   }
   
-    .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  
 
-  }
+  .dropdown { float: none; } 
   
+
   
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    font-family: 'MedievalSharp', cursive;
+  .dropdown:hover .dropdown-menu {
     display: block;
-  }
+    position: absolute;
+    transform: translate3d(5px, 28px, 0px); /* distancia entre menu e btn */
+    top: 0px;
+    left: 0px;
   
+    will-change: transform;
+}
+.dropdown {
+    display: inline-block; /* deixa o LO do "tamanho do próprio texto" e não da largura inteira da tela*/
+    list-style: none; /* rita a "bolinha" do LI*/
+}
   .dropdown-content a:hover {background-color: #ddd;}
   
   .dropdown:hover .dropdown-content {display: block;}

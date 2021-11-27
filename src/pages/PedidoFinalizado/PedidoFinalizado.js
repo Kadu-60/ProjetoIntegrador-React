@@ -11,6 +11,7 @@ import NumeroPedido from "../../components/NumeroPedido/NumeroPedido";
 import { Icon } from 'semantic-ui-react'
 import { useParams } from "react-router-dom"
 import axios from 'axios'
+import Barco from "../../assets/imgs/teste/barco.gif"
 
 function PedidoFinalizado(props) {
     const params = useParams(":pesq")
@@ -65,51 +66,38 @@ function PedidoFinalizado(props) {
                 <div class="container">
                     <div class="row pt-5">
                         <div class="col d-flex justify-content-center">
-                            <p className="title-dash"> Pedido confirmado</p>
+                            <p className="title-dash"> Pedido confirmado <Icon name="chevron circle down" className="icone-pedido-finalizado"/></p>
                         </div>
                     </div>
-
-
-
-                    <br />
-                    <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <p>
-                                Seu pedido foi recebido por nós e em breve estará com você!
-                            </p>
-                        </div>
-                        <br />
-                        <div class="col-12 d-flex justify-content-center">
-                            <img class="barril" src={Barril} alt="" />
+                            <img classname="barco" src={Barco} alt="" width="90px"/>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <h5 class="titulo-pedido">Pedido Nº<NumeroPedido className="num-pedido" numeroPedido={pedido.id} /></h5>
                         </div>
                     </div>
-                    <div class="row  d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center">
                         <div className='col-9'>
                             <TitulosHome texto='' />
-                        </div>
 
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-2"></div>
-                        <div class="col-12 col-md-10 d-flex justify-content-start">
+                        <div class="col-12 col-md-10 d-flex">
                             <h5 class="resumo"><b>Resumo do pedido:</b></h5>
                         </div>
-
                         <div class=" col-12 col-md-9 pt-2 d-flex justify-content-center resumo-pedido-end">
                             <div class="col-12 col-md-10 ">
                                 <div className='row d-flex justify-content-around'>
                                     <CaixaInfo titulo='Endereço de envio'>
-                                    <Endereco rua={endereco.rua} numero={endereco.numero} bairro={endereco.bairro} cidade={endereco.cidade} estado={endereco.estado} cep={endereco.cep} />
+                                    <Endereco rua={endereco.rua} numero={endereco.numero} bairro={endereco.bairro} cidade={endereco.cidade} estado={endereco.estado} cep={endereco.cep}/>
                                 </CaixaInfo>
                                 <CaixaInfo titulo='Forma de pagamento'>
                                     <Pagamento finalCartao={final.substring(12,16)} parcelas={pagamento.parcelamento}/>
                                 </CaixaInfo>
 
-                                <CaixaInfo titulo="Total Pedido">
-                                    <TotalPedido subtotal={((+pedido.subtotal)-15).toFixed(2).toString().replace('.', ',')} frete='15,00' total={(+pedido.total).toFixed(2).toString().replace('.', ',')} />
+                                <CaixaInfo titulo="Total do Pedido">
+                                    <TotalPedido subtotal={(+pedido.subtotal).toFixed(2).toString().replace('.', ',')} frete='15,00' total={(+pedido.total).toFixed(2).toString().replace('.', ',')} />
                                 </CaixaInfo>
                                 
                                 </div>

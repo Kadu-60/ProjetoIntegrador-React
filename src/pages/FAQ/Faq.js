@@ -234,6 +234,48 @@ export default class AccordionExampleStandard extends Component {
         A troca será realizada somente se o produto estiver em perfeito estado, em sua embalagem de envio, com a etiqueta da CervejaBox afixada.
           </p>
         </Accordion.Content>
+        <Accordion.Title
+          active={activeIndex === 6}
+          index={6}
+          onClick={this.handleClick}
+        >
+          <Icon name='beer' />
+          Forma de Pagamento
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 6}>
+          <p>
+          A DevBrew no momento está aceitando somente cartão de crédito.
+          </p>
+        </Accordion.Content>
+        
+        <Accordion.Title
+          active={activeIndex === 7}
+          index={7}
+          onClick={this.handleClick}
+        >
+          <Icon name='beer' />
+          Taxa de Entrega  
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 7}>
+          <p>
+         Frete fixo de R$ 15,00 para qualquer região de São Paulo capital.
+         
+          </p>
+        </Accordion.Content>
+        <Accordion.Title
+          active={activeIndex === 8}
+          index={8}
+          onClick={this.handleClick}
+        >
+          <Icon name='beer' />
+          Prazo de Entrega 
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 8}>
+          <p>
+          O prazo de entrega começa a contar a partir da aprovação do pagamento do pedido. O prazo para as compras via cartão de crédito costuma ser até 24h.
+         
+          </p>
+        </Accordion.Content>
         
 
         <br/> <br/>

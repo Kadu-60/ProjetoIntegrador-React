@@ -65,7 +65,9 @@ section.cadastroNew{
     appearance: none;
     text-align: center;
 }
-
+.fab{
+    color: white;
+}
 
 #texto{
     color: #fff;
@@ -246,6 +248,10 @@ ul.itens{
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
+}
+
+.freteFixo{
+    margin-left: -70px;
 }
 
 footer .middleArea .tpl-center div.coluna ul li.item {
