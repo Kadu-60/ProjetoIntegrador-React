@@ -242,7 +242,8 @@ function CadastroCliente(props) {
                         <Form.Label>E-mail*:</Form.Label>
                         <Form.Control type="email" placeholder="usuario@email.com" onChange={(event) => {
                             setEmail(event.target.value)
-                            setValidEmail('none')
+                            setValidEmail('d-none')
+                            setemailexists("d-none")
                         }}
                             value={email} required="true" />
                         <div className={"invalid-feedback " + validEmail}>
