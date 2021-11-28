@@ -104,11 +104,6 @@ const Panes = ({ user, dataNascimento }) => {
 
 
 
-
-
-
-  console.log(data1)
-
   return ([
     {
       menuItem: 'Minha Conta', render: () => <Tab.Pane>
@@ -235,7 +230,7 @@ const Panes = ({ user, dataNascimento }) => {
             </div>
             :
             pedidos.map((pedido) => (
-              <MeuPedido data={pedido} />
+              <MeuPedido data={pedido} key ={pedido.id}/>
             ))
 
         }

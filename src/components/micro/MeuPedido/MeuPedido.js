@@ -7,7 +7,9 @@ import ItemMeuPedido from '../ItemMeuPedido/ItemMeuPedido'
 
 function MeuPedido(props) {
     const pedido = props.data;
+    console.log(props.data)
     const [itens, setItens] = useState([])
+    const [dataPedido, setDataPedido] = useState('')
     //NumeroPedido"id do pedido"
     //DataPedido
     //StatusPedido
@@ -15,12 +17,11 @@ function MeuPedido(props) {
     //EndereçoPedido
     //DadosPagamento
     //funcaoVerMais
-
     function verMais() {
         var pontos = document.getElementById("pontos"+pedido.id);
         var meusPedidos = document.getElementById("mais"+pedido.id);
         var btnVerMais = document.getElementById("btnVerMais"+pedido.id);
-
+        
         if (pontos.style.display === "none") {
             pontos.style.display = "inline";
             meusPedidos.style.display = "none";
@@ -42,6 +43,7 @@ function MeuPedido(props) {
         .then((response)=>{
             setItens(response.data)
         })
+        setDataPedido((new Date(pedido.dataDeCriacao)).toLocaleString())
         verMais()
         verMais()
     },[])
@@ -92,7 +94,7 @@ function MeuPedido(props) {
                                         {" "}
                                         <li className="date">
                                             {" "}
-                                            <strong>Data do Pedido:</strong> <span>{pedido.dataDeCriacao.slice(0,10)}</span>{" "}
+                                            <strong>Data do Pedido:</strong> <span>{dataPedido.slice(0, dataPedido.length-3)}</span>{" "}
                                         </li>{" "}
                                         <li className="payment">
                                             {" "}
@@ -102,7 +104,7 @@ function MeuPedido(props) {
                                         </li>{" "}
                                         <li className="total">
                                             {" "}
-                                            <strong>Valor Total:</strong> <span>R$ {pedido.total.toFixed(2)}</span>{" "}
+                                            <strong>Valor Total:</strong> <span>R$ {(pedido.total||0).toFixed(2).replace('.', ',')}</span>{" "}
                                         </li>{" "}
                                     </ul>{" "}
                                 </div>{" "}
@@ -204,7 +206,7 @@ function MeuPedido(props) {
                             <tr className="subtotal">
                                 {" "}
                                 <td /> <td colSpan={2}>Subtotal</td>{" "}
-                                <td className="td-subtotal">R$ {(pedido.total-15).toFixed(2)}</td>{" "}
+                                <td className="td-subtotal">R$ {(pedido.subtotal).toFixed(2).replace('.', ',')}</td>{" "}
                             </tr>{" "}
                             <tr className="delivery-amount">
                                 {" "}
@@ -215,7 +217,7 @@ function MeuPedido(props) {
                             <tr className="total">
                                 {" "}
                                 <td /> <td colSpan={2}>Total</td>{" "}
-                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2)} </td>{" "}
+                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2).replace('.', ',')} </td>{" "}
 
                             </tr>{" "}
                         </tfoot>{" "}
@@ -267,8 +269,15 @@ function MeuPedido(props) {
                                 <b>Cartão de Crédito</b>{" "}
                                 <div className="payment-value">
                                     {" "}
-                                    <strong>R$ {pedido.total.toFixed(2)} á vista </strong>{" "}
-
+                                    <strong>R${pedido.total.toFixed(2).replace('.', ',')} </strong>{" "}
+                                    { 
+                                        pedido.pagamento.qtdParcelas!=1?
+                                            <>
+                                                <strong>dividido em {pedido.pagamento.qtdParcelas} parcelas de R${(pedido.total/pedido.pagamento.qtdParcelas).toFixed(2).replace('.', ',')}</strong>
+                                            </>
+                                        :
+                                        <></>
+                                    }
                                 </div>{" "}
                                 <br />
                             </div>{" "}
@@ -279,49 +288,6 @@ function MeuPedido(props) {
                             <b>Status:</b> Pagamento Aprovado
                             <br /><br />
                             {" "}
-                        </div>{" "}
-                    </div>
-                </div>
-                <br />
-
-
-                <p className="title-dash">Acompanhe seu pedido</p>
-                <div className="grid ">
-                    <div className="wd-content-global">
-                        {" "}
-                        {/* CONTENT */}
-                        <div className="value">
-                            {" "}
-                            <ul className="linha-do-pedido">
-                                {" "}
-                                <li className="status status-global-pedido completed status-1">
-                                    {" "}
-                                    <br />
-                                    {/*<span class="count">1</span>*/} <span className="icon-pedidos" />{" "}
-                                    {/* <div className="" /> <small>09/11/2021 11:55:27</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Pedido Realizado</strong>{" "}
-                                </li>{" "}
-
-                                <li className="status status-global-pedido started status-2">
-                                    {" "}
-                                    {/*<span class="count">2</span>*/} <span className="" />{" "}
-                                    {/* <div className="" /> <small>Em andamento</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Confirmaçao de Pagamento</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-3">
-                                    {" "}
-                                    {/*<span class="count">3</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line line-linha" />{" "}
-                                    <strong>Preparando para Envio</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-4">
-                                    {" "}
-                                    {/*<span class="count">4</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line" />{" "}
-                                    <strong>Pedido Enviado</strong>{" "}
-                                    <br /><br />
-                                </li>{" "}
-                            </ul>{" "}
                         </div>{" "}
                     </div>
                 </div>
