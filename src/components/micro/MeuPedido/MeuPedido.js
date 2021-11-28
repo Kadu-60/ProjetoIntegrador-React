@@ -211,7 +211,7 @@ function MeuPedido(props) {
                             <tr className="delivery-amount">
                                 {" "}
                                 <td /> <td colSpan={2}>Custo de entrega</td>{" "}
-                                <td className="td-delivery-amount"> R$15.00 </td>{" "}
+                                <td className="td-delivery-amount"> R$ 15,00 </td>{" "}
                             </tr>{" "}
 
                             <tr className="total">
