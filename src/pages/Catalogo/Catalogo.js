@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos'
 import BotaoPags from '../../components/micro/BotaoPags/BotaoPags'
-import './Destaques.css'
+import './Catalogo.css'
 
 import axios from 'axios'
 import ProdutosBusca from '../../components/macro/BuscaParam/ProdutosBusca'
-// import Estrela from '../../assets/imgs/teste/estrela.gif'
 
 
-function BuscaAvancadaResult(props) {
+function Catalogo(props) {
 
 
     const [produtos, setProdutos] = useState([])
     const [loading, setLoading] = useState(false)
     const [paginaAtual, setPaginaAtual] = useState(1)
     const [prodsPorPagina, setProdsPorPagina] = useState(15)
-    const final = 'http://localhost:8080/Card/todosDestaques'
+    const final = 'http://localhost:8080/Card/todosProdutos'
 
 
 
@@ -50,8 +49,7 @@ function BuscaAvancadaResult(props) {
             <div class="container">
                 <div class="row pt-5 caixaTitulo">
                     <div class="col-10  d-flex flex-column justify-content-start">
-                        
-                        <p className="title-dash dest-produt">Produtos em Destaques </p>
+                    <p className="title-dash dest-produt">Catálogo </p>
 
                     </div>
 
@@ -77,4 +75,4 @@ function BuscaAvancadaResult(props) {
 
 }
 
-export default BuscaAvancadaResult
+export default Catalogo
