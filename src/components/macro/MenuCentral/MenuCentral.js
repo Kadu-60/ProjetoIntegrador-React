@@ -224,7 +224,7 @@ const Panes = ({ user, dataNascimento }) => {
 
 
 
-        <p className="title-dash">meus pedidos</p>
+        <p className="title-dash">Meus Pedidos</p>
         {
           pedidos == false ?
             <div className="container bg-light " >

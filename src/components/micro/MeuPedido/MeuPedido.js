@@ -102,7 +102,7 @@ function MeuPedido(props) {
                                         </li>{" "}
                                         <li className="total">
                                             {" "}
-                                            <strong>Valor Total:</strong> <span>R$ {pedido.total.toFixed(2)}</span>{" "}
+                                            <strong>Valor Total:</strong> <span>R$ {pedido.total.toFixed(2).replace('.', ',')}</span>{" "}
                                         </li>{" "}
                                     </ul>{" "}
                                 </div>{" "}
@@ -204,18 +204,18 @@ function MeuPedido(props) {
                             <tr className="subtotal">
                                 {" "}
                                 <td /> <td colSpan={2}>Subtotal</td>{" "}
-                                <td className="td-subtotal">R$ {(pedido.total-15).toFixed(2)}</td>{" "}
+                                <td className="td-subtotal">R$ {(pedido.total-15).toFixed(2).replace('.', ',')}</td>{" "}
                             </tr>{" "}
                             <tr className="delivery-amount">
                                 {" "}
                                 <td /> <td colSpan={2}>Custo de entrega</td>{" "}
-                                <td className="td-delivery-amount"> R$15.00 </td>{" "}
+                                <td className="td-delivery-amount"> R$ 15,00 </td>{" "}
                             </tr>{" "}
 
                             <tr className="total">
                                 {" "}
                                 <td /> <td colSpan={2}>Total</td>{" "}
-                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2)} </td>{" "}
+                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2).replace('.', ',')} </td>{" "}
 
                             </tr>{" "}
                         </tfoot>{" "}
@@ -267,7 +267,7 @@ function MeuPedido(props) {
                                 <b>Cartão de Crédito</b>{" "}
                                 <div className="payment-value">
                                     {" "}
-                                    <strong>R$ {pedido.total.toFixed(2)} á vista </strong>{" "}
+                                    <strong>R$ {pedido.total.toFixed(2).replace('.', ',')} à vista </strong>{" "}
 
                                 </div>{" "}
                                 <br />
@@ -288,41 +288,43 @@ function MeuPedido(props) {
                 <p className="title-dash">Acompanhe seu pedido</p>
                 <div className="grid ">
                     <div className="wd-content-global">
-                        {" "}
+                        {/* {" "} */}
                         {/* CONTENT */}
-                        <div className="value">
-                            {" "}
-                            <ul className="linha-do-pedido">
-                                {" "}
-                                <li className="status status-global-pedido completed status-1">
-                                    {" "}
+                        {/* <div className="value"> */}
+                            {/* {" "} */}
+                            {/* <ul className="linha-do-pedido"> */}
+                                {/* {" "} */}
+                                {/* <li className="status status-global-pedido completed status-1"> */}
+                                    {/* {" "} */}
                                     <br />
-                                    {/*<span class="count">1</span>*/} <span className="icon-pedidos" />{" "}
+                                    {/* <span class="count">1</span> <span className="icon-pedidos" />{" "} */}
                                     {/* <div className="" /> <small>09/11/2021 11:55:27</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Pedido Realizado</strong>{" "}
-                                </li>{" "}
+                                    {/* <span className="line line-linha filled" />  */}
+                                    <strong><li>Pedido Realizado</li></strong>{" "}
+                                {/* </li>{" "} */}
 
-                                <li className="status status-global-pedido started status-2">
-                                    {" "}
-                                    {/*<span class="count">2</span>*/} <span className="" />{" "}
+                                {/* <li className="status status-global-pedido started status-2"> */}
+                                    {/* {" "} */}
+                                    {/* <span class="count">2</span> <span className="" />{" "} */}
                                     {/* <div className="" /> <small>Em andamento</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Confirmaçao de Pagamento</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-3">
-                                    {" "}
-                                    {/*<span class="count">3</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line line-linha" />{" "}
-                                    <strong>Preparando para Envio</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-4">
-                                    {" "}
-                                    {/*<span class="count">4</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line" />{" "}
-                                    <strong>Pedido Enviado</strong>{" "}
-                                    <br /><br />
-                                </li>{" "}
-                            </ul>{" "}
-                        </div>{" "}
+                                    {/* <span className="line line-linha filled" /> */}
+                                    <strong><li>Confirmaçao de Pagamento</li></strong>{" "} 
+                                {/* </li>{" "} */}
+                                {/* <li className="status status-global-pedido status-3"> */}
+                                    {/* {" "} */}
+                                    {/* <span class="count">3</span> <span className="" />{" "} */}
+                                    {/* <div className="" /> <small /> <span className="line line-linha" />{" "} */}
+                                    <strong><li>Preparando para Envio</li></strong>{" "}
+                                {/* </li>{" "} */}
+                                {/* <li className="status status-global-pedido status-4"> */}
+                                    {/* {" "} */}
+                                    {/* <span class="count">4</span> <span className="" />{" "} */}
+                                    {/* <div className="" /> <small /> <span className="line" />{" "} */}
+                                    <strong><li> Pedido Enviado</li></strong>{" "}
+                                    <br />
+                                {/* </li>{" "} */}
+                            {/* </ul>{" "} */}
+                        {/* </div>{" "} */}
                     </div>
                 </div>
                 <br />
