@@ -5,7 +5,7 @@ import './Destaques.css'
 
 import axios from 'axios'
 import ProdutosBusca from '../../components/macro/BuscaParam/ProdutosBusca'
-import Estrela from '../../assets/imgs/teste/estrela.gif'
+
 
 
 function BuscaAvancadaResult(props) {
