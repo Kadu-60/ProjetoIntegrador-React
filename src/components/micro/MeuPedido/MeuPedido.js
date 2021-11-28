@@ -7,7 +7,6 @@ import ItemMeuPedido from '../ItemMeuPedido/ItemMeuPedido'
 
 function MeuPedido(props) {
     const pedido = props.data;
-    console.log(props.data)
     const [itens, setItens] = useState([])
     const [dataPedido, setDataPedido] = useState('')
     //NumeroPedido"id do pedido"
@@ -273,7 +272,7 @@ function MeuPedido(props) {
                                     { 
                                         pedido.pagamento.qtdParcelas!=1?
                                             <>
-                                                <strong>dividido em {pedido.pagamento.qtdParcelas} parcelas de R${(pedido.total/pedido.pagamento.qtdParcelas).toFixed(2).replace('.', ',')}</strong>
+                                                <strong>dividido em {pedido.pagamento.qtdParcelas} parcelas de R${(pedido.total/pedido.pagamento.qtdParcelas).toFixed(2).replace('.', ',') } Sem Juros</strong>
                                             </>
                                         :
                                         <></>

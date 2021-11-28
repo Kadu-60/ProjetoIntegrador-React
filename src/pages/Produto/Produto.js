@@ -95,7 +95,10 @@ function Produto(props) {
         
     }
     const decremento = () =>{
-        setNumero(numero - 1)
+        if(numero > 0){
+            setNumero(numero - 1)
+        }
+        
         
     }
 
