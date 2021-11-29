@@ -44,3 +44,8 @@ i.icon {
     opacity: 0.8;
     color: #fff
 }
+
+.accordion-faq:hover{
+
+    background-color: rgba(241, 238, 234, 0.945);
+}
