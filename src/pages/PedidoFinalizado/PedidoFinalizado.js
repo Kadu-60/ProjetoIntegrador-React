@@ -70,10 +70,10 @@ function PedidoFinalizado(props) {
                         </div>
                     </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <img classname="barco" src={Barco} alt="" width="90px"/>
+                            <img classname="barco" src={Barril} alt="" width="90px"/>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <h5 class="titulo-pedido">Pedido Nº<NumeroPedido className="num-pedido" numeroPedido={pedido.id} /></h5>
+                            <h5 class="titulo-pedido"><b>NÚMERO DO PEDIDO<NumeroPedido className="num-pedido" numeroPedido={pedido.id} /></b></h5>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -84,12 +84,12 @@ function PedidoFinalizado(props) {
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-2"></div>
                         <div class="col-12 col-md-10 d-flex">
-                            <h5 class="resumo"><b>Resumo do pedido:</b></h5>
+                            <h6 class="resumo"><b>RESUMO DO PEDIDO:</b></h6>
                         </div>
                         <div class=" col-12 col-md-9 pt-2 d-flex justify-content-center resumo-pedido-end">
                             <div class="col-12 col-md-10 ">
-                                <div className='row d-flex justify-content-around'>
-                                    <CaixaInfo titulo='Endereço de envio'>
+                                <div className='global-caixa'>
+                                   <CaixaInfo titulo='Endereço de envio'>
                                     <Endereco rua={endereco.rua} numero={endereco.numero} bairro={endereco.bairro} cidade={endereco.cidade} estado={endereco.estado} cep={endereco.cep}/>
                                 </CaixaInfo>
                                 <CaixaInfo titulo='Forma de pagamento'>
@@ -109,7 +109,7 @@ function PedidoFinalizado(props) {
                     <div class="row d-flex justify-content-around">
                         <div class="col-12  mt-4 d-flex justify-content-around">
 
-                            <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" href="/home"> Voltar para home</a></button>
+                            <button className=" btn btn-voltarHomer"><a className="link-finalizado-pedido" href="/home"> Voltar para home</a></button>
                             <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" onClick={() =>{MeusPedidos()}}> Ver página do pedido</a></button>
 
                         </div>

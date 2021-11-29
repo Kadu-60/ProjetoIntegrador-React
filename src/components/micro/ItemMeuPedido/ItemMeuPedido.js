@@ -45,11 +45,11 @@ function ItemMeuPedido(props) {
                     <td className="quantity">{item.quantidade_produto}</td>{" "}
                     <td className="price">
                         {" "}
-                        {"R$ "+preco.toFixed(2)}{" "}
+                        {"R$ "+preco.toFixed(2).replace('.', ',')}{" "}
                     </td>{" "}
                     <td className="item-subtotal">
                         {" "}
-                        R$ {(preco*item.quantidade_produto).toFixed(2)}{" "}
+                        R$ {(preco*item.quantidade_produto).toFixed(2).replace('.', ',')}{" "}
                     </td>{" "}
                 </tr>{" "}
             </tbody>{" "}

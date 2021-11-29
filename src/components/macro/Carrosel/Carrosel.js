@@ -1,6 +1,7 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
 
+
 function Carrosel(props) {
 
     return (
@@ -8,21 +9,21 @@ function Carrosel(props) {
             <Carousel variant="dark">
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="d-block w-100 "
                         src={props.banner1}
                         alt="First slide"
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="d-block w-100 "
                         src={props.banner2}
                         alt="Second slide"
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="d-block w-100 "
                         src={props.banner3}
                         alt="Second slide"
                     />

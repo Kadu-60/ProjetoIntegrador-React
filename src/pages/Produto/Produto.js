@@ -86,19 +86,35 @@ function Produto(props) {
             })
     }
 
-
+    
     const [numero, setNumero] = useState(1)
 
     const incremento = () =>{
-        setNumero(numero + 1)
+        setNumero(+numero + 1)
        
         
     }
     const decremento = () =>{
-        setNumero(numero - 1)
+        if(numero > 0){
+            setNumero(numero - 1)
+        }
+        
         
     }
 
+    // function incremento(){
+    //     var atual = document.getElementById("total").value;
+    //     var novo = atual - (-1); 
+    //     document.getElementById("total").value = novo;
+    //   }
+      
+    //   function decremento(){
+    //     var atual = document.getElementById("total").value;
+    //     if(atual > 1) { 
+    //       var novo = atual - 1;
+    //       document.getElementById("total").value = novo;
+    //     }
+    //   }
 
 
 
@@ -154,7 +170,7 @@ function Produto(props) {
 
                                                 <div class="contador contador-pag-produto">
                                                     <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
-                                                    <div class="mostrador">{numero}</div>
+                                                    <input type="number" className="mostrador" value={numero} onChange={(event)=>{setNumero(event.target.value)}}/> 
                                                     <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
                                                 </div>
 
@@ -163,7 +179,7 @@ function Produto(props) {
                                     </div>
                                     <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={numero}/>
+                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={+numero}/>
                                         </div>
                                     </div>
                                 </div>

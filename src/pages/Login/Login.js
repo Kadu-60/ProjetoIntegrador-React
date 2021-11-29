@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Input from "../../components/micro/Forms/Input/Input";
 import FormDefault from "../../components/micro/Forms/FormDefault/FormDefault";
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 
 
@@ -62,12 +63,22 @@ function Login(props) {
 
         axios.get(URL + 'cadastro-cliente/senha/'+emailRec)
         .then((response) => {
-            alert("Verifique o  seu E-mail")
+            Swal.fire({
+                title: 'sucesso!',
+                text: 'Verifique seu E-mail!',
+                icon: 'success',
+                confirmButtonText: 'fechar'
+              })
             window.location.href = "http://localhost:3000/login"
         })
         .catch((error) => { 
             console.log(error) 
-            alert("Verifique o  seu E-mail")
+            Swal.fire({
+                title: 'sucesso!',
+                text: 'Verifique seu E-mail!',
+                icon: 'success',
+                confirmButtonText: 'fechar'
+              })
             window.location.href = "http://localhost:3000/login"
         })
         

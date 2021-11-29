@@ -3,6 +3,7 @@ import "./FormularioContato.css"
 import { Modal, Button } from "react-bootstrap"
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
+import Swal from 'sweetalert2'
 
 
 
@@ -36,7 +37,12 @@ function FormularioContato(props) {
       axios.post(URL+'formulariocontato', values)
       .then((response) => {
         
-        alert("Mensagem enviada com sucesso!")
+        Swal.fire({
+          title: 'Ok!',
+          text: 'Mensagem enviada!',
+          icon: 'success',
+          confirmButtonText: 'fechar'
+        })
 
         history.push('/home');
       });
