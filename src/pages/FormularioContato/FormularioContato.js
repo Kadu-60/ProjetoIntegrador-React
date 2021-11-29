@@ -51,7 +51,7 @@ function FormularioContato(props) {
 <body className="formulario-contato"  >
 ;<form className="form-inline dados-form" onSubmit={onSubmit}>
         <div className="container col-4">
-          <p className="title-dash">Formulário Contato</p>
+          <p className="title-dash">Formulário De Contato</p>
 
           <p id="subtitulo">
             Dúvidas, sugestões, elogios ou reclamações, envie:
@@ -75,7 +75,7 @@ function FormularioContato(props) {
            id="telefone"
             type="number"
             className="form-control"
-            placeholder="11 99999-9999" name="telefone" onChange={onChange} 
+            placeholder="(XX) XXXX-XXXX" name="telefone" onChange={onChange} 
           />
         </div>
         <div className="container col-4 titulo">
@@ -90,7 +90,7 @@ function FormularioContato(props) {
           />
         </div>
         <div className="container col-4 titulo">
-        <p className="p-nome"> Tipo De Contato:*</p>
+        <p className="p-nome"> Tipo de Contato:*</p>
           <select className="form-select form-control" aria-label="Tipo De Contato" required name="tipo_de_contato" id="tipo_de_contato" onChange={onChange} >
           <option selected>Selecione</option> 
             <option value="Informação"  onChange={onChange}>Informação</option>
