@@ -335,12 +335,17 @@ padding-bottom: 20px;
   }
 
   
-  
+  .mostrador:focus-visible{
+      outline-offset: none !important;
+      outline-color: white !important;
+  }
 
   
   .mostrador {
     width: 40px;
     font-weight: bold;
+    border : none;
+    text-align: center;
   }
   
   .contador .button {

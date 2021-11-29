@@ -6,6 +6,7 @@ import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 import { Form, Modal } from 'react-bootstrap'
 import axios from 'axios'
 import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
+import Swal from 'sweetalert2'
 
 
 function CadastroCliente(props) {
@@ -66,7 +67,13 @@ function CadastroCliente(props) {
                             })
                             .catch((error) => {
                                 console.log(error)
-                                alert("desculpe ocorreu um erro durante o cadastro")
+                                Swal.fire({
+                                    title: 'Erro!',
+                                    text: 'desculpe ocorreu um erro durante o cadastro!',
+                                    icon: 'error',
+                                    confirmButtonText: 'fechar'
+                                  })
+                                
                             })
                     } else {
                         setemailexists("d-block")
