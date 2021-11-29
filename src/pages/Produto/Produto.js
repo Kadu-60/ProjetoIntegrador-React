@@ -86,19 +86,37 @@ function Produto(props) {
             })
     }
 
-
+    
     const [numero, setNumero] = useState(1)
 
-    const incremento = () =>{
-        setNumero(numero + 1)
+    // const incremento = () =>{
+    //     setNumero(numero + 1)
        
         
-    }
-    const decremento = () =>{
-        setNumero(numero - 1)
-        
-    }
+    // }
+    // const decremento = () => {
+    //     if (numero > 1) {
+    //         setNumero(numero - 1)
+    //     }
+    //     let cartList = localStorage.getItem("cart")
+    //         ? JSON.parse(localStorage.getItem("cart"))
+    //         : []
+       
+    // }
 
+    function incremento(){
+        var atual = document.getElementById("total").value;
+        var novo = atual - (-1); 
+        document.getElementById("total").value = novo;
+      }
+      
+      function decremento(){
+        var atual = document.getElementById("total").value;
+        if(atual > 1) { 
+          var novo = atual - 1;
+          document.getElementById("total").value = novo;
+        }
+      }
 
 
 
@@ -153,9 +171,9 @@ function Produto(props) {
                                             <div class="btn-group inline">
 
                                                 <div class="contador contador-pag-produto">
-                                                    <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
-                                                    <div class="mostrador">{numero}</div>
-                                                    <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
+                                                    <div onClick={decremento} class="contador-btn btn-success"  >-</div>
+                                                    <input className="mostrador" type="number" id="total" defaultValue={numero} /> 
+                                                    <div onClick={incremento} class="contador-btn btn-danger" >+</div>
                                                 </div>
 
                                             </div>

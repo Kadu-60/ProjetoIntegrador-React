@@ -51,7 +51,7 @@ function Produtos(){
                        
                                   
                            
-                            <div className="container d-flex justify-content-center align-items-center">
+                            <div className="container ">
                                 <ListarProdutos >
                                    <ProdutoMarca/>
                                 </ListarProdutos>

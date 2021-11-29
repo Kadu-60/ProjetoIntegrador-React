@@ -285,46 +285,7 @@ function MeuPedido(props) {
                 <br />
 
 
-                <p className="title-dash">Acompanhe seu pedido</p>
-                <div className="grid ">
-                    <div className="wd-content-global">
-                        {" "}
-                        {/* CONTENT */}
-                        <div className="value">
-                            {" "}
-                            <ul className="linha-do-pedido">
-                                {" "}
-                                <li className="status status-global-pedido completed status-1">
-                                    {" "}
-                                    <br />
-                                    {/*<span class="count">1</span>*/} <span className="icon-pedidos" />{" "}
-                                    {/* <div className="" /> <small>09/11/2021 11:55:27</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Pedido Realizado</strong>{" "}
-                                </li>{" "}
-
-                                <li className="status status-global-pedido started status-2">
-                                    {" "}
-                                    {/*<span class="count">2</span>*/} <span className="" />{" "}
-                                    {/* <div className="" /> <small>Em andamento</small>{" "} */}
-                                    <span className="line line-linha filled" /> <strong>Confirmaçao de Pagamento</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-3">
-                                    {" "}
-                                    {/*<span class="count">3</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line line-linha" />{" "}
-                                    <strong>Preparando para Envio</strong>{" "}
-                                </li>{" "}
-                                <li className="status status-global-pedido status-4">
-                                    {" "}
-                                    {/*<span class="count">4</span>*/} <span className="" />{" "}
-                                    <div className="" /> <small /> <span className="line" />{" "}
-                                    <strong>Pedido Enviado</strong>{" "}
-                                    <br /><br />
-                                </li>{" "}
-                            </ul>{" "}
-                        </div>{" "}
-                    </div>
-                </div>
+              
                 <br />
             </div>
         </>
