@@ -54,7 +54,9 @@ function BotaoConfirmar(props) {
           let cartString = JSON.stringify(cartList)
           localStorage.setItem("cart", cartString)
           localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+          window.location.href = "http://localhost:3000/carrinho"
         } else {
+          console.log("passou aqui")
           alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
         }
 
