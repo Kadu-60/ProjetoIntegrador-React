@@ -12,17 +12,7 @@ input[type="number"] {
   input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
   }
-  input[type="number"]{
-  outline:none;
-  border-right: 0px;
-  border-top: 1px solid gray;
-  border-left: 0px;
-  border-bottom: 1px solid gray;
-  height: 25px;
-  padding:1%;
-  border-right: 0 px solid black;
-  text-align: center;
-  }
+  
 
 .body-produto{
     background-color: #F0F0F0;
