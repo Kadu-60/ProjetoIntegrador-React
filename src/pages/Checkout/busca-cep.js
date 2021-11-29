@@ -1,5 +1,5 @@
 // INÍCIO da API dos Correios
-
+import Swal from 'sweetalert2'
 function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('rua').value=("");
@@ -19,7 +19,12 @@ function limpa_formulário_cep() {
         else {
             //CEP não Encontrado.
             limpa_formulário_cep();
-            alert("CEP não encontrado.");
+            Swal.fire({
+                title: 'erro!',
+                text: 'Cep nao encontrado!',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
         }
     }
         
@@ -56,7 +61,13 @@ function limpa_formulário_cep() {
             else {
                 //cep é inválido.
                 limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
+                Swal.fire({
+                    title: 'erro!',
+                    text: 'Formato de CEP inválido!',
+                    icon: 'error',
+                    confirmButtonText: 'fechar'
+                  })
+                
             }
         } //end if.
         else {

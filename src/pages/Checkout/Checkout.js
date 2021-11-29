@@ -57,6 +57,7 @@ const Checkout = (props) => {
         axios.get('http://localhost:8080/parcelas')
             .then((response) => {
                 setParcelas(response.data)
+                console.log(response.data)
             })
         if (localStorage.getItem('user')) {
             let email = localStorage.getItem('user')
@@ -75,7 +76,7 @@ const Checkout = (props) => {
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []))
-        if (cart) {
+        if (cart.length!=[].length) {
             axios.post('http://localhost:8080/Card/multi', cart)
                 .then(response => {
                     setCards(response.data)
@@ -98,6 +99,8 @@ const Checkout = (props) => {
                         console.log(error.message)
                     }
                 })
+        }else{
+            window.location.href = "http://localhost:3000/home"
         }
 
 
@@ -121,7 +124,7 @@ const Checkout = (props) => {
             "finalizado": false,
             "cliente": cliente,
             "pagamento": {
-                "id_parcelamento": 1
+                "id_parcelamento": parcelamento
             },
             "status":
             {
@@ -185,6 +188,7 @@ const Checkout = (props) => {
                 localStorage.setItem('qtyCart', JSON.stringify(0))
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
+                
             })
 
 
@@ -266,7 +270,7 @@ const Checkout = (props) => {
                                                     <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
                                                     <label>* Número </label>
                                                     <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
-                                                    <label>* Complemento </label>
+                                                    <label> Complemento </label>
                                                     <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
                                                     <label>* Bairro </label>
                                                     <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
@@ -328,7 +332,7 @@ const Checkout = (props) => {
                                                     <option value='' selected>Parcelamento</option>
                                                     {
                                                         parcelas.map((parcela) => (
-                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.id_parcelamento).toFixed(2).replace('.', ','))}  </option>
+                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
                                                         )
                                                         )
                                                     }

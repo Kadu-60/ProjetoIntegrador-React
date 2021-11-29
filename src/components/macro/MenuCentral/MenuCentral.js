@@ -6,6 +6,7 @@ import BotaoDash from '../../micro/BotaoDash/BotaoDash'
 import InputMask from "react-input-mask";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 
 const deslogar = () => {
@@ -48,7 +49,12 @@ const Panes = ({ user, dataNascimento }) => {
     };
     axios.put('http://localhost:8080/cadastro-cliente/' + id, { "nome": nomeChanged, "telefone": telefoneChanged, "dataNascimento": dataNas }, config)
       .then(response => {
-        alert("Dados Cadastrais alterados com sucesso!")
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Dados Cadastrais alterados com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'fechar'
+        })
         window.location.reload()
       })
 
@@ -70,11 +76,21 @@ const Panes = ({ user, dataNascimento }) => {
     if (senha == senhaSec) {
       axios.put("http://localhost:8080/cadastroCliente/alterarSenha/" + id, { "password": senha }, config)
         .then(response => {
-          alert("Senha Alterada")
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Senha alterada com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'fechar'
+          })
           window.location.reload()
         })
         .catch((error) => {
-          alert("Ops, Ocorreu um erro na sua senha")
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Ocorreu um erro na sua senha!',
+            icon: 'error',
+            confirmButtonText: 'fechar'
+          })
         })
     } else {
       setValidSenha('d-block')
@@ -103,11 +119,6 @@ const Panes = ({ user, dataNascimento }) => {
 
 
 
-
-
-
-
-  console.log(data1)
 
   return ([
     {
@@ -224,7 +235,7 @@ const Panes = ({ user, dataNascimento }) => {
 
 
 
-        <p className="title-dash">meus pedidos</p>
+        <p className="title-dash">Meus Pedidos</p>
         {
           pedidos == false ?
             <div className="container bg-light " >
@@ -235,7 +246,7 @@ const Panes = ({ user, dataNascimento }) => {
             </div>
             :
             pedidos.map((pedido) => (
-              <MeuPedido data={pedido} />
+              <MeuPedido data={pedido} key ={pedido.id}/>
             ))
 
         }

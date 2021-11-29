@@ -5,6 +5,7 @@ import { Icon } from 'semantic-ui-react'
 import BotaoQtd from '../../micro/BotaoQtd/BotaoQtd';
 import axios from 'axios'
 import InputMask from "react-input-mask";
+import Swal from 'sweetalert2'
 function ProdutoCarrinho(props) {
 
     const [estoque, setEstoque] = useState(50)
@@ -20,10 +21,14 @@ function ProdutoCarrinho(props) {
             let cartString = JSON.stringify(cartList)
             localStorage.setItem("cart", cartString)
             localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
-
-            window.location.reload()
+            props.att(props.attval+1);
         } else {
-            alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+            Swal.fire({
+                title: 'Erro!',
+                text: 'quantidade selecionada acima do estoque',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
         }
 
     }
@@ -37,7 +42,7 @@ function ProdutoCarrinho(props) {
         cartList.splice(cartList.indexOf(props.prod.id_produto), 1)
         localStorage.setItem("cart", JSON.stringify(cartList))
         localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
-        window.location.reload()
+        props.att(props.attval+1);
     }
     const remove = () => {
         let id = props.prod.id_produto
@@ -51,7 +56,7 @@ function ProdutoCarrinho(props) {
         }
         localStorage.setItem("cart", JSON.stringify(cart))
         localStorage.setItem("qtyCart", JSON.stringify(cart.length))
-        window.location.reload()
+        props.att(props.attval+1);
     }
 
 

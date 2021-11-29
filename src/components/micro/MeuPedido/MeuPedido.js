@@ -8,6 +8,7 @@ import ItemMeuPedido from '../ItemMeuPedido/ItemMeuPedido'
 function MeuPedido(props) {
     const pedido = props.data;
     const [itens, setItens] = useState([])
+    const [dataPedido, setDataPedido] = useState('')
     //NumeroPedido"id do pedido"
     //DataPedido
     //StatusPedido
@@ -15,12 +16,11 @@ function MeuPedido(props) {
     //EndereçoPedido
     //DadosPagamento
     //funcaoVerMais
-
     function verMais() {
         var pontos = document.getElementById("pontos"+pedido.id);
         var meusPedidos = document.getElementById("mais"+pedido.id);
         var btnVerMais = document.getElementById("btnVerMais"+pedido.id);
-
+        
         if (pontos.style.display === "none") {
             pontos.style.display = "inline";
             meusPedidos.style.display = "none";
@@ -42,6 +42,7 @@ function MeuPedido(props) {
         .then((response)=>{
             setItens(response.data)
         })
+        setDataPedido((new Date(pedido.dataDeCriacao)).toLocaleString())
         verMais()
         verMais()
     },[])
@@ -92,7 +93,7 @@ function MeuPedido(props) {
                                         {" "}
                                         <li className="date">
                                             {" "}
-                                            <strong>Data do Pedido:</strong> <span>{pedido.dataDeCriacao.slice(0,10)}</span>{" "}
+                                            <strong>Data do Pedido:</strong> <span>{dataPedido.slice(0, dataPedido.length-3)}</span>{" "}
                                         </li>{" "}
                                         <li className="payment">
                                             {" "}
@@ -102,7 +103,7 @@ function MeuPedido(props) {
                                         </li>{" "}
                                         <li className="total">
                                             {" "}
-                                            <strong>Valor Total:</strong> <span>R$ {pedido.total.toFixed(2)}</span>{" "}
+                                            <strong>Valor Total:</strong> <span>R$ {(pedido.total||0).toFixed(2).replace('.', ',')}</span>{" "}
                                         </li>{" "}
                                     </ul>{" "}
                                 </div>{" "}
@@ -204,18 +205,18 @@ function MeuPedido(props) {
                             <tr className="subtotal">
                                 {" "}
                                 <td /> <td colSpan={2}>Subtotal</td>{" "}
-                                <td className="td-subtotal">R$ {(pedido.total-15).toFixed(2)}</td>{" "}
+                                <td className="td-subtotal">R$ {(pedido.subtotal).toFixed(2).replace('.', ',')}</td>{" "}
                             </tr>{" "}
                             <tr className="delivery-amount">
                                 {" "}
                                 <td /> <td colSpan={2}>Custo de entrega</td>{" "}
-                                <td className="td-delivery-amount"> R$15.00 </td>{" "}
+                                <td className="td-delivery-amount"> R$ 15,00 </td>{" "}
                             </tr>{" "}
 
                             <tr className="total">
                                 {" "}
                                 <td /> <td colSpan={2}>Total</td>{" "}
-                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2)} </td>{" "}
+                                <td className="td-delivery-amount"> R$ {(pedido.total).toFixed(2).replace('.', ',')} </td>{" "}
 
                             </tr>{" "}
                         </tfoot>{" "}
@@ -267,8 +268,15 @@ function MeuPedido(props) {
                                 <b>Cartão de Crédito</b>{" "}
                                 <div className="payment-value">
                                     {" "}
-                                    <strong>R$ {pedido.total.toFixed(2)} á vista </strong>{" "}
-
+                                    <strong>R${pedido.total.toFixed(2).replace('.', ',')} </strong>{" "}
+                                    { 
+                                        pedido.pagamento.qtdParcelas!=1?
+                                            <>
+                                                <strong>dividido em {pedido.pagamento.qtdParcelas} parcelas de R${(pedido.total/pedido.pagamento.qtdParcelas).toFixed(2).replace('.', ',') } Sem Juros</strong>
+                                            </>
+                                        :
+                                        <></>
+                                    }
                                 </div>{" "}
                                 <br />
                             </div>{" "}
@@ -282,10 +290,6 @@ function MeuPedido(props) {
                         </div>{" "}
                     </div>
                 </div>
-                <br />
-
-
-              
                 <br />
             </div>
         </>

@@ -6,6 +6,7 @@ import Checkbox from '../../components/micro/Forms/Checkbox/Checkbox'
 import { Form, Modal } from 'react-bootstrap'
 import axios from 'axios'
 import BotaoConfirmar from '../../components/micro/BotaoConfirmar/BotaoConfirmar'
+import Swal from 'sweetalert2'
 
 
 function CadastroCliente(props) {
@@ -28,7 +29,10 @@ function CadastroCliente(props) {
     const [emailexists, setemailexists] = useState('d-none')
     const [termos, setTermos] = useState(false)
     const [validTermos, setValidTermos] = useState('d-none')
+    const [menorIdade, setMenorIdade] = useState('d-none')
+    const [datainvalida, setDatainvalida] = useState('d-none')
     const Cadastrar = (event) => {
+        
         setLoading(true)
         event.preventDefault()
         if (validarEntradas()) {
@@ -63,7 +67,13 @@ function CadastroCliente(props) {
                             })
                             .catch((error) => {
                                 console.log(error)
-                                alert("desculpe ocorreu um erro durante o cadastro")
+                                Swal.fire({
+                                    title: 'Erro!',
+                                    text: 'desculpe ocorreu um erro durante o cadastro!',
+                                    icon: 'error',
+                                    confirmButtonText: 'fechar'
+                                  })
+                                
                             })
                     } else {
                         setemailexists("d-block")
@@ -75,8 +85,38 @@ function CadastroCliente(props) {
         setTimeout(() => {
             setLoading(false)
         }, 2500)
-
     }
+    function calculaIdade(dataNasc) {
+        var dataAtual = new Date();
+        var anoAtual = dataAtual.getFullYear();
+        var anoNascParts = dataNasc.slice(0,10).split('/');
+        var diaNasc = anoNascParts[0];
+        var mesNasc = anoNascParts[1];
+        var anoNasc = anoNascParts[2];
+        var idade = anoAtual - anoNasc;
+        var mesAtual = dataAtual.getMonth() + 1;
+        //Se mes atual for menor que o nascimento, nao fez aniversario ainda;  
+        if (mesAtual < mesNasc) {
+            idade--;
+        } else {
+            //Se estiver no mes do nascimento, verificar o dia
+            if (mesAtual == mesNasc) {
+                if (new Date().getDate() < diaNasc) {
+                    //Se a data atual for menor que o dia de nascimento ele ainda nao fez aniversario
+                    idade--;
+                }
+            }
+        }
+        return idade<18;
+    }
+
+    function validarBissexto(dataNasc){
+        if(dataNasc == new Date('2021/29/02').toLocaleString()){
+            return true;
+        }
+        return false;
+    }
+
     function validarEntradas() {
         if (!nome || nome.length == 0 || nome == "") {
             setValidNome('d-block')
@@ -86,10 +126,19 @@ function CadastroCliente(props) {
             setValidCpf('d-block')
             return false
         }
+        if(validarBissexto(new Date(dataNascimento).toLocaleString())){
+            setDatainvalida('d-block')
+            return false
+        }
         if (!dataNascimento || dataNascimento.length == 0 || dataNascimento == "") {
             setValidDataNascimento('d-block')
             return false
         }
+        if (calculaIdade(new Date(dataNascimento).toLocaleString())){
+            setMenorIdade('d-block')
+            return false
+        }
+        
         if (!email || email.length == 0 || email == "") {
             setValidEmail('d-block')
             return false
@@ -126,24 +175,7 @@ function CadastroCliente(props) {
             .replace(/(-\d{2})\d+?$/, "$1");
     };
 
-    const mascaraData = (value) => {
-        return value
-            .replace(/\D/g, "")
-            .replace(/(\d{2})(\d)/, "$1/$2")
-            .replace(/(\d{2})(\d)/, "$1/$2")
-            .replace(/(\d{4})(\d)/, "$1");
-    };
-
-
-    function validaSenha() {
-
-        if (password === confPassword) {
-            console.log("Senha confirmada");
-        } else {
-            console.log("Insire uma senha correta");
-        }
-
-    }
+    
 
 
 
@@ -170,7 +202,7 @@ function CadastroCliente(props) {
 
                     <div class="form-group col-md-6">
                         <Form.Label>Nome Completo*:</Form.Label>
-                        <Form.Control type="nome" placeholder="seu nome" onChange={(event) => {
+                        <Form.Control type="nome" placeholder="Seu Nome Completo" onChange={(event) => {
                             setNome(mascaraLetras(event.target.value))
                             setValidNome('none')
                         }}
@@ -185,7 +217,7 @@ function CadastroCliente(props) {
 
                     <div class="form-group col-md-3">
                         <Form.Label>CPF*:</Form.Label>
-                        <Form.Control type="cpf" placeholder="999.999.999-00" onChange={(event) => {
+                        <Form.Control type="cpf" placeholder="123.456.789-00" onChange={(event) => {
                             setCpf(mascaraCPF(event.target.value))
                             setValidCpf('none')
                         }}
@@ -197,10 +229,16 @@ function CadastroCliente(props) {
                     {/* --- Função de validação de data --- */}
                     <div class="form-group col-md-3">
                         <Form.Label>Nascimento:</Form.Label>
-                        <Form.Control onKeyDown={(e) => e.preventDefault()} type="date" max="2003-11-30" placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value); setValidDataNascimento('none') }}
+                        <Form.Control  type="date"  placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value); setValidDataNascimento('none'); setMenorIdade('none'); setDatainvalida('none');}}
                             value={dataNascimento} required="true" />
                         <div className={"invalid-feedback " + validDataNascimento}>
                             Data de nascimento é obrigatória!
+                        </div>
+                        <div className={"invalid-feedback " + menorIdade}>
+                            Proíbido o cadastro para menores de 18 anos!
+                        </div>
+                        <div className={"invalid-feedback " + datainvalida}>
+                            Data de nascimento inválida!
                         </div>
                     </div>
 
@@ -211,7 +249,8 @@ function CadastroCliente(props) {
                         <Form.Label>E-mail*:</Form.Label>
                         <Form.Control type="email" placeholder="usuario@email.com" onChange={(event) => {
                             setEmail(event.target.value)
-                            setValidEmail('none')
+                            setValidEmail('d-none')
+                            setemailexists("d-none")
                         }}
                             value={email} required="true" />
                         <div className={"invalid-feedback " + validEmail}>
@@ -223,7 +262,7 @@ function CadastroCliente(props) {
                     </div>
                     <div class="form-forup col-md-3">
                         <Form.Label>Contato*:</Form.Label>
-                        <Form.Control type="telefone" placeholder="(99) 99999-9999" onChange={(event) => {
+                        <Form.Control type="telefone" placeholder="(00) 12345-6789" onChange={(event) => {
                             setTelefone(mascaraTelefone(event.target.value))
                             setValidTelefone('none')
                         }}
@@ -237,7 +276,7 @@ function CadastroCliente(props) {
 
                     <div class="form-group col-md-3">
                         <Form.Label for="senha">Criar Senha*:</Form.Label>
-                        <Form.Control name="senha" id="senha" type="password" placeholder="Abc@123" maxLength="8" onChange={(event) => {
+                        <Form.Control name="senha" id="senha" type="password" placeholder="digite sua senha..." maxLength="8" onChange={(event) => {
                             setPassword(event.target.value)
                             setValidPass('none')
                             setValidsenha('none')
@@ -256,7 +295,7 @@ function CadastroCliente(props) {
                     {/* --- Confirmar senha posteriormente --- */}
                     <div class="form-group col-md-3">
                         <Form.Label for="senha">Confirmar Senha*:</Form.Label>
-                        <Form.Control name="senha1" id="senha1" type="password" placeholder="Abc@123" maxLength="8"
+                        <Form.Control name="senha1" id="senha1" type="password" placeholder="confirme sua senha..." maxLength="8"
                             onChange={(event) => {
                                 setConfPassword(event.target.value)
                                 setValidsenha('d-none')

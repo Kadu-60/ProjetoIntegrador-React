@@ -89,34 +89,32 @@ function Produto(props) {
     
     const [numero, setNumero] = useState(1)
 
-    // const incremento = () =>{
-    //     setNumero(numero + 1)
+    const incremento = () =>{
+        setNumero(+numero + 1)
        
         
-    // }
-    // const decremento = () => {
-    //     if (numero > 1) {
-    //         setNumero(numero - 1)
-    //     }
-    //     let cartList = localStorage.getItem("cart")
-    //         ? JSON.parse(localStorage.getItem("cart"))
-    //         : []
-       
-    // }
-
-    function incremento(){
-        var atual = document.getElementById("total").value;
-        var novo = atual - (-1); 
-        document.getElementById("total").value = novo;
-      }
-      
-      function decremento(){
-        var atual = document.getElementById("total").value;
-        if(atual > 1) { 
-          var novo = atual - 1;
-          document.getElementById("total").value = novo;
+    }
+    const decremento = () =>{
+        if(numero > 0){
+            setNumero(numero - 1)
         }
-      }
+        
+        
+    }
+
+    // function incremento(){
+    //     var atual = document.getElementById("total").value;
+    //     var novo = atual - (-1); 
+    //     document.getElementById("total").value = novo;
+    //   }
+      
+    //   function decremento(){
+    //     var atual = document.getElementById("total").value;
+    //     if(atual > 1) { 
+    //       var novo = atual - 1;
+    //       document.getElementById("total").value = novo;
+    //     }
+    //   }
 
 
 
@@ -171,9 +169,9 @@ function Produto(props) {
                                             <div class="btn-group inline">
 
                                                 <div class="contador contador-pag-produto">
-                                                    <div onClick={decremento} class="contador-btn btn-success"  >-</div>
-                                                    <input className="mostrador" type="number" id="total" defaultValue={numero} /> 
-                                                    <div onClick={incremento} class="contador-btn btn-danger" >+</div>
+                                                    <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
+                                                    <input type="number" className="mostrador" value={numero} onChange={(event)=>{setNumero(event.target.value)}}/> 
+                                                    <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
                                                 </div>
 
                                             </div>
@@ -181,7 +179,7 @@ function Produto(props) {
                                     </div>
                                     <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={numero}/>
+                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={+numero}/>
                                         </div>
                                     </div>
                                 </div>

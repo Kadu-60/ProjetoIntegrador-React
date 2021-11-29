@@ -12,7 +12,8 @@ function CarrinhoDois(props){
         let cartList = localStorage.getItem("cart") 
             ? JSON.parse(localStorage.getItem("cart")) 
             : []
-        setProducts(cartList)
+        setInterval(setProducts(cartList),1000)
+            
     }
     ,[])
     return(
