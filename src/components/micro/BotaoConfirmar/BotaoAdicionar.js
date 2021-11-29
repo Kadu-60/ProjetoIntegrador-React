@@ -2,6 +2,7 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react';
 import './BotaoConfirmar.css'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 function BotaoConfirmar(props) {
   const addToCart = () => {
@@ -25,7 +26,12 @@ function BotaoConfirmar(props) {
           localStorage.setItem("cart", cartString)
           localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
         } else {
-          alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+          Swal.fire({
+            title: 'Erro!',
+            text: 'desculpe, a quantidade selecionada está acima da quantidade em estoque',
+            icon: 'error',
+            confirmButtonText: 'fechar'
+          })
         }
 
       })
@@ -54,8 +60,14 @@ function BotaoConfirmar(props) {
           let cartString = JSON.stringify(cartList)
           localStorage.setItem("cart", cartString)
           localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
+          window.location.href = "http://localhost:3000/carrinho"
         } else {
-          alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+          Swal.fire({
+            title: 'Erro!',
+            text: 'desculpe, a quantidade selecionada está acima da quantidade em estoque',
+            icon: 'error',
+            confirmButtonText: 'fechar'
+          })
         }
 
       })

@@ -90,7 +90,7 @@ function Produto(props) {
     const [numero, setNumero] = useState(1)
 
     const incremento = () =>{
-        setNumero(numero + 1)
+        setNumero(+numero + 1)
        
         
     }
@@ -157,7 +157,7 @@ function Produto(props) {
 
                                                 <div class="contador contador-pag-produto">
                                                     <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
-                                                    <div class="mostrador">{numero}</div>
+                                                    <input type="number" className="mostrador" value={numero} onChange={(event)=>{setNumero(event.target.value)}}/> 
                                                     <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
                                                 </div>
 

@@ -5,6 +5,7 @@ import { Icon } from 'semantic-ui-react'
 import BotaoQtd from '../../micro/BotaoQtd/BotaoQtd';
 import axios from 'axios'
 import InputMask from "react-input-mask";
+import Swal from 'sweetalert2'
 function ProdutoCarrinho(props) {
 
     const [estoque, setEstoque] = useState(50)
@@ -22,7 +23,12 @@ function ProdutoCarrinho(props) {
             localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
             props.att(props.attval+1);
         } else {
-            alert("desculpe, a quantidade selecionada está acima da quantidade em estoque")
+            Swal.fire({
+                title: 'Erro!',
+                text: 'quantidade selecionada acima do estoque',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
         }
 
     }

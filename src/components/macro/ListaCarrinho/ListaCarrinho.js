@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import InputMask from "react-input-mask";
 import ProdutoCarrinho from './ProdutoCarrinho'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 function ListaCarrinho(props) {
     const [subtotal, setSubtotal] = useState(0)
@@ -59,7 +60,12 @@ function ListaCarrinho(props) {
     }
     const checkout = (event) => {
         if ((localStorage.getItem("cart") ? false : true) || localStorage.getItem("cart") == '[]' || localStorage.getItem("cart") == []) {
-            alert("carrinho vazio")
+            Swal.fire({
+                title: 'Carrinho Vazio! ',
+                text: 'Adicione um produto antes de finalizar a compra.',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
         } else {
             if (localStorage.getItem("user")) {
                 window.location.href = "http://localhost:3000/checkout"
