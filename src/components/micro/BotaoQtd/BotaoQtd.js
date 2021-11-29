@@ -1,4 +1,5 @@
 import React, { useState }  from 'react'
+import { Input } from 'semantic-ui-react'
 import './BotaoQtd.css'
 
 function BotaoQtd(props) {
@@ -22,7 +23,7 @@ function BotaoQtd(props) {
 
                             <div class="contador contador-pag-produto">
                                 <div onClick={decremento} class="contador-btn btn-success" data-sinal="-1" >-</div>
-                                <div class="mostrador">{numero}</div>
+                                <input className="mostrador" type="text" value={numero}/> 
                                 <div onClick={incremento} class="contador-btn btn-danger" data-sinal="1">+</div>
                             </div>
               

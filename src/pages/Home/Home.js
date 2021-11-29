@@ -22,7 +22,7 @@ function Home(props) {
     return (
         <>
             <main class="container fonte-global">
-                <br />
+                
                 <Carrosel className="banner" banner1={Banner1} banner2={Banner2} banner3={Banner3} />
                 {/* <TitulosHome titulo="Destaques" /> */}
                 <br /> <br /> <br />

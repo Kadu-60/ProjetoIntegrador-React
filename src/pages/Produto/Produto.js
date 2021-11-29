@@ -86,7 +86,7 @@ function Produto(props) {
             })
     }
 
-
+    
     const [numero, setNumero] = useState(1)
 
     const incremento = () =>{
@@ -95,13 +95,26 @@ function Produto(props) {
         
     }
     const decremento = () =>{
-        if(numero > 0){
+        if(numero > 1){
             setNumero(numero - 1)
         }
         
         
     }
 
+    // function incremento(){
+    //     var atual = document.getElementById("total").value;
+    //     var novo = atual - (-1); 
+    //     document.getElementById("total").value = novo;
+    //   }
+      
+    //   function decremento(){
+    //     var atual = document.getElementById("total").value;
+    //     if(atual > 1) { 
+    //       var novo = atual - 1;
+    //       document.getElementById("total").value = novo;
+    //     }
+    //   }
 
 
 
@@ -166,7 +179,7 @@ function Produto(props) {
                                     </div>
                                     <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
                                         <div class="col-12 d-flex justify-content-center">
-                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={numero}/>
+                                            <BotaoAdicionar texto='Adicionar' id={produto.id_produto} qtd={+numero}/>
                                         </div>
                                     </div>
                                 </div>
