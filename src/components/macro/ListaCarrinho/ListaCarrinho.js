@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, setState } from 'react'
 import './ListaCarrinho.css'
 import { Container, Table } from 'react-bootstrap'
 import { Icon } from 'semantic-ui-react'
@@ -10,6 +10,7 @@ import axios from 'axios'
 function ListaCarrinho(props) {
     const [subtotal, setSubtotal] = useState(0)
     const [cards, setCards] = useState([])
+    const [attComponent, setAttComponent] = useState(0)
     const history = useHistory();
     let conteudoTable = () => {
         if ((localStorage.getItem("cart")
@@ -47,7 +48,7 @@ function ListaCarrinho(props) {
                         <tbody className="conteudo-cart">
                             {
                                 cards.map((prod) => (
-                                    <ProdutoCarrinho prod={prod} />
+                                    <ProdutoCarrinho prod={prod} att={setAttComponent} attval={attComponent}/>
                                 ))
                             }
                         </tbody>
@@ -99,7 +100,7 @@ function ListaCarrinho(props) {
                 })
         }
 
-    }, [])
+    }, [attComponent])
 
     return (
         <>
