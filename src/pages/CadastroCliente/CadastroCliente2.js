@@ -355,7 +355,7 @@ function CadastroCliente(props) {
 </p>
 <p>
                             CARRINHO DE COMPRAS <br/>
-                            Para facilitar sua compra, ela ficará salva em seu carrinho de compras por até 30 dias, caso saia do site ou não queira finalizar a compra no momento. Porém, para ter acesso a esta finalidade você deve entrar com seu Login e Senha no site, senão os produtos do carrinho irão expirar.
+                            Para facilitar sua compra, ela ficará salva em seu carrinho de compras até a saída do site ou não queira finalizar a compra no momento. Porém, para ter acesso a esta finalidade você deve entrar com seu Login e Senha no site, senão os produtos do carrinho irão expirar.
 </p>
 <p>
 
