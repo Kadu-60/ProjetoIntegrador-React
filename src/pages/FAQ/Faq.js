@@ -23,13 +23,13 @@ export default class AccordionExampleStandard extends Component {
             <br/> <br/> <br/>
               <p className="title-dash">Perguntas Frequentes</p>
              <Accordion>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 0}
           index={0}
           onClick={this.handleClick}
         >
           <Icon name='beer' />
-          Por que meu pedido esta parado no posto fiscal?
+          Por que meu pedido está parado no posto fiscal?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 0}>
           <p>
@@ -37,25 +37,25 @@ export default class AccordionExampleStandard extends Component {
 
         Devido a este motivo, alguns pedidos podem ter o prazo informado de entrega ultrapassado, pois, são retidos na barreira fiscal para verificação. Junto a estes pedidos, enviamos a Nota Fiscal e por nossa empresa estar no SIMPLES Nacional, pagamento um tributo único. No entanto, dependemos do Agente Público para liberação do pedido.
 
-        Caso o Órgão do Governo entre em contato com você solicitando o pagamento de algum imposto, Favor Desconsiderar, pois, tudo é pago antes da saída do produto de nosso Centro de Distribuição.
+        Caso o Órgão do Governo entre em contato com você solicitando o pagamento de algum imposto, favor desconsiderar, pois, tudo é pago antes da saída do produto de nosso Centro de Distribuição.
           </p>
         </Accordion.Content>
 
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 1}
           index={1}
           onClick={this.handleClick}
         >
           <Icon name='beer' />
-          Onde estamos?
+          Onde estamos localizados?
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 1}>
           <p>
-          A DevBrew Comércio On-line Ltda esta localizada na Av. Paulista, nº 10767 – Paulista/SP, CEP 00.000-000
+          A DevBrew Comércio On-Line LTDA está localizada na Av. Paulista, nº 10767 – Paulista/SP, CEP 00.000-000.
           </p>
         </Accordion.Content>
 
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 2}
           index={2}
           onClick={this.handleClick}
@@ -77,7 +77,7 @@ export default class AccordionExampleStandard extends Component {
           </p>
           
         </Accordion.Content>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 3}
           index={3}
           onClick={this.handleClick}
@@ -87,10 +87,10 @@ export default class AccordionExampleStandard extends Component {
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 3}>
           <p>
-          Atualmente não temos loja física, apenas venda pelo nossa loja virtual
+          Atualmente não temos loja física, apenas vendas pela nossa loja virtual.
           </p>
         </Accordion.Content>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 4}
           index={4}
           onClick={this.handleClick}
@@ -159,15 +159,11 @@ export default class AccordionExampleStandard extends Component {
 
             V.I - O Cliente deverá solicitar a troca ou devolução através do SAC. A coleta dos pedidos ocorrerá por meio de nossas transportadoras parceiras. Eventualmente, para algumas localidades, a devolução ocorrerá por postagem nos Correios e o custo referente à devolução será de responsabilidade da DevBrew. Você receberá um código de postagem e deverá se dirigir a qualquer agência credenciada dos Correios.
 
-            
-
             V.II - A troca será realizada somente se o produto estiver em perfeito estado, na sua caixa de envio, com a etiqueta da DevBrew afixada.
 
             V.III - Após a chegada do pedido ao Centro de Distribuição, a DevBrew.com.br verificará se as condições de devolução recomendadas foram atendidas. Em caso afirmativo, providenciará a restituição ou troca do pedido de acordo com a solicitação feita pelo Cliente.
 
             V.IV - A DevBrew.com.br isenta-se da obrigação de atender às solicitações de troca ou devolução de qualquer produto devolvido sem que o SAC seja comunicado, ou se o contato for realizado fora do prazo ou na ausência de itens/acessórios que o acompanham.
-
-            
 
             VI. Formas de pagamento aceitas:
 
@@ -189,7 +185,6 @@ export default class AccordionExampleStandard extends Component {
 
             IX. Dos direitos autorais:
 
-            
             IX.I - A estrutura do site DevBrew.com.br, bem como a logomarca, os textos, as imagens, os videos e demais aplicações informáticas que o compõem, são de propriedade da DevBrew e protegidas pela legislação brasileira referente a propriedade intelectual.
             
             IX.II - O Usuário não está autorizado a utilizar, sob qualquer forma ou pretexto, as marcas, conteúdos e serviços propostos pelo site, podendo a DevBrew recorrer às medidas cíveis e penais cabíveis quando da utilização ou reprodução indevida.
@@ -200,8 +195,7 @@ export default class AccordionExampleStandard extends Component {
 
             X.I - O Cliente é responsável pela correta utilização do site e de seus serviços, prezando pelas boas práticas comerciais, sendo proibida a revenda dos produtos aqui vendidos, principalmente, em sites que praticam o MarketPlace.
             
-            X.II -  A DevBrew tem o direito de limitar ou recusar pedidos que entender serem de negociadores, revendedores ou distribuidores, podendo também limitar ou cancelar a quantidade dos produtos adquiridos por cada cliente ou por pedido de compra. Além disso, o Cliente responsabiliza-se pelo cumprimento das normas inseridas nesse instrumento e pela proteção dos dados de acesso da sua conta (login e senha).
-            
+            X.II - A DevBrew tem o direito de limitar ou recusar pedidos que entender serem de negociadores, revendedores ou distribuidores, podendo também limitar ou cancelar a quantidade dos produtos adquiridos por cada cliente ou por pedido de compra. Além disso, o Cliente responsabiliza-se pelo cumprimento das normas inseridas nesse instrumento e pela proteção dos dados de acesso da sua conta (login e senha).
             
             XI. Das sanções
             
@@ -213,7 +207,7 @@ export default class AccordionExampleStandard extends Component {
 
           </p>
         </Accordion.Content>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 5}
           index={5}
           onClick={this.handleClick}
@@ -225,16 +219,13 @@ export default class AccordionExampleStandard extends Component {
           <p>
           As mercadorias podem ser trocadas ou devolvidas até 7 dias após o recebimento, por motivo de desistência, arrependimento, avaria ou entrega do produto em desacordo com o pedido realizado. 
 
-        Para isso, entre em contato com o SAC, pelo Chat ou por E-mail, e informe o número do pedido e o código do produto a ser trocado, ambos descritos na nota fiscal, ao lado do nome da mercadoria e qual o motivo da solicitação.
+        Para isso, entre em contato conosco pelo e-mail, telefone ou formulário de contato, e informe o número do pedido e o código do produto a ser trocado, ambos descritos na nota fiscal, ao lado do nome da mercadoria e qual o motivo da solicitação.
 
-        No caso das compras efetuados por cartão de crédito, o valor será ressarcido via estorno no prazo de até 5 dias úteis após o recebimento do mercadoria no centro de distribuição do CervejaBox. A verificação do estorno na fatura depende do prazo de processamento do banco.
-
-        Já quando a compra for efetuado por boleto, o prazo para depósito na conta corrente em nome do comprador será em até 5 dias úteis após o recebimento do mercadoria no centro de distribuição do CervejaBox.
-
-        A troca será realizada somente se o produto estiver em perfeito estado, em sua embalagem de envio, com a etiqueta da CervejaBox afixada.
+        Compras efetuados por cartão de crédito, o valor será ressarcido via estorno no prazo de até 5 dias úteis após o recebimento do mercadoria no centro de distribuição da DevBrew. A verificação do estorno na fatura depende do prazo de processamento do banco.
+        A troca será realizada somente se o produto estiver em perfeito estado, em sua embalagem de envio, com a etiqueta da DevBrew fixada.
           </p>
         </Accordion.Content>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 6}
           index={6}
           onClick={this.handleClick}
@@ -248,7 +239,7 @@ export default class AccordionExampleStandard extends Component {
           </p>
         </Accordion.Content>
         
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 7}
           index={7}
           onClick={this.handleClick}
@@ -262,7 +253,7 @@ export default class AccordionExampleStandard extends Component {
          
           </p>
         </Accordion.Content>
-        <Accordion.Title
+        <Accordion.Title className="accordion-faq"
           active={activeIndex === 8}
           index={8}
           onClick={this.handleClick}
@@ -272,7 +263,7 @@ export default class AccordionExampleStandard extends Component {
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 8}>
           <p>
-          O prazo de entrega começa a contar a partir da aprovação do pagamento do pedido. O prazo para as compras via cartão de crédito costuma ser até 24h.
+          O prazo de entrega começa a contar a partir da aprovação do pagamento do pedido. O prazo para as compras via cartão de crédito costumam ser de até 24h.
          
           </p>
         </Accordion.Content>
@@ -282,7 +273,7 @@ export default class AccordionExampleStandard extends Component {
 
       </Accordion>
       <p className="title-dash">Não encontrou o que precisava?</p>
-      <p> Visite nossa central de atendimento</p>
+      <p> Visite nossa central de atendimento!</p>
       <button  className="btn-botao-faq" id="">
           <a className="chamado" href="/contato">
                         Criar um chamado</a>

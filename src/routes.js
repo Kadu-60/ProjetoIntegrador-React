@@ -23,6 +23,8 @@ import Fale from './pages/FormularioContato/FormularioContato'
 import Teste from './pages/Teste'
 import Marca from './pages/Marca/Marca'
 import Destaques from './pages/Destaques/Destaques'
+import NotFound from './pages/404/404'
+
 import Catalogo from './pages/Catalogo/Catalogo'
 
 export const RoutesSite = () => {
@@ -35,7 +37,7 @@ export const RoutesSite = () => {
                 <Route path="/dashboard/:id" component={Dashboard} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contato" component={Fale} />
-                <Route path="/marcas" component={Marca} />
+                <Route path="/marcas/" component={Marca} />
                 <Route path="/busca/:pesq" component={Busca} exact/>
                 <Route path="/buscaAvancada/:pesq1/:pesq2/:pesq3/:pesq4" component={BuscaAvancada} exact/>
                 <Route path="/cadastro" component={CadastroCliente} />
@@ -50,6 +52,7 @@ export const RoutesSite = () => {
                 <Route path="/destaques" component={Destaques} />
                 <Route path="/catalogo" component={Catalogo} />
                 <Route path="/teste/:pesq" component={Teste} />
+                <Route component={NotFound} />
             </Switch>
         </StoreProvider>
     )
