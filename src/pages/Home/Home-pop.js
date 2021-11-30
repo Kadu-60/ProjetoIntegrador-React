@@ -79,8 +79,7 @@ function Home(props) {
               <p class="dirija"> <b>Se beber, não dirija.</b> Não compartilhe esse conteúdo com menores de 18 anos</p>
             </div>
          
-            <a class="link-termo" href="/faq"> Termos e condições</a>
-            <br/>
+            
           </div>
         </div>
       </div>
