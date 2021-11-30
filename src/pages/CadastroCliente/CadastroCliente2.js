@@ -321,7 +321,7 @@ function CadastroCliente(props) {
                         {loading ? (<div class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        ) : (<BotaoConfirmar texto="Cadastrar" type="button" onClick={(event) => { Cadastrar(event) }} navigation route="home" />)}
+                        ) : (<BotaoConfirmar texto="Cadastrar" type="button" onClick={(event) => { Cadastrar(event) }} navigation route="login" />)}
                     </div>
 
                 </div>
