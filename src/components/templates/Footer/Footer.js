@@ -16,7 +16,7 @@ function Footer(props) {
                             <section className="cadastroNew" id="cadastroNew">
                                 <div className="texto" id="texto">
                                     
-                                    <strong className="freteFixo">Frete Fixo para qualquer região de São Paulo <br /></strong> <br />
+                                    <strong className="freteFixo">Frete Fixo para qualquer região de Brasil <br /></strong> <br />
 
                                 </div>
 
