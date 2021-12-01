@@ -152,10 +152,12 @@ function ListaCarrinho(props) {
                             <ul className="lista-carrinho-total">
 
                                 <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
+
                                 <li className="sub-global"><b>Subtotal</b> <span className="texto-total-frete-sub" id={"subTotal"}> R$ {(subtotal || 0).toFixed(2).replace('.', ',')}</span>   </li>
                                 <li className="sub-global"><b>Frete </b>  <span className="texto-total-frete">  R$ 15,00</span>   </li>
 
                                 <li className="sub-global borda-total"><b>Total </b> <span className="texto-total-frete-total" id={"total"}>  R$ {((subtotal || 0) + 15).toFixed(2).replace('.', ',')}</span>   </li>
+                                <li className="sub-global"><i>*Entrega em até 6 dias úteis</i></li>
                                 <button class="btn-finalizar-compra" type="button" onClick={(event) => { checkout(event) }}>Finalizar Compra<Icon className="icone-finalizar-compra" name="angle right" /></button>
                                 <br />
                                 <br />

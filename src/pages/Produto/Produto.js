@@ -156,11 +156,11 @@ function Produto(props) {
                                         <div class="preco-produto">
                                             <div class="preco-por">
 
-                                                <span className="titulo-produto-preco"><b> por R${preco1}</b></span>
+                                                <span className="titulo-produto-preco"><b> por R$ {preco1}</b></span>
 
                                             </div>
                                             <div>
-                                                <span className="titulo-produto-parc"> Ou 3 x de R${(parseFloat(preco1) / 3).toFixed(2).replace(".", ",")} sem juros </span>
+                                                <span className="titulo-produto-parc"> Ou 3 x de R$ {(parseFloat(preco1) / 3).toFixed(2).replace(".", ",")} sem juros </span>
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +260,10 @@ function Produto(props) {
 
                         <div className="parcelamento-produto-pd col-4">
                             <Icon name="truck " className="icone-card" />
-                            <span className="texto-par-entr-ambi">Entrega Garantida</span>
+                            <span className="texto-par-entr-ambi">
+                                Entrega Garantida <br/> 
+                                <p class="texto-prazo">em até 6 dias úteis</p>
+                            </span>
 
                         </div>
 
