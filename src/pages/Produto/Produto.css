@@ -222,6 +222,10 @@ a{
     margin-bottom: 100px;
 }
 
+.texto-prazo {
+    padding-left: 55px;
+}
+
 
 @media screen and (max-width: 857px){
 
