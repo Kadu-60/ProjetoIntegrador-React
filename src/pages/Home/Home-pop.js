@@ -76,7 +76,7 @@ function Home(props) {
               <a href="/home"><button type="button" class="btn btn-sim" data-bs-dismiss="modal"  value="Submit Button">SIM</button></a>
             </div>
             <div class="modal-footer">
-              <p class="dirija" text-align-center> <b>Se beber, não dirija.</b> Não compartilhe esse conteúdo com menores de 18 anos</p>
+              <p class="dirija"> <b>Se beber, não dirija.</b> Não compartilhe esse conteúdo com menores de 18 anos.</p>
             </div>
          
             
