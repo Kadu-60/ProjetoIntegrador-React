@@ -39,10 +39,18 @@ div.modal-confirm{
  
  div.modal-footer{
      background-color: #f2f2f2;
+
  }
+
+ .modal-footer {
+     text-align: center;
+     align-items: center;
+ }
+
  p.dirija{
      font-size: 12px;
      font-family: Open Sans;
+
  }
  
  button.btn-nao{

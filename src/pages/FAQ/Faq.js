@@ -207,7 +207,7 @@ export default class AccordionExampleStandard extends Component {
 
           </p>
         </Accordion.Content>
-        <Accordion.Title className="accordion-faq"
+        <Accordion.Title className="accordion-faq" id="#troca"
           active={activeIndex === 5}
           index={5}
           onClick={this.handleClick}
@@ -225,7 +225,7 @@ export default class AccordionExampleStandard extends Component {
         A troca será realizada somente se o produto estiver em perfeito estado, em sua embalagem de envio, com a etiqueta da DevBrew fixada.
           </p>
         </Accordion.Content>
-        <Accordion.Title className="accordion-faq"
+        <Accordion.Title className="accordion-faq" id="#pagamento"
           active={activeIndex === 6}
           index={6}
           onClick={this.handleClick}
@@ -233,13 +233,13 @@ export default class AccordionExampleStandard extends Component {
           <Icon name='beer' />
           Forma de Pagamento
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 6}>
+        <Accordion.Content active={activeIndex === 6} >
           <p>
           A DevBrew no momento está aceitando somente cartão de crédito.
           </p>
         </Accordion.Content>
         
-        <Accordion.Title className="accordion-faq"
+        <Accordion.Title className="accordion-faq" id="#taxa"
           active={activeIndex === 7}
           index={7}
           onClick={this.handleClick}
@@ -253,7 +253,7 @@ export default class AccordionExampleStandard extends Component {
          
           </p>
         </Accordion.Content>
-        <Accordion.Title className="accordion-faq"
+        <Accordion.Title className="accordion-faq" id="#prazo"
           active={activeIndex === 8}
           index={8}
           onClick={this.handleClick}
