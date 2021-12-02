@@ -3,7 +3,7 @@ import './Checkout.css'
 //import 'bootstrap/dist/css'
 import FormDefault from '../../components/macro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
-import { Container, Form, Row, Col, Accordion } from 'react-bootstrap'
+import { Container, Form, Row, Col, Accordion, FormControl, InputGroup } from 'react-bootstrap'
 import { Icon } from 'semantic-ui-react'
 import Produto1 from '../../assets/imgs/teste/cerveja.png'
 import ProdutoCheckout from '../../components/micro/ProdutoCheckout/ProdutoCheckout'
@@ -53,6 +53,16 @@ const Checkout = (props) => {
     //         [event.target.name]: event.target.value
     //     });
     // }
+    <>
+  <InputGroup className="mb-3">
+    <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+    <FormControl aria-label="Text input with checkbox" />
+  </InputGroup>
+  <InputGroup>
+    <InputGroup.Radio aria-label="Radio button for following text input" />
+    <FormControl aria-label="Text input with radio button" />
+  </InputGroup>
+</>
     useEffect(() => {
         axios.get('http://localhost:8080/parcelas')
             .then((response) => {
@@ -105,6 +115,7 @@ const Checkout = (props) => {
 
 
     }, [])
+
 
     const direcionar = (props) => {
         const URL = '/pedidoFinalizado/' + props.id
@@ -304,6 +315,8 @@ const Checkout = (props) => {
 
                                             <div className="div-fundo" id="div-fundo">
                                                 <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
+                    
+                            
                                                 <Cards
                                                     number={number}
                                                     name={name}

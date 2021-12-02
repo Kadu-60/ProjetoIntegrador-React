@@ -69,7 +69,7 @@ function FormularioContato(props) {
            id="nome"
             type="text"
             className="form-control"
-            placeholder="Digite o seu nome"
+            placeholder="Digite o seu nome..."
             aria-required="true"  name="nome" onChange={onChange} required
           />
         </div>
@@ -81,7 +81,7 @@ function FormularioContato(props) {
            id="telefone"
             type="number"
             className="form-control"
-            placeholder="(XX) XXXX-XXXX" name="telefone" onChange={onChange} 
+            placeholder="(11) 12345-6789" name="telefone" onChange={onChange} 
           />
         </div>
         <div className="container col-4 titulo">
@@ -113,7 +113,7 @@ function FormularioContato(props) {
            id="assunto"
             type="text"
             className="form-control"
-            placeholder="Digite o assunto" name="assunto" id="assunto" onChange={onChange} required
+            placeholder="Digite o assunto..." name="assunto" id="assunto" onChange={onChange} required
           />
         </div>
         <div className="container col-4 mensagem-form titulo">
@@ -124,7 +124,7 @@ function FormularioContato(props) {
            id="mensagem"
             className="form-control"
             rows={9}
-            defaultValue={""} required="true" name="mensagem" onChange={onChange}
+            defaultValue={""} required="true" name="mensagem" placeholder="Digite aqui a sua mensagem..." onChange={onChange}
           />
           <div className="container buttonform col-12 d-flex titulo">
             <div className="container col-1">

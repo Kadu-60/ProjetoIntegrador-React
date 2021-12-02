@@ -175,10 +175,6 @@ function CadastroCliente(props) {
             .replace(/(-\d{2})\d+?$/, "$1");
     };
 
-    
-
-
-
     const mascaraTelefone = (value) => {
         return value
             .replace(/\D/g, "")
@@ -348,19 +344,31 @@ function CadastroCliente(props) {
                     aria-labelledby="example-custom-modal-styling-title"
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            Termos e Condições do site
+                        <Modal.Title align-text-center id="example-custom-modal-styling-title">
+                            Termos e Condições do Site
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <p>
-                            Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
-                            commodi aspernatur enim, consectetur. Cumque deleniti temporibus
-                            ipsam atque a dolores quisquam quisquam adipisci possimus
-                            laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
-                            accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
-                            reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
-                            deleniti rem!
+                            CÁLCULO DO VALOR DE FRETE <br/>
+                            O valor do frete é fixo no carrinho de compras de R$ 15,00.  Somente entregamos na cidade de São Paulo/SP.
+</p>
+<p>
+                            CARRINHO DE COMPRAS <br/>
+                            Para facilitar sua compra, ela ficará salva em seu carrinho de compras até a saída do site ou não queira finalizar a compra no momento. Porém, para ter acesso a esta finalidade você deve entrar com seu Login e Senha no site, senão os produtos do carrinho irão expirar.
+</p>
+<p>
+
+                            REGRA PARA PAGAMENTO <br/>
+                            Após a finalização do pedido não será possível alterar a forma de pagamento, endereço, arte do rótulo, estilo de cerveja ou incluir e/ou excluir itens.<br/>
+
+                            – CARTÃO DE CRÉDITO: As compras podem ser pagas com cartão de crédito. O pagamento pode ser à vista ou parcelado em até 3 (três) vezes sem juros. Para sua segurança, todas as compras efetuadas com cartão de crédito estão sujeitas à análise de cadastro.
+</p>
+<p>
+                            ENVIO<br/>
+                            Após a confirmação de pagamento pela instituição financeira, seu pedido estará pronto para ser separado e embalado para entrega. Todos os produtos disponíveis para compra estão separados em nosso estoque, prontos para terem seu rótulos impressos, aplicados e enviados. O prazo de entrega passa a contar a partir do momento em que o pagamento é confirmado sendo de até 6 dias, em caso de contratação do serviço.
+                            Nossas entregas ocorrem todos os dias das semana entre 8h e 20h, caso haja qualquer restrição de dia ou horário, coloque no campo observações.<br/>
+                            Em casos de entrega em condomínio residencial ou comercial o entregador fica responsável em levar até a portaria o produto e não até o apartamento do Cliente.
                         </p>
                     </Modal.Body>
                     <Modal.Footer>

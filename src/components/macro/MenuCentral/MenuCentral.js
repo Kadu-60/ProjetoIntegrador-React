@@ -1,7 +1,10 @@
 import './MenuCentral.css'
 import MeuPedido from '../../micro/MeuPedido/MeuPedido'
+import EnderecoPrincipal from '../../micro/EnderecoPrincipal/EnderecoPrincipal'
+import EnderecoEntrega from '../../micro/EnderecoEntrega/EnderecoEntrega'
+import ListaEnderecos from '../../micro/ListaEnderecos/ListaEnderecos'
 import React, { useState, useEffect } from 'react'
-import { Container, Tab } from 'semantic-ui-react'
+import { Container, Tab, Icon } from 'semantic-ui-react'
 import BotaoDash from '../../micro/BotaoDash/BotaoDash'
 import InputMask from "react-input-mask";
 import { useParams } from 'react-router-dom'
@@ -21,7 +24,16 @@ const deslogar = () => {
 
 
 const Panes = ({ user, dataNascimento }) => {
-
+  let endereco = {
+    "nomeCliente": "Nome Cliente",
+    "rua": "Rua do Cliente",
+    "numero": 123,
+    "complemento": "Complemento",
+    "cep": "12323-123",
+    "bairro": "Bairro",
+    "cidade": "Cidade do Cliente",
+    "estado": "Estado do Cliente"
+  }
 
   const [testeData, setTesteData] = useState([])
 
@@ -241,12 +253,12 @@ const Panes = ({ user, dataNascimento }) => {
             <div className="container bg-light " >
               <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
                 <strong className="me-1">Você ainda não tem pedidos!</strong>
-                
+
               </div>
             </div>
             :
             pedidos.map((pedido) => (
-              <MeuPedido data={pedido} key ={pedido.id}/>
+              <MeuPedido data={pedido} key={pedido.id} />
             ))
 
         }
@@ -254,7 +266,30 @@ const Panes = ({ user, dataNascimento }) => {
 
       </Tab.Pane>
     },
+    {
+      menuItem: 'Meus Endereços', render: () =>
+        <Tab.Pane>
+          <div className="row">
 
+            <EnderecoPrincipal endereco={endereco}/>
+
+            <EnderecoEntrega endereco={endereco}/>
+
+            <div className="col-12">
+              <br />
+              <h2>Endereços Cadastrados</h2>
+              <hr />
+              <ListaEnderecos enderecos ={[endereco, endereco, endereco, endereco]}/>
+            </div>
+          </div>
+        </Tab.Pane>
+    },
+    {
+      menuItem: 'Meus Cartões', render: () =>
+        <Tab.Pane>
+         
+        </Tab.Pane>
+    },
 
     {
       menuItem: 'Sair', render: () => <Tab.Pane>

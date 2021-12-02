@@ -204,7 +204,7 @@ align-items: start;
 }
 
 .titulo-entrega-cart {
-    color: #707070;
+    font-style: italic;
     font-size: 0.75rem;
     max-width: 100px;
     text-align: center;

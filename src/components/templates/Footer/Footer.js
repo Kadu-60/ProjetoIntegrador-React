@@ -16,7 +16,7 @@ function Footer(props) {
                             <section className="cadastroNew" id="cadastroNew">
                                 <div className="texto" id="texto">
                                     
-                                    <strong className="freteFixo">Frete Fixo para qualquer região de São Paulo <br /></strong> <br />
+                                    <strong className="freteFixo">Frete Fixo para qualquer região de Brasil <br /></strong> <br />
 
                                 </div>
 
@@ -94,7 +94,7 @@ function Footer(props) {
                             <div className="coluna redes">
                                 <h3 className="titulo-footer"><b> Redes Sociais</b></h3>
                                 <div className='redesSocias d-flex justify-content-around'>
-                                <a  href="https://www.facebook.com"> <div className="fab fa-facebook"></div> </a>
+                                <a  href="https://www.facebook.com/devbrewcervejaria/?ref=pages_you_manage"> <div className="fab fa-facebook"></div> </a>
                                 <a  href="https://www.instagram.com/devbrewcervejaria/"> <div className="fab fa-instagram"></div> </a>
                                 </div>
                                 
