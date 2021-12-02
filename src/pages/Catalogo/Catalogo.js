@@ -56,7 +56,6 @@ function Catalogo(props) {
                 </div>
 
 
-
                 <ListarProdutos>
                     <ProdutosBusca produtos={prodAtuais} loading={loading} />
                 </ListarProdutos>
