@@ -30,8 +30,7 @@ function Dashboard() {
             
         
     }
-    console.log(user)
-            console.log(dataNascimento)
+    
 
     return (
         <>

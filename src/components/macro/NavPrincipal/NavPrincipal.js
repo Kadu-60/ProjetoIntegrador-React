@@ -54,7 +54,7 @@ function NavPrincipal(props) {
                     localStorage.removeItem('user')
                     setLogado(0)
                     window.location.reload()
-                }, 599900)
+                }, 5999000)
                 setLogado(2)
             }
         },10000)

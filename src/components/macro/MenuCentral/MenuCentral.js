@@ -10,6 +10,7 @@ import InputMask from "react-input-mask";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Formik, Field } from 'formik';
 
 
 const deslogar = () => {
@@ -24,34 +25,32 @@ const deslogar = () => {
 
 
 const Panes = ({ user, dataNascimento }) => {
-  let endereco = {
-    "nomeCliente": "Nome Cliente",
-    "rua": "Rua do Cliente",
-    "numero": 123,
-    "complemento": "Complemento",
-    "cep": "12323-123",
-    "bairro": "Bairro",
-    "cidade": "Cidade do Cliente",
-    "estado": "Estado do Cliente"
-  }
-
   const [testeData, setTesteData] = useState([])
-
-
+  const [cep, setCep] = useState('')
+  const [rua, setRua] = useState('')
+  const [numeroEndereco, setNumeroEndereco] = useState('')
+  const [complemento, setComplemento] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
+  const [att, setAtt]= useState(0)
   const [telefoneChanged, setTelefoneChanged] = useState((user.telefone))
   const [nomeChanged, setNomeChanged] = useState((user.nome))
   const [dataNas, setDataNas] = useState('')
   const [senha, setSenha] = useState('')
   const [senhaSec, setSenhaSec] = useState('')
   const [validSenha, setValidSenha] = useState('')
+  const [destinatario, setDestinatario] = useState(null)
   const { id } = useParams()
   const [pedidos, setPedidos] = useState([])
   const [dateInvalida, setDateInvalida] = useState('d-none')
   const [dateLess, setDateLess] = useState('d-none')
-
   const teste1 = (("" + dataNascimento).slice(0, 10).replaceAll("-", "/"))
   const data1 = new Date(teste1).toLocaleDateString()
   const [muda, setMuda] = useState('')
+  const [endPrincipal, setEndPrincipal] = useState(null)
+  const [endEntrega, setEndEntrega] = useState(null)
+  const [enderecos, setEnderecos] = useState([])
 
   const alterarDados = (event) => {
     event.preventDefault()
@@ -73,9 +72,65 @@ const Panes = ({ user, dataNascimento }) => {
 
   }
 
+  function buscaCep() {
+    const value = cep;
 
+    const cepbusc = value?.replace(/[^0-9]/g, '');
 
+    if (cepbusc?.length !== 8) {
+      return;
+    }
 
+    fetch(`https://viacep.com.br/ws/${cepbusc}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRua(data.logradouro);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
+        setEstado(data.uf);
+      });
+
+  }
+
+  const adicionarEndereco = () => {
+    let endereco =
+    {
+      "clienteEnderecoKey":
+      {
+        "cliente":
+        {
+          "id_Cliente": user.id_Cliente
+        },
+        "endereco":
+        {
+          "estado": estado,
+          "cidade": cidade,
+          "bairro": bairro,
+          "rua": rua,
+          "cep": cep,
+          "numero": numeroEndereco,
+          "complemento": complemento,
+          "ponto_referencia": "",
+          "destinatario": destinatario
+        }
+      },
+      "enderecoPrincipal": false,
+      "enderecoEntrega": false
+    }
+    axios.post("http://localhost:8080/clienteEndereco/create", endereco)
+      .then((response)=>{
+        console.log(response.data)
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Endereco adicionado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'fechar'
+        })
+        setTimeout(()=>{window.location.reload()}, 800)
+        
+      })
+    
+  }
 
 
 
@@ -124,9 +179,14 @@ const Panes = ({ user, dataNascimento }) => {
     axios.get("http://localhost:8080/Pedido/cliente/" + id, config)
       .then((response) => {
         setPedidos(response.data);
-
       })
-  }, [])
+    axios.get("http://localhost:8080/clienteEndereco/cliente/"+id)
+      .then((response)=>{
+        setEnderecos(response.data);
+        
+      })
+
+  }, [att])
 
 
 
@@ -271,15 +331,101 @@ const Panes = ({ user, dataNascimento }) => {
         <Tab.Pane>
           <div className="row">
 
-            <EnderecoPrincipal endereco={endereco}/>
+            <EnderecoPrincipal enderecos={enderecos} />
 
-            <EnderecoEntrega endereco={endereco}/>
+            <EnderecoEntrega enderecos={enderecos} />
 
             <div className="col-12">
               <br />
-              <h2>Endereços Cadastrados</h2>
+              <div className="row">
+                <div className="col-9 d-flex flex-column justify-content-end">
+                  <h2 className="d-flex justify-content-between align-content-center" >Endereços Cadastrados</h2>
+                </div>
+                <div className="col-3  d-flex justify-content-end">
+                  <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                  </button>
+                </div>
+
+
+              </div>
+
               <hr />
-              <ListaEnderecos enderecos ={[endereco, endereco, endereco, endereco]}/>
+              <ListaEnderecos enderecos={enderecos} att ={setAtt} />
+            </div>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <Formik>
+                    <div className="" >
+
+                      <ul className="lista-checkout-total">
+                        
+                        <li className="">
+
+
+
+                          <ul className="lista-carrinho-total">
+
+                            <div className="row">
+                              <div className="col-3">
+                                <label>* CEP </label>
+                                <Field type="text" id="cep" name="cep" onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
+                              </div>
+                              <div class="col-3 d-flex flex-column justify-content-end">
+                                <button type="button" onClick={() => buscaCep()} class="btn btn-secondary" >Buscar</button>
+                              </div>
+
+                            </div>
+
+                            <div className="row ">
+                              <div className="col-9 ">
+                                <label>* Rua </label>
+                                <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
+                              </div>
+
+                              <div className="col-3">
+                                <label>* Número </label>
+                                <Field type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
+                              </div>
+
+                            </div>
+                            <label> Complemento </label>
+                            <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
+                            <label>* Bairro </label>
+                            <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
+                            <label>* Cidade </label>
+                            <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
+                            <label>* Estado </label>
+                            <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
+                            <label>Nome do destinatário </label>
+                            <input type="text" class="form-control" placeholder={user.nome} value={destinatario} onChange={(event) => { setDestinatario(event.target.value == "" ? null : event.target.value) }} />
+
+
+                          </ul>
+
+
+                        </li>
+
+
+
+                        <br />
+                      </ul>
+
+                    </div>
+                  </Formik>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onClick={() => { adicionarEndereco() }}>Adicionar Endereço</button>
+                </div>
+              </div>
             </div>
           </div>
         </Tab.Pane>

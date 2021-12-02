@@ -1,16 +1,40 @@
+import React, { useState, useEffect } from 'react'
+
 function EnderecoEntrega(props) {
-    return (
-        <div className="col-6">
-            <h2>Endereço de Entrega</h2>
-            <hr />
-            <ul className="">
-                    <li className="">{props.endereco.nomeCliente}</li>
-                    <li className="">{props.endereco.rua} , {props.endereco.numero} {props.endereco.complemento},</li>
-                    <li className="">{props.endereco.cep} - {props.endereco.bairro}</li>
-                    <li className="">{props.endereco.cidade} - {props.endereco.estado}</li>
-                </ul>
-        </div>
+    const [endereco, setEndereco] = useState(null)
+    useEffect(() => {
+        props.enderecos.map(endereco =>{
+            if(endereco.enderecoEntrega){
+                setEndereco(endereco.clienteEnderecoKey.endereco)
+            }
+        })
+       
+        
+    },[props.enderecos])
+
+
+    if(endereco){
+        
+        return (
+            
+            <div className="col-6 ">
+                <h2>Endereço Entrega</h2>
+                <hr />
+                <ul className="">
+                <li className="">{endereco.destinatario}</li>
+                <li className="">{endereco.rua} , {endereco.numero} {endereco.complemento},</li>
+                <li className="">{endereco.cep} - {endereco.bairro}</li>
+                <li className="">{endereco.cidade} - {endereco.estado}</li>
+            </ul>
+
+            </div>
+        
     );
+    }else{
+        return (
+            <></>
+        )
+    }
 }
 
 export default EnderecoEntrega;

@@ -35,6 +35,7 @@ const Checkout = (props) => {
     const [estado, setEstado] = useState('')
     const [parcelas, setParcelas] = useState([])
     const [cliente, setCliente] = useState({})
+    const [destinatario, setDestinatario] = useState(null)
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
@@ -139,7 +140,8 @@ const Checkout = (props) => {
                 "cep": cep,
                 "numero": numeroEndereco,
                 "complemento": complemento,
-                "ponto_referencia": ""
+                "ponto_referencia": "",
+                "destinatario":destinatario
             },
             "cartao":
             {
@@ -279,7 +281,7 @@ const Checkout = (props) => {
                                                     <label>* Estado </label>
                                                     <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
                                                     <label>Nome do destinatário </label>
-                                                    <input type="text" class="form-control" placeholder="" />
+                                                    <input type="text" class="form-control" placeholder="" value={destinatario} onChange={(event) => { setDestinatario(event.target.value==""?null:event.target.value)}}/>
 
                                                     <br />
                                                     <br />
