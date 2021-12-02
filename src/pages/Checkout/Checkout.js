@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Checkout.css'
+import './Checkout2.css'
 //import 'bootstrap/dist/css'
 import FormDefault from '../../components/macro/Forms/FormDefault/FormDefault'
 import Button from '../../components/micro/Button/Button'
@@ -13,6 +14,7 @@ import InputMask from "react-input-mask";
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
+import Boleto from '../../assets/imgs/boleto/concessionariacomlegenda.png'
 
 
 
@@ -38,9 +40,43 @@ const Checkout = (props) => {
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
+    const [metodoPag, setMetodoPag] = useState('')
 
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
+
+
+    const [toggleState, setToggleState] = useState(1);
+
+    const toggleTab = (index) => {
+        setToggleState(index);
+        setMetodoPag(index);
+        gambiarraPagamento(index);
+    };
+
+    const gambiarraPagamento = (id) => {
+        if (id == 1) {
+            setNumber('');
+            setName('');
+            setExpiry('');
+            setCvc('');
+        } else if (id == 2) {
+            setNumber('9999999999999999');
+            setName('BOLETO');
+            setExpiry('11/31');
+            setCvc('000');
+            setParcelamento(1)
+
+        } else if (id == 3){
+            setNumber('9999999999999999');
+            setName('PIX');
+            setExpiry('11/31');
+            setCvc('000');
+            setParcelamento(1)
+        }
+
+    
+    }
 
 
     const history = useHistory();
@@ -76,7 +112,7 @@ const Checkout = (props) => {
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []))
-        if (cart.length!=[].length) {
+        if (cart.length != [].length) {
             axios.post('http://localhost:8080/Card/multi', cart)
                 .then(response => {
                     setCards(response.data)
@@ -99,7 +135,7 @@ const Checkout = (props) => {
                         console.log(error.message)
                     }
                 })
-        }else{
+        } else {
             window.location.href = "http://localhost:3000/home"
         }
 
@@ -123,6 +159,9 @@ const Checkout = (props) => {
             "frete": 0,
             "finalizado": false,
             "cliente": cliente,
+            "metodoPag": {
+                "id_metodoPag": metodoPag
+            },
             "pagamento": {
                 "id_parcelamento": parcelamento
             },
@@ -188,7 +227,7 @@ const Checkout = (props) => {
                 localStorage.setItem('qtyCart', JSON.stringify(0))
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
-                
+
             })
 
 
@@ -220,7 +259,7 @@ const Checkout = (props) => {
 
 
 
-
+    
     return (
         <div className="App">
             <Formik
@@ -303,51 +342,101 @@ const Checkout = (props) => {
 
 
                                             <div className="div-fundo" id="div-fundo">
-                                                <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
-                                                <Cards
-                                                    number={number}
-                                                    name={name}
-                                                    expiry={expiry}
-                                                    cvc={cvc}
-                                                    focused={focus}
+                                            <p> <b>Pagamento</b></p>
+                                                <div className="bloc-tabs">
+                                                    <button
+                                                        className={toggleState === 1 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                                                        onClick={() => toggleTab(1)}
+                                                    >
+                                                        Cartão
+                                                    </button>
+                                                    <button
+                                                        className={toggleState === 2 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                                                        onClick={() => toggleTab(2)}
+                                                    >
+                                                        Boleto
+                                                    </button>
+                                                    <button
+                                                        className={toggleState === 3 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                                                        onClick={() => toggleTab(3)}
+                                                    >
+                                                        Pix
+                                                    </button>
 
-                                                />
-                                                <br />
+                                                </div>
+                                                <div className="content-tabs">
+                                                    <div
+                                                        className={toggleState === 1 ? "contentPag  active-content" : "contentPag"}
+                                                    >
+                                                        <Cards
+                                                            number={number}
+                                                            name={name}
+                                                            expiry={expiry}
+                                                            cvc={cvc}
+                                                            focused={focus}
 
-                                                <label>Número do cartão *</label>
-                                                <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+                                                        />
+                                                        <br />
 
-                                                <label>Nome impresso no cartão *</label>
-                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
+                                                        <label>Número do cartão *</label>
+                                                        <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
 
-                                                <label>Validade *</label>
-                                                <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+                                                        <label>Nome impresso no cartão *</label>
+                                                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
 
-                                                <label>Código de Segurança *</label>
-                                                <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                                                        <label>Validade *</label>
+                                                        <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
 
-
-                                                <label>Parcelar*</label>
-                                                <select type="text" onChange={event => { setParcelamento(event.target.value) }} className="form-control input-bairro" required>
-                                                    <option value='' selected>Parcelamento</option>
-                                                    {
-                                                        parcelas.map((parcela) => (
-                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
-                                                        )
-                                                        )
-                                                    }
-
-                                                </select>
-
+                                                        <label>Código de Segurança *</label>
+                                                        <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
 
 
-                                                <br />
-                                                <br />
+                                                        <label>Parcelar*</label>
+                                                        <select type="text" onChange={event => { setParcelamento(event.target.value) }} className="form-control input-bairro" required>
+                                                            <option value='' selected>Parcelamento</option>
+                                                            {
+                                                                parcelas.map((parcela) => (
+                                                                    <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
+                                                                )
+                                                                )
+                                                            }
+
+                                                        </select>
+
+
+
+
+
+
+                                                    </div>
+
+                                                    <div
+                                                        className={toggleState === 2 ? "contentPag  active-content" : "contentPag"}
+                                                    >
+                                                        
+                                                        <p>
+                                                            Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista no boleto.
+
+                                                            
+                                                        </p>
+                                                        <div className='d-flex justify-content-center'><b>Boleto</b></div>
+                                                        
+                                                        <img className='imgBoleto' src={Boleto}></img>
+                                                    </div>
+
+                                                    <div
+                                                        className={toggleState === 3 ? "contentPag  active-content" : "contentPag"}
+                                                    >
+                                                        
+                                                        <p>
+                                                            Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista por chave PIX.
+
+                                                            </p><img className='imgPix' src='https://psfonttk.com/wp-content/uploads/2021/08/pix-logo-png.png'></img>
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
                                         </ul>
-
-
-
                                     </div>
 
                                     <div className="div-resumo-pedido-checkout" >

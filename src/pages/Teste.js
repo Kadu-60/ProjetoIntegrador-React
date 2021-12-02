@@ -1,138 +1,134 @@
-import React, { useState, useEffect } from 'react'
-import './Produto/Produto.css'
-import BotaoAdicionar from '../components/micro/BotaoConfirmar/BotaoAdicionar';
-import BotaoQtd from '../components/micro/BotaoQtd/BotaoQtd';
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
-import axios from 'axios'
-import AcordeonSemantic from '../components/macro/Acordeon/AcordeonSemantic';
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import { Icon } from 'semantic-ui-react'
+import Cards from 'react-credit-cards'
+import InputMask from "react-input-mask";
+import './Teste.css'
 
 
-function Teste(props) {
-
-    const [produto, setProduto] = useState([])
-    const [familia, setFamilia] = useState([])
-    const [estilo, setEstilo] = useState([])
-    const [harmonizacao, setHarmonizacao] = useState([])
-    const [preco1, setPreco1] = useState([])
-    const [teste, setTeste] = useState({})
+function Tabs({parcelas1, parcelamento1, subtotal1}) {
+    const [number, setNumber] = useState('')
+    const [name, setName] = useState('')
+    const [expiry, setExpiry] = useState('')
+    const [cvc, setCvc] = useState('')
+    const [focus, setFocus] = useState('')
     
+    const [parcelas, setParcelas] = useState({parcelas1})
+    const [parcelamento, setParcelamento] = useState({parcelamento1})
+    const [subtotal, setSubtotal] = useState({subtotal1})
 
+    const [toggleState, setToggleState] = useState(1);
 
-    const params = useParams(":pesq")
-    const pesq = params.pesq
-    const URL = 'http://localhost:8080/produtos/'
-    const final = URL + params.pesq
-
-    const URLPreco = 'http://localhost:8080/preco/'
-    const precoFinal = URLPreco + params.pesq
-
-    // useEffect(() => {
-    //     getProduto()
-    // }, [])
-
-    // const getProduto = () => {
-    //     axios.get(final)
-    //         .then((response) => {
-    //             setProduto(response.data)
-    //             setFamilia(response.data.familia)
-    //             setEstilo(response.data.categoria)
-    //             setHarmonizacao(response.data.prato)
-    //             console.log(response.data.familia.descricao)
-
-
-
-    //         })
-    // }
-
-    useEffect(() => {
-        getPreco()
-    }, [])
-
-    const getPreco = () => {
-        axios.get(precoFinal)
-            .then((response) => {
-                setPreco1((+response.data.valor_preco).toFixed(2))
-                console.log(response.data)
-                setTeste(response.data)
-                console.log(teste)
-                
-
-            })
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const toggleTab = (index) => {
+        setToggleState(index);
+    };
 
     return (
-        <>
-            <br />
-            <Breadcrumb className="cor-migalha">
-                <Breadcrumb.Item className="migalha-pao" href="/home"> Home</Breadcrumb.Item>
-                <Breadcrumb.Item href="/produtos">
-                    Produtos
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active> Produto</Breadcrumb.Item>
-            </Breadcrumb>
-            <div key={produto.id} class="container container-produto">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="img-produto">
-                            <img src={produto.foto} alt="" srcset="" />
-                        </div>
+        <div className="div-entrega" >
+            <ul className="lista-carrinho-total">
+
+
+
+
+                <div className="div-fundo" id="div-fundo">
+                    <div className="bloc-tabs">
+                        <button
+                            className={toggleState === 1 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                            onClick={() => toggleTab(1)}
+                        >
+                            Cartão
+                        </button>
+                        <button
+                            className={toggleState === 2 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                            onClick={() => toggleTab(2)}
+                        >
+                            Tab 2
+                        </button>
+                        <button
+                            className={toggleState === 3 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
+                            onClick={() => toggleTab(3)}
+                        >
+                            Tab 3
+                        </button>
+
                     </div>
-                    <div class="col-12 col-md-6 d-flex align-items-center">
-                        <div class="row d-flex justify-content-start info-prod ">
-                            <div class="col-12 nome-produto">
-                                {/* <p>{produto.marca}</p> */}
-                            </div>
-                            <div class="col-12 nome-produto">
-                                <h4>{produto.nome_produto}</h4>
-                            </div>
-                            <div class="col-12 mt-3 align-self-center">
-                                <div class="preco-produto">
-                                    <div class="preco-por">
-                                        
-                                        <h5><b> Por R${preco1}</b></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 d-flex justify-content-center">
-                                <BotaoQtd inicial={1} passo={1} />
-                            </div>
-                            <div class="col-12 col-lg-8 d-flex mt-4 justify-content-center">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <a href="/carrinho" id="botao-comprar-pag-produto"><BotaoAdicionar className="botao-comprar-pag-produto" id="botao-comprar-pag-produto" texto='Adicionar ' /></a>
-                                </div>
-                            </div>
+                    <div className="content-tabs">
+                        <div
+                            className={toggleState === 1 ? "contentPag  active-content" : "contentPag"}
+                        >
+                            <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
+                                                <Cards
+                                                    number={number}
+                                                    name={name}
+                                                    expiry={expiry}
+                                                    cvc={cvc}
+                                                    focused={focus}
+
+                                                />
+                                                <br />
+
+                                                <label>Número do cartão *</label>
+                                                <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                                                <label>Nome impresso no cartão *</label>
+                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
+
+                                                <label>Validade *</label>
+                                                <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                                                <label>Código de Segurança *</label>
+                                                <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+
+
+                                                <label>Parcelar*</label>
+                                                <select type="text" onChange={event => { setParcelamento(event.target.value) }} className="form-control input-bairro" required>
+                                                    <option value='' selected>Parcelamento</option>
+                                                    {
+                                                        parcelas1.map((parcela) => (
+                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal1 || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
+                                                        )
+                                                        )
+                                                    }
+
+                                                </select>
+
+
+
+
+
+                            
+                            
+                        </div>
+
+                        <div
+                            className={toggleState === 2 ? "contentPag  active-content" : "contentPag"}
+                        >
+                            <h2>Content 2</h2>
+                            <hr />
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+                                voluptatum qui adipisci.
+                            </p>
+                        </div>
+
+                        <div
+                            className={toggleState === 3 ? "contentPag  active-content" : "contentPag"}
+                        >
+                            <h2>Content 3</h2>
+                            <hr />
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos sed
+                                nostrum rerum laudantium totam unde adipisci incidunt modi alias!
+                                Accusamus in quia odit aspernatur provident et ad vel distinctio
+                                recusandae totam quidem repudiandae omnis veritatis nostrum
+                                laboriosam architecto optio rem, dignissimos voluptatum beatae
+                                aperiam voluptatem atque. Beatae rerum dolores sunt.
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div className="mb-5">
-
-                    <AcordeonSemantic harmonizacao={harmonizacao.descricao} estilo={estilo.nome} familia={familia.descricao} descricaoProd={produto.descricao} ibu={produto.ibu} cor={produto.cor} teor={produto.teor} />
-
-
-                </div>
-            </div>
-        </>
-
-    )
-
-
-
-
+            </ul>
+        </div>
+    );
 }
 
-export default Teste;
+export default Tabs;

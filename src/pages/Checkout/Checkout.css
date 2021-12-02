@@ -15,6 +15,19 @@
     background-color: #D0A14C;
 }
 
+.imgPix{
+    padding-left: 35px;
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+}
+
+.imgBoleto{
+    margin-left: -15px;
+    width: 300px;
+    height: 100%;
+}
+
 .continuar-comprando-pedido{
    margin-left: 70px;
 }
@@ -38,7 +51,7 @@
     padding-right: 60px;
     max-height: 650px;
     position: relative;
-    width: 400px;
+    width: 350px;
     max-width: 400px;
 
     margin-top: 10px;
