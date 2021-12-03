@@ -273,6 +273,18 @@ td{
 .filled::before{
     background-color: green;
 }
+.filled2::before{
+    background-color: green;
+}
+.filled3::before{
+    background-color: green;
+}
+.filled4::before{
+    background-color: green;
+}
+
+
+
 .status-global-pedido{
     margin-top: 10px;
     margin-bottom: 10px;

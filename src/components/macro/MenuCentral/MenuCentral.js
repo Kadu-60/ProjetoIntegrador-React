@@ -116,6 +116,8 @@ const Panes = ({ user, dataNascimento }) => {
       })
   }, [])
 
+  
+
 
 
 

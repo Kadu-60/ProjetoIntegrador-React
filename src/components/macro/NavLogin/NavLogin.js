@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './NavPrincipal.css'
+import './NavLogin.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../../../assets/imgs/header/logo.png'
 import Busca from '../../../assets/imgs/header/busca.png'
@@ -10,38 +10,20 @@ import Carrinho from '../../../assets/imgs/header/carrinho.png'
 import Badge from 'react-bootstrap/Badge'
 import InputHeader from '../../micro/Forms/Input/InputHeader';
 import axios from 'axios'
-import TituloConta from '../../micro/TituloConta/TituloConta';
-import { useParams } from "react-router-dom";
-
-
-
 
 function estadoInicial() {
     return { busca: '' }
 }
 
 
-function NavPrincipal(props) {
-  
- 
-  
+function NavLogin(props) {
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
     const [qtyCart, setQty] = useState(localStorage.getItem('qtyCart'))
     const [token, setToken] = useState('')
     const [logado, setLogado] = useState(0)
-    const [id, setId] = useState(0)  
-    const [user, setUser] = useState({})
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
-   
-         
-
-
-
-
+    const [id, setId] = useState(0)
     useEffect(() => {
         setInterval(() => {
             setQty(localStorage.getItem('qtyCart'))
@@ -58,7 +40,6 @@ function NavPrincipal(props) {
             axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
                 .then((response) => {
                     setId(response.data.id_Cliente)
-                    setUser(response.data)
                     
                 })
                 .catch((error) => { console.log(error) })
@@ -80,8 +61,7 @@ function NavPrincipal(props) {
         
     })
 
-
- 
+    
 
 
 
@@ -104,6 +84,28 @@ function NavPrincipal(props) {
 
 
     }
+
+    function minhaConta(){
+        let { id } = useParams();
+        const [user, setUser] = useState({})
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        useEffect(() => {
+            getUser()
+        },[])
+        const getUser = () =>{
+            axios.get("http://localhost:8080/cadastro-cliente/" + id, config)
+                .then(response => {
+                    setUser(response.data)
+                    setDataNascimento(response.data.dataNascimento)
+                    
+                })
+                
+            
+        }
+    }
     function meusPedidos() {
 
         
@@ -119,17 +121,6 @@ function NavPrincipal(props) {
         }
 
     }
-
-
-
-    const deslogar = () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        window.location.href = 'http://localhost:3000/home'
-      }
-    
-      
-
 
 
     return (
@@ -161,32 +152,25 @@ function NavPrincipal(props) {
                             <div class="col-4 col-lg-5 d-flex justify-content-end">
                                 <div className="row d-flex justify-content-center align-items-center icones-header">
 
-                                  
+                                    <div className="col-3 header-FC">
+                                        <a className="link-icone" href="/faq">
+                                            <img className="imagem" src={Fale} />
+                                            <span className="icone"> Fale conosco</span>
+                                        </a>
+                                    </div>
 
                                     <div className="col-3 header-conta">
-                                        <a className="link-icone" href={logado == 0 ? "/login" : "/dashboard/" + id}>
+                                        <a className="link-icone" onClick={() => { minhaConta() }} href={logado == 0 ? "/login" : "/dashboard/" + id}>
                                             <img className="imagem" src={Conta} />
-
-                                            <span className="icone " > {logado == 0 ? "Minha conta" :  <><TituloConta nome={user.nome}/> <a href="/home" className="link-sair" onClick={() => { deslogar() }} >Sair</a></>} </span>
-                                            
+                                            <span className="icone "> Olá, {user.nome}</span>
                                         </a>
-                                                             
                                     </div>
-                                    
-                                    
-
 
                                     <div className="col-3 header-Pedidos ">
                                         <div className="link-icone" onClick={() => { meusPedidos() }}>
                                             <img className="imagem" src={Pedido} />
                                             <span className="icone"> Meus Pedidos</span>
                                         </div>
-                                    </div>
-                                    <div className="col-3 header-FC">
-                                        <a className="link-icone" href="/faq">
-                                            <img className="imagem" src={Fale} />
-                                            <span className="icone"> Fale conosco</span>
-                                        </a>
                                     </div>
 
                                     <div className="col-3 header-carrinho">
@@ -206,7 +190,6 @@ function NavPrincipal(props) {
 
         </>
     )
-
 }
 
-export default NavPrincipal;
+export default NavLogin;

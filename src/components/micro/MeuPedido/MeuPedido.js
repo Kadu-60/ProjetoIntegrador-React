@@ -9,6 +9,11 @@ function MeuPedido(props) {
     const pedido = props.data;
     const [itens, setItens] = useState([])
     const [dataPedido, setDataPedido] = useState('')
+    const [ fill, setFill ] = useState('')
+    const [ fillDois, setFillDois ] = useState('')
+    const [ fill3, setFill3 ] = useState('')
+    const [ fill4, setFill4 ] = useState('')
+   
     //NumeroPedido"id do pedido"
     //DataPedido
     //StatusPedido
@@ -41,12 +46,39 @@ function MeuPedido(props) {
         axios.get("http://localhost:8080/item_pedido/findBypedido/"+pedido.id, config)
         .then((response)=>{
             setItens(response.data)
+         
+
+           
         })
         setDataPedido((new Date(pedido.dataDeCriacao)).toLocaleString())
         verMais()
         verMais()
+        console.log(props.data.status.id_status_pedido)
+        if (pedido.status.id_status_pedido == 1){
+            setFill(" filled")
+        }
+        if (pedido.status.id_status_pedido == 2){
+            setFill(" filled")
+            setFillDois(" filled2")
+        }
+        if (pedido.status.id_status_pedido == 3){
+            setFill(" filled")
+            setFillDois(" filled2")
+            setFill3(" filled3")
+        }
+        if (pedido.status.id_status_pedido == 4){
+            setFill(" filled")
+            setFillDois(" filled2")
+            setFill3(" filled3")
+            setFill4(" filled4")
+        }
+
     },[])
 
+  
+   
+
+   
     return (
         <>
             <Container>
@@ -65,7 +97,7 @@ function MeuPedido(props) {
                                     <p><b>{pedido.id || 0}</b> </p>
                                 </div>
                                 <div className="col-lg-4 col-12 col-status">
-                                    <div className="order-status">Situação: <p><b>{pedido.status.estado_pedido}</b> </p></div>{" "}
+                                    <div className="order-status" id="status">Situação: <p className="status-pedido-bol"><b>{pedido.status.estado_pedido}</b> </p></div>{" "}
                                 </div>
                                 <div className="col-lg-2 col-12">
                                     <div className="div-botao">
@@ -291,7 +323,55 @@ function MeuPedido(props) {
                     </div>
                 </div>
                 <br />
-            </div>
+            
+
+
+            <p className="title-dash">Acompanhe seu pedido</p>
+                <div className="grid ">
+                    <div className="wd-content-global">
+                        {" "}
+                        {/* CONTENT */}
+                        <div className="value">
+                            {" "}
+                            <ul className="linha-do-pedido">
+                                {" "}
+                                <li className="status status-global-pedido completed status-1">
+                                    {" "}
+                                    <br />
+                                    {/*<span class="count">1</span>*/} <span className="icon-pedidos" />{" "}
+                                    {/* <div className="" /> <small>09/11/2021 11:55:27</small>{" "} */}
+                                    <span className={"line line-linha " + fill}  id="bolinha" > </span> <strong>Pedido Realizado</strong>{" "}
+                                </li>{" "}
+
+                                <li className="status status-global-pedido started status-2">
+                                    {" "}
+                                    {/*<span class="count">2</span>*/} <span className="" />{" "}
+                                    {/* <div className="" /> <small>Em andamento</small>{" "} */}
+                                        <span className={"line line-linha " + fillDois } /> <strong>Confirmação de Pagamento</strong>{" "}
+                                </li>{" "}
+                                <li className="status status-global-pedido status-3">
+                                    {" "}
+                                    {/*<span class="count">3</span>*/} <span className="" />{" "}
+                                    <div className="" /> <small /> <span className={"line line-linha  "+ fill3}  />{" "}
+                                    <strong>Preparando para Envio</strong>{" "}
+                                </li>{" "}
+                                <li className="status status-global-pedido status-4">
+                                    {" "}
+                                    {/*<span class="count">4</span>*/} <span className="" />{" "}
+                                    <div className="" /> <small /> <span className={"line "+ fill4} />{" "}
+                                    <strong>Pedido Enviado</strong>{" "}
+                                    <br /><br />
+                                </li>{" "}
+                            </ul>{" "}
+                        </div>{" "}
+                    </div>
+                </div>
+
+                </div>
+               
+            
+
+
         </>
     );
 }

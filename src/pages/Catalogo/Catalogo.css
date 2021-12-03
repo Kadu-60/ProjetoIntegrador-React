@@ -4,3 +4,13 @@
     
 }
 
+#checkboxes label {
+    float: left;
+    min-width: 100px;
+    margin-right: 20px;
+  }
+  #checkboxes ul {
+    margin: 0;
+    list-style: none;
+    float: left;
+  }
