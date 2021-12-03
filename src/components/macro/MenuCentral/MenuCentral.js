@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Formik, Field } from 'formik';
+import Cards from 'react-credit-cards'
+import 'react-credit-cards/es/styles-compiled.css'
 
 
 const deslogar = () => {
@@ -51,6 +53,11 @@ const Panes = ({ user, dataNascimento }) => {
   const [endPrincipal, setEndPrincipal] = useState(null)
   const [endEntrega, setEndEntrega] = useState(null)
   const [enderecos, setEnderecos] = useState([])
+  const [number, setNumber] = useState('')
+  const [name, setName] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [cvc, setCvc] = useState('')
+  const [focus, setFocus] = useState('')
 
   const alterarDados = (event) => {
     event.preventDefault()
@@ -93,6 +100,46 @@ const Panes = ({ user, dataNascimento }) => {
   }
 
   const adicionarEndereco = () => {
+    let endereco =
+    {
+      "clienteEnderecoKey":
+      {
+        "cliente":
+        {
+          "id_Cliente": user.id_Cliente
+        },
+        "endereco":
+        {
+          "estado": estado,
+          "cidade": cidade,
+          "bairro": bairro,
+          "rua": rua,
+          "cep": cep,
+          "numero": numeroEndereco,
+          "complemento": complemento,
+          "ponto_referencia": "",
+          "destinatario": destinatario
+        }
+      },
+      "enderecoPrincipal": false,
+      "enderecoEntrega": false
+    }
+    axios.post("http://localhost:8080/clienteEndereco/create", endereco)
+      .then((response)=>{
+        console.log(response.data)
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Endereco adicionado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'fechar'
+        })
+        setTimeout(()=>{window.location.reload()}, 800)
+        
+      })
+    
+  }
+
+  const adicionarCartao = () => {
     let endereco =
     {
       "clienteEnderecoKey":
@@ -431,11 +478,62 @@ const Panes = ({ user, dataNascimento }) => {
         </Tab.Pane>
     },
     {
-      menuItem: 'Meus Cartões', render: () =>
-        <Tab.Pane>
+      menuItem: 'Meus Cartões', render: () => 
+       <Tab.Pane> 
+           <div className="col-12">
+              <br />
+              <div className="row">
+                <div className="col-9 d-flex flex-column justify-content-end">
+                  <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
+                </div>
+                <div className="col-3  d-flex justify-content-end">
+                  <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                  </button>
+                </div>
+                </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <Cards
+                                                    number={number}
+                                                    name={name}
+                                                    expiry={expiry}
+                                                    cvc={cvc}
+                                                    focused={focus}
 
-        </Tab.Pane>
-    },
+                                                />
+                <label>Número do cartão *</label>
+                                                <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                                                <label>Nome impresso no cartão *</label>
+                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
+
+                                                <label>Validade *</label>
+                                                <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                                                <label>Código de Segurança *</label>
+                                                <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+
+                                                <br />
+                                                <br />
+                                                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onClick={() => { adicionarCartao() }}>Adicionar Cartão</button>
+                </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div> 
+                                                
+                </Tab.Pane>
+      },
 
     {
       menuItem: 'Sair', render: () => <Tab.Pane>

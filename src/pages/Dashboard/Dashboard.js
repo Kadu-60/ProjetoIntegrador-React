@@ -37,6 +37,7 @@ function Dashboard() {
             <div className="container">
                 <TituloDash nome={user.nome} />
                 <MenuCentral user={user} dataNascimento={dataNascimento}/>
+                
                 <br/>
                 <br/>
             </div>
