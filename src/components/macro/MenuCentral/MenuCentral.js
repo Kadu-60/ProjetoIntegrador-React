@@ -477,7 +477,14 @@ const TabExampleVerticalTabular = (props) => {
     localStorage.removeItem("comprando");
     window.location.href= "http://localhost:3000/carrinho"
   }
-
+  if(JSON.parse(localStorage.getItem("defaultIndex"))==1){
+    Swal.fire({
+      title: 'Atenção!',
+      text: 'Altere a sua Senha!',
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    })
+  }
 
   let index = localStorage.getItem('defaultIndex')? JSON.parse(localStorage.getItem('defaultIndex')):0
   return (
