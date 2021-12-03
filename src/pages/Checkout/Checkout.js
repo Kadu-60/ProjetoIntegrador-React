@@ -13,6 +13,8 @@ import InputMask from "react-input-mask";
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
+import frete from 'frete'
+import Swal from 'sweetalert2'
 
 
 
@@ -38,6 +40,7 @@ const Checkout = (props) => {
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
+    const [frete, setFrete] = useState('')
 
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
@@ -207,6 +210,20 @@ const Checkout = (props) => {
             return;
         }
 
+        switch (true) {
+            case (cep > '01000-000' && cep < '09999-999') :
+                console.log("Frete R$ 15,00");
+                break;
+            default :
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Não é possível prosseguir',
+                    text: 'Não entregamos para fora de SP', 
+                    footer: '<a href="\checkout"><b>Digite o CEP novamente</b></a>'});
+                console.log(cep)
+        }
+        
+
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then((res) => res.json())
             .then((data) => {
@@ -215,6 +232,7 @@ const Checkout = (props) => {
                 setCidade(data.localidade);
                 setEstado(data.uf);
             });
+
 
     }
 
