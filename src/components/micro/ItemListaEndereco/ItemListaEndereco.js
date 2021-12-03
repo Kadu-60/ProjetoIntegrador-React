@@ -21,7 +21,7 @@ function ItemListaEndereco(props) {
 
 
     const excluir = (idend) => {
-        axios.delete("http://localhost:8080/clienteEndereco/DeleteEndereco/" + id + "/" + idend)
+        axios.delete("http://localhost:8080/clienteEndereco/DeleteEndereco/" + (id||props.id_cliente) + "/" + idend)
             .then((response) => {
                 props.att(response)
             })
@@ -68,14 +68,14 @@ function ItemListaEndereco(props) {
             })
     }
     const tornarPrincipal = (idend) => {
-        axios.put("http://localhost:8080/clienteEndereco/EndPrincipal/" + id + "/" + idend)
+        axios.put("http://localhost:8080/clienteEndereco/EndPrincipal/" + (id||props.id_cliente) + "/" + idend)
             .then((response) => {
                 props.att(response)
             })
     }
 
     const tornarEntrega = (idend) => {
-        axios.put("http://localhost:8080/clienteEndereco/EndEntrega/" + id + "/" + idend)
+        axios.put("http://localhost:8080/clienteEndereco/EndEntrega/" + (id||props.id_cliente) + "/" + idend)
             .then((response) => {
                 props.att(response)
             })
@@ -99,7 +99,7 @@ function ItemListaEndereco(props) {
 
                 </div>
                 <div className="col-3 ">
-                    <a className=" cursorPointer" data-bs-toggle="modal" data-bs-target={"#editModal" + endereco.id_endereco}>
+                    <a className=" cursorPointer"  data-bs-toggle="modal" data-bs-target={"#editModal" + endereco.id_endereco} >
                         <Icon name="edit" className="icon-menucentral" />
                         Editar        </a>
                     <span className="separadoritemListaEndereco">|</span>
@@ -109,12 +109,12 @@ function ItemListaEndereco(props) {
                 </div>
             </div>
             <hr />
-            <div class="modal fade" id={"editModal" + endereco.id_endereco} tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal " id={"editModal" + endereco.id_endereco} tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content modal">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Alterar Endereco</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  ></button>
                         </div>
                         <div class="modal-body">
                             <Formik>

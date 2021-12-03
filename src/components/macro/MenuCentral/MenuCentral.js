@@ -473,7 +473,13 @@ function verMais() {
 
 
 const TabExampleVerticalTabular = (props) => {
-  let index = localStorage.getItem('defaultIndex') ? 2 : 0
+  if(localStorage.getItem("comprando")){
+    localStorage.removeItem("comprando");
+    window.location.href= "http://localhost:3000/carrinho"
+  }
+
+
+  let index = localStorage.getItem('defaultIndex')? JSON.parse(localStorage.getItem('defaultIndex')):0
   return (
     <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index} />
   )

@@ -13,6 +13,7 @@ import InputMask from "react-input-mask";
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
+import ListaEnderecos from "../../components/micro/ListaEnderecos/ListaEnderecos"
 
 
 
@@ -20,7 +21,7 @@ import { Formik, Field } from 'formik';
 
 const Checkout = (props) => {
 
-
+    const [attComponent, setAttComponent] =useState(0)
     const [number, setNumber] = useState('')
     const [name, setName] = useState('')
     const [expiry, setExpiry] = useState('')
@@ -39,7 +40,31 @@ const Checkout = (props) => {
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
-
+    const [enderecos, setEnderecos] = useState([])
+    const [endereco, setEndereco] = useState({
+        "id_endereco": 0,
+        "estado": "",
+        "cidade": "",
+        "bairro": "",
+        "rua": "",
+        "cep": "",
+        "numero": "",
+        "complemento": "",
+        "ponto_referencia": "",
+        "destinatario": ""
+    })
+    const [enderecoCobranca, setEnderecoCobranca] = useState({
+        "id_endereco": 0,
+        "estado": "",
+        "cidade": "",
+        "bairro": "",
+        "rua": "",
+        "cep": "",
+        "numero": "",
+        "complemento": "",
+        "ponto_referencia": "",
+        "destinatario": ""
+    })
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
 
@@ -69,6 +94,19 @@ const Checkout = (props) => {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email, config)
                 .then((response) => {
                     setCliente(response.data)
+                    axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
+                        .then((response) => {
+                            setEnderecos(response.data)
+                            response.data.map((item) => {
+                                if (item.enderecoEntrega) {
+                                    setEndereco(item.clienteEnderecoKey.endereco)
+                                }
+                                if (item.enderecoPrincipal) {
+                                    setEnderecoCobranca(item.clienteEnderecoKey.endereco)
+                                }
+                            })
+
+                        })
                 })
         } else {
             window.location.href = "http://localhost:3000/login"
@@ -77,7 +115,7 @@ const Checkout = (props) => {
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []))
-        if (cart.length!=[].length) {
+        if (cart.length != [].length) {
             axios.post('http://localhost:8080/Card/multi', cart)
                 .then(response => {
                     setCards(response.data)
@@ -100,12 +138,12 @@ const Checkout = (props) => {
                         console.log(error.message)
                     }
                 })
-        }else{
+        } else {
             window.location.href = "http://localhost:3000/home"
         }
 
 
-    }, [])
+    }, [attComponent])
 
     const direcionar = (props) => {
         const URL = '/pedidoFinalizado/' + props.id
@@ -113,10 +151,15 @@ const Checkout = (props) => {
         history.push(URL)
 
     }
-
+    function MeusEnderecos(){
+        localStorage.setItem('defaultIndex', JSON.stringify(3))
+        
+        
+        window.location.href="http://localhost:3000/dashboard/"+cliente.id_Cliente
+        
+    }
 
     const Finalizar = (event) => {
-
         event.preventDefault();
         let pedido = {
             "subtotal": 0,
@@ -133,15 +176,15 @@ const Checkout = (props) => {
             },
             "endereco":
             {
-                "estado": estado,
-                "cidade": cidade,
-                "bairro": bairro,
-                "rua": rua,
-                "cep": cep,
-                "numero": numeroEndereco,
-                "complemento": complemento,
+                "estado": endereco.estado,
+                "cidade": endereco.cidade,
+                "bairro": endereco.bairro,
+                "rua": endereco.rua,
+                "cep": endereco.cep,
+                "numero": endereco.numero,
+                "complemento": endereco.complemento,
                 "ponto_referencia": "",
-                "destinatario":destinatario
+                "destinatario": endereco.destinatario
             },
             "cartao":
             {
@@ -190,35 +233,30 @@ const Checkout = (props) => {
                 localStorage.setItem('qtyCart', JSON.stringify(0))
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
-                
+
             })
-
-
-
-
-
         // window.location.href = "http://localhost:3000/pedidofinalizado"
     }
 
-    function buscaCep(ev, setFieldValue) {
-        const { value } = ev.target;
+    // function buscaCep(ev, setFieldValue) {
+    //     const { value } = ev.target;
 
-        const cep = value?.replace(/[^0-9]/g, '');
+    //     const cep = value?.replace(/[^0-9]/g, '');
 
-        if (cep?.length !== 8) {
-            return;
-        }
+    //     if (cep?.length !== 8) {
+    //         return;
+    //     }
 
-        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            .then((res) => res.json())
-            .then((data) => {
-                setRua(data.logradouro);
-                setBairro(data.bairro);
-                setCidade(data.localidade);
-                setEstado(data.uf);
-            });
+    //     fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setRua(data.logradouro);
+    //             setBairro(data.bairro);
+    //             setCidade(data.localidade);
+    //             setEstado(data.uf);
+    //         });
 
-    }
+    // }
 
 
 
@@ -226,19 +264,6 @@ const Checkout = (props) => {
     return (
         <div className="App">
             <Formik
-                onSubmit={Finalizar}
-                validateOnMount
-                initialValues={{
-                    cep: '',
-                    logradouro: '',
-                    numero: '',
-                    complemento: '',
-                    bairro: '',
-                    cidade: '',
-                    uf: '',
-                }}
-
-
 
                 render={({ isValid, setFieldValue }) => (
                     <>
@@ -252,46 +277,41 @@ const Checkout = (props) => {
 
                             <br />
                             <Container>
-                                <div className="div-checkout" id="">
+                                <div className="div-checkout" >
                                     <div className="div-pessoais " >
 
                                         <ul className="lista-checkout-total">
 
-                                            <p> <Icon className="icone-resumo" name="home" /><b>Entrega</b></p>
-                                            <p>Solicitamos apenas as informações essenciais para a realização da compra.</p>
-                                            <li className="sub-global">
+                                            <p> <Icon className="icone-resumo" name="home" /><b>Endereco de Entrega</b></p>
 
 
-
-                                                <ul className="lista-carrinho-total">
-
-
-                                                    <label>* CEP </label>
-                                                    <Field type="text" id="cep" name="cep" onBlur={(ev) => buscaCep(ev, setFieldValue)} onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
-                                                    <label>* Rua </label>
-                                                    <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
-                                                    <label>* Número </label>
-                                                    <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
-                                                    <label> Complemento </label>
-                                                    <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
-                                                    <label>* Bairro </label>
-                                                    <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
-                                                    <label>* Cidade </label>
-                                                    <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
-                                                    <label>* Estado </label>
-                                                    <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
-                                                    <label>Nome do destinatário </label>
-                                                    <input type="text" class="form-control" placeholder="" value={destinatario} onChange={(event) => { setDestinatario(event.target.value==""?null:event.target.value)}}/>
-
-                                                    <br />
-                                                    <br />
+                                            <div className=" ">
+                                                <h2>Endereço de Entrega</h2>
+                                                <hr />
+                                                <ul className="">
+                                                    <li className="">{endereco.destinatario}</li>
+                                                    <li className="">{endereco.rua} , {endereco.numero} {endereco.complemento},</li>
+                                                    <li className="">{endereco.cep} - {endereco.bairro}</li>
+                                                    <li className="">{endereco.cidade} - {endereco.estado}</li>
                                                 </ul>
 
+                                            </div>
+                                            <a className="linkMudarEnderecoEntrega" onClick={() =>{MeusEnderecos()}} >Mudar endereço de entrega</a>
+                                            
+                                            <br /><br />
+                                            <div className="">
+                                                <h2>Endereço Cobrança</h2>
+                                                <hr />
+                                                <ul className="">
+                                                    <li className="">{enderecoCobranca.destinatario}</li>
+                                                    <li className="">{enderecoCobranca.rua} , {enderecoCobranca.numero} {enderecoCobranca.complemento},</li>
+                                                    <li className="">{enderecoCobranca.cep} - {enderecoCobranca.bairro}</li>
+                                                    <li className="">{enderecoCobranca.cidade} - {enderecoCobranca.estado}</li>
+                                                </ul>
 
-                                            </li>
-
-
-
+                                            </div>
+                                            <a className="linkMudarEnderecoEntrega" onClick={() =>{MeusEnderecos()}} >Mudar endereço de cobrança</a>
+                                            
                                             <br />
                                         </ul>
 

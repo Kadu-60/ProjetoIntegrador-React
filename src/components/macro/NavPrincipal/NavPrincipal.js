@@ -92,7 +92,7 @@ function NavPrincipal(props) {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
                 .then((response) => {
                     window.location.href = "http://localhost:3000/dashboard/" + response.data.id_Cliente
-                    localStorage.setItem('defaultIndex', "index")
+                    localStorage.setItem('defaultIndex', JSON.stringify(2))
                 })
         } else {
             window.location.href = "http://localhost:3000/login"
