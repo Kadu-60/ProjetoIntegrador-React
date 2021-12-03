@@ -100,9 +100,6 @@ input[type="number"] {
 }
 
 
-
-
-
 .img-produto img{
     width : 450px;
 }
@@ -220,6 +217,10 @@ a{
 .list-cards-produtos{
     margin-left: 30px;
     margin-bottom: 100px;
+}
+
+.texto-prazo {
+    padding-left: 55px;
 }
 
 

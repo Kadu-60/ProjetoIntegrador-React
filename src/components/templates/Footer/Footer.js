@@ -16,7 +16,7 @@ function Footer(props) {
                             <section className="cadastroNew" id="cadastroNew">
                                 <div className="texto" id="texto">
                                     
-                                    <strong className="freteFixo">Frete Fixo para qualquer região de Brasil <br /></strong> <br />
+                                    <strong className="freteFixo">Entregas somente para São Paulo e Grande SP<br /></strong> <br />
 
                                 </div>
 
@@ -55,16 +55,17 @@ function Footer(props) {
                                         <a className="link-footer" href="/faq">Perguntas Frequentes</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="/faq">Forma de Pagamento</a>
+                                        <a className="link-footer" id="/faq#pagamento">Forma de Pagamento</a>
+                                        {/* <HashLink to="/faq#pagamento">Forma de Pagamento</HashLink> */}
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="/faq">Taxas de Entrega</a>
+                                        <a className="link-footer" href="/faq#taxa">Taxas de Entrega</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="/faq">Prazo de Entrega</a>
+                                        <a className="link-footer" href="/faq#prazo">Prazo de Entrega</a>
                                     </li>
                                     <li className="item">
-                                        <a className="link-footer" href="/faq">Troca e Devolução</a>
+                                        <a className="link-footer" href="/faq#troca">Troca e Devolução</a>
                                     </li>
                                 </ul>
                             </div>

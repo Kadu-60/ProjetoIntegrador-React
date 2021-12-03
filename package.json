@@ -23,6 +23,7 @@
     "react-dom": "^17.0.2",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "remask": "0.1.0-alpha.5",
     "semantic-ui-css": "^2.4.1",

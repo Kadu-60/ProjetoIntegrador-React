@@ -26,7 +26,7 @@ function Produto(props) {
         </div>
         <div className='d-flex flex-column'>
           <div>
-            <p class="preco">R${props.preco}</p>
+            <p class="preco">R$ {props.preco}</p>
           </div>
 
           <div class="col-12 d-flex align-self-end justify-content-center">
