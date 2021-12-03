@@ -128,6 +128,8 @@ const Panes = ({ user, dataNascimento }) => {
       })
   }, [])
 
+  
+
 
 
 
@@ -287,7 +289,7 @@ const Panes = ({ user, dataNascimento }) => {
     {
       menuItem: 'Meus Cartões', render: () =>
         <Tab.Pane>
-
+         
         </Tab.Pane>
     },
 

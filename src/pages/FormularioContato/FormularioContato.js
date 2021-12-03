@@ -79,7 +79,7 @@ function FormularioContato(props) {
           </label>
           <input
            id="telefone"
-            type="number"
+            type="text"
             className="form-control"
             placeholder="(11) 12345-6789" name="telefone" onChange={onChange} 
           />

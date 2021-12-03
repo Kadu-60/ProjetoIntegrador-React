@@ -84,23 +84,11 @@
     /* display: block !important; */
 }
 .header-logo{
-    width: 85%;
+    width: 90%;
 }
-
-.link-sair{
-    color: white;
-    text-decoration: underline;
-   
-}
-.link-sair:hover{
-    color: #D0A14C;
-    text-decoration: underline;
-  
-}
-
 .header-input{
     width: 80%;
-    height: 40px;
+    height: 45px;
     border-radius: 5px;
     border: none;
 }
@@ -148,12 +136,12 @@
 
 .icone{
     font-family: 'MedievalSharp', cursive;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: none;
     letter-spacing: 0;
     color: white ;
     
- 
+    margin-left: 5px;
     margin-bottom: 15px;
    
       
