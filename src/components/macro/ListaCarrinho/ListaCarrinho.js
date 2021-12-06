@@ -70,6 +70,7 @@ function ListaCarrinho(props) {
             if (localStorage.getItem("user")) {
                 window.location.href = "http://localhost:3000/checkout"
             } else {
+                localStorage.setItem("comprando", "comprando")
                 window.location.href = "http://localhost:3000/login"
             }
 

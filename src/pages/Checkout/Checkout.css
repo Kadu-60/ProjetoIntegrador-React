@@ -60,6 +60,16 @@
     
     margin-left: 10px;
 }
+.linkMudarEnderecoEntrega{
+    color: #0000FF;
+    text-decoration: underline;
+}
+.linkMudarEnderecoEntrega:hover{
+    color: #0000ca;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .sub-global{
     margin-left: 24px;
 }

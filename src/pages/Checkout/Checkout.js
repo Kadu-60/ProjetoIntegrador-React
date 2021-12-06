@@ -18,13 +18,14 @@ import { Formik, Field } from 'formik';
 import Swal from 'sweetalert2'
 import Boleto from '../../assets/imgs/boleto/concessionariacomlegenda.png'
 
+import ListaEnderecos from "../../components/micro/ListaEnderecos/ListaEnderecos"
 
 
 
 
 const Checkout = (props) => {
 
-
+    const [attComponent, setAttComponent] = useState(0)
     const [number, setNumber] = useState('')
     const [name, setName] = useState('')
     const [expiry, setExpiry] = useState('')
@@ -39,14 +40,42 @@ const Checkout = (props) => {
     const [estado, setEstado] = useState('')
     const [parcelas, setParcelas] = useState([])
     const [cliente, setCliente] = useState({})
+    const [destinatario, setDestinatario] = useState(null)
     const [parcelamento, setParcelamento] = useState('')
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
     const [frete, setFrete] = useState('')
     const [metodoPag, setMetodoPag] = useState('')
 
+    const [enderecos, setEnderecos] = useState([])
+    const [endereco, setEndereco] = useState({
+        "id_endereco": 0,
+        "estado": "",
+        "cidade": "",
+        "bairro": "",
+        "rua": "",
+        "cep": "",
+        "numero": "",
+        "complemento": "",
+        "ponto_referencia": "",
+        "destinatario": ""
+    })
+    const [enderecoCobranca, setEnderecoCobranca] = useState({
+        "id_endereco": 0,
+        "estado": "",
+        "cidade": "",
+        "bairro": "",
+        "rua": "",
+        "cep": "",
+        "numero": "",
+        "complemento": "",
+        "ponto_referencia": "",
+        "destinatario": ""
+    })
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
+    const [cartaoPreenchido, setCartaoPreenchido] = useState(false)
+    const [cartaoFuturo, setCartaoFuturo] = useState(false)
 
 
     const [toggleState, setToggleState] = useState(1);
@@ -106,7 +135,6 @@ const Checkout = (props) => {
         axios.get('http://localhost:8080/parcelas')
             .then((response) => {
                 setParcelas(response.data)
-                console.log(response.data)
             })
         if (localStorage.getItem('user')) {
             let email = localStorage.getItem('user')
@@ -117,7 +145,35 @@ const Checkout = (props) => {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email, config)
                 .then((response) => {
                     setCliente(response.data)
+                    axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
+                        .then((response) => {
+                            setEnderecos(response.data)
+                            response.data.map((item) => {
+                                if (item.enderecoEntrega) {
+                                    setEndereco(item.clienteEnderecoKey.endereco)
+                                }
+                                if (item.enderecoPrincipal) {
+                                    setEnderecoCobranca(item.clienteEnderecoKey.endereco)
+                                }
+                            })
+
+                        })
+                    axios.get("http://localhost:8080/clienteCartao/cliente/" + response.data.id_Cliente)
+                        .then((response) => {
+
+                            response.data.map((item) => {
+
+                                if (item.principal) {
+
+                                    // setNumber(item.clienteCartaoKey.cartao.numero)
+                                    // setName(item.clienteCartaoKey.cartao.nome)
+                                    // setExpiry(item.clienteCartaoKey.cartao.validade)
+                                    // setCartaoPreenchido(true)
+                                }
+                            })
+                        })
                 })
+
         } else {
             window.location.href = "http://localhost:3000/login"
         }
@@ -153,7 +209,7 @@ const Checkout = (props) => {
         }
 
 
-    }, [])
+    }, [attComponent])
 
 
     const direcionar = (props) => {
@@ -162,11 +218,19 @@ const Checkout = (props) => {
         history.push(URL)
 
     }
+    function MeusEnderecos() {
+        localStorage.setItem('defaultIndex', JSON.stringify(3))
+        window.location.href = "http://localhost:3000/dashboard/" + cliente.id_Cliente
+    }
 
+    function meusCartoes() {
+        localStorage.setItem('defaultIndex', JSON.stringify(4))
+        window.location.href = "http://localhost:3000/dashboard/" + cliente.id_Cliente
+    }
 
     const Finalizar = (event) => {
-
         event.preventDefault();
+
         let pedido = {
             "subtotal": 0,
             "total": 0,
@@ -185,14 +249,15 @@ const Checkout = (props) => {
             },
             "endereco":
             {
-                "estado": estado,
-                "cidade": cidade,
-                "bairro": bairro,
-                "rua": rua,
-                "cep": cep,
-                "numero": numeroEndereco,
-                "complemento": complemento,
-                "ponto_referencia": ""
+                "estado": endereco.estado,
+                "cidade": endereco.cidade,
+                "bairro": endereco.bairro,
+                "rua": endereco.rua,
+                "cep": endereco.cep,
+                "numero": endereco.numero,
+                "complemento": endereco.complemento,
+                "ponto_referencia": "",
+                "destinatario": endereco.destinatario
             },
             "cartao":
             {
@@ -239,16 +304,28 @@ const Checkout = (props) => {
                 setNumeroPedido(response.data.pedido)
                 localStorage.setItem('cart', JSON.stringify([]))
                 localStorage.setItem('qtyCart', JSON.stringify(0))
+                if (cartaoFuturo) {
+                    let cartaoFuturo = {
+                        "clienteCartaoKey": {
+                            "cliente": {
+                                "id_Cliente": 1
+                            },
+                            "cartao": {
+                                "id_Cartao": response.data.pedido.cartao.id_Cartao
+                            }
+                        },
+                        "principal": true
+                    }
+                    axios.post('http://localhost:8080/clienteCartao/create', cartaoFuturo)
+                        .then((response) => {
+
+                        })
+                }
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
 
             })
 
-
-
-
-
-        // window.location.href = "http://localhost:3000/pedidofinalizado"
     }
 
     function buscaCep(ev, setFieldValue) {
@@ -292,19 +369,6 @@ const Checkout = (props) => {
     return (
         <div className="App">
             <Formik
-                onSubmit={Finalizar}
-                validateOnMount
-                initialValues={{
-                    cep: '',
-                    logradouro: '',
-                    numero: '',
-                    complemento: '',
-                    bairro: '',
-                    cidade: '',
-                    uf: '',
-                }}
-
-
 
                 render={({ isValid, setFieldValue }) => (
                     <>
@@ -318,45 +382,40 @@ const Checkout = (props) => {
 
                             <br />
                             <Container>
-                                <div className="div-checkout" id="">
+                                <div className="div-checkout" >
                                     <div className="div-pessoais " >
 
                                         <ul className="lista-checkout-total">
 
-                                            <p> <Icon className="icone-resumo" name="home" /><b>Entrega</b></p>
-                                            <p>Solicitamos apenas as informações essenciais para a realização da compra.</p>
-                                            <li className="sub-global">
+                                            <p> <Icon className="icone-resumo" name="home" /><b>Endereco de Entrega</b></p>
 
 
-
-                                                <ul className="lista-carrinho-total">
-
-
-                                                    <label>* CEP </label>
-                                                    <Field type="text" id="cep" name="cep" onBlur={(ev) => buscaCep(ev, setFieldValue)} onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
-                                                    <label>* Rua </label>
-                                                    <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
-                                                    <label>* Número </label>
-                                                    <Field type="text" className="form-control input-numero" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
-                                                    <label> Complemento </label>
-                                                    <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
-                                                    <label>* Bairro </label>
-                                                    <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
-                                                    <label>* Cidade </label>
-                                                    <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
-                                                    <label>* Estado </label>
-                                                    <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
-                                                    <label>Nome do destinatário </label>
-                                                    <input type="text" class="form-control" placeholder="" />
-
-                                                    <br />
-                                                    <br />
+                                            <div className=" ">
+                                                <h2>Endereço de Entrega</h2>
+                                                <hr />
+                                                <ul className="">
+                                                    <li className="">{endereco.destinatario}</li>
+                                                    <li className="">{endereco.rua} , {endereco.numero} {endereco.complemento},</li>
+                                                    <li className="">{endereco.cep} - {endereco.bairro}</li>
+                                                    <li className="">{endereco.cidade} - {endereco.estado}</li>
                                                 </ul>
 
+                                            </div>
+                                            <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de entrega</a>
 
-                                            </li>
+                                            <br /><br />
+                                            <div className="">
+                                                <h2>Endereço Cobrança</h2>
+                                                <hr />
+                                                <ul className="">
+                                                    <li className="">{enderecoCobranca.destinatario}</li>
+                                                    <li className="">{enderecoCobranca.rua} , {enderecoCobranca.numero} {enderecoCobranca.complemento},</li>
+                                                    <li className="">{enderecoCobranca.cep} - {enderecoCobranca.bairro}</li>
+                                                    <li className="">{enderecoCobranca.cidade} - {enderecoCobranca.estado}</li>
+                                                </ul>
 
-
+                                            </div>
+                                            <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de cobrança</a>
 
                                             <br />
                                         </ul>
@@ -464,6 +523,58 @@ const Checkout = (props) => {
                                                         
                                                     </div>
                                                 </div>
+                                                {/* <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
+                                                <Cards
+                                                    number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
+                                                    name={name}
+                                                    expiry={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
+                                                    cvc={cvc}
+                                                    focused={focus}
+
+                                                />
+
+
+                                                <label>Número do cartão *</label>
+                                                <InputMask type="tel" name="number" value={!cartaoPreenchido ? number : "**** **** **** " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
+
+                                                <label>Nome impresso no cartão *</label>
+                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
+
+                                                <label>Validade *</label>
+                                                <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
+
+                                                <label>Código de Segurança *</label>
+                                                <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+
+
+                                                <label>Parcelar*</label>
+                                                <select type="text" onChange={event => { setParcelamento(event.target.value) }} className="form-control input-bairro" required>
+                                                    <option value='' selected>Parcelamento</option>
+                                                    {
+                                                        parcelas.map((parcela) => (
+                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
+                                                        )
+                                                        )
+                                                    }
+
+                                                </select>
+                                                {cartaoPreenchido ? (
+                                                    <>
+                                                        <p>
+                                                            * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
+                                                        </p>
+                                                        <br />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <br />
+                                                        <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(e.target.value) }} /> Deseja utilizar esse cartão em compras futuras?
+                                                    </>
+                                                )}
+
+
+                                                <br />
+                                                <br /> */}
                                             </div>
                                         </ul>
                                     </div>
