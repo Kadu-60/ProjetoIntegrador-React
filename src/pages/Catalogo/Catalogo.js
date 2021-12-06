@@ -5,14 +5,11 @@ import './Catalogo.css'
 import { useHistory } from "react-router-dom"
 import axios from 'axios'
 import ProdutosBusca from '../../components/macro/BuscaParam/ProdutosBusca'
+import FiltroProdut from '../../components/micro/FiltroProdu/FiltroProdut'
+import { useParams } from 'react-router-dom'
+import { Row , Col, Collapse } from 'react-bootstrap'
 
 
-const initialValue = {
-    marca: -1,
-    familia: -1,
-    categoria: -1,
-    prato: -1
-}
 
 function Catalogo(props) {
 
@@ -21,9 +18,13 @@ function Catalogo(props) {
     const [paginaAtual, setPaginaAtual] = useState(1)
     const [prodsPorPagina, setProdsPorPagina] = useState(15)
     const final = 'http://localhost:8080/Card/todosProdutos'
-    const [ busca, setBusca] = useState('')
 
-
+    
+  
+   
+  
+   
+       
 
     useEffect(() => {
         const fetchProds = async () => {
@@ -33,11 +34,21 @@ function Catalogo(props) {
             setLoading(false)
             console.log(produtos)
             console.log(props.pesq)
+         
         }
 
         fetchProds()
 
     }, [])
+
+  
+
+
+   
+
+
+
+
 
     // produtos atuais
     const indexUltimoProd = paginaAtual * prodsPorPagina
@@ -47,13 +58,29 @@ function Catalogo(props) {
     // mudar pagina 
     const paginate = numeroPags => setPaginaAtual(numeroPags)
     
-  
 
+    // filtro
+  
+    function getFiltrar(e){
+        axios.get('http://localhost:8080/Card/Marca/' + e.target.value)
+        .then(response => {
+            setProdutos(response.data)
+        }) 
+
+    }
+   
+  
 
     return (
 
 
         <>
+        <body>
+        <div className="filtroo d-flex flex column  ">
+        <FiltroProdut function = {getFiltrar}  />
+
+        </div>
+        
             <div class="container">
                 <div class="row pt-5 caixaTitulo">
                     <div class="col-10  d-flex flex-column justify-content-start">
@@ -63,57 +90,23 @@ function Catalogo(props) {
 
                 </div>
                 <br/> <br/>
-
-                <div id="checkboxes" className="col-2">
-                
-                <ul>
-                    <p><b>Marcas</b></p>
-                    <li><input type="checkbox" /> Baden</li>
-                    <li><input type="checkbox" /> Colorado</li>
-                    <li><input type="checkbox" /> Hoegaarden</li>
-                    <li><input type="checkbox" /> Patagonia</li>
-                    <li><input type="checkbox" /> Michelob</li>
-                    <li><input type="checkbox" /> Madalena</li>
-                    <li><input type="checkbox"/> Weltenburger</li>
-                    <li><input type="checkbox" /> Blumenau</li>
-                <br/>
-                
-                    <p><b>Familias</b></p>
-                    <li><input type="checkbox" /> American IPA</li>
-                    <li><input type="checkbox"/> Weiss</li>
-                    <li><input type="checkbox"/> Pilsen</li>
-                    <li><input type="checkbox"/> Bock</li>
-                    <li><input type="checkbox"/> India Pale Ale</li>
-                    <li><input type="checkbox"/> Witbier</li>
-                    <li><input type="checkbox"/> Cristal</li>
-                    <li><input type="checkbox"/> Golden</li>
-                    <li><input type="checkbox"/> Pale Ale</li>
-                    <li><input type="checkbox"/> Red Ale</li>
-                    <li><input type="checkbox"/> Lager</li>
-                    <li><input type="checkbox"/> Fruit Beer</li>
-                    <br/>
-                    <p><b>Pratos</b></p>
-                    <li><input type="checkbox"/> Aves</li>
-                    <li><input type="checkbox"/> Carnes vermelhas</li>
-                    <li><input type="checkbox"/> Peixes e frutos do mar</li>
-                    <li><input type="checkbox"/> Chocolate</li>
-                    <li><input type="checkbox"/> Frutas vermelhas</li>
-                    <li><input type="checkbox"/> Massa com molho ao sugo ou bolonhesa</li>
-                    <li><input type="checkbox"/> Massa com molho bechamel ou alfredo</li>
-                    <li><input type="checkbox"/> Queijos</li>
-                    <li><input type="checkbox"/> Torta de limão</li>
-
-                </ul>
-                </div>
-                
-                <ListarProdutos>
-                    <ProdutosBusca produtos={prodAtuais} loading={loading}  />
-                </ListarProdutos>
-                <BotaoPags prodsPorPagina={prodsPorPagina} totalProd={produtos.length} paginate={paginate} />
+                      
+                    
+                        
+                  
+               
+                    <ListarProdutos >
+                        <ProdutosBusca produtos={prodAtuais} loading={loading}  />
+                    </ListarProdutos>
+                    <BotaoPags prodsPorPagina={prodsPorPagina} totalProd={produtos.length} paginate={paginate} />
+                   
+               
 
 
                 <br /> <br />
             </div>
+
+            </body>
 
         </>
 

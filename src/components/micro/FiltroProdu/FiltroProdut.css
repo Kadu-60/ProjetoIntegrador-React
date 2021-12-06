@@ -1,0 +1,37 @@
+.btn-limpar{
+    color: #d0a14c;
+text-decoration: underline;
+cursor: pointer;
+
+
+}
+
+li .li  {
+    padding: 10;
+    cursor: pointer;
+    padding-bottom: 15px;
+}
+input .input{
+cursor: pointer;
+padding-right:  5px;
+
+
+}
+
+.checkb{
+    margin-top: 20px;
+    
+}
+.div-check{
+    display: inline-flex;
+}
+
+.label-inline{
+    display:inline-block !important;
+    margin-right: 5px;
+}
+
+.filtra-por{
+    display:inline-block !important;
+
+}

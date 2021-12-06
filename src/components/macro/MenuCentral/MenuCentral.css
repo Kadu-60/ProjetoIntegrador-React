@@ -12,6 +12,16 @@
 
 }
 
+.nota-fiscal{
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.nota-fiscal:hover{
+    color: blue;
+    text-decoration: underline;
+}
 
 
 
