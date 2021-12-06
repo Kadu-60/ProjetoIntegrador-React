@@ -32,3 +32,18 @@
   background-color: #686760;
 }
 
+.btnBoletoFinal{
+  background-color: #8D733F;
+  color: white;
+  margin-left: 77px;
+}
+
+.btnBoletoFinal:hover{
+  color: white;
+  background-color: #686760;
+}
+
+.imgBoletoFinal{
+  width: 100%;
+}
+
