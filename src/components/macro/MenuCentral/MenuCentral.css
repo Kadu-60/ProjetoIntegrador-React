@@ -15,7 +15,6 @@
     color: white!important;
 }
 
-<<<<<<< HEAD
 .nota-fiscal{
     color: blue;
     text-decoration: underline;
@@ -25,10 +24,10 @@
 .nota-fiscal:hover{
     color: blue;
     text-decoration: underline;
-=======
+}
+
 .cursorPointer{
     cursor: pointer;
->>>>>>> meusEnderecos
 }
 
 .btn-adcend{

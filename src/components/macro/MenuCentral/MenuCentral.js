@@ -479,9 +479,6 @@ const Panes = ({ user, dataNascimento }) => {
     {
       menuItem: 'Meus Cartões', render: () =>
         <Tab.Pane>
-<<<<<<< HEAD
-         
-=======
           <div className="row">
             <div className="col-9 ">
               <h2 className=" " >Cartão Principal</h2>
@@ -573,7 +570,6 @@ const Panes = ({ user, dataNascimento }) => {
           <ListaCartoes cartoes={cartoes} att={setAtt} />
 
 
->>>>>>> meusEnderecos
         </Tab.Pane>
     },
 
