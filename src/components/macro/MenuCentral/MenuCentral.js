@@ -11,6 +11,9 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Formik, Field } from 'formik';
+import LinhaCartao from '../../micro/LinhaCartao/LinhaCartao'
+import ListaCartoes from '../../micro/ListaCartoes/ListaCartoes'
+import Cards from 'react-credit-cards'
 
 
 const deslogar = () => {
@@ -25,6 +28,11 @@ const deslogar = () => {
 
 
 const Panes = ({ user, dataNascimento }) => {
+  const [number, setNumber] = useState('')
+  const [name, setName] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [cvc, setCvc] = useState('')
+  const [focus, setFocus] = useState('')
   const [testeData, setTesteData] = useState([])
   const [cep, setCep] = useState('')
   const [rua, setRua] = useState('')
@@ -33,7 +41,7 @@ const Panes = ({ user, dataNascimento }) => {
   const [bairro, setBairro] = useState('')
   const [cidade, setCidade] = useState('')
   const [estado, setEstado] = useState('')
-  const [att, setAtt]= useState(0)
+  const [att, setAtt] = useState(0)
   const [telefoneChanged, setTelefoneChanged] = useState((user.telefone))
   const [nomeChanged, setNomeChanged] = useState((user.nome))
   const [dataNas, setDataNas] = useState('')
@@ -51,6 +59,10 @@ const Panes = ({ user, dataNascimento }) => {
   const [endPrincipal, setEndPrincipal] = useState(null)
   const [endEntrega, setEndEntrega] = useState(null)
   const [enderecos, setEnderecos] = useState([])
+  const [cartoes, setCartoes] = useState([])
+  const [cartao, setCartao] = useState({})
+  const [checkboxCartao, setCheckboxCartao] = useState(false)
+
 
   const alterarDados = (event) => {
     event.preventDefault()
@@ -118,7 +130,7 @@ const Panes = ({ user, dataNascimento }) => {
       "enderecoEntrega": false
     }
     axios.post("http://localhost:8080/clienteEndereco/create", endereco)
-      .then((response)=>{
+      .then((response) => {
         console.log(response.data)
         Swal.fire({
           title: 'Sucesso!',
@@ -126,12 +138,33 @@ const Panes = ({ user, dataNascimento }) => {
           icon: 'success',
           confirmButtonText: 'fechar'
         })
-        setTimeout(()=>{window.location.reload()}, 800)
-        
+        setTimeout(() => { window.location.reload() }, 800)
+
       })
-    
+
   }
 
+  const AdicionarCartao = () => {
+    let novoCartao = {
+      "clienteCartaoKey": {
+        "cliente": {
+          "id_Cliente": user.id_Cliente
+        },
+        "cartao": {
+          "nome": name,
+          "numero": number,
+          "validade": new Date(expiry.replace('/', "/01/"))
+        }
+      },
+      "principal": checkboxCartao
+    }
+    axios.post("http://localhost:8080/clienteCartao/create",novoCartao)
+      .then(response => {
+        
+        localStorage.setItem("defaultIndex", JSON.stringify(4))
+        window.location.href = "http://localhost:3000/dashboard/"+user.id_Cliente
+      })
+  }
 
 
   const alterarSenha = (event) => {
@@ -180,10 +213,21 @@ const Panes = ({ user, dataNascimento }) => {
       .then((response) => {
         setPedidos(response.data);
       })
-    axios.get("http://localhost:8080/clienteEndereco/cliente/"+id)
-      .then((response)=>{
+    axios.get("http://localhost:8080/clienteEndereco/cliente/" + id)
+      .then((response) => {
         setEnderecos(response.data);
-        
+
+      })
+    axios.get("http://localhost:8080/clienteCartao/cliente/" + id)
+      .then((response) => {
+        setCartoes(response.data);
+        response.data.map((item) => {
+
+          if (item.principal) {
+            
+            setCartao(item)
+          }
+        })
       })
 
   }, [att])
@@ -351,7 +395,7 @@ const Panes = ({ user, dataNascimento }) => {
               </div>
 
               <hr />
-              <ListaEnderecos enderecos={enderecos} att ={setAtt} />
+              <ListaEnderecos enderecos={enderecos} att={setAtt} />
             </div>
           </div>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -366,7 +410,7 @@ const Panes = ({ user, dataNascimento }) => {
                     <div className="" >
 
                       <ul className="lista-checkout-total">
-                        
+
                         <li className="">
 
 
@@ -433,6 +477,96 @@ const Panes = ({ user, dataNascimento }) => {
     {
       menuItem: 'Meus Cartões', render: () =>
         <Tab.Pane>
+          <div className="row">
+            <div className="col-9 ">
+              <h2 className=" " >Cartão Principal</h2>
+            </div>
+          </div>
+          <hr className="mt-1" />
+
+          <div className="row d-flex justify-content-center align-items-center">
+
+            <div className="col-1 d-flex justify-content-center align-items-center">
+              <b>Cartão</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center text-center">
+              <b>Nome</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center text-center">
+              <b>Número  </b>
+            </div>
+            <div className="col-2 d-flex justify-content-center align-items-center text-center">
+              <b>Vencimento</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center">
+              <b>Ações</b>
+            </div>
+
+          </div>
+          <hr className="mb-0 mt-1" />
+          <LinhaCartao cartao={cartao} att={setAtt} />
+          <div className="row">
+            <div className="col-9 d-flex flex-column justify-content-end">
+              <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
+            </div>
+            <div className="col-3  d-flex justify-content-end">
+              <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
+                <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+              </button>
+            </div>
+          </div>
+          <hr className="mt-1" />
+          <div class="modal fade" id="ModalAdicionarCartao" tabindex="-1" aria-labelledby="ModalAdicionarCartao" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalAdicionarCartao">Adicionar Cartão</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div className="div-fundo" id="div-fundo">
+                    <p> <Icon className="icone-resumo" name="credit card outline" /><b>Adicionar Cartão</b></p>
+                    <Cards
+                      number={number}
+                      name={name}
+                      expiry={expiry}
+                      cvc={cvc}
+                      focused={focus}
+
+                    />
+                    <br />
+
+                    <label>Número do cartão *</label>
+                    <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                    <label>Nome impresso no cartão *</label>
+                    <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" />
+
+                    <label>Validade *</label>
+                    <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                    <label>Código de Segurança *</label>
+                    <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                    <br/>
+                    <input type="checkbox" value={checkboxCartao} onChange={e => setCheckboxCartao(e.target.checked)}/> Desejo tornar este cartão meu principal
+                    
+
+
+
+
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onClick={() => { AdicionarCartao()}}>Adicionar Cartão</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ListaCartoes cartoes={cartoes} att={setAtt} />
+
 
         </Tab.Pane>
     },
@@ -473,11 +607,11 @@ function verMais() {
 
 
 const TabExampleVerticalTabular = (props) => {
-  if(localStorage.getItem("comprando")){
+  if (localStorage.getItem("comprando")) {
     localStorage.removeItem("comprando");
-    window.location.href= "http://localhost:3000/carrinho"
+    window.location.href = "http://localhost:3000/carrinho"
   }
-  if(JSON.parse(localStorage.getItem("defaultIndex"))==1){
+  if (JSON.parse(localStorage.getItem("defaultIndex")) == 1) {
     Swal.fire({
       title: 'Atenção!',
       text: 'Altere a sua Senha!',
@@ -486,7 +620,7 @@ const TabExampleVerticalTabular = (props) => {
     })
   }
 
-  let index = localStorage.getItem('defaultIndex')? JSON.parse(localStorage.getItem('defaultIndex')):0
+  let index = localStorage.getItem('defaultIndex') ? JSON.parse(localStorage.getItem('defaultIndex')) : 0
   return (
     <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index} />
   )

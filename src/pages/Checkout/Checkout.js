@@ -14,14 +14,14 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
 import ListaEnderecos from "../../components/micro/ListaEnderecos/ListaEnderecos"
-
+import Swal from 'sweetalert2'
 
 
 
 
 const Checkout = (props) => {
 
-    const [attComponent, setAttComponent] =useState(0)
+    const [attComponent, setAttComponent] = useState(0)
     const [number, setNumber] = useState('')
     const [name, setName] = useState('')
     const [expiry, setExpiry] = useState('')
@@ -67,6 +67,8 @@ const Checkout = (props) => {
     })
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
+    const [cartaoPreenchido, setCartaoPreenchido] = useState(false)
+    
 
 
     const history = useHistory();
@@ -83,7 +85,6 @@ const Checkout = (props) => {
         axios.get('http://localhost:8080/parcelas')
             .then((response) => {
                 setParcelas(response.data)
-                console.log(response.data)
             })
         if (localStorage.getItem('user')) {
             let email = localStorage.getItem('user')
@@ -107,7 +108,22 @@ const Checkout = (props) => {
                             })
 
                         })
+                    axios.get("http://localhost:8080/clienteCartao/cliente/" + response.data.id_Cliente)
+                        .then((response) => {
+                            
+                            response.data.map((item) => {
+
+                                if (item.principal) {
+
+                                    // setNumber(item.clienteCartaoKey.cartao.numero)
+                                    // setName(item.clienteCartaoKey.cartao.nome)
+                                    // setExpiry(item.clienteCartaoKey.cartao.validade)
+                                    // setCartaoPreenchido(true)
+                                }
+                            })
+                        })
                 })
+
         } else {
             window.location.href = "http://localhost:3000/login"
         }
@@ -151,12 +167,14 @@ const Checkout = (props) => {
         history.push(URL)
 
     }
-    function MeusEnderecos(){
+    function MeusEnderecos() {
         localStorage.setItem('defaultIndex', JSON.stringify(3))
-        
-        
-        window.location.href="http://localhost:3000/dashboard/"+cliente.id_Cliente
-        
+        window.location.href = "http://localhost:3000/dashboard/" + cliente.id_Cliente
+    }
+
+    function meusCartoes() {
+        localStorage.setItem('defaultIndex', JSON.stringify(4))
+        window.location.href = "http://localhost:3000/dashboard/" + cliente.id_Cliente
     }
 
     const Finalizar = (event) => {
@@ -190,7 +208,7 @@ const Checkout = (props) => {
             {
                 "nome": name,
                 "numero": number,
-                "validade": new Date(expiry.replace('/', "/01/"))
+                "validade": expiry
             }
         }
         let arrayItens = [];
@@ -296,8 +314,8 @@ const Checkout = (props) => {
                                                 </ul>
 
                                             </div>
-                                            <a className="linkMudarEnderecoEntrega" onClick={() =>{MeusEnderecos()}} >Mudar endereço de entrega</a>
-                                            
+                                            <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de entrega</a>
+
                                             <br /><br />
                                             <div className="">
                                                 <h2>Endereço Cobrança</h2>
@@ -310,8 +328,8 @@ const Checkout = (props) => {
                                                 </ul>
 
                                             </div>
-                                            <a className="linkMudarEnderecoEntrega" onClick={() =>{MeusEnderecos()}} >Mudar endereço de cobrança</a>
-                                            
+                                            <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de cobrança</a>
+
                                             <br />
                                         </ul>
 
@@ -327,23 +345,23 @@ const Checkout = (props) => {
                                             <div className="div-fundo" id="div-fundo">
                                                 <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
                                                 <Cards
-                                                    number={number}
+                                                    number={!cartaoPreenchido?number:"000000000000" + number.slice(number.length - 4, number.length)}
                                                     name={name}
-                                                    expiry={expiry}
+                                                    expiry={!cartaoPreenchido?expiry:expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
                                                     cvc={cvc}
                                                     focused={focus}
 
                                                 />
-                                                <br />
+
 
                                                 <label>Número do cartão *</label>
-                                                <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+                                                <InputMask type="tel" name="number" value={!cartaoPreenchido?number:"**** **** **** " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
 
                                                 <label>Nome impresso no cartão *</label>
-                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
+                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
 
                                                 <label>Validade *</label>
-                                                <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+                                                <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido?expiry:expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
 
                                                 <label>Código de Segurança *</label>
                                                 <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
@@ -361,7 +379,9 @@ const Checkout = (props) => {
 
                                                 </select>
 
-
+                                                <p>
+                                                    * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
+                                                </p>
 
                                                 <br />
                                                 <br />
