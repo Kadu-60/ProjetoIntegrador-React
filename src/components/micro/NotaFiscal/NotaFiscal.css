@@ -1,0 +1,334 @@
+@media print {
+    @page {
+        margin-left: 15mm;
+        margin-right: 15mm;
+    }
+
+    footer {
+        page-break-after: always;
+    }
+}
+
+* {
+    margin: 0;
+}
+
+.ui-widget-content {
+    border: none !important;
+}
+
+.nfe-square {
+    margin: 0 auto 2cm;
+    box-sizing: border-box;
+    width: 2cm;
+    height: 1cm;
+    border: 1px solid #000;
+}
+
+.nfeArea.page {
+    width: 18cm;
+    position: relative;
+    font-family: "Arial";
+    color: #000;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.nfeArea .font-12 {
+    font-size: 14pt;
+}
+
+.nfeArea .font-8 {
+    font-size: 10px;
+}
+
+.nfeArea .bold {
+    font-weight: bold;
+}
+/* == TABELA == */
+.nfeArea .area-name {
+    font-family: "Arial";
+    color: #000;
+    font-weight: bold;
+    margin: 5px 0 0;
+    font-size: 8px;
+    text-transform: uppercase;
+}
+
+.nfeArea .txt-upper {
+    text-transform: uppercase;
+}
+
+.nfeArea .txt-center {
+    text-align: center;
+}
+
+.nfeArea .txt-right {
+    text-align: right;
+}
+
+.nfeArea .nf-label {
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    display: block;
+}
+   
+    .nfeArea .nf-label.label-small {
+        letter-spacing: -0.5px;
+        font-size: 6pt;
+    }
+
+.nfeArea .info {
+    font-weight: bold;
+    font-size: 8pt;
+    display: block;
+    line-height: 1em;
+}
+
+.nfeArea table {
+    font-family: "Arial";
+    color: #000;
+    font-size: 6pt;
+    border-collapse: collapse;
+    width: 100%;
+    border-color: #000;
+    border-radius: 5px;
+}
+
+.nfeArea .no-top {
+    margin-top: -1px;
+}
+
+.nfeArea .mt-table {
+    margin-top: 3px;
+}
+
+.nfeArea .valign-middle {
+    vertical-align: middle;
+}
+
+.nfeArea td {
+    vertical-align: top;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-color: #000;
+    padding: 1px;
+    height: 5mm;
+}
+
+.nfeArea .tserie {
+    width: 32.2mm;
+    vertical-align: middle;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+    .nfeArea .tserie span {
+        display: block;
+    }
+
+    .nfeArea .tserie h3 {
+        display: inline-block;
+    }
+
+.nfeArea .entradaSaida .legenda {
+    text-align: left;
+    margin-left: 2mm;
+    display: block;
+}
+
+    .nfeArea .entradaSaida .legenda span {
+        display: block;
+    }
+
+.nfeArea .entradaSaida .identificacao {
+    float: right;
+    margin-right: 2mm;
+    border: 1px solid black;
+    width: 5mm;
+    height: 5mm;
+    text-align: center;
+    padding-top: 0;
+    line-height: 5mm;
+}
+
+.nfeArea .hr-dashed {
+    border: none;
+    border-top: 1px dashed #444;
+    margin: 5px 0;
+}
+
+.nfeArea .client_logo {
+    height: 27.5mm;
+    width: 28mm;
+    margin: 0.5mm;
+}
+
+.nfeArea .title {
+    font-size: 10pt;
+    margin-bottom: 2mm;
+}
+
+.nfeArea .txtc {
+    text-align: center;
+}
+
+.nfeArea .pd-0 {
+    padding: 0;
+}
+
+.nfeArea .mb2 {
+    margin-bottom: 2mm;
+}
+
+.nfeArea table table {
+    margin: -1pt;
+    width: 100.5%;
+}
+
+.nfeArea .wrapper-table {
+    margin-bottom: 2pt;
+}
+
+    .nfeArea .wrapper-table table {
+        margin-bottom: 0;
+    }
+
+        .nfeArea .wrapper-table table + table {
+            margin-top: -1px;
+        }
+
+.nfeArea .boxImposto {
+    table-layout: fixed;
+}
+
+    .nfeArea .boxImposto td {
+        width: 11.11%;
+    }
+
+    .nfeArea .boxImposto .nf-label {
+        font-size: 6pt;
+    }
+
+    .nfeArea .boxImposto .info {
+        text-align: right;
+    }
+
+.nfeArea .wrapper-border {
+    border: 1px solid #000;
+    border-width: 0 1px 1px;
+    height: 75.7mm;
+}
+
+    .nfeArea .wrapper-border table {
+        margin: 0 -1px;
+        width: 100.4%;
+    }
+
+.nfeArea .content-spacer {
+    display: block;
+    height: 10px;
+}
+
+.nfeArea .titles th {
+    padding: 3px 0;
+}
+
+.nfeArea .listProdutoServico td {
+    padding: 0;
+}
+
+.nfeArea .codigo {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.nfeArea .boxProdutoServico tr td:first-child {
+    border-left: none;
+}
+
+.nfeArea .boxProdutoServico td {
+    font-size: 6pt;
+    height: auto;
+}
+
+.nfeArea .boxFatura span {
+    display: block;
+}
+
+.nfeArea .boxFatura td {
+    border: 1px solid #000;
+}
+
+.nfeArea .freteConta .border {
+    width: 5mm;
+    height: 5mm;
+    float: right;
+    text-align: center;
+    line-height: 5mm;
+    border: 1px solid black;
+}
+
+.nfeArea .freteConta .info {
+    line-height: 5mm;
+}
+
+.page .boxFields td p {
+    font-family: "Arial";
+    font-size: 5pt;
+    line-height: 1.2em;
+    color: #000;
+}
+
+.nfeArea .imgCanceled {
+    position: absolute;
+    top: 75mm;
+    left: 30mm;
+    z-index: 3;
+    opacity: 0.8;
+    display: none;
+}
+
+.nfeArea.invoiceCanceled .imgCanceled {
+    display: block;
+}
+
+.nfeArea .imgNull {
+    position: absolute;
+    top: 75mm;
+    left: 20mm;
+    z-index: 3;
+    opacity: 0.8;
+    display: none;
+}
+
+.nfeArea.invoiceNull .imgNull {
+    display: block;
+}
+
+.nfeArea.invoiceCancelNull .imgCanceled {
+    top: 100mm;
+    left: 35mm;
+    display: block;
+}
+
+.nfeArea.invoiceCancelNull .imgNull {
+    top: 65mm;
+    left: 15mm;
+    display: block;
+}
+
+.nfeArea .page-break {
+    page-break-before: always;
+}
+
+.nfeArea .block {
+    display: block;
+}
+
+.label-mktup {
+    font-family: Arial !important;
+    font-size: 8px !important;
+    padding-top: 8px !important;
+}

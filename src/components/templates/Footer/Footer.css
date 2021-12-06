@@ -68,7 +68,10 @@ section.cadastroNew{
 .fab{
     color: white;
 }
-
+.pix{
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
 #texto{
     color: #fff;
     font-weight: 500;

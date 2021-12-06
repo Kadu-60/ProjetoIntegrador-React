@@ -26,6 +26,7 @@ import Destaques from './pages/Destaques/Destaques'
 import NotFound from './pages/404/404'
 
 import Catalogo from './pages/Catalogo/Catalogo'
+import NotaFiscal from './components/micro/NotaFiscal/NotaFiscal'
 
 export const RoutesSite = () => {
     return (
@@ -52,6 +53,7 @@ export const RoutesSite = () => {
                 <Route path="/destaques" component={Destaques} />
                 <Route path="/catalogo" component={Catalogo} />
                 <Route path="/teste/:pesq" component={Teste} />
+                <Route path="/notafiscal" component={NotaFiscal} />
                 <Route component={NotFound} />
             </Switch>
         </StoreProvider>
