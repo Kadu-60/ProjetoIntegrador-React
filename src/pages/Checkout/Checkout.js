@@ -68,7 +68,7 @@ const Checkout = (props) => {
     const [cards, setCards] = useState([])
     const [subtotal, setSubtotal] = useState('')
     const [cartaoPreenchido, setCartaoPreenchido] = useState(false)
-    
+    const [cartaoFuturo, setCartaoFuturo] = useState(false)
 
 
     const history = useHistory();
@@ -110,7 +110,7 @@ const Checkout = (props) => {
                         })
                     axios.get("http://localhost:8080/clienteCartao/cliente/" + response.data.id_Cliente)
                         .then((response) => {
-                            
+
                             response.data.map((item) => {
 
                                 if (item.principal) {
@@ -179,6 +179,7 @@ const Checkout = (props) => {
 
     const Finalizar = (event) => {
         event.preventDefault();
+
         let pedido = {
             "subtotal": 0,
             "total": 0,
@@ -208,7 +209,7 @@ const Checkout = (props) => {
             {
                 "nome": name,
                 "numero": number,
-                "validade": expiry
+                "validade": new Date(expiry.replace('/', "/01/"))
             }
         }
         let arrayItens = [];
@@ -249,32 +250,30 @@ const Checkout = (props) => {
                 setNumeroPedido(response.data.pedido)
                 localStorage.setItem('cart', JSON.stringify([]))
                 localStorage.setItem('qtyCart', JSON.stringify(0))
+                if (cartaoFuturo) {
+                    let cartaoFuturo = {
+                        "clienteCartaoKey": {
+                            "cliente": {
+                                "id_Cliente": 1
+                            },
+                            "cartao": {
+                                "id_Cartao": response.data.pedido.cartao.id_Cartao
+                            }
+                        },
+                        "principal": true
+                    }
+                    axios.post('http://localhost:8080/clienteCartao/create', cartaoFuturo)
+                        .then((response) => {
+
+                        })
+                }
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
 
             })
-        // window.location.href = "http://localhost:3000/pedidofinalizado"
+
     }
 
-    // function buscaCep(ev, setFieldValue) {
-    //     const { value } = ev.target;
-
-    //     const cep = value?.replace(/[^0-9]/g, '');
-
-    //     if (cep?.length !== 8) {
-    //         return;
-    //     }
-
-    //     fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             setRua(data.logradouro);
-    //             setBairro(data.bairro);
-    //             setCidade(data.localidade);
-    //             setEstado(data.uf);
-    //         });
-
-    // }
 
 
 
@@ -345,9 +344,9 @@ const Checkout = (props) => {
                                             <div className="div-fundo" id="div-fundo">
                                                 <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
                                                 <Cards
-                                                    number={!cartaoPreenchido?number:"000000000000" + number.slice(number.length - 4, number.length)}
+                                                    number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
                                                     name={name}
-                                                    expiry={!cartaoPreenchido?expiry:expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
+                                                    expiry={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
                                                     cvc={cvc}
                                                     focused={focus}
 
@@ -355,13 +354,13 @@ const Checkout = (props) => {
 
 
                                                 <label>Número do cartão *</label>
-                                                <InputMask type="tel" name="number" value={!cartaoPreenchido?number:"**** **** **** " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
+                                                <InputMask type="tel" name="number" value={!cartaoPreenchido ? number : "**** **** **** " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
 
                                                 <label>Nome impresso no cartão *</label>
                                                 <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
 
                                                 <label>Validade *</label>
-                                                <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido?expiry:expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
+                                                <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
 
                                                 <label>Código de Segurança *</label>
                                                 <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
@@ -378,10 +377,20 @@ const Checkout = (props) => {
                                                     }
 
                                                 </select>
+                                                {cartaoPreenchido ? (
+                                                    <>
+                                                        <p>
+                                                            * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
+                                                        </p>
+                                                        <br />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <br />
+                                                        <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(e.target.value) }} /> Deseja utilizar esse cartão em compras futuras?
+                                                    </>
+                                                )}
 
-                                                <p>
-                                                    * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
-                                                </p>
 
                                                 <br />
                                                 <br />
