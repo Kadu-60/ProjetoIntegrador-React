@@ -44,7 +44,7 @@ function PedidoFinalizado(props) {
 
     }, [])
     function MeusPedidos(){
-        localStorage.setItem('defaultIndex', "index")
+        localStorage.setItem('defaultIndex', JSON.stringify(2))
         let email = localStorage.getItem('user')
         axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
                 .then((response) => {
