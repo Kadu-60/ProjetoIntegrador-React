@@ -1,4 +1,4 @@
-import React, { useState} from "react"
+import React, { useState, useEffect } from 'react'
 import "./FormularioContato.css"
 import { Modal, Button } from "react-bootstrap"
 import axios from 'axios'
@@ -22,19 +22,85 @@ function FormularioContato(props) {
 
   const [ values, setValues ] = useState(initialValue);
 
-    function onChange(ev){
-      const { name, value } = ev.target;
+  //   function onChange(ev){
+  //     const { name, value } = ev.target;
+      
 
-      setValues({ ...values, [name]: value })
-    }
+  //     setValues({ ...values, [name]: value })
+  //   }
   const history = useHistory();
+
+  const [telefone, setTelefone] = useState('')
+  const [nome, setNome] = useState('')
+  const [email, setEmail] = useState('')
+  const [assunto, setAssunto] = useState('')
+  const [tipo_de_contato, setTipo_de_contato] = useState('')
+  const [mensagem, setMensagem] = useState('')
+
+  const [nomePlaceholder, setNomePlaceholder] = useState("Digite o seu nome...")
+  
+
+  // function setCampos(logado) {
+
+  //   if (logado == 1) {
+  //     setValues({ ...values, nome: usuario.nome })
+      
+  //   }
+    
+  // }
+
+
+  const [logado, setLogado] = useState(0)
+  const [token, setToken] = useState('')
+  const [usuario, setUsuario] = useState([])
+
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+    let email = localStorage.getItem('user')
+    if (token && logado == 0 && email) {
+        axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
+            .then((response) => {
+              setUsuario(response.data)
+              setNome(response.data.nome)
+              setTelefone((response.data.telefone))
+              setEmail(response.data.email)
+            })
+            .catch((error) => { console.log(error) })
+        setLogado(1)
+    }
+    
+    
+    
+    
+})
+
+
+
+
+
+console.log(usuario)
+
    
 
 
     function onSubmit(event){
       event.preventDefault();
 
-      axios.post(URL+'formulariocontato', values)
+      const formContato = {
+        nome: nome,
+        telefone: telefone.replace('-', '').replace('(', '').replace(')', '').replaceAll(' ', ''),
+        email: email,
+        tipo_de_contato: tipo_de_contato,
+        assunto: assunto,
+        mensagem: mensagem
+      }
+      setValues(formContato)
+      console.log(formContato)
+      console.log(values)
+
+
+      axios.post(URL+'formulariocontato',formContato)
       .then((response) => {
         
         Swal.fire({
@@ -67,10 +133,11 @@ function FormularioContato(props) {
         <p className="p-nome">  Nome:*</p>
           <input 
            id="nome"
+           value={nome}
             type="text"
             className="form-control"
             placeholder="Digite o seu nome..."
-            aria-required="true"  name="nome" onChange={onChange} required
+            aria-required="true"  name="nome" onChange={(event) => { setNome(event.target.value) }} required
           />
         </div>
         <div className="container col-4 titulo">
@@ -79,9 +146,10 @@ function FormularioContato(props) {
           </label>
           <input
            id="telefone"
+           value={telefone}
             type="text"
             className="form-control"
-            placeholder="(11) 12345-6789" name="telefone" onChange={onChange} 
+            placeholder="(11) 12345-6789" name="telefone" onChange={(event) => { setTelefone(event.target.value) }} 
           />
         </div>
         <div className="container col-4 titulo">
@@ -90,19 +158,20 @@ function FormularioContato(props) {
           </label>
           <input 
            id="email"
+           value={email}
             type="email"
             className="form-control"
-            placeholder="contato@devbrew.com.br" name="email" onChange={onChange} required
+            placeholder="contato@devbrew.com.br" name="email" onChange={(event) => { setEmail(event.target.value) }} required
           />
         </div>
         <div className="container col-4 titulo">
         <p className="p-nome"> Tipo de Contato:*</p>
-          <select className="form-select form-control" aria-label="Tipo De Contato" required name="tipo_de_contato" id="tipo_de_contato" onChange={onChange} >
+          <select className="form-select form-control" aria-label="Tipo De Contato" required name="tipo_de_contato" id="tipo_de_contato" onChange={(event) => { setTipo_de_contato(event.target.value) }} >
           <option selected>Selecione</option> 
-            <option value="Informação"  onChange={onChange}>Informação</option>
-            <option value="Reclamação" onChange={onChange}>Reclamação</option>
-            <option value="Sugestão"  onChange={onChange}>Sugestão</option>
-            <option value="Elogio"  onChange={onChange}>Elogio</option> 
+            <option value="Informação"  onChange={(event) => { setTipo_de_contato(event.target.value) }}>Informação</option>
+            <option value="Reclamação" onChange={(event) => { setTipo_de_contato(event.target.value) }}>Reclamação</option>
+            <option value="Sugestão"  onChange={(event) => { setTipo_de_contato(event.target.value) }}>Sugestão</option>
+            <option value="Elogio"  onChange={(event) => { setTipo_de_contato(event.target.value) }}>Elogio</option> 
           </select>
         </div>
         <div className="container col-4 titulo">
@@ -111,9 +180,10 @@ function FormularioContato(props) {
           </label>
           <input 
            id="assunto"
+           value={assunto}
             type="text"
             className="form-control"
-            placeholder="Digite o assunto..." name="assunto" id="assunto" onChange={onChange} required
+            placeholder="Digite o assunto..." name="assunto" id="assunto" onChange={(event) => { setAssunto(event.target.value) }} required
           />
         </div>
         <div className="container col-4 mensagem-form titulo">
@@ -122,9 +192,10 @@ function FormularioContato(props) {
           </label>
           <textarea
            id="mensagem"
+           value={mensagem}
             className="form-control"
             rows={9}
-            defaultValue={""} required="true" name="mensagem" placeholder="Digite aqui a sua mensagem..." onChange={onChange}
+            defaultValue={""} required="true" name="mensagem" placeholder="Digite aqui a sua mensagem..." onChange={(event) => { setMensagem(event.target.value) }}
           />
           <div className="container buttonform col-12 d-flex titulo">
             <div className="container col-1">

@@ -43,22 +43,7 @@ function Produtos() {
 
 
 
-            <br />   <br />
-
-
-                       
-                                  
-                           
-                            <div className="container ">
-                                <ListarProdutos >
-                                   <ProdutoMarca/>
-                                </ListarProdutos>
-                            </div>
-             
-                                
-                                
-                          
-                            <br/>   <br/>
+            
             
                         
         </body>
