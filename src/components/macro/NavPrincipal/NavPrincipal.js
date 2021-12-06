@@ -73,7 +73,7 @@ function NavPrincipal(props) {
                     localStorage.removeItem('user')
                     setLogado(0)
                     window.location.reload()
-                }, 599900)
+                }, 5999000)
                 setLogado(2)
             }
         },10000)
@@ -112,7 +112,7 @@ function NavPrincipal(props) {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
                 .then((response) => {
                     window.location.href = "http://localhost:3000/dashboard/" + response.data.id_Cliente
-                    localStorage.setItem('defaultIndex', "index")
+                    localStorage.setItem('defaultIndex', JSON.stringify(2))
                 })
         } else {
             window.location.href = "http://localhost:3000/login"

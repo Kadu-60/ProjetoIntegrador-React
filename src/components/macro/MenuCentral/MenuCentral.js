@@ -10,6 +10,10 @@ import InputMask from "react-input-mask";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Formik, Field } from 'formik';
+import LinhaCartao from '../../micro/LinhaCartao/LinhaCartao'
+import ListaCartoes from '../../micro/ListaCartoes/ListaCartoes'
+import Cards from 'react-credit-cards'
 
 
 const deslogar = () => {
@@ -24,34 +28,41 @@ const deslogar = () => {
 
 
 const Panes = ({ user, dataNascimento }) => {
-  let endereco = {
-    "nomeCliente": "Nome Cliente",
-    "rua": "Rua do Cliente",
-    "numero": 123,
-    "complemento": "Complemento",
-    "cep": "12323-123",
-    "bairro": "Bairro",
-    "cidade": "Cidade do Cliente",
-    "estado": "Estado do Cliente"
-  }
-
+  const [number, setNumber] = useState('')
+  const [name, setName] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [cvc, setCvc] = useState('')
+  const [focus, setFocus] = useState('')
   const [testeData, setTesteData] = useState([])
-
-
+  const [cep, setCep] = useState('')
+  const [rua, setRua] = useState('')
+  const [numeroEndereco, setNumeroEndereco] = useState('')
+  const [complemento, setComplemento] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
+  const [att, setAtt] = useState(0)
   const [telefoneChanged, setTelefoneChanged] = useState((user.telefone))
   const [nomeChanged, setNomeChanged] = useState((user.nome))
   const [dataNas, setDataNas] = useState('')
   const [senha, setSenha] = useState('')
   const [senhaSec, setSenhaSec] = useState('')
   const [validSenha, setValidSenha] = useState('')
+  const [destinatario, setDestinatario] = useState(null)
   const { id } = useParams()
   const [pedidos, setPedidos] = useState([])
   const [dateInvalida, setDateInvalida] = useState('d-none')
   const [dateLess, setDateLess] = useState('d-none')
-
   const teste1 = (("" + dataNascimento).slice(0, 10).replaceAll("-", "/"))
   const data1 = new Date(teste1).toLocaleDateString()
   const [muda, setMuda] = useState('')
+  const [endPrincipal, setEndPrincipal] = useState(null)
+  const [endEntrega, setEndEntrega] = useState(null)
+  const [enderecos, setEnderecos] = useState([])
+  const [cartoes, setCartoes] = useState([])
+  const [cartao, setCartao] = useState({})
+  const [checkboxCartao, setCheckboxCartao] = useState(false)
+
 
   const alterarDados = (event) => {
     event.preventDefault()
@@ -73,10 +84,87 @@ const Panes = ({ user, dataNascimento }) => {
 
   }
 
+  function buscaCep() {
+    const value = cep;
 
+    const cepbusc = value?.replace(/[^0-9]/g, '');
 
+    if (cepbusc?.length !== 8) {
+      return;
+    }
 
+    fetch(`https://viacep.com.br/ws/${cepbusc}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRua(data.logradouro);
+        setBairro(data.bairro);
+        setCidade(data.localidade);
+        setEstado(data.uf);
+      });
 
+  }
+
+  const adicionarEndereco = () => {
+    let endereco =
+    {
+      "clienteEnderecoKey":
+      {
+        "cliente":
+        {
+          "id_Cliente": user.id_Cliente
+        },
+        "endereco":
+        {
+          "estado": estado,
+          "cidade": cidade,
+          "bairro": bairro,
+          "rua": rua,
+          "cep": cep,
+          "numero": numeroEndereco,
+          "complemento": complemento,
+          "ponto_referencia": "",
+          "destinatario": destinatario
+        }
+      },
+      "enderecoPrincipal": false,
+      "enderecoEntrega": false
+    }
+    axios.post("http://localhost:8080/clienteEndereco/create", endereco)
+      .then((response) => {
+        console.log(response.data)
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Endereco adicionado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'fechar'
+        })
+        setTimeout(() => { window.location.reload() }, 800)
+
+      })
+
+  }
+
+  const AdicionarCartao = () => {
+    let novoCartao = {
+      "clienteCartaoKey": {
+        "cliente": {
+          "id_Cliente": user.id_Cliente
+        },
+        "cartao": {
+          "nome": name,
+          "numero": number,
+          "validade": new Date(expiry.replace('/', "/01/"))
+        }
+      },
+      "principal": checkboxCartao
+    }
+    axios.post("http://localhost:8080/clienteCartao/create",novoCartao)
+      .then(response => {
+        
+        localStorage.setItem("defaultIndex", JSON.stringify(4))
+        window.location.href = "http://localhost:3000/dashboard/"+user.id_Cliente
+      })
+  }
 
 
   const alterarSenha = (event) => {
@@ -124,9 +212,25 @@ const Panes = ({ user, dataNascimento }) => {
     axios.get("http://localhost:8080/Pedido/cliente/" + id, config)
       .then((response) => {
         setPedidos(response.data);
+      })
+    axios.get("http://localhost:8080/clienteEndereco/cliente/" + id)
+      .then((response) => {
+        setEnderecos(response.data);
 
       })
-  }, [])
+    axios.get("http://localhost:8080/clienteCartao/cliente/" + id)
+      .then((response) => {
+        setCartoes(response.data);
+        response.data.map((item) => {
+
+          if (item.principal) {
+            
+            setCartao(item)
+          }
+        })
+      })
+
+  }, [att])
 
   
 
@@ -273,15 +377,101 @@ const Panes = ({ user, dataNascimento }) => {
         <Tab.Pane>
           <div className="row">
 
-            <EnderecoPrincipal endereco={endereco}/>
+            <EnderecoPrincipal enderecos={enderecos} />
 
-            <EnderecoEntrega endereco={endereco}/>
+            <EnderecoEntrega enderecos={enderecos} />
 
             <div className="col-12">
               <br />
-              <h2>Endereços Cadastrados</h2>
+              <div className="row">
+                <div className="col-9 d-flex flex-column justify-content-end">
+                  <h2 className="d-flex justify-content-between align-content-center" >Endereços Cadastrados</h2>
+                </div>
+                <div className="col-3  d-flex justify-content-end">
+                  <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                  </button>
+                </div>
+
+
+              </div>
+
               <hr />
-              <ListaEnderecos enderecos ={[endereco, endereco, endereco, endereco]}/>
+              <ListaEnderecos enderecos={enderecos} att={setAtt} />
+            </div>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <Formik>
+                    <div className="" >
+
+                      <ul className="lista-checkout-total">
+
+                        <li className="">
+
+
+
+                          <ul className="lista-carrinho-total">
+
+                            <div className="row">
+                              <div className="col-3">
+                                <label>* CEP </label>
+                                <Field type="text" id="cep" name="cep" onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
+                              </div>
+                              <div class="col-3 d-flex flex-column justify-content-end">
+                                <button type="button" onClick={() => buscaCep()} class="btn btn-secondary" >Buscar</button>
+                              </div>
+
+                            </div>
+
+                            <div className="row ">
+                              <div className="col-9 ">
+                                <label>* Rua </label>
+                                <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
+                              </div>
+
+                              <div className="col-3">
+                                <label>* Número </label>
+                                <Field type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
+                              </div>
+
+                            </div>
+                            <label> Complemento </label>
+                            <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
+                            <label>* Bairro </label>
+                            <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
+                            <label>* Cidade </label>
+                            <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
+                            <label>* Estado </label>
+                            <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
+                            <label>Nome do destinatário </label>
+                            <input type="text" class="form-control" placeholder={user.nome} value={destinatario} onChange={(event) => { setDestinatario(event.target.value == "" ? null : event.target.value) }} />
+
+
+                          </ul>
+
+
+                        </li>
+
+
+
+                        <br />
+                      </ul>
+
+                    </div>
+                  </Formik>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onClick={() => { adicionarEndereco() }}>Adicionar Endereço</button>
+                </div>
+              </div>
             </div>
           </div>
         </Tab.Pane>
@@ -289,7 +479,97 @@ const Panes = ({ user, dataNascimento }) => {
     {
       menuItem: 'Meus Cartões', render: () =>
         <Tab.Pane>
-         
+          <div className="row">
+            <div className="col-9 ">
+              <h2 className=" " >Cartão Principal</h2>
+            </div>
+          </div>
+          <hr className="mt-1" />
+
+          <div className="row d-flex justify-content-center align-items-center">
+
+            <div className="col-1 d-flex justify-content-center align-items-center">
+              <b>Cartão</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center text-center">
+              <b>Nome</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center text-center">
+              <b>Número  </b>
+            </div>
+            <div className="col-2 d-flex justify-content-center align-items-center text-center">
+              <b>Vencimento</b>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center">
+              <b>Ações</b>
+            </div>
+
+          </div>
+          <hr className="mb-0 mt-1" />
+          <LinhaCartao cartao={cartao} att={setAtt} />
+          <div className="row">
+            <div className="col-9 d-flex flex-column justify-content-end">
+              <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
+            </div>
+            <div className="col-3  d-flex justify-content-end">
+              <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
+                <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+              </button>
+            </div>
+          </div>
+          <hr className="mt-1" />
+          <div class="modal fade" id="ModalAdicionarCartao" tabindex="-1" aria-labelledby="ModalAdicionarCartao" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalAdicionarCartao">Adicionar Cartão</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div className="div-fundo" id="div-fundo">
+                    <p> <Icon className="icone-resumo" name="credit card outline" /><b>Adicionar Cartão</b></p>
+                    <Cards
+                      number={number}
+                      name={name}
+                      expiry={expiry}
+                      cvc={cvc}
+                      focused={focus}
+
+                    />
+                    <br />
+
+                    <label>Número do cartão *</label>
+                    <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                    <label>Nome impresso no cartão *</label>
+                    <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" />
+
+                    <label>Validade *</label>
+                    <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                    <label>Código de Segurança *</label>
+                    <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                    <br/>
+                    <input type="checkbox" value={checkboxCartao} onChange={e => setCheckboxCartao(e.target.checked)}/> Desejo tornar este cartão meu principal
+                    
+
+
+
+
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onClick={() => { AdicionarCartao()}}>Adicionar Cartão</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ListaCartoes cartoes={cartoes} att={setAtt} />
+
+
         </Tab.Pane>
     },
 
@@ -329,7 +609,20 @@ function verMais() {
 
 
 const TabExampleVerticalTabular = (props) => {
-  let index = localStorage.getItem('defaultIndex') ? 2 : 0
+  if (localStorage.getItem("comprando")) {
+    localStorage.removeItem("comprando");
+    window.location.href = "http://localhost:3000/carrinho"
+  }
+  if (JSON.parse(localStorage.getItem("defaultIndex")) == 1) {
+    Swal.fire({
+      title: 'Atenção!',
+      text: 'Altere a sua Senha!',
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    })
+  }
+
+  let index = localStorage.getItem('defaultIndex') ? JSON.parse(localStorage.getItem('defaultIndex')) : 0
   return (
     <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={Panes(props)} defaultActiveIndex={index} />
   )

@@ -69,6 +69,7 @@ function Login(props) {
                 icon: 'success',
                 confirmButtonText: 'fechar'
               })
+            localStorage.setItem('defaultIndex', JSON.parse(1))
             window.location.href = "http://localhost:3000/login"
         })
         .catch((error) => { 

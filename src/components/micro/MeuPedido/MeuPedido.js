@@ -268,7 +268,7 @@ function MeuPedido(props) {
                                 <div className="content">
                                     <br />
                                     <b>Casa</b>
-                                    <br /> <b>{pedido.cliente.nome}</b>
+                                    <br /> <b>{pedido.endereco.destinatario}</b>
                                     <br /> Rua: {pedido.endereco.rua} , {pedido.endereco.numero} <br /> {pedido.endereco.bairro} , {pedido.endereco.cidade} - {pedido.endereco.estado}
                                     <br /> CEP: {pedido.endereco.cep}{" "}
                                     <br />    <br />
@@ -279,7 +279,7 @@ function MeuPedido(props) {
                                 <div className="content">
                                     {" "}
                                     <br />
-                                    <b>Prazo de Entrega</b> 5 dia(s) útil(eis)
+                                    <b>Prazo de Entrega</b> 6 dia(s) útil(eis)
                                     <br /> <b>Forma de Entrega:</b> Correios{" "}
                                 </div>{" "}
                             </div>{" "}

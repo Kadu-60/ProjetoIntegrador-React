@@ -11,6 +11,9 @@
  
 
 }
+.icon-plus-white{
+    color: white!important;
+}
 
 .nota-fiscal{
     color: blue;
@@ -22,9 +25,27 @@
     color: blue;
     text-decoration: underline;
 }
+.cursorPointer{
+    cursor: pointer;
+}
 
-
-
+.btn-adcend{
+    color: white;
+    background-color: #8D733F;
+    line-height:1;
+    border: 1px solid;
+    border-color: #836a38;
+    font-weight: bold;
+}
+.btn-adcend:hover{
+    color: white!important;
+}
+.icon-menucentral{
+    border: none !important;
+}
+.separadoritemListaEndereco{
+    font-size: 25px;
+}
 
 
 .label-minha-conta{
