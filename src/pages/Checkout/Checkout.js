@@ -148,6 +148,15 @@ const Checkout = (props) => {
                     axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
                         .then((response) => {
                             setEnderecos(response.data)
+                            if(response.data.length==0){
+                                MeusEnderecos()
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Não é possível prosseguir',
+                                    text: 'É necessário ao menos um Endereço para finalizar a compra',
+                                    confirmButtonText: 'fechar'
+                                });
+                            }
                             response.data.map((item) => {
                                 if (item.enderecoEntrega) {
                                     setEndereco(item.clienteEnderecoKey.endereco)
@@ -425,7 +434,7 @@ const Checkout = (props) => {
 
 
                                     <div className="div-entrega" >
-                                        <ul className="lista-carrinho-total">
+                                        <ul className="lista-checkout-total">
 
 
 
@@ -547,7 +556,7 @@ const Checkout = (props) => {
                                     </div>
 
                                     <div className="div-resumo-pedido-checkout" >
-                                        <ul className="lista-carrinho-total">
+                                        <ul className="lista-checkout-total mt-2">
 
                                             <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
 
@@ -599,8 +608,7 @@ const Checkout = (props) => {
                                 </div>
 
                             </Container>
-                            <br />
-                            <br />
+                            
                             <br />
                             <br />
                             <br />
