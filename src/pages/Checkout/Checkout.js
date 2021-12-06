@@ -14,7 +14,7 @@ import InputMask from "react-input-mask";
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
-import frete from 'frete'
+
 import Swal from 'sweetalert2'
 import Boleto from '../../assets/imgs/boleto/concessionariacomlegenda.png'
 
