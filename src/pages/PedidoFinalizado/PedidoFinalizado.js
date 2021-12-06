@@ -22,6 +22,8 @@ function PedidoFinalizado(props) {
     const [cartao, setCartao] = useState([])
     const [pagamento, setPagamento] = useState([])
     const [numero, setNumero] = useState([])
+    const [metodoPag, setMetodoPag] = useState([])
+    const [metodoPagId, setMetodoPagId] = useState('')
 
 
     
@@ -35,6 +37,7 @@ function PedidoFinalizado(props) {
             setEndereco(res.data.endereco)
             setPagamento(res.data.pagamento)
             setCartao((res.data.cartao))
+            setMetodoPag((res.data.metodoPag))
         }
         
 
@@ -53,6 +56,7 @@ function PedidoFinalizado(props) {
     }
     useEffect(()=>{
         setNumero((cartao.numero))
+        setMetodoPagId((metodoPag.id_metodoPag))
     })
 
     const final = "" + numero
@@ -81,19 +85,21 @@ function PedidoFinalizado(props) {
                             <TitulosHome texto='' />
 
                     </div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-2"></div>
-                        <div class="col-12 col-md-10 d-flex">
+                    <div class="row">
+                        
+                        <div class="tituloResumo col-12 d-flex">
                             <h6 class="resumo"><b>RESUMO DO PEDIDO:</b></h6>
                         </div>
+                        </div>
+                        <div className='row d-flex justify-content-center'>
                         <div class=" col-12 col-md-9 pt-2 d-flex justify-content-center resumo-pedido-end">
-                            <div class="col-12 col-md-10 ">
-                                <div className='global-caixa'>
+                            <div class="col-12">
+                                <div className='d-flex justify-content-around global-caixa'>
                                    <CaixaInfo titulo='Endereço de envio'>
                                     <Endereco rua={endereco.rua} numero={endereco.numero} bairro={endereco.bairro} cidade={endereco.cidade} estado={endereco.estado} cep={endereco.cep}/>
                                 </CaixaInfo>
                                 <CaixaInfo titulo='Forma de pagamento'>
-                                    <Pagamento finalCartao={final.substring(12,16)} parcelas={pagamento.parcelamento}/>
+                                    <Pagamento metodoPagId={metodoPagId} finalCartao={final.substring(12,16)} parcelas={pagamento.parcelamento}/>
                                 </CaixaInfo>
 
                                 <CaixaInfo titulo="Total do Pedido">
