@@ -24,7 +24,7 @@ function ProdutoCheckout(props) {
                 </td>
 
                 <td className="product-name product-cart">
-                    <a href="/produto"><span className="titulo-cerveja-cart">{props.product.nome_produto}</span></a>
+                <a href={"/produto/"+props.product.id_produto}><span className="titulo-cerveja-cart">{props.product.nome_produto}</span></a>
                 </td>
 
                 <td className="quantidade-produto-checkout">

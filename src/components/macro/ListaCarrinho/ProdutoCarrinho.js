@@ -94,7 +94,7 @@ function ProdutoCarrinho(props) {
                 </td>
 
                 <td className="product-name product-cart">
-                    <a href="/produto"><span className="titulo-cerveja-cart">{props.prod.nome_produto}</span></a>
+                <a href={"/produto/"+props.prod.id_produto}><span className="titulo-cerveja-cart">{props.prod.nome_produto}</span></a>
                 </td>
 
                 <td className="shipping-date">

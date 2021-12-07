@@ -530,7 +530,7 @@ const Checkout = (props) => {
                                                     >
 
                                                         <p>
-                                                            Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista no boleto.
+                                                            Pagamento de R${((subtotal || 0) + 15).toFixed(2).replace('.', ',')} à vista no boleto.
 
 
                                                         </p>
@@ -544,7 +544,7 @@ const Checkout = (props) => {
                                                     >
 
                                                         <p>
-                                                            Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista por chave PIX.
+                                                            Pagamento de R${((subtotal || 0) + 15).toFixed(2).replace('.', ',')} à vista por chave PIX.
 
                                                         </p><img className='imgPix' src='https://psfonttk.com/wp-content/uploads/2021/08/pix-logo-png.png'></img>
 
