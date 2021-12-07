@@ -113,7 +113,7 @@ function ProdutoCarrinho(props) {
                             <div class="btn-group inline">
 
                                 <div class="contador contador-pag-produto">
-                                    <div onClick={decremento} min="1" class="contador-btn btn-danger" data-sinal="-1" disabled >-</div>
+                                    <div onClick={decremento} min="1" class="contador-btn btn-danger" data-sinal="-1">-</div>
                                     <div class="mostrador">{numero}</div>
                                     <div onClick={incremento} max="50" class="contador-btn btn-success" data-sinal="1">+</div>
                                 </div>
