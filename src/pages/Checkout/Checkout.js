@@ -46,7 +46,7 @@ const Checkout = (props) => {
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
     const [frete, setFrete] = useState('')
     const [metodoPag, setMetodoPag] = useState(1)
-
+    const [carregando, setCarregando] = useState(false)
     const [enderecos, setEnderecos] = useState([])
     const [endereco, setEndereco] = useState({
         "id_endereco": 0,
@@ -148,7 +148,7 @@ const Checkout = (props) => {
                     axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
                         .then((response) => {
                             setEnderecos(response.data)
-                            if(response.data.length==0){
+                            if (response.data.length == 0) {
                                 MeusEnderecos()
                                 Swal.fire({
                                     icon: 'error',
@@ -239,7 +239,7 @@ const Checkout = (props) => {
 
     const Finalizar = (event) => {
         event.preventDefault();
-
+        setCarregando(true)
         let pedido = {
             "subtotal": 0,
             "total": 0,
@@ -330,9 +330,13 @@ const Checkout = (props) => {
 
                         })
                 }
+                setCarregando(false)
                 const URL = '/pedidoFinalizado/' + response.data.pedido.id
                 history.push(URL)
 
+            })
+            .catch((err) =>{ 
+                setCarregando(false)
             })
 
     }
@@ -377,7 +381,13 @@ const Checkout = (props) => {
 
 
     return (
+
         <div className="App">
+            <div className={carregando ? "div-Carregando" : "d-none"}>
+                <div class="spinner-border text-warning">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <Formik
 
                 render={({ isValid, setFieldValue }) => (
@@ -401,7 +411,7 @@ const Checkout = (props) => {
 
 
                                             <div className=" ">
-                                                
+
                                                 <hr />
                                                 <ul className="">
                                                     <li className="">{endereco.destinatario}</li>
@@ -466,7 +476,7 @@ const Checkout = (props) => {
                                                     <div
                                                         className={toggleState === 1 ? "contentPag  active-content" : "contentPag"}
                                                     >
-                                                        
+
                                                         <Cards
                                                             number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
                                                             name={name}
@@ -506,7 +516,7 @@ const Checkout = (props) => {
                                                                 <p>
                                                                     * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
                                                                 </p>
-                                                                
+
                                                             </>
                                                         ) : (
                                                             <>
@@ -516,7 +526,7 @@ const Checkout = (props) => {
                                                         )}
 
 
-                                                        
+
 
 
 
@@ -608,7 +618,7 @@ const Checkout = (props) => {
                                 </div>
 
                             </Container>
-                            
+
                             <br />
                             <br />
                             <br />
