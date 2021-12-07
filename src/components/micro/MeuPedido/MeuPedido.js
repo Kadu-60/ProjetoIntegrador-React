@@ -52,7 +52,12 @@ function MeuPedido(props) {
            
         })
         setDataPedido((new Date(pedido.dataDeCriacao)).toLocaleString())
-        setFormaPag(pedido.metodoPag.metodoPag)
+        if(pedido.metodoPag.metodoPag == null){
+            setFormaPag('')
+        }else{
+            setFormaPag(pedido.metodoPag.metodoPag)
+        }
+        
         verMais()
         verMais()
         console.log(props.data.status.id_status_pedido)

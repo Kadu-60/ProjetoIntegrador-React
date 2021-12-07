@@ -99,7 +99,7 @@ function PedidoFinalizado(props) {
                                     <Endereco rua={endereco.rua} numero={endereco.numero} bairro={endereco.bairro} cidade={endereco.cidade} estado={endereco.estado} cep={endereco.cep}/>
                                 </CaixaInfo>
                                 <CaixaInfo titulo='Forma de pagamento'>
-                                    <Pagamento metodoPagId={metodoPagId} finalCartao={final.substring(12,16)} parcelas={pagamento.parcelamento}/>
+                                    <Pagamento metodoPagId={metodoPagId} finalCartao={final.replaceAll(' ', '').substring(12,16)} parcelas={pagamento.parcelamento}/>
                                 </CaixaInfo>
 
                                 <CaixaInfo titulo="Total do Pedido">
