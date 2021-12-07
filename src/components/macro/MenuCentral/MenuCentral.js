@@ -646,7 +646,7 @@ function meusCartoes() {
 
               <div className="row">
                 <div className="col-9 ">
-                  <h2 className=" " >Cartão Principal</h2>
+                  <p className=" endereco-dash" >Cartão Principal</p>
                 </div>
               </div>
               <hr className="mt-1" />
@@ -674,7 +674,7 @@ function meusCartoes() {
               <LinhaCartao cartao={cartao} att={setAtt} />
               <div className="row">
                 <div className="col-9 d-flex flex-column justify-content-end">
-                  <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
+                  <p className="d-flex justify-content-between align-content-center endereco-dash" >Cartões Cadastrados</p>
                 </div>
                 <div className="col-3  d-flex justify-content-end">
                   <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
