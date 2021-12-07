@@ -34,6 +34,11 @@ function Produtos() {
                 <MarcaItem marcas={produtos} />
 
             </div>
+            <div className="list-cards-produtos">
+                <ListarProdutos >
+                    <ProdutoMarca />
+                </ListarProdutos>
+            </div>
          
 
             
