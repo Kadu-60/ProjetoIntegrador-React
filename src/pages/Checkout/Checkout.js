@@ -14,7 +14,7 @@ import InputMask from "react-input-mask";
 import axios from 'axios'
 import { useHistory } from "react-router-dom"
 import { Formik, Field } from 'formik';
-import frete from 'frete'
+
 import Swal from 'sweetalert2'
 import Boleto from '../../assets/imgs/boleto/concessionariacomlegenda.png'
 
@@ -45,7 +45,7 @@ const Checkout = (props) => {
     const [numeroPedido, setNumeroPedido] = useState([])
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
     const [frete, setFrete] = useState('')
-    const [metodoPag, setMetodoPag] = useState('')
+    const [metodoPag, setMetodoPag] = useState(1)
 
     const [enderecos, setEnderecos] = useState([])
     const [endereco, setEndereco] = useState({
@@ -99,7 +99,7 @@ const Checkout = (props) => {
             setCvc('000');
             setParcelamento(1)
 
-        } else if (id == 3){
+        } else if (id == 3) {
             setNumber('9999999999999999');
             setName('PIX');
             setExpiry('11/31');
@@ -107,7 +107,7 @@ const Checkout = (props) => {
             setParcelamento(1)
         }
 
-    
+
     }
 
 
@@ -122,15 +122,15 @@ const Checkout = (props) => {
     //     });
     // }
     <>
-  <InputGroup className="mb-3">
-    <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-    <FormControl aria-label="Text input with checkbox" />
-  </InputGroup>
-  <InputGroup>
-    <InputGroup.Radio aria-label="Radio button for following text input" />
-    <FormControl aria-label="Text input with radio button" />
-  </InputGroup>
-</>
+        <InputGroup className="mb-3">
+            <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+            <FormControl aria-label="Text input with checkbox" />
+        </InputGroup>
+        <InputGroup>
+            <InputGroup.Radio aria-label="Radio button for following text input" />
+            <FormControl aria-label="Text input with radio button" />
+        </InputGroup>
+    </>
     useEffect(() => {
         axios.get('http://localhost:8080/parcelas')
             .then((response) => {
@@ -148,6 +148,15 @@ const Checkout = (props) => {
                     axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
                         .then((response) => {
                             setEnderecos(response.data)
+                            if(response.data.length==0){
+                                MeusEnderecos()
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Não é possível prosseguir',
+                                    text: 'É necessário ao menos um Endereço para finalizar a compra',
+                                    confirmButtonText: 'fechar'
+                                });
+                            }
                             response.data.map((item) => {
                                 if (item.enderecoEntrega) {
                                     setEndereco(item.clienteEnderecoKey.endereco)
@@ -165,10 +174,10 @@ const Checkout = (props) => {
 
                                 if (item.principal) {
 
-                                    // setNumber(item.clienteCartaoKey.cartao.numero)
-                                    // setName(item.clienteCartaoKey.cartao.nome)
-                                    // setExpiry(item.clienteCartaoKey.cartao.validade)
-                                    // setCartaoPreenchido(true)
+                                    setNumber(item.clienteCartaoKey.cartao.numero)
+                                    setName(item.clienteCartaoKey.cartao.nome)
+                                    setExpiry(item.clienteCartaoKey.cartao.validade)
+                                    setCartaoPreenchido(true)
                                 }
                             })
                         })
@@ -245,7 +254,7 @@ const Checkout = (props) => {
             },
             "status":
             {
-                "estado_pedido": "Preparando Pedido"
+                "id_status_pedido": 1
             },
             "endereco":
             {
@@ -338,18 +347,19 @@ const Checkout = (props) => {
         }
 
         switch (true) {
-            case (cep > '01000-000' && cep < '09999-999') :
+            case (cep > '01000-000' && cep < '09999-999'):
                 console.log("Frete R$ 15,00");
                 break;
-            default :
+            default:
                 Swal.fire({
                     icon: 'error',
                     title: 'Não é possível prosseguir',
-                    text: 'Não entregamos para fora de SP', 
-                    footer: '<a href="\checkout"><b>Digite o CEP novamente</b></a>'});
+                    text: 'Não entregamos para fora de SP',
+                    footer: '<a href="\checkout"><b>Digite o CEP novamente</b></a>'
+                });
                 console.log(cep)
         }
-        
+
 
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then((res) => res.json())
@@ -365,7 +375,7 @@ const Checkout = (props) => {
 
 
 
-    
+
     return (
         <div className="App">
             <Formik
@@ -391,7 +401,7 @@ const Checkout = (props) => {
 
 
                                             <div className=" ">
-                                                <h2>Endereço de Entrega</h2>
+                                                
                                                 <hr />
                                                 <ul className="">
                                                     <li className="">{endereco.destinatario}</li>
@@ -405,7 +415,7 @@ const Checkout = (props) => {
 
                                             <br /><br />
                                             <div className="">
-                                                <h2>Endereço Cobrança</h2>
+                                                <p><Icon className="icone-resumo" name="money bill alternate outline" /> <b>Endereço Cobrança</b></p>
                                                 <hr />
                                                 <ul className="">
                                                     <li className="">{enderecoCobranca.destinatario}</li>
@@ -424,13 +434,13 @@ const Checkout = (props) => {
 
 
                                     <div className="div-entrega" >
-                                        <ul className="lista-carrinho-total">
+                                        <ul className="lista-checkout-total">
 
 
 
 
                                             <div className="div-fundo" id="div-fundo">
-                                            <p> <b>Pagamento</b></p>
+                                                <p><Icon className="icone-resumo" name="money bill alternate " /> <b>Pagamento</b></p>
                                                 <div className="bloc-tabs">
                                                     <button
                                                         className={toggleState === 1 ? "tabs-pagamento active-tabs" : "tabs-pagamento"}
@@ -456,24 +466,25 @@ const Checkout = (props) => {
                                                     <div
                                                         className={toggleState === 1 ? "contentPag  active-content" : "contentPag"}
                                                     >
+                                                        
                                                         <Cards
-                                                            number={number}
+                                                            number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
                                                             name={name}
-                                                            expiry={expiry}
+                                                            expiry={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
                                                             cvc={cvc}
                                                             focused={focus}
 
                                                         />
-                                                        <br />
+
 
                                                         <label>Número do cartão *</label>
-                                                        <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+                                                        <InputMask mask={"**** **** **** ****"} type="tel" name="number" value={!cartaoPreenchido ? number : "000000000000 " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
 
                                                         <label>Nome impresso no cartão *</label>
-                                                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="" />
+                                                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
 
                                                         <label>Validade *</label>
-                                                        <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+                                                        <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
 
                                                         <label>Código de Segurança *</label>
                                                         <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
@@ -490,6 +501,22 @@ const Checkout = (props) => {
                                                             }
 
                                                         </select>
+                                                        {cartaoPreenchido ? (
+                                                            <>
+                                                                <p>
+                                                                    * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
+                                                                </p>
+                                                                
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <br />
+                                                                <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(e.target.value) }} /> Deseja utilizar esse cartão em compras futuras?
+                                                            </>
+                                                        )}
+
+
+                                                        
 
 
 
@@ -501,86 +528,35 @@ const Checkout = (props) => {
                                                     <div
                                                         className={toggleState === 2 ? "contentPag  active-content" : "contentPag"}
                                                     >
-                                                        
+
                                                         <p>
                                                             Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista no boleto.
 
-                                                            
+
                                                         </p>
                                                         <div className='d-flex justify-content-center'><b>Boleto</b></div>
-                                                        
+
                                                         <img className='imgBoleto' src={Boleto}></img>
                                                     </div>
 
                                                     <div
                                                         className={toggleState === 3 ? "contentPag  active-content" : "contentPag"}
                                                     >
-                                                        
+
                                                         <p>
                                                             Pagamento de R${(subtotal || 0).toFixed(2).replace('.', ',')} à vista por chave PIX.
 
-                                                            </p><img className='imgPix' src='https://psfonttk.com/wp-content/uploads/2021/08/pix-logo-png.png'></img>
-                                                        
+                                                        </p><img className='imgPix' src='https://psfonttk.com/wp-content/uploads/2021/08/pix-logo-png.png'></img>
+
                                                     </div>
                                                 </div>
-                                                {/* <p> <Icon className="icone-resumo" name="credit card outline" /><b>Pagamento</b></p>
-                                                <Cards
-                                                    number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
-                                                    name={name}
-                                                    expiry={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]}
-                                                    cvc={cvc}
-                                                    focused={focus}
 
-                                                />
-
-
-                                                <label>Número do cartão *</label>
-                                                <InputMask type="tel" name="number" value={!cartaoPreenchido ? number : "**** **** **** " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
-
-                                                <label>Nome impresso no cartão *</label>
-                                                <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
-
-                                                <label>Validade *</label>
-                                                <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
-
-                                                <label>Código de Segurança *</label>
-                                                <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
-
-
-                                                <label>Parcelar*</label>
-                                                <select type="text" onChange={event => { setParcelamento(event.target.value) }} className="form-control input-bairro" required>
-                                                    <option value='' selected>Parcelamento</option>
-                                                    {
-                                                        parcelas.map((parcela) => (
-                                                            <option value={parcela.id_parcelamento} onChange={event => { setParcelamento(event.target.value) }}>{parcela.parcelamento} R$ {((((subtotal || 0) + 15) / parcela.qtdParcelas).toFixed(2).replace('.', ','))}  </option>
-                                                        )
-                                                        )
-                                                    }
-
-                                                </select>
-                                                {cartaoPreenchido ? (
-                                                    <>
-                                                        <p>
-                                                            * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
-                                                        </p>
-                                                        <br />
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <br />
-                                                        <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(e.target.value) }} /> Deseja utilizar esse cartão em compras futuras?
-                                                    </>
-                                                )}
-
-
-                                                <br />
-                                                <br /> */}
                                             </div>
                                         </ul>
                                     </div>
 
                                     <div className="div-resumo-pedido-checkout" >
-                                        <ul className="lista-carrinho-total">
+                                        <ul className="lista-checkout-total mt-2">
 
                                             <p> <Icon className="icone-resumo" name="file alternate outline" /><b>Resumo do Pedido</b></p>
 
@@ -632,8 +608,7 @@ const Checkout = (props) => {
                                 </div>
 
                             </Container>
-                            <br />
-                            <br />
+                            
                             <br />
                             <br />
                             <br />

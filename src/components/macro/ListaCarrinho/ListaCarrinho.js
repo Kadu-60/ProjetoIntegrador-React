@@ -23,7 +23,7 @@ function ListaCarrinho(props) {
                 <>
                     <div className="container bg-light " >
                         <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
-                            <strong className="me-1">Carrinho vazio!</strong> 
+                            <strong className="me-1">Carrinho vazio!</strong>
                             Adicione um produto ao carrinho primeiro.
                         </div>
                     </div>
@@ -49,7 +49,7 @@ function ListaCarrinho(props) {
                         <tbody className="conteudo-cart">
                             {
                                 cards.map((prod) => (
-                                    <ProdutoCarrinho prod={prod} att={setAttComponent} attval={attComponent}/>
+                                    <ProdutoCarrinho prod={prod} att={setAttComponent} attval={attComponent} />
                                 ))
                             }
                         </tbody>
@@ -65,15 +65,48 @@ function ListaCarrinho(props) {
                 text: 'Adicione um produto antes de finalizar a compra.',
                 icon: 'error',
                 confirmButtonText: 'fechar'
-              })
+            })
         } else {
             if (localStorage.getItem("user")) {
-                window.location.href = "http://localhost:3000/checkout"
+                let email = localStorage.getItem('user')
+                const token = localStorage.getItem('token')
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };
+                axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email, config)
+                    .then((response) => {
+                        const id_cliente = response.data.id_Cliente
+                        axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
+                            .then((response) => {
+
+                                if (response.data.length == 0) {
+                                    localStorage.setItem('defaultIndex', JSON.stringify(3))
+                                    window.location.href = "http://localhost:3000/dashboard/" + id_cliente
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Não é possível prosseguir',
+                                        text: 'É necessário ao menos um Endereço para finalizar a compra',
+                                        confirmButtonText: 'fechar'
+                                    });
+                                }else{
+                                    window.location.href = "http://localhost:3000/checkout"
+                                }
+
+
+                            })
+
+                    })
             } else {
                 localStorage.setItem("comprando", "comprando")
                 window.location.href = "http://localhost:3000/login"
             }
 
+        }
+        if (localStorage.getItem('user')) {
+
+
+        } else {
+            window.location.href = "http://localhost:3000/login"
         }
 
     }

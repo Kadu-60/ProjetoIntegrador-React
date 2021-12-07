@@ -11,3 +11,39 @@
   height: auto;
 }
 
+.imgPIXFinal{
+  margin-left: 26px;
+}
+
+.textoQRCode{
+  font-size: 14px;
+  padding-left: 27px;
+  margin-top: -10px;
+  
+}
+
+.btnQRCode{
+  background-color: #8D733F;
+  color: white;
+  margin-left: 65px;
+}
+.btnQRCode:hover{
+  color: white;
+  background-color: #686760;
+}
+
+.btnBoletoFinal{
+  background-color: #8D733F;
+  color: white;
+  margin-left: 77px;
+}
+
+.btnBoletoFinal:hover{
+  color: white;
+  background-color: #686760;
+}
+
+.imgBoletoFinal{
+  width: 100%;
+}
+

@@ -13,6 +13,7 @@ function MeuPedido(props) {
     const [ fillDois, setFillDois ] = useState('')
     const [ fill3, setFill3 ] = useState('')
     const [ fill4, setFill4 ] = useState('')
+    const [formaPag, setFormaPag] = useState('')
    
     //NumeroPedido"id do pedido"
     //DataPedido
@@ -51,6 +52,7 @@ function MeuPedido(props) {
            
         })
         setDataPedido((new Date(pedido.dataDeCriacao)).toLocaleString())
+        setFormaPag(pedido.metodoPag.metodoPag)
         verMais()
         verMais()
         console.log(props.data.status.id_status_pedido)
@@ -131,7 +133,7 @@ function MeuPedido(props) {
                                             {" "}
                                             <strong>Forma de Pagamento:</strong>{" "}
 
-                                            <span>Cartão de Crédito</span>{" "}
+                                            <span>{formaPag}</span>{" "}
                                         </li>{" "}
                                         <li className="total">
                                             {" "}
@@ -297,7 +299,7 @@ function MeuPedido(props) {
                             <div className="payment-info">
                                 {" "}
                                 <br />
-                                <b>Cartão de Crédito</b>{" "}
+                                <b>{formaPag}</b>{" "}
                                 <div className="payment-value">
                                     {" "}
                                     <strong>R${pedido.total.toFixed(2).replace('.', ',')} </strong>{" "}
