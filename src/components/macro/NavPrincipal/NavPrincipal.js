@@ -22,22 +22,22 @@ function estadoInicial() {
 
 
 function NavPrincipal(props) {
-  
- 
-  
+
+
+
     const [values, setValues] = useState(estadoInicial)
     const URL = '/busca/'
     const final = URL + values.busca
     const [qtyCart, setQty] = useState(localStorage.getItem('qtyCart'))
     const [token, setToken] = useState('')
     const [logado, setLogado] = useState(0)
-    const [id, setId] = useState(0)  
+    const [id, setId] = useState(0)
     const [user, setUser] = useState({})
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
-   
-         
+
+
 
 
 
@@ -46,9 +46,28 @@ function NavPrincipal(props) {
         setInterval(() => {
             setQty(localStorage.getItem('qtyCart'))
             setToken(localStorage.getItem('token'))
-        },500)
-        
-    },[URL])
+        }, 500)
+        setInterval(() => {
+            if (localStorage.getItem('token')) {
+                const token = localStorage.getItem('token')
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };
+                axios.get("http://localhost:8080/cadastroCliente/validarToken", config)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch((error) => {
+                        if (error.response.status == 403) {
+                            localStorage.removeItem('token')
+                            localStorage.removeItem('user')
+                            setLogado(0)
+                        }
+                    })
+            }
+
+        }, 5000)
+    }, [URL])
 
     useEffect(() => {
         setQty(localStorage.getItem('qtyCart'))
@@ -59,29 +78,17 @@ function NavPrincipal(props) {
                 .then((response) => {
                     setId(response.data.id_Cliente)
                     setUser(response.data)
-                    
+
                 })
                 .catch((error) => { console.log(error) })
             setLogado(1)
         }
-        setInterval(() => {
-            if (logado == 1) {
-                setTimeout(() => {
-                    console.log('token expirado')
-                    localStorage.removeItem('token')
-                    setToken(null)
-                    localStorage.removeItem('user')
-                    setLogado(0)
-                    window.location.reload()
-                }, 5999000)
-                setLogado(2)
-            }
-        },10000)
-        
+
+
     })
 
 
- 
+
 
 
 
@@ -106,7 +113,7 @@ function NavPrincipal(props) {
     }
     function meusPedidos() {
 
-        
+
         let email = localStorage.getItem('user')
         if (email) {
             axios.get('http://localhost:8080/cadastro-cliente/getByEmail/' + email)
@@ -126,9 +133,9 @@ function NavPrincipal(props) {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         window.location.href = 'http://localhost:3000/home'
-      }
-    
-      
+    }
+
+
 
 
 
@@ -161,19 +168,19 @@ function NavPrincipal(props) {
                             <div class="col-4 col-lg-5 d-flex justify-content-end">
                                 <div className="row d-flex justify-content-center align-items-center icones-header">
 
-                                  
+
 
                                     <div className="col-3 header-conta">
                                         <a className="link-icone" href={logado == 0 ? "/login" : "/dashboard/" + id}>
                                             <img className="imagem" src={Conta} />
 
-                                            <span className="icone " > {logado == 0 ? "Minha conta" :  <><TituloConta nome={user.nome}/> <a href="/home" className="link-sair" onClick={() => { deslogar() }} >Sair</a></>} </span>
-                                            
+                                            <span className="icone " > {logado == 0 ? "Minha conta" : <><TituloConta nome={user.nome} /> <a href="/home" className="link-sair" onClick={() => { deslogar() }} >Sair</a></>} </span>
+
                                         </a>
-                                                             
+
                                     </div>
-                                    
-                                    
+
+
 
 
                                     <div className="col-3 header-Pedidos ">
