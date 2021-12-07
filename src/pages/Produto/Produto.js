@@ -14,6 +14,7 @@ import Prato from '../../assets/imgs/teste/prato.gif'
 import Garrafas from '../../assets/imgs/teste/cervejas.png'
 import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
 import NovidadesHome from '../../components/macro/NovidadesHome/NovidadesHome';
+import Swal from 'sweetalert2'
 import { createSemanticDiagnosticsBuilderProgram } from 'typescript';
 
 function Produto(props) {
@@ -25,6 +26,9 @@ function Produto(props) {
     const [teste, setTeste] = useState([])
     const [products, setProducts] = useState([])
     const [qtyCart, setQtyCart] = useState(0)
+
+    const [estoque, setEstoque] = useState(50)
+
 
 
     const history = useHistory();
@@ -97,21 +101,35 @@ function Produto(props) {
     
     const [numero, setNumero] = useState(1)
 
-    const incremento = () =>{
-        setNumero(+numero + 1 )
-      
-       
-       
-        
+    // const incremento = () =>{
+    //     setNumero(+numero + 1)        
+    // }
+
+    const incremento = () => {
+        if ((numero + 1 <= estoque)) {
+            setNumero(numero + 1)
+        } else {
+            Swal.fire({
+                title: 'Erro!',
+                text: 'quantidade selecionada acima do estoque',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
+        }
+
     }
+
     const decremento = () =>{
         if(numero > 1){
-            setNumero(numero - 1 )
-            
-        } 
-
-        
-        
+            setNumero(numero - 1)
+        } else {
+            Swal.fire({
+                title: 'Erro!',
+                text: 'quantidade não pode ser menor que 1',
+                icon: 'error',
+                confirmButtonText: 'fechar'
+              })
+        }
         
     }
 
@@ -306,4 +324,3 @@ function Produto(props) {
 }
 
 export default Produto;
-
