@@ -131,14 +131,14 @@ const Panes = ({ user, dataNascimento }) => {
     }
     axios.post("http://localhost:8080/clienteEndereco/create", endereco)
       .then((response) => {
-        console.log(response.data)
+        MeusEnderecos()
         Swal.fire({
           title: 'Sucesso!',
           text: 'Endereco adicionado com sucesso!',
           icon: 'success',
           confirmButtonText: 'fechar'
         })
-        setTimeout(() => { window.location.reload() }, 800)
+        
 
       })
 
@@ -158,11 +158,10 @@ const Panes = ({ user, dataNascimento }) => {
       },
       "principal": checkboxCartao
     }
-    axios.post("http://localhost:8080/clienteCartao/create",novoCartao)
+    axios.post("http://localhost:8080/clienteCartao/create", novoCartao)
       .then(response => {
-        
-        localStorage.setItem("defaultIndex", JSON.stringify(4))
-        window.location.href = "http://localhost:3000/dashboard/"+user.id_Cliente
+
+        meusCartoes()
       })
   }
 
@@ -198,7 +197,15 @@ const Panes = ({ user, dataNascimento }) => {
   }
 
 
+  function MeusEnderecos() {
+    localStorage.setItem('defaultIndex', JSON.stringify(3))
+    window.location.href = "http://localhost:3000/dashboard/" +id
+}
 
+function meusCartoes() {
+    localStorage.setItem('defaultIndex', JSON.stringify(4))
+    window.location.href = "http://localhost:3000/dashboard/" +id
+}
 
 
   useEffect(() => {
@@ -224,7 +231,7 @@ const Panes = ({ user, dataNascimento }) => {
         response.data.map((item) => {
 
           if (item.principal) {
-            
+
             setCartao(item)
           }
         })
@@ -232,7 +239,7 @@ const Panes = ({ user, dataNascimento }) => {
 
   }, [att])
 
-  
+
 
 
 
@@ -375,201 +382,360 @@ const Panes = ({ user, dataNascimento }) => {
     {
       menuItem: 'Meus Endereços', render: () =>
         <Tab.Pane>
-          <div className="row">
+          {enderecos.length == 0 ? (
+            <>
+              <div className="container bg-light " >
+                <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
+                  <strong className="me-1">Você ainda não tem Enderecos!</strong>
 
-            <EnderecoPrincipal enderecos={enderecos} />
-
-            <EnderecoEntrega enderecos={enderecos} />
-
-            <div className="col-12">
-              <br />
-              <div className="row">
-                <div className="col-9 d-flex flex-column justify-content-end">
-                  <h2 className="d-flex justify-content-between align-content-center" >Endereços Cadastrados</h2>
                 </div>
-                <div className="col-3  d-flex justify-content-end">
-                  <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                    <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
-                  </button>
-                </div>
-
-
               </div>
+              <div className="container d-flex justify-content-center align-content-center" >
+                <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                  <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                </button>
+              </div>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <Formik>
+                        <div className="" >
 
-              <hr />
-              <ListaEnderecos enderecos={enderecos} att={setAtt} />
-            </div>
-          </div>
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <Formik>
-                    <div className="" >
+                          <ul className="lista-checkout-total">
 
-                      <ul className="lista-checkout-total">
-
-                        <li className="">
-
-
-
-                          <ul className="lista-carrinho-total">
-
-                            <div className="row">
-                              <div className="col-3">
-                                <label>* CEP </label>
-                                <Field type="text" id="cep" name="cep" onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
-                              </div>
-                              <div class="col-3 d-flex flex-column justify-content-end">
-                                <button type="button" onClick={() => buscaCep()} class="btn btn-secondary" >Buscar</button>
-                              </div>
-
-                            </div>
-
-                            <div className="row ">
-                              <div className="col-9 ">
-                                <label>* Rua </label>
-                                <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
-                              </div>
-
-                              <div className="col-3">
-                                <label>* Número </label>
-                                <Field type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
-                              </div>
-
-                            </div>
-                            <label> Complemento </label>
-                            <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
-                            <label>* Bairro </label>
-                            <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
-                            <label>* Cidade </label>
-                            <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
-                            <label>* Estado </label>
-                            <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
-                            <label>Nome do destinatário </label>
-                            <input type="text" class="form-control" placeholder={user.nome} value={destinatario} onChange={(event) => { setDestinatario(event.target.value == "" ? null : event.target.value) }} />
+                            <li className="">
 
 
+
+                              <ul className="lista-carrinho-total">
+
+                                <div className="row">
+                                  <div className="col-3">
+                                    <label>* CEP </label>
+                                    <Field type="text" id="cep" name="cep" onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
+                                  </div>
+                                  <div class="col-3 d-flex flex-column justify-content-end">
+                                    <button type="button" onClick={() => buscaCep()} class="btn btn-secondary" >Buscar</button>
+                                  </div>
+
+                                </div>
+
+                                <div className="row ">
+                                  <div className="col-9 ">
+                                    <label>* Rua </label>
+                                    <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
+                                  </div>
+
+                                  <div className="col-3">
+                                    <label>* Número </label>
+                                    <Field type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
+                                  </div>
+
+                                </div>
+                                <label> Complemento </label>
+                                <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
+                                <label>* Bairro </label>
+                                <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
+                                <label>* Cidade </label>
+                                <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
+                                <label>* Estado </label>
+                                <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
+                                <label>Nome do destinatário </label>
+                                <input type="text" class="form-control" placeholder={user.nome} value={destinatario} onChange={(event) => { setDestinatario(event.target.value == "" ? null : event.target.value) }} />
+
+
+                              </ul>
+
+
+                            </li>
+
+
+
+                            <br />
                           </ul>
 
-
-                        </li>
-
-
-
-                        <br />
-                      </ul>
-
+                        </div>
+                      </Formik>
                     </div>
-                  </Formik>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-primary" onClick={() => { adicionarEndereco() }}>Adicionar Endereço</button>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary" onClick={() => { adicionarEndereco() }}>Adicionar Endereço</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          ) : (
+            <>
+              <div className="row">
+
+                <EnderecoPrincipal enderecos={enderecos} />
+
+                <EnderecoEntrega enderecos={enderecos} />
+
+                <div className="col-12">
+                  <br />
+                  <div className="row">
+                    <div className="col-9 d-flex flex-column justify-content-end">
+                      <h2 className="d-flex justify-content-between align-content-center" >Endereços Cadastrados</h2>
+                    </div>
+                    <div className="col-3  d-flex justify-content-end">
+                      <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                        <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                      </button>
+                    </div>
+
+
+                  </div>
+
+                  <hr />
+                  <ListaEnderecos enderecos={enderecos} att={setAtt} />
+                </div>
+              </div>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereco</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <Formik>
+                        <div className="" >
+
+                          <ul className="lista-checkout-total">
+
+                            <li className="">
+
+
+
+                              <ul className="lista-carrinho-total">
+
+                                <div className="row">
+                                  <div className="col-3">
+                                    <label>* CEP </label>
+                                    <Field type="text" id="cep" name="cep" onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep" data-js="cep" placeholder="00000-000" required />
+                                  </div>
+                                  <div class="col-3 d-flex flex-column justify-content-end">
+                                    <button type="button" onClick={() => buscaCep()} class="btn btn-secondary" >Buscar</button>
+                                  </div>
+
+                                </div>
+
+                                <div className="row ">
+                                  <div className="col-9 ">
+                                    <label>* Rua </label>
+                                    <Field type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
+                                  </div>
+
+                                  <div className="col-3">
+                                    <label>* Número </label>
+                                    <Field type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
+                                  </div>
+
+                                </div>
+                                <label> Complemento </label>
+                                <Field type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
+                                <label>* Bairro </label>
+                                <Field type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
+                                <label>* Cidade </label>
+                                <Field type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
+                                <label>* Estado </label>
+                                <Field type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
+                                <label>Nome do destinatário </label>
+                                <input type="text" class="form-control" placeholder={user.nome} value={destinatario} onChange={(event) => { setDestinatario(event.target.value == "" ? null : event.target.value) }} />
+
+
+                              </ul>
+
+
+                            </li>
+
+
+
+                            <br />
+                          </ul>
+
+                        </div>
+                      </Formik>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary" onClick={() => { adicionarEndereco() }}>Adicionar Endereço</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </Tab.Pane>
     },
     {
       menuItem: 'Meus Cartões', render: () =>
         <Tab.Pane>
-          <div className="row">
-            <div className="col-9 ">
-              <h2 className=" " >Cartão Principal</h2>
-            </div>
-          </div>
-          <hr className="mt-1" />
+          {cartoes.length == 0 ? (
+            <>
+              <div className="container bg-light " >
+                <div class="alert alert-warning alert-dismissible container  d-flex justify-content-center align-content-center" role="alert">
+                  <strong className="me-1">Você ainda não tem Cartões!</strong>
 
-          <div className="row d-flex justify-content-center align-items-center">
-
-            <div className="col-1 d-flex justify-content-center align-items-center">
-              <b>Cartão</b>
-            </div>
-            <div className="col-3 d-flex justify-content-center align-items-center text-center">
-              <b>Nome</b>
-            </div>
-            <div className="col-3 d-flex justify-content-center align-items-center text-center">
-              <b>Número  </b>
-            </div>
-            <div className="col-2 d-flex justify-content-center align-items-center text-center">
-              <b>Vencimento</b>
-            </div>
-            <div className="col-3 d-flex justify-content-center align-items-center">
-              <b>Ações</b>
-            </div>
-
-          </div>
-          <hr className="mb-0 mt-1" />
-          <LinhaCartao cartao={cartao} att={setAtt} />
-          <div className="row">
-            <div className="col-9 d-flex flex-column justify-content-end">
-              <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
-            </div>
-            <div className="col-3  d-flex justify-content-end">
-              <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
-                <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
-              </button>
-            </div>
-          </div>
-          <hr className="mt-1" />
-          <div class="modal fade" id="ModalAdicionarCartao" tabindex="-1" aria-labelledby="ModalAdicionarCartao" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="ModalAdicionarCartao">Adicionar Cartão</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div className="div-fundo" id="div-fundo">
-                    <p> <Icon className="icone-resumo" name="credit card outline" /><b>Adicionar Cartão</b></p>
-                    <Cards
-                      number={number}
-                      name={name}
-                      expiry={expiry}
-                      cvc={cvc}
-                      focused={focus}
-
-                    />
-                    <br />
-
-                    <label>Número do cartão *</label>
-                    <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
-
-                    <label>Nome impresso no cartão *</label>
-                    <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" />
-
-                    <label>Validade *</label>
-                    <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
-
-                    <label>Código de Segurança *</label>
-                    <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
-                    <br/>
-                    <input type="checkbox" value={checkboxCartao} onChange={e => setCheckboxCartao(e.target.checked)}/> Desejo tornar este cartão meu principal
-                    
-
-
-
-
-                    <br />
-                    <br />
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-primary" onClick={() => { AdicionarCartao()}}>Adicionar Cartão</button>
                 </div>
               </div>
-            </div>
-          </div>
-          <ListaCartoes cartoes={cartoes} att={setAtt} />
+              <div className="container d-flex justify-content-center align-content-center" >
+                <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
+                  <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                </button>
+              </div>
+              <div class="modal fade" id="ModalAdicionarCartao" tabindex="-1" aria-labelledby="ModalAdicionarCartao" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ModalAdicionarCartao">Adicionar Cartão</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div className="div-fundo" id="div-fundo">
+                        <p> <Icon className="icone-resumo" name="credit card outline" /><b>Adicionar Cartão</b></p>
+                        <Cards
+                          number={number}
+                          name={name}
+                          expiry={expiry}
+                          cvc={cvc}
+                          focused={focus}
+
+                        />
+                        <br />
+
+                        <label>Número do cartão *</label>
+                        <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                        <label>Nome impresso no cartão *</label>
+                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" />
+
+                        <label>Validade *</label>
+                        <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                        <label>Código de Segurança *</label>
+                        <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                        <br />
+                        <input type="checkbox" value={checkboxCartao} onChange={e => setCheckboxCartao(e.target.checked)} /> Desejo tornar este cartão meu principal
 
 
+
+
+
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary" onClick={() => { AdicionarCartao() }}>Adicionar Cartão</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+
+              <div className="row">
+                <div className="col-9 ">
+                  <h2 className=" " >Cartão Principal</h2>
+                </div>
+              </div>
+              <hr className="mt-1" />
+
+              <div className="row d-flex justify-content-center align-items-center">
+
+                <div className="col-1 d-flex justify-content-center align-items-center">
+                  <b>Cartão</b>
+                </div>
+                <div className="col-3 d-flex justify-content-center align-items-center text-center">
+                  <b>Nome</b>
+                </div>
+                <div className="col-3 d-flex justify-content-center align-items-center text-center">
+                  <b>Número  </b>
+                </div>
+                <div className="col-2 d-flex justify-content-center align-items-center text-center">
+                  <b>Vencimento</b>
+                </div>
+                <div className="col-3 d-flex justify-content-center align-items-center">
+                  <b>Ações</b>
+                </div>
+
+              </div>
+              <hr className="mb-0 mt-1" />
+              <LinhaCartao cartao={cartao} att={setAtt} />
+              <div className="row">
+                <div className="col-9 d-flex flex-column justify-content-end">
+                  <h2 className="d-flex justify-content-between align-content-center" >Cartões Cadastrados</h2>
+                </div>
+                <div className="col-3  d-flex justify-content-end">
+                  <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#ModalAdicionarCartao" >
+                    <Icon name="plus circle  " className="icon-menucentral icon-plus-white" />Adicionar
+                  </button>
+                </div>
+              </div>
+              <hr className="mt-1" />
+              <div class="modal fade" id="ModalAdicionarCartao" tabindex="-1" aria-labelledby="ModalAdicionarCartao" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ModalAdicionarCartao">Adicionar Cartão</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div className="div-fundo" id="div-fundo">
+                        <p> <Icon className="icone-resumo" name="credit card outline" /><b>Adicionar Cartão</b></p>
+                        <Cards
+                          number={number}
+                          name={name}
+                          expiry={expiry}
+                          cvc={cvc}
+                          focused={focus}
+
+                        />
+                        <br />
+
+                        <label>Número do cartão *</label>
+                        <InputMask mask="9999999999999999" type="tel" name="number" value={number} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" required />
+
+                        <label>Nome impresso no cartão *</label>
+                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" />
+
+                        <label>Validade *</label>
+                        <InputMask mask="99/99" type="text" name="expiry" value={expiry} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" />
+
+                        <label>Código de Segurança *</label>
+                        <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                        <br />
+                        <input type="checkbox" value={checkboxCartao} onChange={e => setCheckboxCartao(e.target.checked)} /> Desejo tornar este cartão meu principal
+
+
+
+
+
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-primary" onClick={() => { AdicionarCartao() }}>Adicionar Cartão</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ListaCartoes cartoes={cartoes} att={setAtt} />
+
+            </>
+          )}
         </Tab.Pane>
     },
 

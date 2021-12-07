@@ -32,7 +32,7 @@ function CadastroCliente(props) {
     const [menorIdade, setMenorIdade] = useState('d-none')
     const [datainvalida, setDatainvalida] = useState('d-none')
     const Cadastrar = (event) => {
-        
+
         setLoading(true)
         event.preventDefault()
         if (validarEntradas()) {
@@ -72,8 +72,8 @@ function CadastroCliente(props) {
                                     text: 'desculpe ocorreu um erro durante o cadastro!',
                                     icon: 'error',
                                     confirmButtonText: 'fechar'
-                                  })
-                                
+                                })
+
                             })
                     } else {
                         setemailexists("d-block")
@@ -89,7 +89,7 @@ function CadastroCliente(props) {
     function calculaIdade(dataNasc) {
         var dataAtual = new Date();
         var anoAtual = dataAtual.getFullYear();
-        var anoNascParts = dataNasc.slice(0,10).split('/');
+        var anoNascParts = dataNasc.slice(0, 10).split('/');
         var diaNasc = anoNascParts[0];
         var mesNasc = anoNascParts[1];
         var anoNasc = anoNascParts[2];
@@ -107,11 +107,11 @@ function CadastroCliente(props) {
                 }
             }
         }
-        return idade<18;
+        return idade < 18;
     }
 
-    function validarBissexto(dataNasc){
-        if(dataNasc == new Date('2021/29/02').toLocaleString()){
+    function validarBissexto(dataNasc) {
+        if (dataNasc == new Date('2021/29/02').toLocaleString()) {
             return true;
         }
         return false;
@@ -126,7 +126,7 @@ function CadastroCliente(props) {
             setValidCpf('d-block')
             return false
         }
-        if(validarBissexto(new Date(dataNascimento).toLocaleString())){
+        if (validarBissexto(new Date(dataNascimento).toLocaleString())) {
             setDatainvalida('d-block')
             return false
         }
@@ -134,11 +134,11 @@ function CadastroCliente(props) {
             setValidDataNascimento('d-block')
             return false
         }
-        if (calculaIdade(new Date(dataNascimento).toLocaleString())){
+        if (calculaIdade(new Date(dataNascimento).toLocaleString())) {
             setMenorIdade('d-block')
             return false
         }
-        
+
         if (!email || email.length == 0 || email == "") {
             setValidEmail('d-block')
             return false
@@ -225,7 +225,7 @@ function CadastroCliente(props) {
                     {/* --- Função de validação de data --- */}
                     <div class="form-group col-md-3">
                         <Form.Label>Nascimento:</Form.Label>
-                        <Form.Control  type="date"  placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value); setValidDataNascimento('none'); setMenorIdade('none'); setDatainvalida('none');}}
+                        <Form.Control type="date" placeholder="Ex.: 29/02/1980" onChange={(event) => { setDataNascimento(event.target.value); setValidDataNascimento('none'); setMenorIdade('none'); setDatainvalida('none'); }}
                             value={dataNascimento} required="true" />
                         <div className={"invalid-feedback " + validDataNascimento}>
                             Data de nascimento é obrigatória!
@@ -350,24 +350,24 @@ function CadastroCliente(props) {
                     </Modal.Header>
                     <Modal.Body>
                         <p>
-                            CÁLCULO DO VALOR DE FRETE <br/>
+                            CÁLCULO DO VALOR DE FRETE <br />
                             O valor do frete é fixo no carrinho de compras de R$ 15,00.  Somente entregamos na cidade de São Paulo/SP.
-</p>
-<p>
-                            CARRINHO DE COMPRAS <br/>
+                        </p>
+                        <p>
+                            CARRINHO DE COMPRAS <br />
                             Para facilitar sua compra, ela ficará salva em seu carrinho de compras até a saída do site ou não queira finalizar a compra no momento. Porém, para ter acesso a esta finalidade você deve entrar com seu Login e Senha no site, senão os produtos do carrinho irão expirar.
-</p>
-<p>
+                        </p>
+                        <p>
 
-                            REGRA PARA PAGAMENTO <br/>
-                            Após a finalização do pedido não será possível alterar a forma de pagamento, endereço, arte do rótulo, estilo de cerveja ou incluir e/ou excluir itens.<br/>
+                            REGRA PARA PAGAMENTO <br />
+                            Após a finalização do pedido não será possível alterar a forma de pagamento, endereço, arte do rótulo, estilo de cerveja ou incluir e/ou excluir itens.<br />
 
-                            – CARTÃO DE CRÉDITO: As compras podem ser pagas com cartão de crédito. O pagamento pode ser à vista ou parcelado em até 3 (três) vezes sem juros. Para sua segurança, todas as compras efetuadas com cartão de crédito estão sujeitas à análise de cadastro.
-</p>
-<p>
-                            ENVIO<br/>
+                            <br />CARTÃO DE CRÉDITO: As compras podem ser pagas com cartão de crédito. O pagamento pode ser à vista ou parcelado em até 3 (três) vezes sem juros. Para sua segurança, todas as compras efetuadas com cartão de crédito estão sujeitas à análise de cadastro.
+                        </p>
+                        <p>
+                            ENVIO<br />
                             Após a confirmação de pagamento pela instituição financeira, seu pedido estará pronto para ser separado e embalado para entrega. Todos os produtos disponíveis para compra estão separados em nosso estoque, prontos para terem seu rótulos impressos, aplicados e enviados. O prazo de entrega passa a contar a partir do momento em que o pagamento é confirmado sendo de até 6 dias, em caso de contratação do serviço.
-                            Nossas entregas ocorrem todos os dias das semana entre 8h e 20h, caso haja qualquer restrição de dia ou horário, coloque no campo observações.<br/>
+                            Nossas entregas ocorrem todos os dias das semana entre 8h e 20h, caso haja qualquer restrição de dia ou horário, coloque no campo observações.<br />
                             Em casos de entrega em condomínio residencial ou comercial o entregador fica responsável em levar até a portaria o produto e não até o apartamento do Cliente.
                         </p>
                     </Modal.Body>
