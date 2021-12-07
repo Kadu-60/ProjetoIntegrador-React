@@ -1,0 +1,21 @@
+.imagem-busca{
+    width: 49%;
+    height: 315px;
+    padding-top: 5px;
+
+    
+   
+}
+
+.buscarAvn{
+    display: inline-flex;
+   
+}
+
+.bannerHome{
+    max-width: 1900px;
+    max-height: 240px;
+    width: 100%;
+    height: 100%;
+}
+

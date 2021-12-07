@@ -1,0 +1,13 @@
+.titulo-dash{
+    font-size: 22px;
+    margin-left: 30px;
+    
+}
+.btn-voltar{
+    color: white;
+    background-color: #8D733F;
+    line-height: 1;
+    border: 1px solid;
+    border-color: #836a38;
+    font-weight: bold;
+}

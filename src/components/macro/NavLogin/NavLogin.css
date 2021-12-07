@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+
+.navPrincipal{
+    font-family: 'MedievalSharp', cursive;
+}
+
+.logo{
+    width: 150px;    
+    
+}
+
+
+.header-FC{
+    display: inline-block;
+    
+}
+
+.header-conta{
+    display: inline-block;
+   
+}
+.header-Pedidos{
+    display: inline-block;
+   
+}
+
+.header-carrinho{
+    display: inline-block;
+   
+}
+.nav-item{
+    list-style-type: none;
+}
+
+.badge{
+    padding: 0.20em 0.35em;
+    position: relative;
+    
+}
+
+
+#carrinho{
+    width: 35px;
+     
+}
+
+.header-FC img{
+    width: 20%;
+   margin-top: 10px;  
+    
+}
+
+.header-conta img{
+    width: 20%;
+    margin-top: 10px;  
+  
+}
+.header-Pedidos img{
+    width: 20%;
+    margin-top: 10px;  
+    
+}
+.header-carrinho img{
+    width: 25%;
+    margin-top: 10px;  
+    
+}
+.header-FC p{
+    color: white;
+    /* display: block !important; */
+}
+
+.header-conta p{
+    color: white;
+    /* display: block !important; */
+}
+.header-Pedidos p{
+    color: white;
+    /* display: block !important; */
+}
+.header-carrinho p{
+    color: white;
+    /* display: block !important; */
+}
+.header-logo{
+    width: 90%;
+}
+.header-input{
+    width: 80%;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+}
+.header-pesquisa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.icones-header{
+    justify-content: center;
+    align-items: center;
+    position: relative;
+   
+
+}
+
+.imgBusca {
+    background-size: 20px 50px;
+    top: -10px;
+    margin-right: -100px;
+    /* background-color: transparent; */
+    /* transition: .25s all ease; */
+    /* pointer-events: none; */
+    /* height: 45px; */
+  }
+.header-busca{
+    position: relative;
+    right: 40px;
+    bottom: -5px;
+}
+
+.header-busca img{
+    width: 25px;
+}
+.header-nav{
+    width: 100%;
+}
+
+.icone-login{
+    margin-left: 27px ;
+
+}
+
+
+.icone{
+    font-family: 'MedievalSharp', cursive;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: white ;
+    
+    margin-left: 5px;
+    margin-bottom: 15px;
+   
+      
+    /* display: block !important; */
+}
+    
+
+
+
+
+/* Lupa */
+.custom-img {
+    position: relative;
+    top: 8px;
+    left: -40px;  
+}
+/* Fim Lupa */
+
+
+.col-8 {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+
+
+ .link-icone{
+    text-decoration: none;
+    cursor: pointer;
+ }
+
+ .promo{
+    text-decoration: none;
+    padding-top: 13px;
+ }
+
+
+
+@media screen and (max-width: 700px) {
+  
+    .custom-img {
+        position: relative;
+        top: 3px;
+        left: -40px;  
+        width: 20px;
+        height: 20px;
+    }
+    .navbar-brand-link{
+        display: none;
+    }
+    .header-FC {
+        display: none;
+    }    
+    .header-conta img{
+        width: 35px;
+        margin-right: 10px;
+               
+       
+    }
+    .header-conta{
+        margin-right: 30px;
+    }
+
+    .header-Pedidos {
+        display: none;
+    }
+    .header-carrinho {
+        width: 150px;
+    }
+    
+
+  
+  }
+
+  @media (max-width:992px) {
+    .navbar-brand-link{
+        display: none;
+    }
+    .header-FC {
+        display: none;
+    }    
+    .header-conta img{
+        width: 35px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+       
+     
+    }
+
+    .header-conta p{
+        
+       margin-left: 10px;
+       word-wrap: normal;
+       font-size: 14px;
+           
+       
+    }
+
+    .header-conta {
+        
+        margin-left: -15px;
+        flex-wrap: none;
+            
+        
+     }
+    .icone{
+        padding-top: 0;
+    }
+    .header-conta{
+        margin-right: 30px;
+       
+        right: 10px
+    }
+
+    .header-Pedidos {
+        display: none;
+    }
+    .header-carrinho {
+        width: 35px;
+        margin-right: 100px;
+        padding-left: 20px;
+      
+        right: 10px;
+        margin-bottom: 10px;
+       
+
+    }
+}
+
+
+@media (max-width:860px) {
+    .navbar-brand-link{
+        display: none;
+    }
+    .header-FC {
+        display: none;
+    }    
+    .header-conta img{
+        width: 30px;
+        margin-right: 20px;
+        display: block;
+        left:20px;
+      
+    }
+  
+    .header-conta{
+        margin-right: 30px;
+        display: flex;
+
+    }
+
+    .header-Pedidos {
+        display: none;
+    }
+    .header-carrinho {
+        width: 120px;
+        display: flex;
+       
+        right: -80px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:760px) {
+    .navbar-brand-link{
+        display: none;
+    }
+    .header-FC {
+        display: none;
+    }    
+    .header-conta img{
+        width: 30px;
+        margin-right: 20px;
+        display: block;
+        left:20px;
+      
+    }
+   
+    .header-conta{
+        margin-right: 8%;
+        display: flex;
+
+    }
+
+    .header-Pedidos {
+        display: none;
+    }
+    .header-carrinho {
+        width:15%;
+        display: flex;
+       
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:590px) {
+    .navbar-brand-link{
+        display: none;
+    }
+    .header-FC {
+        display: none;
+    }    
+    .header-conta img{
+        width: 30px;
+        margin-right: 20px;
+        display: block;
+        left:20px;
+      
+    }
+    .header-busca{
+        width: 1px;
+    }
+  
+    .header-conta{
+        margin-right: 8%;
+        display: flex;
+
+    }
+
+    .header-Pedidos {
+        display: none;
+    }
+    .header-carrinho {
+        width:15%;
+        display: flex;
+       
+        margin-bottom: 10px;
+    }
+}

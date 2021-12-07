@@ -1,0 +1,9 @@
+.titulo{
+    font-family: 'MedievalSharp', serif;
+    font-weight: bolder;
+}
+.pesquisa {
+    color: black;
+    font-weight: bolder;
+    padding-left: 15px;
+}

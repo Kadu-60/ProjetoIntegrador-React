@@ -1,0 +1,10 @@
+.titulo{
+    font-family: 'MedievalSharp', serif;
+    font-weight: bolder;
+}
+.fazer{
+    text-decoration: underline ;
+    cursor: pointer;
+    color: blue;
+    font-weight: bold;
+}

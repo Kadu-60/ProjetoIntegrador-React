@@ -1,0 +1,446 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+
+
+footer{
+    clear: both;
+    display: block;
+    overflow: hidden;
+    margin-top: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /* vertical-align: baseline; */
+    text-decoration: none;
+    appearance: none;
+
+}
+
+#tpl-center{
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+
+footer .topBar{
+    overflow: hidden;
+    background-color: #8D733F;
+    align-items: center;
+    
+}
+
+.pagamento{
+    color: white;
+    font-size: 30px;
+    /* padding-left: 20px; */
+    margin-left: 40px;
+    margin-right: -20px;
+}
+
+.redesSocias{
+    color: white;
+    font-size: 30px;
+}
+
+#cadastroNews{
+    background-color: #8D733F;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-align: center;
+}
+
+section.cadastroNew{
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /* vertical-align: baseline; */
+    text-decoration: none;
+    appearance: none;
+    text-align: center;
+}
+.fab{
+    color: white;
+}
+.pix{
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+#texto{
+    color: #fff;
+    font-weight: 500;
+    font-family: 'MedievalSharp', cursive;
+   
+
+}
+.fixo{
+    color: #fff;
+    font-family: 'MedievalSharp', cursive;
+}
+
+body section.cadastroNews .texto strong.fixo{
+    font-weight: 500;
+    font-family: 'MedievalSharp', cursive;
+}
+
+
+#texto{
+    display: inline-block;
+    text-align: left;
+    top: 8px;
+    position: relative;
+    margin-left: 100px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 22px;
+    font-family: 'MedievalSharp', cursive;
+    letter-spacing: 2px;
+    
+}
+
+span.frete{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+    appearance: none;
+    font-family: 'MedievalSharp', cursive;
+}
+
+
+.span{
+    margin-left: 100px;
+}
+
+body .tpl-center {
+  
+    margin: 0 auto;
+}
+
+footer .middleArea {
+    overflow: hidden;
+    height: auto;
+   
+    background-color: #4B4A42;
+}
+
+footer .middleArea .tpl-center {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+footer h3.titulo-footer{
+   
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    font-family: 'MedievalSharp', cursive;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: center;
+   
+}
+
+.texto-footer{
+    color: white;
+    
+}
+
+#cellphone{
+ 
+    background-position: -390px -192px;
+    float: left;
+       
+}
+
+footer .middleArea .tpl-center div.coluna {
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    width: max-content;
+    margin-right: 2.5%;
+    margin-top: 20px;
+}
+
+footer .middleArea .tpl-center div.coluna.atendimento{
+    margin-left: -20px;
+  
+}
+
+footer .middleArea .tpl-center div.coluna.atendimento .left{
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+}
+
+
+
+#telefone {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+
+
+footer .middleArea .tpl-center div.coluna.atendimento .left a {
+    display: block;
+    clear: both;
+    font-size: 16px;
+    font-family: 'MedievalSharp', cursive;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+footer .middleArea .tpl-center div.coluna.atendimento .left span{
+    display: block;
+    clear: both;
+    font-size: 16px;
+    font-family: 'MedievalSharp', cursive;
+    color: white;
+        
+
+}
+
+#idade18 {
+    clear: both;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    letter-spacing: 1.5px;
+    font-family: 'MedievalSharp', cursive;
+    text-transform: uppercase;
+    font-weight: 500;
+    
+}
+
+
+
+footer .middleArea .tpl-center div.coluna ul {
+    text-align: center;
+    display: block;
+}
+div.coluna{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-right: 50px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+ul.itens{
+    list-style: none;
+    text-decoration: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.freteFixo{
+    margin-left: -70px;
+}
+
+footer .middleArea .tpl-center div.coluna ul li.item {
+    text-align: left;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: left;
+    display: block;
+    font-family: 'MedievalSharp', cursive;
+}
+
+footer .middleArea .tpl-center div.coluna ul li.item a {
+    color: white;
+    font-family: 'MedievalSharp', cursive;
+    font-weight: 300;
+}
+
+
+
+
+footer .middleArea .tpl-center div.coluna ul li.item a {
+    color: white;
+    font-family: 'MedievalSharp', cursive;
+    font-weight: 300;
+}
+
+a, body, footer, form, h3, html, i, img, li, section, span, strong, ul,div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+footer .middleArea .tpl-center div.coluna.redes ul li {
+    display: inline-block!important;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 28px;
+    height: 28px;
+}
+
+footer .bottom {
+    overflow: hidden;
+    background-color: #fff;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+footer .bottom .tpl-center small {
+    width: 50%;
+    float: center;
+    color: #979797;
+    font-family: Oswald,sans-serif;
+    line-height: 22px;
+    font-size: 12px;
+    letter-spacing: .5px;
+    letter-spacing: normal;
+    font-weight: 300;
+    
+}
+footer .bottom .tpl-center {
+    text-align: center;
+}
+
+
+
+.coluna  {
+    float:left;
+    width: 33.33%;
+  }
+  
+  
+
+
+  @media screen and (max-width: 700px) {
+    .coluna{
+        width: 100%;
+        text-align: center;
+
+    }
+    .contact-box{
+        text-align: center;
+      
+    }
+
+  
+
+    #texto{
+        margin-bottom: 30px;
+        position: relative;
+        margin-left: 100px;
+        align-items: center;
+        display: block;
+        
+    }
+
+ 
+    footer .middleArea .tpl-center div.coluna.atendimento {
+        margin-bottom: 10px;
+        margin-left: 70px;
+        font-size: 18px;
+    }
+    footer .middleArea .tpl-center div.coluna.ajuda{
+        margin-left: 80px;
+    }
+    footer .middleArea .tpl-center div.coluna.forma{
+        margin-left: 60px;
+    }
+    footer .middleArea .tpl-center div.coluna.redes{
+        margin-left: 100px;
+    }
+
+  }
+
+
+  @media only screen and (max-width: 400px) {
+    .coluna  {
+         
+       text-align: center;
+     }
+
+     
+    #texto{
+        margin-bottom: 30px;
+        position: relative;
+        margin-left: 100px;
+        align-items: center;
+        display: block;
+        
+    }
+
+    footer .middleArea .tpl-center div.coluna.atendimento {
+      margin-left: 0px;
+      font-size: 14px;
+       
+    }
+    footer .middleArea .tpl-center div.coluna.ajuda{
+        margin-left: 100px;
+    }
+
+    footer .middleArea .tpl-center div.coluna.selos{
+        margin-left: 100px;
+    }
+
+    footer .middleArea .tpl-center div.coluna.forma{
+        margin-left: 60px;
+    }
+
+    footer .middleArea .tpl-center div.coluna.redes{
+        margin-left: 110px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+         
+    #texto{
+        margin-bottom: 30px;
+        position: relative;
+        margin-left: 100px;
+        align-items: center;
+        display: block;
+        
+    }
+}

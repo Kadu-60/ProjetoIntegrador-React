@@ -1,0 +1,18 @@
+.contador-pag-produto{
+    width: 100px;
+    margin-left: 120px;
+  
+    
+}
+.contador-btn{
+    width: 80%;
+    height: 55%;
+    background-color: #EACF2B;
+    color: black ;
+    font-weight: bold;
+}
+.contador-btn:hover{
+    background-color: #d0a14c;
+    color: black;
+    cursor: pointer;
+}

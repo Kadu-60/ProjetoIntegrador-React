@@ -1,0 +1,8 @@
+.btn-voltarHome{
+    background-color: #8D733F;
+    color: white;
+}
+.btn-voltarHome:hover{
+    background-color: #4B4A42;
+    color: white;
+}

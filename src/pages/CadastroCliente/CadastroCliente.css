@@ -1,0 +1,49 @@
+.titulo{
+    font-family: 'MedievalSharp', serif;
+    font-weight: bolder;
+}
+
+.btn-modal-termo{
+    background-color: #8D733F;
+    font-weight: bold;
+    border:#8D733F ;
+}
+
+.btn-modal-termo:hover{
+    background-color: #8D733F;
+    border:#8D733F ;
+}
+.link-termo{
+    cursor: pointer;
+   
+}
+
+.fazer-login{
+    color: blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#input-container {
+    margin-top: 8px;
+    height: 40px;
+    width: 270px;
+    border: 1px solid gray;
+    border-radius:  5px;
+    margin-bottom: 10px;
+
+}
+
+#input-container-nome{
+    margin-top: 8px;
+    height: 40px;
+    width: 552px;
+    border: 1px solid gray;
+    border-radius:  5px;
+    margin-bottom: 10px;
+}
+
+.form-check-input:checked {
+    background-color: #D0A14C;
+    border-color: #D0A14C;
+}
