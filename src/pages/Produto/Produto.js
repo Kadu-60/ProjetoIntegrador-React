@@ -98,14 +98,16 @@ function Produto(props) {
     const [numero, setNumero] = useState(1)
 
     const incremento = () =>{
-        setNumero(+numero + 1)
+        setNumero(+numero + 1 )
+      
        
        
         
     }
     const decremento = () =>{
         if(numero > 1){
-            setNumero(numero - 1)
+            setNumero(numero - 1 )
+            
         } 
 
         
