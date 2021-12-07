@@ -116,7 +116,7 @@ function PedidoFinalizado(props) {
                         <div class="col-12  mt-4 d-flex justify-content-around">
 
                             <button className=" btn btn-voltarHomer"><a className="link-finalizado-pedido" href="/home"> Voltar para home</a></button>
-                            <button className=" btn btn-voltarHome"><a className="link-finalizado-pedido" onClick={() =>{MeusPedidos()}}> Ver página do pedido</a></button>
+                            <button className=" btn btn-voltarHome" onClick={() =>{MeusPedidos()}}><a className="link-finalizado-pedido" > Ver página do pedido</a></button>
 
                         </div>
                     </div>
