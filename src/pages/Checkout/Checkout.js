@@ -424,7 +424,7 @@ const Checkout = (props) => {
                                             <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de entrega</a>
 
                                             <br /><br />
-                                            {/* <div className="">
+                                            <div className="">
                                                 <p><Icon className="icone-resumo" name="money bill alternate outline" /> <b>Endereço Cobrança</b></p>
                                                 <hr />
                                                 <ul className="">
@@ -434,8 +434,8 @@ const Checkout = (props) => {
                                                     <li className="">{enderecoCobranca.cidade} - {enderecoCobranca.estado}</li>
                                                 </ul>
 
-                                            </div> */}
-                                            {/* <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de cobrança</a> */}
+                                            </div> 
+                                            <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de cobrança</a>
 
                                             <br />
                                         </ul>
