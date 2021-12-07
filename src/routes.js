@@ -53,7 +53,7 @@ export const RoutesSite = () => {
                 <Route path="/destaques" component={Destaques} />
                 <Route path="/catalogo" component={Catalogo} />
                 <Route path="/teste/:id" component={Teste} />
-                <Route path="/notafiscal" component={NotaFiscal} />
+                <Route path="/notafiscal/:id" component={NotaFiscal} />
                 <Route component={NotFound} />
             </Switch>
         </StoreProvider>

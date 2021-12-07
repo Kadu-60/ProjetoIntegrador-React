@@ -40,12 +40,13 @@ function CadastroCliente(props) {
     const [bairro, setBairro] = useState('')
     const [cidade, setCidade] = useState('')
     const [estado, setEstado] = useState('')
+    const [carregando, setCarregando] = useState(false)
     const { id } = useParams()
 
 
     const Cadastrar = (event) => {
 
-        setLoading(true)
+        setCarregando(true)
         event.preventDefault()
         if (validarEntradas()) {
             axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email)
@@ -58,14 +59,12 @@ function CadastroCliente(props) {
                             "email": email,
                             "telefone": telefone,
                             "password": password
-                    }
-                 
-                    
-                    )
+                        })
                             .then((response) => {
                                 adicionarEndereco(response.data.id_Cliente)
                                 axios.post("http://localhost:8080/login", { "email": email, "password": password })
                                     .then((response) => {
+
                                         let token = response.data;
                                         localStorage.setItem('token', token)
                                         localStorage.setItem('user', email)
@@ -75,17 +74,19 @@ function CadastroCliente(props) {
                                         axios.get("http://localhost:8080/cadastro-cliente/getByEmail/" + email, config)
                                             .then((response) => {
                                                 let { id_Cliente } = response.data
-                                                setLoading(false)
+                                                setCarregando(false)
                                                 window.location.href = "http://localhost:3000/dashboard/" + id_Cliente
                                             })
-                                            .catch((error) => { console.log(error) })
-                                            
-                                           
+                                            .catch((error) => { setCarregando(false) })
+
+
 
                                     })
+                                    .catch((error) => { setCarregando(false) })
                             })
                             .catch((error) => {
                                 console.log(error)
+                                setCarregando(false)
                                 Swal.fire({
                                     title: 'Erro!',
                                     text: 'desculpe ocorreu um erro durante o cadastro!',
@@ -93,59 +94,61 @@ function CadastroCliente(props) {
                                     confirmButtonText: 'fechar'
                                 })
 
+
                             })
                     } else {
+                        setCarregando(false)
                         setemailexists("d-block")
                     }
 
                 })
-                .catch((error) => { console.log(error) })
+                .catch((error) => { console.log(error); setCarregando(false) })
+        } else {
+            setCarregando(false)
         }
-        setTimeout(() => {
-            setLoading(false)
-        }, 2500)
 
 
-      
-       
+
+
+
     }
 
     const adicionarEndereco = (id_Cliente) => {
         let endereco =
         {
-          "clienteEnderecoKey":
-          {
-            "cliente":
+            "clienteEnderecoKey":
             {
-              "id_Cliente": id_Cliente
+                "cliente":
+                {
+                    "id_Cliente": id_Cliente
+                },
+                "endereco":
+                {
+                    "estado": estado,
+                    "cidade": cidade,
+                    "bairro": bairro,
+                    "rua": rua,
+                    "cep": cep,
+                    "numero": numeroEndereco,
+                    "complemento": complemento,
+                    "ponto_referencia": "",
+                    "destinatario": ""
+                }
             },
-            "endereco":
-            {
-              "estado": estado,
-              "cidade": cidade,
-              "bairro": bairro,
-              "rua": rua,
-              "cep": cep,
-              "numero": numeroEndereco,
-              "complemento": complemento,
-              "ponto_referencia": "",
-              "destinatario": ""
-            }
-          },
-          "enderecoPrincipal": false,
-          "enderecoEntrega": false
+            "enderecoPrincipal": false,
+            "enderecoEntrega": false
         }
         axios.post("http://localhost:8080/clienteEndereco/create", endereco)
-          .then((response) => {
-              console.log(response.data)
-          
-          
-            
-    
-          })
-    
-      }
-    
+            .then((response) => {
+                console.log(response.data)
+
+
+
+
+            })
+
+    }
+
     function calculaIdade(dataNasc) {
         var dataAtual = new Date();
         var anoAtual = dataAtual.getFullYear();
@@ -266,15 +269,21 @@ function CadastroCliente(props) {
     }
 
 
-   
-// }
+
+    // }
 
 
 
     return (
-       
+
         <>
+            <div className={carregando ? "div-Carregando" : "d-none"}>
+                <div class="spinner-border text-warning">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <FormDefault>
+
                 <br />    <br />
                 <div class="row d-flex justify-content-center">
                     <div class="col d-flex justify-content-center">
@@ -329,29 +338,29 @@ function CadastroCliente(props) {
 
                 {/* Inicio Endereço */}
 
-               
+
                 <div class="row d-flex justify-content-center">
-                
+
 
                     <div class="form-group col-md-2">
                         <Form.Label>CEP*:</Form.Label>
                         <Form.Control type="text" id="cep" name="cep" onBlur={(ev) => buscaCep(ev)} onChange={(ev) => setCep(ev.target.value)} value={cep} className="form-control input-cep-2" data-js="cep" placeholder="00000-000" required />
-                        <div className={"invalid-feedback " }>
+                        <div className={"invalid-feedback "}>
                             CEP é obrigatório!
                         </div>
                     </div>
                     {/* --- Função de validação de data --- */}
                     <div class="form-group col-md-3">
                         <Form.Label>Logradouro:</Form.Label>
-                        <Form.Control type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required/>
-                        <div className={"invalid-feedback " }>
-                        Endereço é obrigatória!
+                        <Form.Control type="text" className="form-control input-endereco" name="logradouro" id="logradouro" placeholder="Rua das flores" onChange={(event) => { setRua(event.target.value) }} value={rua} required />
+                        <div className={"invalid-feedback "}>
+                            Endereço é obrigatória!
                         </div>
-                       
+
                     </div>
                     <div class="form-group col-md-1">
                         <Form.Label>Número*:</Form.Label>
-                        <Form.Control type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required/>
+                        <Form.Control type="text" className="form-control " placeholder="1234" name="numero" id="numero" placeholder="" onChange={(event) => { setNumeroEndereco(event.target.value) }} value={numeroEndereco} required />
                         <div className={"invalid-feedback "}>
                             Número é obrigatório!
                         </div>
@@ -360,47 +369,47 @@ function CadastroCliente(props) {
 
                 <div class="row d-flex justify-content-center">
 
-                    
-                  
+
+
                     <div class="form-group col-md-3">
                         <Form.Label>Complemento:</Form.Label>
-                        <Form.Control type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento}  />
-                        
-                    
+                        <Form.Control type="text" className="form-control input-comp" name="complemento" placeholder="Ex. apto 200" onChange={(event) => { setComplemento(event.target.value) }} value={complemento} />
+
+
                     </div>
                     <div class="form-group col-md-3">
                         <Form.Label>Bairro:</Form.Label>
                         <Form.Control type="text" className="form-control input-bairro" id="bairro" name="bairro" placeholder="Jardim das Flores" onChange={(event) => { setBairro(event.target.value) }} value={bairro} required />
-                        
-                    
+
+
                     </div>
                 </div>
-                
+
                 <div class="row d-flex justify-content-center">
 
                     <div class="form-group col-md-3">
                         <Form.Label>Cidade*:</Form.Label>
-                        <Form.Control type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required/>
+                        <Form.Control type="text" className="form-control input-cidade" id="cidade" name="cidade" placeholder="São Paulo" onChange={(event) => { setCidade(event.target.value) }} value={cidade} required />
                         <div className={"invalid-feedback " + validCpf}>
-                        Cidade é obrigatório!
+                            Cidade é obrigatório!
                         </div>
                     </div>
                     {/* --- Função de validação de data --- */}
                     <div class="form-group col-md-3">
                         <Form.Label>Estado*:</Form.Label>
                         <Form.Control type="text" className="form-control input-estado" name="uf" id="uf" placeholder="São Paulo" onChange={(event) => { setEstado(event.target.value) }} value={estado} required />
-                        
+
 
                     </div>
-                   
+
                 </div>
-                
-
-                    {/* Fim Endereço */}
-                    
 
 
-               
+                {/* Fim Endereço */}
+
+
+
+
                 <div class="row d-flex justify-content-center">
 
                     <div class="form-group col-md-3">
@@ -483,7 +492,7 @@ function CadastroCliente(props) {
                         {loading ? (<div class="spinner-border" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        ) : (<BotaoConfirmar texto="Cadastrar" type="button" onClick={(event) => { Cadastrar(event) } } navigation route="login" />)}
+                        ) : (<BotaoConfirmar texto="Cadastrar" type="button" onClick={(event) => { Cadastrar(event) }} navigation route="login" />)}
                     </div>
 
                 </div>
@@ -542,7 +551,7 @@ function CadastroCliente(props) {
                 <br />
             </FormDefault>
         </>
-       
+
     )
 
 

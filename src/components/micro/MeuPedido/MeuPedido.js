@@ -104,7 +104,7 @@ function MeuPedido(props) {
                                     <p><b>{pedido.id || 0}</b> </p>
                                 </div>
                                 <div className="col-lg-4 col-12 col-status">
-                                    <div className="order-status" id="status">Situação: <p className="status-pedido-bol"><b>{pedido.status.estado_pedido}</b> </p> <a className="nota-fiscal" href="/notafiscal">Nota Fiscal </a></div>{" "}
+                                    <div className="order-status" id="status">Situação: <p className="status-pedido-bol"><b>{pedido.status.estado_pedido}</b> </p> <a className="nota-fiscal" href={"/notafiscal/"+pedido.id}>Nota Fiscal </a></div>{" "}
                                 </div>
                                 <div className="col-lg-2 col-12">
                                     <div className="div-botao">
