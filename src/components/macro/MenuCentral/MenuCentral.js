@@ -482,7 +482,7 @@ function meusCartoes() {
                   <br />
                   <div className="row">
                     <div className="col-9 d-flex flex-column justify-content-end">
-                      <h2 className="d-flex justify-content-between align-content-center" >Endereços Cadastrados</h2>
+                      <p className="d-flex justify-content-between align-content-center endereco-dash" >Endereços Cadastrados</p>
                     </div>
                     <div className="col-3  d-flex justify-content-end">
                       <button type="button " class="btn btn-adcend pt-1 text-center" data-bs-toggle="modal" data-bs-target="#exampleModal" >

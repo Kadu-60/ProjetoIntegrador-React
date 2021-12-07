@@ -99,7 +99,7 @@ function ItemListaEndereco(props) {
 
                 </div>
                 <div className="col-3 ">
-                    <a className=" cursorPointer"  data-bs-toggle="modal" data-bs-target={"#editModal" + endereco.id_endereco} >
+                    <a type="button" className=" cursorPointer"  data-bs-toggle="modal" data-bs-target={"#editModal" + endereco.id_endereco} >
                         <Icon name="edit" className="icon-menucentral" />
                         Editar        </a>
                     <span className="separadoritemListaEndereco">|</span>
@@ -109,9 +109,9 @@ function ItemListaEndereco(props) {
                 </div>
             </div>
             <hr />
-            <div class="modal " id={"editModal" + endereco.id_endereco} tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal fade " id={"editModal" + endereco.id_endereco } tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content modal">
+                    <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Alterar Endereco</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  ></button>
@@ -178,7 +178,7 @@ function ItemListaEndereco(props) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => { alterarEnd(endereco.id_endereco) }}>Adicionar Endereço</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  onClick={() => { alterarEnd(endereco.id_endereco) }}>Adicionar Endereço</button>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ import Prato from '../../assets/imgs/teste/prato.gif'
 import Garrafas from '../../assets/imgs/teste/cervejas.png'
 import ListarProdutos from '../../components/macro/ListarProdutos/ListarProdutos';
 import NovidadesHome from '../../components/macro/NovidadesHome/NovidadesHome';
+import { createSemanticDiagnosticsBuilderProgram } from 'typescript';
 
 function Produto(props) {
     const [produto, setProduto] = useState([])
@@ -40,8 +41,15 @@ function Produto(props) {
     const URLCard = 'http://localhost:8080/Card/'
     const cardFinal = URLCard + params.pesq
 
+    // verificar estoque
+
+ 
+
+    // verificar estoque
+
     useEffect(() => {
         getProduto()
+       
     }, [])
 
     const getProduto = () => {
@@ -92,12 +100,15 @@ function Produto(props) {
     const incremento = () =>{
         setNumero(+numero + 1)
        
+       
         
     }
     const decremento = () =>{
         if(numero > 1){
             setNumero(numero - 1)
-        }
+        } 
+
+        
         
         
     }

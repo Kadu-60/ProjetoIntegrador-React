@@ -18,7 +18,7 @@ function EnderecoPrincipal(props) {
         return (
             
             <div className="col-6 ">
-                <h2>Endereço Cobrança</h2>
+                <p className="endereco-dash">Endereço de Cobrança</p>
                 <hr />
                 <ul className="">
                 <li className="">{endereco.destinatario}</li>
