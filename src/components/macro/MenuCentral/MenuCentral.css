@@ -11,6 +11,11 @@
  
 
 }
+
+.endereco-dash{
+    font-weight: bold;
+    font-size: 18px;
+}
 .icon-plus-white{
     color: white!important;
 }

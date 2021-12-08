@@ -36,6 +36,7 @@ function ProdutoCarrinho(props) {
         if (numero > 1) {
             setNumero(numero - 1)
         }
+
         let cartList = localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : []
@@ -44,6 +45,8 @@ function ProdutoCarrinho(props) {
         localStorage.setItem('qtyCart', JSON.stringify(cartList.length))
         props.att(props.attval+1);
     }
+
+
     const remove = () => {
         let id = props.prod.id_produto
         let cart = ((localStorage.getItem("cart")
@@ -72,12 +75,15 @@ function ProdutoCarrinho(props) {
 
         })
 
+
+
         setNumero(count)
         axios.get('http://localhost:8080/Estoque/' + props.prod.id_produto)
             .then((response) => {
                 setEstoque(response.data.quantidade)
             })
     }, [])
+
 
     return (
         <>
@@ -88,7 +94,7 @@ function ProdutoCarrinho(props) {
                 </td>
 
                 <td className="product-name product-cart">
-                    <a href="/produto"><span className="titulo-cerveja-cart">{props.prod.nome_produto}</span></a>
+                <a href={"/produto/"+props.prod.id_produto}><span className="titulo-cerveja-cart">{props.prod.nome_produto}</span></a>
                 </td>
 
                 <td className="shipping-date">
@@ -107,9 +113,9 @@ function ProdutoCarrinho(props) {
                             <div class="btn-group inline">
 
                                 <div class="contador contador-pag-produto">
-                                    <div onClick={decremento} class="contador-btn btn-danger" data-sinal="-1" >-</div>
+                                    <div onClick={decremento} min="1" class="contador-btn btn-danger" data-sinal="-1">-</div>
                                     <div class="mostrador">{numero}</div>
-                                    <div onClick={incremento} class="contador-btn btn-success" data-sinal="1">+</div>
+                                    <div onClick={incremento} max="50" class="contador-btn btn-success" data-sinal="1">+</div>
                                 </div>
 
                             </div>
