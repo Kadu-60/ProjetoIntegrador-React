@@ -223,6 +223,13 @@ a{
     padding-left: 55px;
 }
 
+/* div.disabled, .btn-success
+{
+  pointer-events: none;
+  opacity: 0.5;
+  background: #CCC;
+} */
+
 
 @media screen and (max-width: 857px){
 

@@ -46,7 +46,7 @@ const Checkout = (props) => {
     const [URLPedidoFinalizado, setURLPedidoFinalizado] = useState([])
     const [frete, setFrete] = useState('')
     const [metodoPag, setMetodoPag] = useState(1)
-
+    const [carregando, setCarregando] = useState(false)
     const [enderecos, setEnderecos] = useState([])
     const [endereco, setEndereco] = useState({
         "id_endereco": 0,
@@ -77,7 +77,7 @@ const Checkout = (props) => {
     const [cartaoPreenchido, setCartaoPreenchido] = useState(false)
     const [cartaoFuturo, setCartaoFuturo] = useState(false)
 
-
+    const [idCartaoPreenchido, setIdCartaoPreenchido] = useState(1)
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index) => {
@@ -148,7 +148,7 @@ const Checkout = (props) => {
                     axios.get('http://localhost:8080/clienteEndereco/cliente/' + response.data.id_Cliente)
                         .then((response) => {
                             setEnderecos(response.data)
-                            if(response.data.length==0){
+                            if (response.data.length == 0) {
                                 MeusEnderecos()
                                 Swal.fire({
                                     icon: 'error',
@@ -173,7 +173,7 @@ const Checkout = (props) => {
                             response.data.map((item) => {
 
                                 if (item.principal) {
-
+                                    setIdCartaoPreenchido(item.clienteCartaoKey.cartao.id_Cartao)
                                     setNumber(item.clienteCartaoKey.cartao.numero)
                                     setName(item.clienteCartaoKey.cartao.nome)
                                     setExpiry(item.clienteCartaoKey.cartao.validade)
@@ -239,42 +239,82 @@ const Checkout = (props) => {
 
     const Finalizar = (event) => {
         event.preventDefault();
-
-        let pedido = {
-            "subtotal": 0,
-            "total": 0,
-            "frete": 0,
-            "finalizado": false,
-            "cliente": cliente,
-            "metodoPag": {
-                "id_metodoPag": metodoPag
-            },
-            "pagamento": {
-                "id_parcelamento": parcelamento
-            },
-            "status":
-            {
-                "id_status_pedido": 1
-            },
-            "endereco":
-            {
-                "estado": endereco.estado,
-                "cidade": endereco.cidade,
-                "bairro": endereco.bairro,
-                "rua": endereco.rua,
-                "cep": endereco.cep,
-                "numero": endereco.numero,
-                "complemento": endereco.complemento,
-                "ponto_referencia": "",
-                "destinatario": endereco.destinatario
-            },
-            "cartao":
-            {
-                "nome": name,
-                "numero": number,
-                "validade": new Date(expiry.replace('/', "/01/"))
-            }
-        }
+        setCarregando(true)
+        
+        let pedido =
+            cartaoPreenchido ?
+                {
+                    "subtotal": 0,
+                    "total": 0,
+                    "frete": 0,
+                    "finalizado": false,
+                    "cliente": cliente,
+                    "metodoPag": {
+                        "id_metodoPag": metodoPag
+                    },
+                    "pagamento": {
+                        "id_parcelamento": parcelamento
+                    },
+                    "status":
+                    {
+                        "id_status_pedido": 1
+                    },
+                    "endereco":
+                    {
+                        "estado": endereco.estado,
+                        "cidade": endereco.cidade,
+                        "bairro": endereco.bairro,
+                        "rua": endereco.rua,
+                        "cep": endereco.cep,
+                        "numero": endereco.numero,
+                        "complemento": endereco.complemento,
+                        "ponto_referencia": "",
+                        "destinatario": endereco.destinatario
+                    },
+                    "cartao":
+                    {
+                        "id_Cartao": idCartaoPreenchido,
+                        "nome": name,
+                        "numero": number,
+                        "validade": new Date(expiry.replace('/', "/01/"))
+                    }
+                }
+                :
+                {
+                    "subtotal": 0,
+                    "total": 0,
+                    "frete": 0,
+                    "finalizado": false,
+                    "cliente": cliente,
+                    "metodoPag": {
+                        "id_metodoPag": metodoPag
+                    },
+                    "pagamento": {
+                        "id_parcelamento": parcelamento
+                    },
+                    "status":
+                    {
+                        "id_status_pedido": 1
+                    },
+                    "endereco":
+                    {
+                        "estado": endereco.estado,
+                        "cidade": endereco.cidade,
+                        "bairro": endereco.bairro,
+                        "rua": endereco.rua,
+                        "cep": endereco.cep,
+                        "numero": endereco.numero,
+                        "complemento": endereco.complemento,
+                        "ponto_referencia": "",
+                        "destinatario": endereco.destinatario
+                    },
+                    "cartao":
+                    {
+                        "nome": name,
+                        "numero": number,
+                        "validade": new Date(expiry.replace('/', "/01/"))
+                    }
+                }
         let arrayItens = [];
         let cart = ((localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
@@ -313,11 +353,12 @@ const Checkout = (props) => {
                 setNumeroPedido(response.data.pedido)
                 localStorage.setItem('cart', JSON.stringify([]))
                 localStorage.setItem('qtyCart', JSON.stringify(0))
+                let idPedido = response.data.pedido.id
                 if (cartaoFuturo) {
-                    let cartaoFuturo = {
+                    let novoCartao = {
                         "clienteCartaoKey": {
                             "cliente": {
-                                "id_Cliente": 1
+                                "id_Cliente": response.data.pedido.cliente.id_Cliente
                             },
                             "cartao": {
                                 "id_Cartao": response.data.pedido.cartao.id_Cartao
@@ -325,14 +366,25 @@ const Checkout = (props) => {
                         },
                         "principal": true
                     }
-                    axios.post('http://localhost:8080/clienteCartao/create', cartaoFuturo)
+                    console.log(novoCartao)
+                    axios.post('http://localhost:8080/clienteCartao/create', novoCartao)
                         .then((response) => {
-
+                            console.log(response.data)
+                            setCarregando(false)
+                            const URL = '/pedidoFinalizado/' + idPedido
+                            history.push(URL)
                         })
+                }else{
+                    setCarregando(false)
+                    const URL = '/pedidoFinalizado/' + idPedido
+                    history.push(URL) 
                 }
-                const URL = '/pedidoFinalizado/' + response.data.pedido.id
-                history.push(URL)
 
+
+            })
+            .catch((err) => {
+                
+                setCarregando(false)
             })
 
     }
@@ -377,7 +429,13 @@ const Checkout = (props) => {
 
 
     return (
+
         <div className="App">
+            <div className={carregando ? "div-Carregando" : "d-none"}>
+                <div class="spinner-border text-warning">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <Formik
 
                 render={({ isValid, setFieldValue }) => (
@@ -401,7 +459,7 @@ const Checkout = (props) => {
 
 
                                             <div className=" ">
-                                                
+
                                                 <hr />
                                                 <ul className="">
                                                     <li className="">{endereco.destinatario}</li>
@@ -424,7 +482,7 @@ const Checkout = (props) => {
                                                     <li className="">{enderecoCobranca.cidade} - {enderecoCobranca.estado}</li>
                                                 </ul>
 
-                                            </div>
+                                            </div> 
                                             <a className="linkMudarEnderecoEntrega" onClick={() => { MeusEnderecos() }} >Mudar endereço de cobrança</a>
 
                                             <br />
@@ -466,7 +524,7 @@ const Checkout = (props) => {
                                                     <div
                                                         className={toggleState === 1 ? "contentPag  active-content" : "contentPag"}
                                                     >
-                                                        
+
                                                         <Cards
                                                             number={!cartaoPreenchido ? number : "000000000000" + number.slice(number.length - 4, number.length)}
                                                             name={name}
@@ -478,16 +536,16 @@ const Checkout = (props) => {
 
 
                                                         <label>Número do cartão *</label>
-                                                        <InputMask mask={"**** **** **** ****"} type="tel" name="number" value={!cartaoPreenchido ? number : "000000000000 " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} />
+                                                        <InputMask mask={"**** **** **** ****"} type="tel" name="number" value={!cartaoPreenchido ? number : "000000000000 " + number.slice(number.length - 4, number.length)} onChange={e => setNumber(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="0000.0000.0000.0000" disabled={cartaoPreenchido} required />
 
                                                         <label>Nome impresso no cartão *</label>
-                                                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} />
+                                                        <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-endereco" placeholder="Nome Impresso no Cartão" disabled={cartaoPreenchido} required/>
 
                                                         <label>Validade *</label>
-                                                        <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0]} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
+                                                        <InputMask mask="99/99" type="text" name="expiry" value={!cartaoPreenchido ? expiry : expiry.slice(0, 7).split("-")[1] + "/" + expiry.slice(0, 7).split("-")[0].slice(2,4)} onChange={e => setExpiry(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-validade" placeholder="Ex: 12/28" disabled={cartaoPreenchido} />
 
                                                         <label>Código de Segurança *</label>
-                                                        <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" />
+                                                        <InputMask mask="999" type="tel" name="cvc" value={cvc} onChange={e => setCvc(e.target.value)} onFocus={e => setFocus(e.target.name)} className="form-control input-cod-seg" placeholder="000" required/>
 
 
                                                         <label>Parcelar*</label>
@@ -506,17 +564,17 @@ const Checkout = (props) => {
                                                                 <p>
                                                                     * as informações de pagamento foram preenchidas com seu cartão de pagamento principal, <a className="linkMudarEnderecoEntrega" onClick={() => { meusCartoes() }}> clique aqui para alterar seu cartão principal</a>
                                                                 </p>
-                                                                
+
                                                             </>
                                                         ) : (
                                                             <>
                                                                 <br />
-                                                                <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(e.target.value) }} /> Deseja utilizar esse cartão em compras futuras?
+                                                                <input type="checkbox" value={cartaoFuturo} onChange={(e) => { setCartaoFuturo(cartaoFuturo?false:true) }} /> Deseja utilizar esse cartão em compras futuras?
                                                             </>
                                                         )}
 
 
-                                                        
+
 
 
 
@@ -608,7 +666,7 @@ const Checkout = (props) => {
                                 </div>
 
                             </Container>
-                            
+
                             <br />
                             <br />
                             <br />
